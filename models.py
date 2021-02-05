@@ -12,9 +12,10 @@ class Order(db.Model):
     order_number = db.Column(db.Integer,db.ForeignKey('order_number.id'),nullable = False)
     coffice = db.Column(db.String(255))
     created_at = db.Column(db.DateTime,server_default = func.now())
-    updated_at = db.Column(db.DateTime,server_default = func.now())
-    
-#what actions do we need for ths table: Create and read
+    updated_at = db.Column(db.DateTime,server_default = func.now(), onupdate=func.now())
+#Add relationships here when all teables have been created.   
+
+#Table actions: 
     @classmethod
     def new(state:str, order_number:int ,coffice:str):
         self.state = state

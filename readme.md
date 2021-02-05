@@ -5,6 +5,7 @@ In collaboration with Modernization Staff Association.
 Flask app proof of concept.
 
 To run:
+TODO: https://dev.to/mburszley/an-introduction-to-poetry-2b6n ?
 ```
 conda activate myenv
 pip install -r requirements.txt
