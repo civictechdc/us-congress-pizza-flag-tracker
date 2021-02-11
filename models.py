@@ -5,11 +5,13 @@ from sqlalchemy import func
 from config import *
 
 #id, State, Order Number, COffice, created_at , updated_at
-class Order(db.Model):
+class OrderModel(db.Model):
     __tablename__="orders"
     id=db.Column(db.Integer,primary_key=True)
     state = db.Column(db.String(255))
-    order_number = db.Column(db.Integer,db.ForeignKey('order_number.id'),nullable = False)
+    # order_number = db.Column(db.Integer,db.ForeignKey('order_number.id'),nullable = False)
+    order_number = db.Column(db.Integer,nullable = False)
+
     coffice = db.Column(db.String(255))
     created_at = db.Column(db.DateTime,server_default = func.now())
     updated_at = db.Column(db.DateTime,server_default = func.now(), onupdate=func.now())
@@ -17,11 +19,11 @@ class Order(db.Model):
 
 #Table actions: 
     @classmethod
-    def new(state:str, order_number:int ,coffice:str):
-        self.state = state
+    def new(self, mystate:str, order_number:int ,coffice:str):
+        self.mystate = mystate
         self.order_number = order_number
         self.coffice = coffice
-        new_order = self(state,order_number,coffice)
+        new_order = self(self)
         db.session.add(new_order)
         db.session.commit()
         return new_order

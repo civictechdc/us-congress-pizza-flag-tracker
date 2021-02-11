@@ -10,6 +10,10 @@ TODO: https://dev.to/mburszley/an-introduction-to-poetry-2b6n ?
 conda activate myenv
 pip install -r requirements.txt
 FLASK_APP=app.py flask run
+
+DEBUG=True FLASK_APP=app.py flask db init
+DEBUG=True FLASK_APP=app.py flask db migrate
+DEBUG=True FLASK_APP=app.py flask db upgrade
 ```
 
 ### TODOs:
