@@ -7,3 +7,7 @@ from models import *
 
 def index():
     return render_template('index.html')
+#generate qr code 
+def get_qrcode():
+    data= "team-work"
+    return send_file(qrcode(data, mode="raw"), mimetype="image/png")
