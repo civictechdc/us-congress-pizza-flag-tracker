@@ -1,8 +1,12 @@
 To Do:
 - discuss: rename state to status?
 - review create test and code
-- check code coverage
-- remove any untested code
+- refactor
+  - move getOrder and any other order transaction code to OrderTransactions
+  - check code coverage
+  - comment out any untested code
+  - look at naming
+  - use named parameters instead of positional
 - test adding an order: 
   - model
     - When create an order with required attributes, then it gets saved to the database and auto generates an id
@@ -18,7 +22,7 @@ To Do:
   - Manually build and test UI for viewing a specific order and seeing the qr code and scanning the qr code
 - create status codes and descriptions and get all
   - model
-    - when create an order with required attributes, then StatusCodes.getDescription(statusCode) returns the description
+    - when create several statusses, then StatusCodes.getDescription(statusCode) returns the description
   - controller
   - route for creating and getting
   - UI: when call get root_url:/update/<order.id> you see a drop down for statusses and order id is displayed 
