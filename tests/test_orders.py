@@ -1,11 +1,10 @@
 import pytest
-from flag.orders import Orders 
-
-class TestBasic():
-    def test_basic(self):
-        assert 1 == 1
-
-class TestOrders():
+from OrderTransactions import OrderTransactions 
+from models import OrderModel
+class TestOrderTransactions():
     def test_create(self):
-        x = Orders.create(self, mystate="MD", order_number=567238, coffice="MD06")
-        assert(x.mystate == "MD")
+        # TODO: Make a random id number
+        success = OrderTransactions.create( "MD",  567238, "MD06")
+        assert(success)
+        orderTransaction = OrderTransactions.getorder(567238)
+        assert(orderTransaction)

@@ -18,37 +18,8 @@ class OrderModel(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
         db.DateTime, server_default=func.now(), onupdate=func.now())
-# Add relationships here when all teables have been created.
 
-# Table actions:
-    @classmethod
-    def create(cls, usastate: str, order_number: int, coffice: str):
-        # self.mystate = mystate
-        # self.order_number = order_number
-        # self.coffice = coffice
-        # new_order = self(self)
-        new_order = cls(state = usastate,
-                          order_number = order_number,
-                          coffice = coffice
-                          )
-        db.session.add(new_order)
-        db.session.commit()
-        return new_order
-
-   
-    @ classmethod
-    def get(cls):
-        return self.query.all()
-
-    @ classmethod
-    def getstate(cls, state):
-        return db.session.query.filter(self.state == state)
-
-    @ classmethod
-    def getorder(cls, order_number):
-        orders = cls.query.filter(cls.order_number == order_number).all()
-        return orders
-
-    @ classmethod
-    def getcoffice(cls, coffice):
-        return self.query.filter(self.coffice == coffice)
+    def __init__(self, state, order_number, coffice):
+       self.state = state
+       self.order_number = order_number
+       self.coffice = coffice
