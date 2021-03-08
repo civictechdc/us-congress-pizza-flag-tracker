@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# VSCODE
+.vscode
+migrations
+
 # Distribution / packaging
 .Python
 build/
@@ -60,6 +64,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+flag.db
 
 # Flask stuff:
 instance/
@@ -109,6 +114,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+myenv/
 
 # Spyder project settings
 .spyderproject
@@ -128,3 +134,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 env/
+ 

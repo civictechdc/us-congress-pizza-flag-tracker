@@ -9,16 +9,17 @@ TODO: https://dev.to/mburszley/an-introduction-to-poetry-2b6n ?
 ```
 conda activate myenv
 OR
-python3 -m venv myenv
-source myenv/bin/activate
+
+
 
 pip install -r requirements.txt
-FLASK_APP=app.py flask run
 
-
+If database is not created in your local environment:
 DEBUG=True FLASK_APP=app.py flask db init
 DEBUG=True FLASK_APP=app.py flask db migrate
 DEBUG=True FLASK_APP=app.py flask db upgrade
+
+FLASK_APP=app.py flask run
 ```
 
 ### TODOs:
