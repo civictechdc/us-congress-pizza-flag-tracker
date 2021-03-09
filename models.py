@@ -11,7 +11,10 @@ class OrderModel(db.Model):
     __tablename__ = "orders"
     id = db.Column(db.Integer, primary_key=True)
     state = db.Column(db.String(255))
-    # order_number = db.Column(db.Integer,db.ForeignKey('order_number.id'),nullable = False)
+    
+    #uuid = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    # uuid = db.Column(db.Integer, db.ForeignKey('order_number.id'), nullable = False)
+ 
     order_number = db.Column(db.Integer, nullable=False)
 
     coffice = db.Column(db.String(255))

@@ -6,19 +6,19 @@
   - comment out any untested code
   - look at naming
   - use named parameters instead of positional
-- test adding an order: 
+- [x] test adding an order: 
   - model
     - When create an order with required attributes, auto generates an id
   - controller
   - router: confirm a route calls the correct controller
   - Manually build and test UI for creating an order
-- test getting qr code 
+- [ ] test getting qr code 
   - Util.getQRCode(get_secure_id(order_number)) returns qr code in format ??root_url:/show/<order.id>
   - Create test for OrderTransactions: when you add a order there is a QR code attribute on the order.
   - Change model
   - Create controller and  router for creating and building
   - Manually build and test UI for specifying an order and seeing the qr code and scanning the qr code
-- getting list of orders
+- [ ] getting list of orders
   - create test for OrderTransactions.getAll()
   - create controller and router
   - create UI to list orders, all attributes except QR code
