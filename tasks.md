@@ -6,8 +6,8 @@
   - comment out any untested code
   - look at naming
   - use named parameters instead of positional
-- [x] adding an order: 
-  - [] test the model
+- [ ] adding an order: 
+  - [x] test the model
     - When create an order with required attributes, auto generates an id
   - [] (just write the) controller & router : confirm a route calls the correct controller
   - [ ] Manually build React UI for creating an order
@@ -48,3 +48,6 @@
   
 
 ### Tests That Are Done:
+
+### Low Priority Tasks
+- consider passing an object rather than positional for create

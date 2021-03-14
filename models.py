@@ -8,14 +8,12 @@ from config import *
 
 class OrderModel(db.Model):
     __tablename__ = "orders"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    order_number = db.Column(db.Integer, primary_key=True, nullable=False)
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     state = db.Column(db.String(255))
-    order_number = db.Column(db.Integer, nullable=False)
     coffice = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(
-        db.DateTime, server_default=func.now(), onupdate=func.now())
+    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
     def __init__(self, theUuid, state, order_number, coffice):
        self.state = state

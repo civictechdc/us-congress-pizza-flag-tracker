@@ -7,7 +7,6 @@ from config import *
 class TestOrderTransactions():
     
     def test_create(self):
-        # TODO: Make a random id number
         unique_order_number = random.randint(1,1000000)
         success = OrderTransactions.create( "MD",  unique_order_number , "MD06")
         assert(success)
