@@ -1,23 +1,23 @@
 ## To Do nearterm:
-- rename state to status
-- review create test and code
-- refactor options
+- [ ] rename state to status
+- [ ] review create test and code
+- [ ] refactor options
   - check code coverage
   - comment out any untested code
   - look at naming
   - use named parameters instead of positional
-- [x] test adding an order: 
-  - model
+- [x] adding an order: 
+  - [] test the model
     - When create an order with required attributes, auto generates an id
-  - controller
-  - router: confirm a route calls the correct controller
-  - Manually build and test UI for creating an order
-- [ ] test getting qr code 
-  - Util.getQRCode(get_secure_id(order_number)) returns qr code in format ??root_url:/show/<order.id>
+  - [] (just write the) controller & router : confirm a route calls the correct controller
+  - [ ] Manually build React UI for creating an order
+    - define API_ROOT env variable to coordinate the backend and frontend.
+    - add the javascript files and setup root element for React
+- [ ] Getting the QR code:
+  - Create test that `Util.getQRCode('any_string')` returns PNG for the qr code from `?root_url:/show/any_string` route (we can build on early Feb experiment)
   - Create test for OrderTransactions: when you add a order there is a QR code attribute on the order.
-  - Change model
-  - Create controller and  router for creating and building
-  - Manually build and test UI for specifying an order and seeing the qr code and scanning the qr code
+  - Create a test that `OrderTransactions.getOrderByID(ordernumber).qrCode` returns the PNG of the QR code including the order's corresponding UUID.
+  - Manually build and test UI for specifying an order number and displaying the qr code so that you can print it.
 - [ ] getting list of orders
   - create test for OrderTransactions.getAll()
   - create controller and router
