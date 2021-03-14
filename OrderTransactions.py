@@ -1,33 +1,33 @@
 from models import OrderModel
 from flask_sqlalchemy import sqlalchemy
 from config import * #important for db
-
+import uuid
 
 class OrderTransactions():
 # Table actions:
     @classmethod
     def create(cls, usastate: str, order_number: int, coffice: str):
-        new_order = OrderModel(usastate, order_number,coffice)
+        theUuid = str(uuid.uuid4())
+        new_order = OrderModel(theUuid, usastate, order_number,coffice)
         db.session.add(new_order)
         db.session.commit()
         return new_order
 
-   
     @ classmethod
     def get(cls):
         return OrderModel.query.all()
 
     @ classmethod
-    def getstate(cls, state):
+    def get_state(cls, state):
         return db.session.query.filter(OrderModel.state == state)
 
     @ classmethod
-    def getorder(cls, order_number):
-        orders = OrderModel.query.filter(OrderModel.order_number == order_number).all()
+    def get_order_by_order_number(cls, order_number):
+        orders = OrderModel.query.filter(OrderModel.order_number == order_number).first()
         return orders
 
     @ classmethod
-    def getcoffice(cls, coffice):
+    def get_coffice(cls, coffice):
         return OrderModel.query.filter(OrderModel.coffice == coffice)
 
 
