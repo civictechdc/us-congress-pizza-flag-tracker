@@ -1,4 +1,5 @@
 ## To Do nearterm:
+
 - [ ] rename state to status
 - [ ] review create test and code
 - [ ] refactor options
@@ -6,7 +7,7 @@
   - comment out any untested code
   - look at naming
   - use named parameters instead of positional
-- [ ] adding an order: 
+- [ ] adding an order:
   - [x] test the model
     - When create an order with required attributes, auto generates an id
   - [] (just write the) controller & router : confirm a route calls the correct controller
@@ -22,7 +23,7 @@
   - create test for OrderTransactions.getAll()
   - create controller and router
   - create UI to list orders, all attributes except QR code
-  - when click on an order, see the QR code 
+  - when click on an order, see the QR code
 - create status codes and descriptions + getAllStatusCodes()
   - model actions (create, read, update, delete)
     - test when create several statusses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statusses
@@ -34,10 +35,12 @@
   - create controller and router
   - review UI for scanning and updating status
   - consider status being a drop down - only a few, scanning two codes is cumbersome
-  - UI: 
+  - UI:
     - when call get ??root_url:/show/<order.id> you see a drop down for statusses and order id is displayed
     - when submit, update status
+
 ### Later / authorization tests
+
 - tests for admin authorization
 - tests for update status authorization
 - tests and UI for creating and getting all attributes for an order
@@ -45,9 +48,24 @@
 - tests and UI for updating order
 - tests filtering order by multiple parameters
 - tests create order with invalid US state
-  
 
 ### Tests That Are Done:
 
 ### Low Priority Tasks
+
 - consider passing an object rather than positional for create
+
+### Retro format
+
+- Learned
+  - UUID
+  - Git Stash
+- Liked
+  - AnyDesk
+  - Refactoring to remove stuff
+  - Quickly re-creating db
+  - Class method do the work rather than the database
+- Proposals for doing differently next time
+  - Create a shell file for each step of recreating db (e.g. wipedb.sh `rm flag.db && rm -rf migrations/`)
+  - 7 minutes, if 2 or 3 people
+  - 4 people, 5 minutes
