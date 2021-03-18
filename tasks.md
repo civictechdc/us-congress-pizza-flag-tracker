@@ -4,17 +4,46 @@
   - comment out any untested code
   - look at naming
   - use named parameters instead of positional
+## Every time
+- Onboard new person
+  - env seup: install AnyDesk
+  - project review
+- Send name and github email in form: Co-authored-by: Ethan Strominger<ethanstrominger2@gmail.com> in Slack
+- Review Ensemble (aka Mob) and TDD
+  - [ ] Roles: Driver (Smart Keyboardist), Navigator (Conductor / Facilitator), and Team mates
+  - [ ] Navigator sets direction, can ask for advice and team mates can indicate they have a suggestion
+  - [ ] Rotate every 5 minutes
+  - [ ] Quick retro to see if anything should be adjusted after every round
+  - [ ] Leave 10 minutes at end for committing
+- Identify who will be AnyDesk host and set up env
 
-## To Do nearterm:
-- [ ] rename state to status
+- Review what was done last session and if there is work remaining to do
+## To Dos
+- [ ] Investigaton
+      - [ ] Look at what to install
+      - [ ] Try PyCharm
+- [ ] Technical debt
+      - [ ] Figure out code coverage
+      - [ ] Comment out untested code
+      - [ ] Use annotation for routing
+      - [ ] Use named parameters instead of positional
+      - [ ] Set up guide: how to installl environment
+      - [ ] Add black, pytest, pytest-cov, pytest-watch to requirements.txt
+      - [ ] Create test for route controller
+- [ ] rename state to status in documentation
 - [x] review create test and code
-- [] adding an order: 
-  - [x] test the model
-    - When create an order with required attributes, auto generates a UUID.
-  - [] (just write the) controller & router : confirm a route calls the correct controller - started, needs to take more input.
+- [ ] adding an order: 
+  - [x] test the create action
+    - [x] When create an order with required attributes, auto generates a UUID.
+  - [ ] (just write the) controller & router : confirm a route calls the correct controller - started, needs to take more input.
   - [ ] Manually build React UI for creating an order
-    - define API_ROOT env variable to coordinate the backend and frontend.
-    - add the javascript files and setup root element for React
+    - [ ] decide on mono-repo/server, multi-repo/server, or mono-repo/multi-server
+      - Pros
+        - mono-repo/server: easier to keep synchronized, easier to deploy at least locally, don't need to worry about CORS
+        - multi-repo/server: more flexible for changing UI or db later, frontend / backend distinction more obvious, can be deployed separately on different servers, may be easier to set up in Heroku
+        - mono-repo/multi-server: easier to keep synchronized while allowing for future flexiblity
+    - [ ] proposal: If going with one respository, follow https://dev.to/arnu515/build-a-fullstack-twitter-clone-using-flask-and-react-1j72 skipping authentication and use order entity rather than tweet entity
+    - [ ] proposal if going with two: use https://bezkoder.com/react-crud-web-api/
 - [ ] Getting the QR code:
   - Create test that `Util.getQRCode('any_string')` returns PNG for the qr code from `?root_url:/show/any_string` route (we can build on early Feb experiment)
   - Create test for OrderTransactions: when you add a order there is a QR code attribute on the order.
