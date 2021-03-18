@@ -3,7 +3,7 @@ from flask_sqlalchemy import sqlalchemy
 from config import * #important for db
 import uuid
 
-class OrderTransactions():
+class OrderActions():
 # Table actions:
     @classmethod
     def create(cls, usastate: str, order_number: int, coffice: str):

@@ -1,16 +1,17 @@
-## To Do nearterm:
-
-- [ ] rename state to status
-- [ ] review create test and code
-- [ ] refactor options
+## Everyday TDD
+- refactor options
   - check code coverage
   - comment out any untested code
   - look at naming
   - use named parameters instead of positional
-- [ ] adding an order:
+
+## To Do nearterm:
+- [ ] rename state to status
+- [x] review create test and code
+- [] adding an order: 
   - [x] test the model
-    - When create an order with required attributes, auto generates an id
-  - [] (just write the) controller & router : confirm a route calls the correct controller
+    - When create an order with required attributes, auto generates a UUID.
+  - [] (just write the) controller & router : confirm a route calls the correct controller - started, needs to take more input.
   - [ ] Manually build React UI for creating an order
     - define API_ROOT env variable to coordinate the backend and frontend.
     - add the javascript files and setup root element for React
