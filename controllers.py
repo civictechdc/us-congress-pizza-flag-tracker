@@ -14,8 +14,11 @@ def index():
     return render_template('index.html')
 
 def create():
+    usa_state = request.form['usa_state']
     idbased_order_number = request.form['order_number']
-    order = OrderActions.create( "MD",  idbased_order_number , "MD06")
+    coffice = request.form['coffice']
+
+    order = OrderActions.create( usa_state,  idbased_order_number , coffice)
     return f'Created one'
 
 #generate qr code 

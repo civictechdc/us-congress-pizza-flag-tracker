@@ -12,7 +12,7 @@
 - Review Ensemble (aka Mob) and TDD
   - [ ] Roles: Driver (Smart Keyboardist), Navigator (Conductor / Facilitator), and Team mates
   - [ ] Navigator sets direction, can ask for advice and team mates can indicate they have a suggestion
-  - [ ] Rotate every 5 minutes
+  - [ ] Rotate every 5-7 minutes
   - [ ] Quick retro to see if anything should be adjusted after every round
   - [ ] Leave 10 minutes at end for committing
 - Identify who will be AnyDesk host and set up env
@@ -35,7 +35,7 @@
 - [ ] adding an order: 
   - [x] test the create action
     - [x] When create an order with required attributes, auto generates a UUID.
-  - [ ] (just write the) controller & router : confirm a route calls the correct controller - started, needs to take more input.
+    - [x] (just write the) controller & router
   - [ ] Manually build React UI for creating an order
     - [ ] decide on mono-repo/server, multi-repo/server, or mono-repo/multi-server
       - Pros
