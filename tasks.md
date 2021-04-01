@@ -37,7 +37,7 @@
     - [x] When create an order with required attributes, auto generates a UUID.
     - [x] (just write the) controller & router
   - [ ] Manually build React UI for creating an order
-    - [ ] decide on mono-repo/server, multi-repo/server, or mono-repo/multi-server
+    - [x] decide on mono-repo/server, multi-repo/server, or mono-repo/multi-server
       - Pros
         - mono-repo/server: easier to keep synchronized, easier to deploy at least locally, don't need to worry about CORS
         - multi-repo/server: more flexible for changing UI or db later, frontend / backend distinction more obvious, can be deployed separately on different servers, may be easier to set up in Heroku
@@ -87,6 +87,44 @@
 
 ### Retro format
 
+##### Wed Mar 31
+- Learned
+  - Rajinder learned a lot about how APIs talk to e/o in nuts and bolts!
+  - Terence Learned how to bring JSON data into a flask enviro and submit to DB (dictname[u'key'])
+  - Thad relearned same thing as Terence
+- Liked
+  - Liked that we got two different libraries working together (Axios, flask)
+  - Terence Frontend and backend wired together!
+  - Found a tutorial that was pretty easy modify and explain to everybody and 7 min timer worked pretty well.
+- Proposals
+##### Thur Mar 25
+- Learned
+  - Ethan refreshed on react.
+  - Actually doing create-react-app.
+  - Crash course in react
+  - mono-repo; multi-repo / server
+- Liked
+  - We created a react app, even though just a spinner
+  - Pair programming and discussion well
+  - Figure out anydesk in Linux (sort of) + troubleshooting not using it.
+  - getting the hang of good flow with anydesk
+- Proposal for doing differently next time
+  - get Rajinder in here :)
+  ##### Wed Mar 17
+  - Learned
+    - Rajinder learned routes, POST vs. GET in routes
+    - Thad thought about how SQLAlchemy works and remembered Flask POST details.
+    - Ethan refreshed on how POST works.
+  - Liked
+    - Postman
+    - Getting the hang of hosting AnyDesk
+    - Wednesday night
+    - Not as much facilitation needed by Ethan
+  - Proposal for doing differently next time
+    - Thad would like to eat before hacking
+    - Ethan would like to join the group
+
+
 ##### Sunday Mar 12
 - Learned
   - UUID
@@ -101,16 +139,3 @@
   - 7 minutes, if 2 or 3 people
   - 4 people, 5 minutes
 
-  ##### Wed Mar 17
-  - Learned
-    - Rajinder learned routes, POST vs. GET in routes
-    - Thad thought about how SQLAlchemy works and remembered Flask POST details.
-    - Ethan refreshed on how POST works.
-  - Liked
-    - Postman
-    - Getting the hang of hosting AnyDesk
-    - Wednesday night
-    - Not as much facilitation needed by Ethan
-  - Proposal for doing differently next time
-    - Thad would like to eat before hacking
-    - Ethan would like to join the group

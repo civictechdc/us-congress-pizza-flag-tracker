@@ -4,8 +4,6 @@ from controllers import *
 # TODO: refactor out this from routes:
 from flask import Flask, render_template, request, send_file
 
-
-
 # add routes below
 app.add_url_rule('/', view_func=index)
 # create qr code
