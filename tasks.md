@@ -44,7 +44,7 @@
         - mono-repo/server: easier to keep synchronized, easier to deploy at least locally, don't need to worry about CORS
         - multi-repo/server: more flexible for changing UI or db later, frontend / backend distinction more obvious, can be deployed separately on different servers, may be easier to set up in Heroku
         - mono-repo/multi-server: easier to keep synchronized while allowing for future flexiblity
-    - [ ] implement screen for creating orders using https://bezkoder.com/react-crud-web-api/ (substitute tutorials for orders,  )
+    - [ ] implement screen for creating orders using https://bezkoder.com/react-hooks-crud-axios-api/ (substitute tutorials for orders)
 - [ ] Getting the QR code:
   - Create test that `Util.getQRCode('any_string')` returns PNG for the qr code from `?root_url:/show/any_string` route (we can build on early Feb experiment)
   - Create test for OrderTransactions: when you add a order there is a QR code attribute on the order.
