@@ -29,21 +29,22 @@
       - [ ] Use named parameters instead of positional
       - [ ] Set up guide: how to installl environment
       - [ ] Add black, pytest, pytest-cov, pytest-watch to requirements.txt
+      - [ ] Change positional parameters to named parameters
       - [ ] Create test for route controller
 - [ ] rename state to status in documentation
 - [x] review create test and code
 - [ ] adding an order: 
   - [x] test the create action
     - [x] When create an order with required attributes, auto generates a UUID.
-    - [x] (just write the) controller & router
+  - [x] (just write the) controller & router : confirm a route calls the correct controller - started, needs to take more input.
   - [ ] Manually build React UI for creating an order
     - [x] decide on mono-repo/server, multi-repo/server, or mono-repo/multi-server
+      DECISION: mutil-repo/server
       - Pros
         - mono-repo/server: easier to keep synchronized, easier to deploy at least locally, don't need to worry about CORS
         - multi-repo/server: more flexible for changing UI or db later, frontend / backend distinction more obvious, can be deployed separately on different servers, may be easier to set up in Heroku
         - mono-repo/multi-server: easier to keep synchronized while allowing for future flexiblity
-    - [ ] proposal: If going with one respository, follow https://dev.to/arnu515/build-a-fullstack-twitter-clone-using-flask-and-react-1j72 skipping authentication and use order entity rather than tweet entity
-    - [ ] proposal if going with two: use https://bezkoder.com/react-crud-web-api/
+    - [ ] implement screen for creating orders using https://bezkoder.com/react-crud-web-api/ (substitute tutorials for orders,  )
 - [ ] Getting the QR code:
   - Create test that `Util.getQRCode('any_string')` returns PNG for the qr code from `?root_url:/show/any_string` route (we can build on early Feb experiment)
   - Create test for OrderTransactions: when you add a order there is a QR code attribute on the order.
@@ -79,63 +80,6 @@
 - tests filtering order by multiple parameters
 - tests create order with invalid US state
 
-### Tests That Are Done:
-
 ### Low Priority Tasks
 
-- consider passing an object rather than positional for create
-
-### Retro format
-
-##### Wed Mar 31
-- Learned
-  - Rajinder learned a lot about how APIs talk to e/o in nuts and bolts!
-  - Terence Learned how to bring JSON data into a flask enviro and submit to DB (dictname[u'key'])
-  - Thad relearned same thing as Terence
-- Liked
-  - Liked that we got two different libraries working together (Axios, flask)
-  - Terence Frontend and backend wired together!
-  - Found a tutorial that was pretty easy modify and explain to everybody and 7 min timer worked pretty well.
-- Proposals
-##### Thur Mar 25
-- Learned
-  - Ethan refreshed on react.
-  - Actually doing create-react-app.
-  - Crash course in react
-  - mono-repo; multi-repo / server
-- Liked
-  - We created a react app, even though just a spinner
-  - Pair programming and discussion well
-  - Figure out anydesk in Linux (sort of) + troubleshooting not using it.
-  - getting the hang of good flow with anydesk
-- Proposal for doing differently next time
-  - get Rajinder in here :)
-  ##### Wed Mar 17
-  - Learned
-    - Rajinder learned routes, POST vs. GET in routes
-    - Thad thought about how SQLAlchemy works and remembered Flask POST details.
-    - Ethan refreshed on how POST works.
-  - Liked
-    - Postman
-    - Getting the hang of hosting AnyDesk
-    - Wednesday night
-    - Not as much facilitation needed by Ethan
-  - Proposal for doing differently next time
-    - Thad would like to eat before hacking
-    - Ethan would like to join the group
-
-
-##### Sunday Mar 12
-- Learned
-  - UUID
-  - Git Stash
-- Liked
-  - AnyDesk
-  - Refactoring to remove stuff
-  - Quickly re-creating db
-  - Class method do the work rather than the database
-- Proposals for doing differently next time
-  - Create a shell file for each step of recreating db (e.g. wipedb.sh `rm flag.db && rm -rf migrations/`)
-  - 7 minutes, if 2 or 3 people
-  - 4 people, 5 minutes
 
