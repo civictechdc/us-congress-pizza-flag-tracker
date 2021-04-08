@@ -28,6 +28,11 @@ DEBUG=True FLASK_APP=app.py flask db upgrade
 FLASK_APP=app.py flask run
 ```
 
+### To look at the database
+`pip install datasette` first if needed
+`datasette flag.db`
+click the link (typically port 8001 on localhost)
+
 ### TODOs:
 * Plug some data in there along lines of the (https://www.figma.com/file/Lzq30lUA6N0hevjn8JVU6z/flag-requests?node-id=2%3A4)[Figma]
 

@@ -45,6 +45,7 @@
         - multi-repo/server: more flexible for changing UI or db later, frontend / backend distinction more obvious, can be deployed separately on different servers, may be easier to set up in Heroku
         - mono-repo/multi-server: easier to keep synchronized while allowing for future flexiblity
     - [ ] implement screen for creating orders using https://bezkoder.com/react-hooks-crud-axios-api/ (substitute tutorials for orders)
+- [ ] Change SQLAlchemy to JSON
 - [ ] Getting the QR code:
   - Create test that `Util.getQRCode('any_string')` returns PNG for the qr code from `?root_url:/show/any_string` route (we can build on early Feb experiment)
   - Create test for OrderTransactions: when you add a order there is a QR code attribute on the order.
@@ -55,7 +56,7 @@
   - create controller and router
   - create UI to list orders, all attributes except QR code
   - when click on an order, see the QR code
-- create status codes and descriptions + getAllStatusCodes()
+- [ ] create status codes and descriptions + getAllStatusCodes()
   - model actions (create, read, update, delete)
     - test when create several statusses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statusses
     - test when create several statusses, then StatusCodes.getDescription(statusCode) returns the description

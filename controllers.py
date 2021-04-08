@@ -26,6 +26,10 @@ def create():
     order = OrderActions.create( usa_state,  idbased_order_number , coffice)
     return f'Created one'
 
+def get_orders():
+    orders=OrderActions.get()
+    print(orders)
+
 #generate qr code 
 def get_qrcode():
     qrcode = QRcode(app)
