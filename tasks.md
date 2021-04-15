@@ -22,16 +22,24 @@
 - [ ] Investigaton
       - [ ] Look at what to install
       - [ ] Try PyCharm
-- [ ] Technical debt
+- [ ] Technical debt / refactoring
+      - [x] Python: Change way we do importing, explicity mport, import from config.py
+      - [ ] Check Daniel's code to maybe do more https://github.com/codeforboston/flagging
+      - [ ] Flask/Python: Be in production mode, app.py
+      - [ ] Create an src folder with __init__
+      - [ ] Annotate routes - if we can get it to work easily
+      - [ ] Environment:
+        - [ ] Use git module, either make backend master repo 
+        - [ ] Deployment
+      - [ ] Identify where we are not modular
+      - [ ] Blueprints?      
       - [ ] Figure out code coverage
       - [ ] Comment out untested code
-      - [ ] Use annotation for routing
-      - [ ] Use named parameters instead of positional
-      - [ ] Set up guide: how to installl environment
+      - [ ] Use named parameters instead of positional!
+      - [ ] Set up guide in readme: how to deploy locally and in cloud
       - [ ] Add black, pytest, pytest-cov, pytest-watch to requirements.txt
-      - [ ] Change positional parameters to named parameters
       - [ ] Create test for route controller
-- [ ] rename state to status in documentation
+- [ ] rename state to status in figma documentation
 - [x] review create test and code
 - [ ] adding an order: 
   - [x] test the create action
@@ -70,6 +78,7 @@
   - UI:
     - when call get ??root_url:/show/<order.id> you see a drop down for statusses and order id is displayed
     - when submit, update status
+- query database on multiple criteria
 
 ### Later / authorization tests
 

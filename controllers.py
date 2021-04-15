@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, session, send_file
 from config import db
-from models import *
+from models import OrderModel
+
 import random
 import json
 
@@ -14,7 +15,7 @@ from OrderActions import OrderActions
 def index():
     return render_template('index.html')
 
-def create():
+def create_order():
     request_json = request.get_json()
     print(request_json, type(request_json))
     # for x in request_json.keys():

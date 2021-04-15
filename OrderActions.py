@@ -1,6 +1,6 @@
 from models import OrderModel
 from flask_sqlalchemy import sqlalchemy
-from config import * #important for db
+from config import db
 import uuid
 
 class OrderActions():
@@ -17,9 +17,9 @@ class OrderActions():
     def get(cls):
         return OrderModel.query.all()
 
-    @ classmethod
-    def get_state(cls, state):
-        return db.session.query.filter(OrderModel.state == state)
+    # @ classmethod
+    # def get_state(cls, state):
+    #     return db.session.query.filter(OrderModel.state == state)
 
     @ classmethod
     def get_order_by_order_number(cls, order_number):

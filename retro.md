@@ -1,3 +1,27 @@
+Retro questions:
+- How do you feel?
+- What did you like?
+- What would you do differently next time 
+- What would you like to do next time?
+
+#### Wed Apr 14
+- How do you feel?
+  - Energized, Anxious - E
+  - Relieved, Ready -TK
+  - Happy, Clear -R
+  - Motivated -T
+- What did you like?
+  - Liked that we worked on our task list and did some refactoring -E
+  - That there were some useful bits and inspiration to refactor from Sunday session -TK
+  - We racked up technical debt over past sessions and we finally addressed it.
+  - Refactored a lot of things that needed to be done. Get program to get back to the same error we hit last time -T
+- What would you do differently next time
+  - More of my own attention and grokking of Daniel's and would have liked to followup somehow (studying general code) -R
+- What would you like to do next time?
+  - make frontend order list work, then continue working on refactoring, first 5 items -E
+  - Make the frontend order list work -TK
+  - Continuing on refactoring -R
+  - Take care of orders error on frontend's api call -T
 #### Wed Apr 7
   - Learned
     - Ethan learned about unicode String

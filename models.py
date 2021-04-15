@@ -2,7 +2,7 @@
 from flask_sqlalchemy import sqlalchemy
 from flask_migrate import Migrate
 from sqlalchemy import func
-from config import *
+from config import db
 
 # id, State, Order Number, COffice, created_at , updated_at
 
