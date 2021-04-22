@@ -4,6 +4,22 @@ Retro questions:
 - What would you do differently next time 
 - What would you like to do next time?
 
+#### Wed Apr 21
+- How do you feel?
+  - Disappointed, engaged - E
+  - Lost, Encouraged - R
+  - Bummed, Engaged - T
+- What did you like?
+  - Mobtimer visible - E
+  - Stayed on track while things were unclear - R
+  - Able to do research - T
+- What would you do differently next time 
+  - State intention of action before proceeding - E
+  - Have a volunteer setup environment up ahead of time - E
+- What would you like to do next time?
+  - Solve the json problem - E
+  - Looking forward to seeing solution - R
+
 #### Wed Apr 14
 - How do you feel?
   - Energized, Anxious - E

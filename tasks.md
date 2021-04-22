@@ -1,3 +1,8 @@
+## Next task
+- Solve returning json of orders from OrderActions.get
+- Use the json value in controllers.get_orders
+
+
 ## Everyday TDD
 - refactor options
   - check code coverage
@@ -23,7 +28,7 @@
       - [ ] Look at what to install
       - [ ] Try PyCharm
 - [ ] Technical debt / refactoring
-      - [x] Python: Change way we do importing, explicity mport, import from config.py
+      - [x] Python: Change way we do importing, explicity import, import from config.py
       - [ ] Check Daniel's code to maybe do more https://github.com/codeforboston/flagging
       - [ ] Flask/Python: Be in production mode, app.py
       - [ ] Create an src folder with __init__
@@ -45,14 +50,14 @@
   - [x] test the create action
     - [x] When create an order with required attributes, auto generates a UUID.
   - [x] (just write the) controller & router : confirm a route calls the correct controller - started, needs to take more input.
-  - [ ] Manually build React UI for creating an order
+  - [x] Manually build React UI for creating an order
     - [x] decide on mono-repo/server, multi-repo/server, or mono-repo/multi-server
       DECISION: mutil-repo/server
       - Pros
         - mono-repo/server: easier to keep synchronized, easier to deploy at least locally, don't need to worry about CORS
         - multi-repo/server: more flexible for changing UI or db later, frontend / backend distinction more obvious, can be deployed separately on different servers, may be easier to set up in Heroku
         - mono-repo/multi-server: easier to keep synchronized while allowing for future flexiblity
-    - [ ] implement screen for creating orders using https://bezkoder.com/react-hooks-crud-axios-api/ (substitute tutorials for orders)
+    - [x] implement screen for creating orders using https://bezkoder.com/react-hooks-crud-axios-api/ (substitute tutorials for orders)
 - [ ] Change SQLAlchemy to JSON
 - [ ] Getting the QR code:
   - Create test that `Util.getQRCode('any_string')` returns PNG for the qr code from `?root_url:/show/any_string` route (we can build on early Feb experiment)
