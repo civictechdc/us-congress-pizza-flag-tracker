@@ -30,7 +30,7 @@ def create_order():
 def get_orders():
     orders=OrderActions.get()
     print(orders)
-    return {"data":["b"]}
+    return orders
 
 #generate qr code 
 def get_qrcode():

@@ -1,10 +1,24 @@
 Retro questions:
+
 - How do you feel?
 - What did you like?
-- What would you do differently next time 
+- What would you do differently next time
 - What would you like to do next time?
 
+#### Thurs Apr 22
+
+- How do you feel?
+  - Pleased - E
+  - Ecstatic - T
+- What did you like?
+  - We got the list done on frontend - E
+  - We solved JSonify on backend and display on frontend
+- What would you do differently next time
+  - figure out hoe to get FLASK to auto rebuild - E
+- What would you like to do next time
+
 #### Wed Apr 21
+
 - How do you feel?
   - Disappointed, engaged - E
   - Lost, Encouraged - R
@@ -13,7 +27,7 @@ Retro questions:
   - Mobtimer visible - E
   - Stayed on track while things were unclear - R
   - Able to do research - T
-- What would you do differently next time 
+- What would you do differently next time
   - State intention of action before proceeding - E
   - Have a volunteer setup environment up ahead of time - E
 - What would you like to do next time?
@@ -21,6 +35,7 @@ Retro questions:
   - Looking forward to seeing solution - R
 
 #### Wed Apr 14
+
 - How do you feel?
   - Energized, Anxious - E
   - Relieved, Ready -TK
@@ -38,40 +53,48 @@ Retro questions:
   - Make the frontend order list work -TK
   - Continuing on refactoring -R
   - Take care of orders error on frontend's api call -T
+
 #### Wed Apr 7
-  - Learned
-    - Ethan learned about unicode String
-    - Thad more about SQLQlchemy and appreciate starting with Tutorial
-    - Rajinder more about testing and two API's talking to each other
-    - Terence how to use find and replace in VSCode 
-  - Liked
-    - Ethan reviewing code form last session, guided with questions
-    - Terence testing for get-orders
-  - Proposals?
+
+- Learned
+  - Ethan learned about unicode String
+  - Thad more about SQLQlchemy and appreciate starting with Tutorial
+  - Rajinder more about testing and two API's talking to each other
+  - Terence how to use find and replace in VSCode
+- Liked
+  - Ethan reviewing code form last session, guided with questions
+  - Terence testing for get-orders
+- Proposals?
+
 ##### Wed Mar 31
- - Learned
-   - Rajinder learned a lot about how APIs talk to e/o in nuts and bolts!
-   - Terence Learned how to bring JSON data into a flask enviro and submit to DB (dictname[u'key'])
-   - Thad relearned same thing as Terence
- - Liked
-   - Liked that we got two different libraries working together (Axios, flask)
-   - Terence Frontend and backend wired together!
-   - Found a tutorial that was pretty easy modify and explain to everybody and 7 min timer worked pretty well.
- - Proposals
- ##### Thur Mar 25
- - Learned
-   - Ethan refreshed on react.
-   - Actually doing create-react-app.
-   - Crash course in react
-   - mono-repo; multi-repo / server
- - Liked
-   - We created a react app, even though just a spinner
-   - Pair programming and discussion well
-   - Figure out anydesk in Linux (sort of) + troubleshooting not using it.
-   - getting the hang of good flow with anydesk
- - Proposal for doing differently next time
-   - get Rajinder in here :)
+
+- Learned
+  - Rajinder learned a lot about how APIs talk to e/o in nuts and bolts!
+  - Terence Learned how to bring JSON data into a flask enviro and submit to DB (dictname[u'key'])
+  - Thad relearned same thing as Terence
+- Liked
+  - Liked that we got two different libraries working together (Axios, flask)
+  - Terence Frontend and backend wired together!
+  - Found a tutorial that was pretty easy modify and explain to everybody and 7 min timer worked pretty well.
+- Proposals
+
+##### Thur Mar 25
+
+- Learned
+  - Ethan refreshed on react.
+  - Actually doing create-react-app.
+  - Crash course in react
+  - mono-repo; multi-repo / server
+- Liked
+  - We created a react app, even though just a spinner
+  - Pair programming and discussion well
+  - Figure out anydesk in Linux (sort of) + troubleshooting not using it.
+  - getting the hang of good flow with anydesk
+- Proposal for doing differently next time
+  - get Rajinder in here :)
+
 ##### Sunday Mar 12
+
 - Learned
   - UUID
   - Git Stash
@@ -81,11 +104,13 @@ Retro questions:
   - Quickly re-creating db
   - Class method do the work rather than the database
 - Proposals for doing differently next time
+
   - Create a shell file for each step of recreating db (e.g. wipedb.sh `rm flag.db && rm -rf migrations/`)
   - 7 minutes, if 2 or 3 people
   - 4 people, 5 minutes
 
   ##### Wed Mar 17
+
   - Learned
     - Rajinder learned routes, POST vs. GET in routes
     - Thad thought about how SQLAlchemy works and remembered Flask POST details.

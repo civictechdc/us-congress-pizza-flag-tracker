@@ -15,7 +15,9 @@ class OrderActions():
 
     @ classmethod
     def get(cls):
-        return OrderModel.query.all()
+        orders = OrderModel.query.all()
+        return {"orders": [{"order_number": i.order_number, "uuid": i.uuid, "usa_state": i.usa_state, "coffice": i.coffice} 
+          for i in orders]}
 
     # @ classmethod
     # def get_state(cls, state):

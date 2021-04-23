@@ -1,6 +1,6 @@
 ## Next task
-- Solve returning json of orders from OrderActions.get
-- Use the json value in controllers.get_orders
+- Continue with the UI list on frontend
+- Look for the words START HERE
 
 
 ## Everyday TDD
@@ -65,10 +65,12 @@
   - Create a test that `OrderTransactions.getOrderByID(ordernumber).qrCode` returns the PNG of the QR code including the order's corresponding UUID.
   - Manually build and test UI for specifying an order number and displaying the qr code so that you can print it.
 - [ ] getting list of orders
-  - create test for OrderTransactions.getAll()
-  - create controller and router
-  - create UI to list orders, all attributes except QR code
-  - when click on an order, see the QR code
+  - [x] create test for OrderTransactions.getAll()
+  - [x] create controller and router
+  - [x] create UI to list orders, all attributes except QR code
+-  START HERE https://getbootstrap.com/docs/4.0/content/tables/
+  - [ ] Make it look user friendly 
+  - [ ] when click on an order, see the QR code
 - [ ] create status codes and descriptions + getAllStatusCodes()
   - model actions (create, read, update, delete)
     - test when create several statusses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statusses
