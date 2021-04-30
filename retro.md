@@ -2,8 +2,24 @@ Retro questions:
 
 - How do you feel?
 - What did you like?
-- What would you do differently next time
-- What would you like to do next time?
+- What would you do differently next time (process)
+- What would you like to do next time? (task)
+
+#### Wed Apr 29
+- How do you feel?
+  - Happy, Frustrated and Engaged -Ethan
+  - Happy to continue progress -Thad
+  - Motivated by progress 
+- What did you like?
+  - Learning about how to highlight
+  - Dev tools - Terence, Ethan
+- What would you do differently next time (process)
+  - Use dev tools more
+  - Say "elephant" when you have an idea
+  - have a volunteer set up the environment 20 minutes ahead of time
+- What would you like to do next time? (task)
+  - Getting qrcode test working - all
+
 
 #### Thurs Apr 22
 

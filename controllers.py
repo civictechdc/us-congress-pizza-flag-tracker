@@ -1,11 +1,10 @@
 from flask import render_template, redirect, request, session, send_file
-from config import db
+from config import db, qrcode
 from models import OrderModel
 
 import random
 import json
 
-from flask_qrcode import QRcode
 from OrderActions import OrderActions 
 
 
@@ -34,6 +33,5 @@ def get_orders():
 
 #generate qr code 
 def get_qrcode():
-    qrcode = QRcode(app)
     data= "team-work"
     return send_file(qrcode(data, mode="raw"), mimetype="image/png")
