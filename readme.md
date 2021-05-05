@@ -18,14 +18,13 @@ If you have not already set up your python env
 
 ```
 python3 -m venv myenv
+```
+
+Next:
+
+```
 source myenv/bin/activate
 pip install -r requirements.txt
-```
-
-If you have done the above steps previously:
-
-```
-source myenv/bin/activate
 ```
 
 If database is not created in your local environment:
