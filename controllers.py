@@ -32,6 +32,8 @@ def get_orders():
     return orders
 
 #generate qr code 
-def get_qrcode():
-    data= "team-work"
-    return send_file(qrcode(data, mode="raw"), mimetype="image/png")
+def get_qrcode(data):
+    return qrcode(data, mode="raw")
+
+def send_file_qrcode(data):
+    return send_file(get_qrcode(data), mimetype="image/png");

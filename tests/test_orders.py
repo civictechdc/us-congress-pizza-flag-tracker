@@ -25,10 +25,11 @@ class TestOrderActions():
     def test_get(self):
         unique_order_number = random.randint(1,1000000)
         order = OrderActions.create( "MD",  unique_order_number , "MD06")
-        get_orders=OrderActions.get()
+        get_orders=OrderActions.get()["orders"]
         found = False
 
         for order in get_orders:
-            if order.order_number == unique_order_number:
+            print('debug', order)
+            if order["order_number"] == unique_order_number:
                 found = True
-        assert(found)        
+        assert(found)
