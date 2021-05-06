@@ -5,11 +5,32 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+#### Wed May 5
+
+- How do you feel?
+  - Straight out happy and interested -Ethan
+  - Tired from the second vaccine -Thad
+  - Happy with the progress -Terence
+  - Feeling like missing out. -Rajinder
+- What did you like?
+  - Fixing the test bug, Giving up on a stupid library (qrtools) -Ethan
+  - Window layout and presetup and rajinder's run fixing text -Thad
+  - Figuring out how to use files with Python and how we got QR code file saved to a location -Terence.
+  - Got back into it! -Rajinder
+- What would you do differently next time (process)
+  - Fine the way we're navigating now, but I'd like to check everyone is okay with not having strict rules. Still say "I have an idea" because we might be on a roll, rather than "elephant". -Ethan
+  - "What do you all/guys think/suggest?" worked nicely. -Terence +1 -Rajinder
+- What would you like to do next time? (task)
+  - Continue where it says START HERE. -Ethan
+  - Starting to aim towards a demoable thing for stakeholders -Thad
+  - Shaping up the MVP, what's it look like. -Terence +1 -Rajinder
+
 #### Wed Apr 29
+
 - How do you feel?
   - Happy, Frustrated and Engaged -Ethan
   - Happy to continue progress -Thad
-  - Motivated by progress 
+  - Motivated by progress
 - What did you like?
   - Learning about how to highlight
   - Dev tools - Terence, Ethan
@@ -19,7 +40,6 @@ Retro questions:
   - have a volunteer set up the environment 20 minutes ahead of time
 - What would you like to do next time? (task)
   - Getting qrcode test working - all
-
 
 #### Thurs Apr 22
 
