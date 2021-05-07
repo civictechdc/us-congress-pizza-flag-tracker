@@ -4,7 +4,7 @@ from sqlalchemy.sql import func
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_qrcode import QRcode
-
+import qrcode
 
 app = Flask(__name__)
 qrcode = QRcode(app)

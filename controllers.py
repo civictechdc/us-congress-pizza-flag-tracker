@@ -1,11 +1,14 @@
 from flask import render_template, redirect, request, session, send_file
 from config import app, db, qrcode
 from models import OrderModel
+import cv2
+import qrcode
 
 import random
 import json
 
 from OrderActions import OrderActions 
+import io
 
 
 # https://flask-session.readthedocs.io/en/latest/
@@ -28,15 +31,20 @@ def create_order():
 
 def get_orders():
     orders=OrderActions.get()
-    print(orders)
     return orders
 
 def get_order_by_uuid(uuid):
     return OrderActions.get_order_by_uuid(uuid)
 
 #generate qr code 
-def get_qrcode(data):
-    return qrcode(data, mode="raw")
+def get_qrcode():
+    data = request.args.get("value", None)
+    img = qrcode.make(data)
+    buf = io.BytesIO()
+    img.save(buf)
+    buf.seek(0)
+    return buf
 
-def send_file_qrcode(data):
-    return send_file(get_qrcode(data), mimetype="image/png");
+def send_file_qrcode():
+    q = get_qrcode()
+    return send_file(q, mimetype="image/jpeg")

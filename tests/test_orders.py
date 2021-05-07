@@ -29,7 +29,6 @@ class TestOrderActions():
         found = False
 
         for order in get_orders:
-            print('debug', order)
             if order["order_number"] == unique_order_number:
                 found = True
         assert(found)
