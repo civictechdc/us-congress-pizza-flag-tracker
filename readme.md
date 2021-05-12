@@ -46,6 +46,12 @@ DEBUG=True FLASK_APP=app.py flask db upgrade
 FLASK_APP=app.py FLASK_ENV=development flask run
 ```
 
+### Running tests
+
+```
+pytest -s --verbose
+```
+
 ### To look at the database
 
 `pip install datasette` first if needed

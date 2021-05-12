@@ -48,22 +48,22 @@
         - mono-repo/multi-server: easier to keep synchronized while allowing for future flexiblity
     - [x] implement screen for creating orders using https://bezkoder.com/react-hooks-crud-axios-api/ (substitute tutorials for orders)
 - [x] Change SQLAlchemy to JSON
-- [ ] Getting the QR code:
+- [ ] QR code:
   - START HERE
-  - Think about how to scan library
-  - When get to creating QR code for URL, scan it from our phone and then paste into console (once we have the show implemented)
-  - Unless we can figure out an easier way to test qr codes, skip the tests for qr codes
-  - https://stackoverflow.com/questions/26363613/how-to-test-send-file-flask test_qrcode() in `tests/test_util.py`
-  - Create test that `Util.getQRCode('any_string')` returns PNG for the qr code from `root_url:/show/any_string` route (we can build on early Feb experiment)
-  - Create test for OrderTransactions: when you add a order there is a QR code attribute on the order.
-  - Create a test that `OrderTransactions.getOrderByID(ordernumber).qrCode` returns the PNG of the QR code including the order's corresponding UUID.
-  - Manually build and test UI for specifying an order number and displaying the qr code so that you can print it.
+  - Resource: https://stackoverflow.com/questions/26363613/how-to-test-send-file-flask
+  - [ ] Review pull request for test for `get_QRCode('any_string')` returns PNG for the qr code for `'any_string'`
+    - [ ] Tests and implements route for qr_code that includes a parameter for the string
+  - [ ] Modify above test that the qr code returns `<root url>/ + any_string` where root_url is read from an env variable
+  - [ ] Create a button in the UI that calls route for generating qr code with UUID as a parameter
+- [ ] Screen for changing status
+  - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
+  - [ ] Add a drop down list
+  - [ ] Add a Submit button that calls backend route for updating status (see update status below)
 - [ ] getting list of orders
   - [x] create test for OrderTransactions.getAll()
   - [x] create controller and router
   - [x] create UI to list orders, all attributes except QR code
   - [x] Make it look user friendly
-  - [ ] when click on an order, see the QR code
 - [ ] create status codes and descriptions + getAllStatusCodes()
   - model actions (create, read, update, delete)
     - test when create several statusses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statusses
@@ -73,11 +73,6 @@
 - update status
   - create test for OrderTransactions.updateStatus(order_number, status)
   - create controller and router
-  - review UI for scanning and updating status
-  - consider status being a drop down - only a few, scanning two codes is cumbersome
-  - UI:
-    - when call get ??root_url:/show/<order.id> you see a drop down for statusses and order id is displayed
-    - when submit, update status
 - query database on multiple criteria
 
 ### Later / authorization tests
