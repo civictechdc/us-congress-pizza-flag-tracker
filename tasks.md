@@ -59,7 +59,7 @@
   - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
   - [ ] Add a drop down list
   - [ ] Add a Submit button that calls backend route for updating status (see update status below)
-- [ ] getting list of orders
+- [x] getting list of orders
   - [x] create test for OrderTransactions.getAll()
   - [x] create controller and router
   - [x] create UI to list orders, all attributes except QR code
