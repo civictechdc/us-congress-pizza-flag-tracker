@@ -5,16 +5,17 @@ from io import BytesIO
 from app import app
 from controllers import get_qrcode
 import io
+import numpy as np
+from cachelib import file
 class TestUtils():
     def test_qrcode(self):
         qrcodeValue = "https://example.com/A43X2Q3"
         with app.test_client() as c:
             response = c.get('/qrcode?value=' + qrcodeValue)
-            imgData = response.data
-            img = BytesIO(imgData);            ## For sanity's sake
-            with open("test.jpeg","wb") as f: ## Excel File
-                f.write(img.getvalue())   ## Conversion to TextIOWrapper
-            cv2Img = cv2.imread("test.jpeg")
+            imgData = BytesIO(response.data)
+            imgData.seek(0)
+            data = np.fromstring(imgData.getvalue(), dtype=np.uint8)
+            cv2Img = cv2.imdecode(data, 0)
             detector = cv2.QRCodeDetector()
             data, bbox, straight_qrcode = detector.detectAndDecode(cv2Img)
             assert data == qrcodeValue
