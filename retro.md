@@ -5,6 +5,21 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+#### Wed May 12
+
+- How do you feel?
+  - Positive and energized -Thad
+  - Learned something! -Rajinder
+  - Excited to see civic effort -Nelson
+- What did you like?
+  - Good to work on front end CRUD -Thad
+  - Liked having a new coder in the chat with us -Rajinder
+  - Nice watching experienced coders -Nelson
+- What would you do differently next time (process)
+  - Having the figma up is important again as we work on routes.
+- What would you like to do next time? (task
+ - Stay focused on MVP -Thad +1 Rajinder
+ - Want to get the setup locally on my machine -Nelson
 #### Wed May 5
 
 - How do you feel?

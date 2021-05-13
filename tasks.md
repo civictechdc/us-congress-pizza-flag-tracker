@@ -63,7 +63,11 @@
   - [x] create test for OrderTransactions.getAll()
   - [x] create controller and router
   - [x] create UI to list orders, all attributes except QR code
-  - [x] Make it look user friendlyn
+  - [x] Make it look user friendly
+  - [ ] When an order is clicked, the order details are shown
+  - [ ] when click on an order, see the QR code
+  - [ ] When an order is edited, the order details are shown (resolve the 404 on /orders/uuid)
+  - [ ] When an order is edited and published, changes persist (update/put request)
 - [ ] create status codes and descriptions + getAllStatusCodes()
   - model actions (create, read, update, delete)
     - test when create several statusses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statusses
