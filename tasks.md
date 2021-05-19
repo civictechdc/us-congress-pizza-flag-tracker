@@ -57,13 +57,13 @@
   - [ ] Create a button in the UI that calls route for generating qr code with UUID as a parameter
 - [ ] Screen for changing status
   - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
-  - [ ] Add a drop down list
+  - [ ] Add a hard coded drop down list (temporary)
   - [ ] Add a Submit button that calls backend route for updating status (see update status below)
 - [x] getting list of orders
   - [x] create test for OrderTransactions.getAll()
   - [x] create controller and router
   - [x] create UI to list orders, all attributes except QR code
-  - [x] Make it look user friendly
+  - [x] Make it look user friendlyn
 - [ ] create status codes and descriptions + getAllStatusCodes()
   - model actions (create, read, update, delete)
     - test when create several statusses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statusses
