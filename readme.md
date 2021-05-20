@@ -36,20 +36,23 @@ OR if using python
 
 If database is not created in your local environment or you want to recreate:
 
-If you already setup: `rm flag.db`
+`DEBUG=True FLASK_APP=app.py flask db init`
 
-```
-DEBUG=True FLASK_APP=app.py flask db init
+To bring the db up to date:
+
+``
 DEBUG=True FLASK_APP=app.py flask db migrate
 DEBUG=True FLASK_APP=app.py flask db upgrade
-
 FLASK_APP=app.py FLASK_ENV=development flask run
+
 ```
 
 ### Running tests
 
 ```
+
 pytest -s --verbose
+
 ```
 
 ### To look at the database
@@ -68,6 +71,8 @@ or run `sqlite`
 
 - https://mobti.me/flagpizza
 - https://anydesk.com
+
+```
 
 ```
 

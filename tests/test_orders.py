@@ -22,7 +22,7 @@ class TestOrderActions():
         order2 = OrderActions.get_order_by_order_number(unique_order_number2)
         assert(order1.uuid != order2.uuid)
 
-    def test_get(self):
+    def test_get_orders(self):
         unique_order_number = random.randint(1,1000000)
         order = OrderActions.create( "MD",  unique_order_number , "MD06")
         get_orders=OrderActions.get()["orders"]
@@ -33,3 +33,14 @@ class TestOrderActions():
             if order["order_number"] == unique_order_number:
                 found = True
         assert(found)
+
+    def test_get_order(self):
+        unique_order_number = random.randint(1,1000000)
+        created_order = OrderActions.create( "MD",  unique_order_number , "MD06")
+        actual_order=OrderActions.get_order_by_order_number(created_order.order_number)
+        
+        assert(actual_order.usa_state == "MD")
+        assert(actual_order.coffice == "MD06")
+        assert(actual_order.order_number == unique_order_number)
+
+

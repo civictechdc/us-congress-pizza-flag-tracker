@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, session, send_file
-from config import db, qrcode
+from config import app, db, qrcode
 from models import OrderModel
 
 import random
@@ -30,6 +30,10 @@ def get_orders():
     orders=OrderActions.get()
     print(orders)
     return orders
+
+@app.route('/orders/<order_number>')
+def get_order_by_order_number(order_number):
+    return OrderActions.get_order_by_order_number(order_number)
 
 #generate qr code 
 def get_qrcode(data):
