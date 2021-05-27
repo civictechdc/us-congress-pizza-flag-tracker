@@ -31,9 +31,8 @@ def get_orders():
     print(orders)
     return orders
 
-@app.route('/orders/<order_number>')
-def get_order_by_order_number(order_number):
-    return OrderActions.get_order_by_order_number(order_number)
+def get_order_by_uuid(uuid):
+    return OrderActions.get_order_by_uuid(uuid)
 
 #generate qr code 
 def get_qrcode(data):

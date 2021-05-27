@@ -43,4 +43,14 @@ class TestOrderActions():
         assert(actual_order.coffice == "MD06")
         assert(actual_order.order_number == unique_order_number)
 
+    def test_get_order_by_uuid(self):
+        unique_order_number = random.randint(1,1000000)
+        created_order = OrderActions.create( "OH",  unique_order_number , "OH06")
+        actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
+        
+        assert(actual_order["usa_state"] == "OH")
+        assert(actual_order["coffice"] == "OH06")
+        assert(actual_order["order_number"] == unique_order_number)
+        assert(actual_order["uuid"] == created_order.uuid)
+
 
