@@ -37,14 +37,14 @@ def get_order_by_uuid(uuid):
     return OrderActions.get_order_by_uuid(uuid)
 
 #generate qr code 
-def get_qrcode():
-    data = request.args.get("value", None)
+def get_qrcode(uuid):
+    data = request.args.get("value", uuid)
     img = qrcode.make(data)
     buf = io.BytesIO()
     img.save(buf)
     buf.seek(0)
     return buf
 
-def send_file_qrcode():
-    q = get_qrcode()
+def send_file_qrcode(uuid):
+    q = get_qrcode(uuid)
     return send_file(q, mimetype="image/jpeg")
