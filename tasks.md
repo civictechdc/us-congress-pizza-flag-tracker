@@ -15,9 +15,9 @@
 ## Every time
 
 - Onboard new person
-  - env seup: install AnyDesk
+  - env setup: install AnyDesk
   - project review
-- Send name and github email in form: Co-authored-by: Ethan Strominger<ethanstrominger2@gmail.com> in Slack
+- Send name and github email in form: Co-authored-by: Ethan Strominger <ethanstrominger2@gmail.com> in Slack
 - Review Ensemble (aka Mob) and TDD
   - [ ] Roles: Driver (Smart Keyboardist), Navigator (Conductor / Facilitator), and Team mates
   - [ ] Navigator sets direction, can ask for advice and team mates can indicate they have a suggestion
@@ -30,8 +30,8 @@
 
 ## To Dos
 
-- [ ] Investigaton - [ ] Look at what to install - [ ] Try PyCharm
-- [ ] Technical debt / refactoring - [x] Python: Change way we do importing, explicity import, import from config.py - [ ] Check Daniel's code to maybe do more https://github.com/codeforboston/flagging - [ ] Flask/Python: Be in production mode, app.py - [ ] Create an src folder with **init** - [ ] Annotate routes - if we can get it to work easily - [ ] Environment: - [ ] Use git module, either make backend master repo - [ ] Deployment - [ ] Identify where we are not modular - [ ] Blueprints?  
+- [ ] Investigation - [ ] Look at what to install - [ ] Try PyCharm
+- [ ] Technical debt / refactoring - [x] Python: Change way we do importing, explicitly import, import from config.py - [ ] Check Daniel's code to maybe do more https://github.com/codeforboston/flagging - [ ] Flask/Python: Be in production mode, app.py - [ ] Create an src folder with **init** - [ ] Annotate routes - if we can get it to work easily - [ ] Environment: - [ ] Use git module, either make backend master repo - [ ] Deployment - [ ] Identify where we are not modular - [ ] Blueprints?  
        - [ ] Figure out code coverage - [ ] Comment out untested code - [ ] Use named parameters instead of positional! - [ ] Set up guide in readme: how to deploy locally and in cloud - [ ] Add black, pytest, pytest-cov, pytest-watch to requirements.txt - [ ] Create test for route controller
 - [ ] rename state to status in figma documentation
 - [x] review create test and code
@@ -41,35 +41,40 @@
   - [x] (just write the) controller & router : confirm a route calls the correct controller - started, needs to take more input.
   - [x] Manually build React UI for creating an order
     - [x] decide on mono-repo/server, multi-repo/server, or mono-repo/multi-server
-          DECISION: mutil-repo/server
+          DECISION: multi-repo/server
       - Pros
         - mono-repo/server: easier to keep synchronized, easier to deploy at least locally, don't need to worry about CORS
         - multi-repo/server: more flexible for changing UI or db later, frontend / backend distinction more obvious, can be deployed separately on different servers, may be easier to set up in Heroku
-        - mono-repo/multi-server: easier to keep synchronized while allowing for future flexiblity
+        - mono-repo/multi-server: easier to keep synchronized while allowing for future flexibility
     - [x] implement screen for creating orders using https://bezkoder.com/react-hooks-crud-axios-api/ (substitute tutorials for orders)
 - [x] Change SQLAlchemy to JSON
 - [ ] QR code:
+  - [x] Review pull request for test for `get_QRCode('any_string')` returns PNG for the qr code for `'any_string'`
+    - [x] Tests and implements route for qr_code that includes a parameter for the string
   - START HERE
   - Resource: https://stackoverflow.com/questions/26363613/how-to-test-send-file-flask
-  - [ ] Review pull request for test for `get_QRCode('any_string')` returns PNG for the qr code for `'any_string'`
-    - [ ] Tests and implements route for qr_code that includes a parameter for the string
+  - [] Ask ethan about "data = request.args.get("value", uuid)" from controllers.py
   - [ ] Modify above test that the qr code returns `<root url>/ + any_string` where root_url is read from an env variable
-  - [ ] Create a button in the UI that calls route for generating qr code with UUID as a parameter
-- [ ] Screen for changing status
-  - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
-  - [ ] Add a hard coded drop down list (temporary)
-  - [ ] Add a Submit button that calls backend route for updating status (see update status below)
+  - [x] Create a button in the UI that calls route for generating qr code with UUID as a parameter
 - [x] getting list of orders
   - [x] create test for OrderTransactions.getAll()
   - [x] create controller and router
   - [x] create UI to list orders, all attributes except QR code
-  - [x] Make it look user friendlyn
+  - [x] Make it look user friendly
+  - [x] When an order is clicked, the order details are shown
+  - [x] when click on an order, see the QR code
+  - [ ] When an order is edited, the order details are shown (resolve the 404 on /orders/uuid)
+  - [ ] When an order is edited and published, changes persist (update/put request)
+- [ ] Screen for changing status
+  - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
+  - [ ] Add a hard coded drop down list (temporary)
+  - [ ] Add a Submit button that calls backend route for updating status (see update status below)
 - [ ] create status codes and descriptions + getAllStatusCodes()
   - model actions (create, read, update, delete)
-    - test when create several statusses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statusses
-    - test when create several statusses, then StatusCodes.getDescription(statusCode) returns the description
-  - controller and router for creating and getting statusses
-  - UI for listing and creatng statusses
+    - test when create several statuses (StatusCodeActions.create), then StatusCodeActions.getAll() returns those statuses
+    - test when create several statuses, then StatusCodes.getDescription(statusCode) returns the description
+  - controller and router for creating and getting statuses
+  - UI for listing and creating statuses
 - update status
   - create test for OrderTransactions.updateStatus(order_number, status)
   - create controller and router

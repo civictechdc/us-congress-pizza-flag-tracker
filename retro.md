@@ -5,6 +5,38 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+#### Wed May 26
+
+- How do you feel?
+  - Great! -Terence
+  - ease and impact -Thad
+- What did you like?
+  - Knock out errors and get backend and frontend talking with QR codes - Terence
+  - Thad +1's above
+- What would you do differently next time (process)
+  - Pair programming worked well, mobtime not needed for 2.
+- What would you like to do next time? (task)
+  - Talk as a group to reaffirm what MVP looks like -Terence
+  - Get into statuses! - Terence
+  - Make sure new people find footholds, mention them in retro so next team can invite them etc -Thad
+#### Wed May 19 
+Verbal retro
+
+#### Wed May 12
+
+- How do you feel?
+  - Positive and energized -Thad
+  - Learned something! -Rajinder
+  - Excited to see civic effort -Nelson
+- What did you like?
+  - Good to work on front end CRUD -Thad
+  - Liked having a new coder in the chat with us -Rajinder
+  - Nice watching experienced coders -Nelson
+- What would you do differently next time (process)
+  - Having the figma up is important again as we work on routes.
+- What would you like to do next time? (task
+ - Stay focused on MVP -Thad +1 Rajinder
+ - Want to get the setup locally on my machine -Nelson
 #### Wed May 5
 
 - How do you feel?
