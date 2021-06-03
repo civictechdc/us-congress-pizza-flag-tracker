@@ -1,8 +1,11 @@
 from flask import render_template, redirect, request, session, send_file
+import flask
 from config import app, db, qrcode
 from models import OrderModel
 import cv2
 import qrcode
+#from './http-common.js' import baseURL
+
 
 import random
 import json
@@ -38,8 +41,9 @@ def get_order_by_uuid(uuid):
 
 #generate qr code 
 def get_qrcode(uuid):
-    data = request.args.get("value", uuid)
-    img = qrcode.make(data)
+    print(request.get_json())
+    print('here')
+    img = qrcode.make(uuid)
     buf = io.BytesIO()
     img.save(buf)
     buf.seek(0)
@@ -48,3 +52,7 @@ def get_qrcode(uuid):
 def send_file_qrcode(uuid):
     q = get_qrcode(uuid)
     return send_file(q, mimetype="image/jpeg")
+
+def info():
+    headers = flask.request.headers
+    return "Request headers:\n" + str(headers)

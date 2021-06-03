@@ -1,5 +1,5 @@
 from config import app
-from controllers import send_file_qrcode, create_order, get_orders, index, get_order_by_uuid
+from controllers import info, send_file_qrcode, create_order, get_orders, index, get_order_by_uuid
 
 
 # TODO: refactor out this from routes:
@@ -19,3 +19,4 @@ app.add_url_rule('/orders', view_func=get_orders, methods=["GET"])
 # get specific order
 app.add_url_rule('/orders/<uuid>', view_func=get_order_by_uuid, methods=["GET"])
 
+app.add_url_rule('/info', view_func=info, methods=["GET"])

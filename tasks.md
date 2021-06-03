@@ -54,7 +54,8 @@
   - START HERE
   - Resource: https://stackoverflow.com/questions/26363613/how-to-test-send-file-flask
   - [] Ask ethan about "data = request.args.get("value", uuid)" from controllers.py
-  - [ ] Modify above test that the qr code returns `<root url>/ + any_string` where root_url is read from an env variable
+  - [ ] Pass baseURL to backend 
+  - [ ] Modify above test that the qr code returns `<baseURL>/status/<uuid>` where root_url is read from an env variable
   - [x] Create a button in the UI that calls route for generating qr code with UUID as a parameter
 - [x] getting list of orders
   - [x] create test for OrderTransactions.getAll()

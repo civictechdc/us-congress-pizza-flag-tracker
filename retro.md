@@ -5,6 +5,18 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+#### Wed Jun 02
+
+- How do you feel?
+    - Mixed - rm, ts
+    - Disappointed: wanted to get further - es
+- What did you like?
+    - we met - es
+    - we caught up on changes - ts
+- What would you do differently next time (process)
+    - Debug working - rm
+- What would you like to do next time? (task)
+    - START HERE - rm
 #### Wed May 26
 
 - How do you feel?
