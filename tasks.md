@@ -2,7 +2,7 @@
 
 - Discuss MVP
 - PyCharm IDE
-- Look for the words START HERE
+- Fix populating data when click on edit - create new route for get_by_uuid
 
 ## Everyday TDD
 
