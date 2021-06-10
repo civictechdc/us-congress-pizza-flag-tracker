@@ -41,9 +41,7 @@ def get_order_by_uuid(uuid):
 
 #generate qr code 
 def get_qrcode(uuid):
-    print(request.get_json())
-    print('here')
-    img = qrcode.make(uuid)
+    img = qrcode.make('http://localhost:3000/orders/'+uuid)
     buf = io.BytesIO()
     img.save(buf)
     buf.seek(0)

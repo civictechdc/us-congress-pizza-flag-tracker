@@ -1,6 +1,16 @@
 ## Next task
 
 - Discuss MVP
+  - Update orders and see the status of the order
+  - when you scan the qr code
+    - see the order (today)
+    - update the status
+    - it gives you a prompt to update?
+  - report and queries that we haven't thought about
+  - help Rajinder do pull request
+  - do we need any additional attributes of orders?
+  - security (people adding/updating/deleting the orders, but also ppl updating the status)
+
 - PyCharm IDE
 - Fix populating data when click on edit - create new route for get_by_uuid
 
@@ -53,10 +63,19 @@
     - [x] Tests and implements route for qr_code that includes a parameter for the string
   - START HERE
   - Resource: https://stackoverflow.com/questions/26363613/how-to-test-send-file-flask
-  - [] Ask ethan about "data = request.args.get("value", uuid)" from controllers.py
-  - [ ] Pass baseURL to backend 
-  - [ ] Modify above test that the qr code returns `<baseURL>/status/<uuid>` where root_url is read from an env variable
+  - [x] Ask ethan about "data = request.args.get("value", uuid)" from controllers.py
+  - [ ] create an environment variable for frontendBaseURL in backend 
+  - [ ] Modify above test that the QR code returns `<frontendBaseURL>/status/<uuid>` where root_url is read from an env variable
   - [x] Create a button in the UI that calls route for generating qr code with UUID as a parameter
+  - [x] QR code return http://localhost:3000/orders/uuid
+  - [x] Display the order when above is entered
+  - [x] Review pull request for test for `get_QRCode('any_string')` returns PNG for the qr code for `'any_string'`
+    - [ ] Tests and implements route for qr_code that includes a parameter for the string
+- [ ] Explore deploying the app frontend/backend for QR code demo
+- [ ] Screen for changing status
+  - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
+  - [ ] Add a hard coded drop down list (temporary)
+  - [ ] Add a Submit button that calls backend route for updating status (see update status below)
 - [x] getting list of orders
   - [x] create test for OrderTransactions.getAll()
   - [x] create controller and router
