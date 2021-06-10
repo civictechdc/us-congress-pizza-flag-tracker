@@ -10,7 +10,7 @@
   - help Rajinder do pull request
   - do we need any additional attributes of orders?
   - security (people adding/updating/deleting the orders, but also ppl updating the status)
-
+- report out from flag reform meeting on thoughts from Ananda and co.
 - PyCharm IDE
 - Fix populating data when click on edit - create new route for get_by_uuid
 

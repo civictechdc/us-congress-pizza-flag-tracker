@@ -5,6 +5,20 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+
+Retro questions:
+
+- How do you feel?
+  - Grumpy and Happy b/c hot weather -Ethan
+  - Satisfied b/c we were able accomplish a couple things
+- What did you like?
+  - started to deploy Heroku & qr code loading a real page -Ethan
+  - frontend QR code URL embed & started deploying, learned how to deploy to heroku for the first time.
+- What would you do differently next time (process)
+  - use Tutorial? -Ethan 
+  - Spend more time thinking about what kind of tutorial we'd need to help everyone follow -Thad (Gunicorn or Postgres seems to have caught us, not sure which yet)
+- What would you like to do next time? (task)
+  - report out from flag reform meeting on thoughts from Ananda and co. -Thad 
 #### Wed Jun 02
 
 - How do you feel?
