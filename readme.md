@@ -38,7 +38,7 @@ If database is not created in your local environment or you want to recreate:
 
 `DEBUG=True FLASK_APP=app.py flask db init`
 
-To bring the db up to date:
+After the database has been created:
 
 ``
 DEBUG=True FLASK_APP=app.py flask db migrate
@@ -62,6 +62,16 @@ pytest -s --verbose
 click the link (typically port 8001 on localhost)
 
 or run `sqlite`
+
+### To Deploy to Heroku
+```
+heroku create
+heroku buildpacks:add --index 1 heroku-community/apt
+heroku config:set FLASK_APP=app.py FLASK_ENV=development
+heroku run flask db init
+heroku run flask db migrate
+heroku run flask db upgrade
+```
 
 ### TODOs:
 
