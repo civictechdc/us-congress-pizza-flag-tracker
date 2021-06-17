@@ -54,3 +54,15 @@ def send_file_qrcode(uuid):
 def info():
     headers = flask.request.headers
     return "Request headers:\n" + str(headers)
+
+def update_order(uuid):
+    request_json = request.get_json()
+    print(request_json, type(request_json))
+    # for x in request_json.keys():
+    #     print(x,request_json[x])
+
+    usa_state = request_json[u'usa_state']
+    idbased_order_number = request_json[u'order_number']
+    coffice = request_json[u'coffice']
+    updated_order = OrderActions.update_order( uuid, usa_state, idbased_order_number , coffice)
+    return updated_order

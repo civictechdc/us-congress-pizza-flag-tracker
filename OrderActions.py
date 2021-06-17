@@ -37,4 +37,12 @@ class OrderActions():
     def get_coffice(cls, coffice):
         return OrderModel.query.filter(OrderModel.coffice == coffice)
 
-
+    @ classmethod
+    def update_order(cls, uuid, usa_state, idbased_order_number , coffice):
+        order = cls.get_order_by_uuid(uuid)
+        order["order_number"] = idbased_order_number
+        order["usa_state"] = usa_state
+        order["coffice"] = coffice 
+        db.session.commit()
+        return order
+     
