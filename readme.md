@@ -34,9 +34,14 @@ OR if using python
     pip install -r requirements.txt
     ```
 
-If database is not created in your local environment or you want to recreate:
+If database is not created in your local environment:
 
 `DEBUG=True FLASK_APP=app.py flask db init`
+
+If database is created but you want to recreate
+`rm -rf migrations`
+`DEBUG=True FLASK_APP=app.py flask db init`
+
 
 After the database has been created:
 
