@@ -63,7 +63,7 @@
     - [x] Tests and implements route for qr_code that includes a parameter for the string
   - Resource: https://stackoverflow.com/questions/26363613/how-to-test-send-file-flask
   - [x] Ask ethan about "data = request.args.get("value", uuid)" from controllers.py
-  - [ ] create an environment variable for <frontendBaseURL> in backend 
+  - [ ] create an environment variable for <frontendBaseURL> in backend
   - [ ] Modify above test that the QR code returns `<frontendBaseURL>/status/<uuid>` where root_url is read from an env variable
   - [x] Create a button in the UI that calls route for generating qr code with UUID as a parameter
   - [x] QR code return http://localhost:3000/orders/uuid
@@ -86,6 +86,8 @@
   - [x] Make it look user friendly
   - [x] When an order is clicked, the order details are shown
   - [x] when click on an order, see the QR code
+  - [x] Create tests for updated orders
+  - [x] Create update functions
   - [ ] When an order is edited, the order details are shown (resolve the 404 on /orders/uuid)
   - [ ] When an order is edited and published, changes persist (update/put request)
 - [ ] Screen for changing status

@@ -5,8 +5,24 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
-
 Retro questions:
+
+### June 16
+
+- How do you feel?
+  - Excited to have new person coding - Rajinder
+  - I'm happy that Rajinder helped debug my enviornment setup - Nelson
+  - Happy that we wrote tests and got it working - Terence
+- What did you like?
+  - Got dev enviornment setup and learned about Heroku - Rajinder
+  - Cool seeing TDD focused workflow - Nelson
+  - Each time we meet, we are able to move the project a little bit further - Terence
+- What would you do differently next time (process)
+  - Didn't use mod timer - Terence, Rajinder
+- What would you like to do next time? (task)
+  - Get frontend updated and working - Terence, Rajinder
+
+### June 09
 
 - How do you feel?
   - Grumpy and Happy b/c hot weather -Ethan
@@ -15,22 +31,24 @@ Retro questions:
   - started to deploy Heroku & qr code loading a real page -Ethan
   - frontend QR code URL embed & started deploying, learned how to deploy to heroku for the first time.
 - What would you do differently next time (process)
-  - use Tutorial? -Ethan 
+  - use Tutorial? -Ethan
   - Spend more time thinking about what kind of tutorial we'd need to help everyone follow -Thad (Gunicorn or Postgres seems to have caught us, not sure which yet)
 - What would you like to do next time? (task)
-  - report out from flag reform meeting on thoughts from Ananda and co. -Thad 
+  - report out from flag reform meeting on thoughts from Ananda and co. -Thad
+
 #### Wed Jun 02
 
 - How do you feel?
-    - Mixed - rm, ts
-    - Disappointed: wanted to get further - es
+  - Mixed - rm, ts
+  - Disappointed: wanted to get further - es
 - What did you like?
-    - we met - es
-    - we caught up on changes - ts
+  - we met - es
+  - we caught up on changes - ts
 - What would you do differently next time (process)
-    - Debug working - rm
+  - Debug working - rm
 - What would you like to do next time? (task)
-    - START HERE - rm
+  - START HERE - rm
+
 #### Wed May 26
 
 - How do you feel?
@@ -45,7 +63,9 @@ Retro questions:
   - Talk as a group to reaffirm what MVP looks like -Terence
   - Get into statuses! - Terence
   - Make sure new people find footholds, mention them in retro so next team can invite them etc -Thad
-#### Wed May 19 
+
+#### Wed May 19
+
 Verbal retro
 
 #### Wed May 12
@@ -61,8 +81,9 @@ Verbal retro
 - What would you do differently next time (process)
   - Having the figma up is important again as we work on routes.
 - What would you like to do next time? (task
- - Stay focused on MVP -Thad +1 Rajinder
- - Want to get the setup locally on my machine -Nelson
+- Stay focused on MVP -Thad +1 Rajinder
+- Want to get the setup locally on my machine -Nelson
+
 #### Wed May 5
 
 - How do you feel?
