@@ -37,7 +37,14 @@ def get_orders():
     return orders
 
 def get_order_by_uuid(uuid):
-    return OrderActions.get_order_by_uuid(uuid)
+    # Return a dictionary(json) object for use by frontend
+    order_obj = OrderActions.get_order_by_uuid(uuid)
+    order_dict = {}
+    order_dict['order_number'] = order_obj.order_number
+    order_dict['usa_state'] = order_obj.usa_state
+    order_dict['coffice'] = order_obj.coffice
+    order_dict['uuid'] = order_obj.uuid
+    return order_dict
 
 #generate qr code 
 def get_qrcode(uuid):

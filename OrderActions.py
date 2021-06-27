@@ -30,19 +30,20 @@ class OrderActions():
 
     @ classmethod
     def get_order_by_uuid(cls, uuid):
+        # Return OrderModel object for use by backend
         order = OrderModel.query.filter(OrderModel.uuid == uuid).first()
-        return {"order_number": order.order_number, "uuid": order.uuid, "usa_state": order.usa_state, "coffice": order.coffice}
+        return order
 
     @ classmethod
     def get_coffice(cls, coffice):
         return OrderModel.query.filter(OrderModel.coffice == coffice)
 
     @ classmethod
-    def update_order(cls, uuid, usa_state, idbased_order_number , coffice):
+    def update_order(cls, uuid, usa_state, order_number , coffice):
         order = cls.get_order_by_uuid(uuid)
-        order["order_number"] = idbased_order_number
-        order["usa_state"] = usa_state
-        order["coffice"] = coffice 
+        order.order_number = order_number
+        order.usa_state = usa_state
+        order.coffice = coffice 
         db.session.commit()
         return order
      

@@ -3,6 +3,7 @@ import random
 from OrderActions import OrderActions 
 from models import OrderModel
 from config import *
+from controllers import get_order_by_uuid as controllers_get_order_by_uuid
 
 class TestOrderActions():
     
@@ -47,10 +48,20 @@ class TestOrderActions():
         created_order = OrderActions.create( "OH",  unique_order_number , "OH06")
         actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
         
-        assert(actual_order["usa_state"] == "OH")
-        assert(actual_order["coffice"] == "OH06")
-        assert(actual_order["order_number"] == unique_order_number)
-        assert(actual_order["uuid"] == created_order.uuid)
+        assert(actual_order.usa_state == "OH")
+        assert(actual_order.coffice == "OH06")
+        assert(actual_order.order_number == unique_order_number)
+        assert(actual_order.uuid == created_order.uuid)
+
+    def test_controllers_get_order_by_uuid(self):
+        unique_order_number = random.randint(1,1000000)
+        created_order = OrderActions.create( "OH",  unique_order_number , "OH06")
+        actual_order=controllers_get_order_by_uuid(created_order.uuid)
+        
+        assert(actual_order['usa_state'] == "OH")
+        assert(actual_order['coffice'] == "OH06")
+        assert(actual_order['order_number'] == unique_order_number)
+        assert(actual_order['uuid'] == created_order.uuid)       
 
     def test_update_order(self):
         unique_order_number = random.randint(1,1000000)
@@ -59,10 +70,12 @@ class TestOrderActions():
 
         usa_state = "VA"
         coffice = "031E"
-        order_number = 13214
-        uuid = actual_order["uuid"]
+        order_number = random.randint(1,1000000)
+        uuid = actual_order.uuid
         updated_order = OrderActions.update_order(uuid, usa_state, order_number , coffice)
-        assert(updated_order["usa_state"] == "VA")
-        assert(updated_order["coffice"] == "031E")
-        assert(updated_order["order_number"] == 13214)
+
+        refreshed_actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
+        assert(refreshed_actual_order.usa_state == usa_state)
+        assert(refreshed_actual_order.coffice == coffice)
+        assert(refreshed_actual_order.order_number == order_number)
 
