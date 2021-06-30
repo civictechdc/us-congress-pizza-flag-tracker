@@ -7,6 +7,21 @@ Retro questions:
 
 Retro questions:
 
+### June 23
+- How do you feel?
+  - Good (even though some bugs)
+  - Frazzled
+- What did you like?
+  - Caught up
+  - Rajinder offered
+  - Reviewing old changes
+- What would you do differently next time (process)
+  - Add link to pull request
+- What would you like to do next time? (task)
+  - Get existing tests to work
+
+
+Recapped understanding.  Heroku.  Python.
 ### June 16
 
 - How do you feel?
