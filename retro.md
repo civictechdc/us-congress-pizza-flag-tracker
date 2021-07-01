@@ -7,7 +7,30 @@ Retro questions:
 
 Retro questions:
 
+### June 30
+
+- How do you feel?
+  - Sort of sad, pensive, hopeful
+  - Inspired
+  - Motivated
+  - Mixed (headachy, happy at retro)
+- What did you like?
+  - Getting things live - closer
+  - Appreciate taking time to teach us
+  - Making solid progress
+  - Work out conflicts with deploying, gunicorn
+  - Thad taught us how to use Heroku
+  - We found a good example and were able to follow it without too many hitches
+- What would you do differently next time (process)
+  - Maybe role of expert +1
+  - Find one or write an article on React and Flask Heroku
+  - Discuss role of expert
+  - Before next time, read articles
+- What would you like to do next time? (task)
+  - THAD will make things work
+
 ### June 23
+
 - How do you feel?
   - Good (even though some bugs)
   - Frazzled
@@ -20,8 +43,8 @@ Retro questions:
 - What would you like to do next time? (task)
   - Get existing tests to work
 
+Recapped understanding. Heroku. Python.
 
-Recapped understanding.  Heroku.  Python.
 ### June 16
 
 - How do you feel?
