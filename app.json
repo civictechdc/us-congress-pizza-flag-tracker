@@ -1,0 +1,35 @@
+{
+  "name": "SPA with Heroku",
+  "description": "A reference app for how to build and deploy a frontend alongside a backend app in Heroku",
+  "keywords": ["deployment", "frontend", "backend", "spa"],
+  "website": "https://www.karlsutt.com/articles/how-to-build-and-serve-spa-with-heroku-app/",
+  "repository": "https://github.com/karls/spa-with-heroku",
+  "env": {
+    "NODE_ENV": {
+      "description": "Node.js environment",
+      "value": "production"
+    },
+    "YARN_PRODUCTION": {
+      "description": "Should Yarn prune devDependencies?",
+      "value": "false"
+    },
+    "FLASK_ENV": {
+      "description": "Flask environment",
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "size": "free",
+      "quantity": 1
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

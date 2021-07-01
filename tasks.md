@@ -43,7 +43,7 @@
 - [ ] Investigation - [ ] Look at what to install - [ ] Try PyCharm
 - [ ] Technical debt / refactoring - [x] Python: Change way we do importing, explicitly import, import from config.py - [ ] Check Daniel's code to maybe do more https://github.com/codeforboston/flagging - [ ] Flask/Python: Be in production mode, app.py - [ ] Create an src folder with **init** - [ ] Annotate routes - if we can get it to work easily - [ ] Environment: - [ ] Use git module, either make backend master repo - [ ] Deployment - [ ] Identify where we are not modular - [ ] Blueprints?  
        - [ ] Figure out code coverage - [ ] Comment out untested code - [ ] Use named parameters instead of positional! - [ ] Set up guide in readme: how to deploy locally and in cloud - [ ] Add black, pytest, pytest-cov, pytest-watch to requirements.txt - [ ] Create test for route controller
-- [ ] rename state to status in figma documentation
+- [x] rename state to status in figma documentation
 - [x] review create test and code
 - [ ] adding an order:
   - [x] test the create action

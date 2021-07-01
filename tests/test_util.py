@@ -11,7 +11,7 @@ class TestUtils():
     def test_qrcode(self):
         qrcodeValue = "https://example.com/A43X2Q3"
         with app.test_client() as c:
-            response = c.get('/qrcode?value=' + qrcodeValue)
+            response = c.get('/qrcode/' + qrcodeValue)
             imgData = BytesIO(response.data)
             imgData.seek(0)
             data = np.fromstring(imgData.getvalue(), dtype=np.uint8)
