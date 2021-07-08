@@ -42,12 +42,10 @@ If database is created but you want to recreate
 `rm -rf migrations`
 `DEBUG=True FLASK_APP=app.py flask db init`
 
-
 After the database has been created:
 
 ``
 DEBUG=True FLASK_APP=app.py flask db migrate
-DEBUG=True FLASK_APP=app.py flask db upgrade
 FLASK_APP=app.py FLASK_ENV=development flask run
 
 ```
@@ -70,12 +68,14 @@ or run `sqlite`
 
 ### To Deploy to Heroku
 ```
+
 heroku create
 heroku buildpacks:add --index 1 heroku-community/apt
 heroku config:set FLASK_APP=app.py FLASK_ENV=development
 heroku run flask db init
 heroku run flask db migrate
 heroku run flask db upgrade
+
 ```
 
 ### TODOs:
