@@ -77,11 +77,11 @@
   - [x] Display the order when above is entered
   - [x] Review pull request for test for `get_QRCode('any_string')` returns PNG for the qr code for `'any_string'`
     - [ ] Run and fix the tests
-- START HERE
 - [ ] Explore deploying the app frontend/backend for QR code demo
   - [x] Set up https://codefordc-flag.herokuapp.com/
+  - START HERE
   - [ ] Get Postgres working with the app deployed on Heroku
-  - [ ] Un-hard code and reference environment variable <frontendBaseURL> of the frontend inside QR code.
+  - [x] Un-hard code and reference environment variable <frontendBaseURL> of the frontend inside QR code.
 - [ ] Screen for changing status
   - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
   - [ ] Add a hard coded drop down list (temporary)

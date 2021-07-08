@@ -7,7 +7,21 @@ Retro questions:
 
 Retro questions:
 
-## -### June 30
+## July 7
+
+- How do you feel?
+  - I will feel better if this works -thad
+  - Satisfied -Ethan
+- What did you like?
+  - Liked we got the frontend going -Ethan and Terence
+  - Hearing Thad's ideas on difference between Heroku (keeps it running, but sleeps) and Netlify (keeps it built as static resources)
+- What would you do differently next time (process)
+  - Simple first for Heroku environment (don't have Flask host the frontend, even if alluring) Thad
+- What would you like to do next time? (task)
+  - Debug postgres `heroku logs --tail` errors
+  - Ask Greg to add netlify to our frontend repo (now?)
+
+## June 30
 
 -- How do you feel?
 
