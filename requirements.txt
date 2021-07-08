@@ -31,3 +31,4 @@ Flask-Cors==3.0.10
 opencv-python==4.5.1.48
 opencv-python-headless==4.5.2.54
 python-dotenv==0.18.0
+gunicorn==20.0.4; python_version >= "3.4"
