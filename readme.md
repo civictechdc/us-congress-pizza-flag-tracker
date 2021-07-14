@@ -41,11 +41,11 @@ If database is not created in your local environment:
 If database is created but you want to recreate
 `rm -rf migrations`
 `DEBUG=True FLASK_APP=app.py flask db init`
+DEBUG=True FLASK_APP=app.py flask db migrate
 
 After the database has been created:
 
 ``
-DEBUG=True FLASK_APP=app.py flask db migrate
 FLASK_APP=app.py FLASK_ENV=development flask run
 
 ```

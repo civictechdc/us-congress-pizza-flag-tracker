@@ -8,7 +8,6 @@ __pycache__/
 
 # VSCODE
 .vscode
-migrations
 
 # Distribution / packaging
 .Python
