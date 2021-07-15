@@ -48,7 +48,8 @@ def get_order_by_uuid(uuid):
 
 #generate qr code 
 def get_qrcode(uuid):
-    img = qrcode.make('http://localhost:3000/orders/'+uuid)
+    frontendURL = app.config['FRONTEND_URI'] 
+    img = qrcode.make(frontendURL+'/orders/'+uuid)
     buf = io.BytesIO()
     img.save(buf)
     buf.seek(0)
