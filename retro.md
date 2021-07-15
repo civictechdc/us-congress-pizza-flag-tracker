@@ -7,6 +7,22 @@ Retro questions:
 
 Retro questions:
 
+## July 14
+
+- How do you feel?
+  Happy+(very), excited, glad
+- What did you like?
+  Progress+
+  Closed loop
+  Cool to see it come up
+  Found example of redirect file
+  Netlify
+- What would you do differently next time (process)
+  Write out the steps when doing a deploy++
+- What would you like to do next time? (task)
+  Options: blog, write up, authority, status table, security
+  Status for two houses - different statusses
+
 ## July 7
 
 - How do you feel?
