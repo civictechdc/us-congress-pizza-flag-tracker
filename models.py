@@ -20,3 +20,21 @@ class OrderModel(db.Model):
        self.order_number = order_number
        self.coffice = coffice
        self.uuid = theUuid
+
+# Terence: When we create the new table for statuses
+#  we'll need foreign keys in our ORM
+#  for statuses. Every order has a status but
+#  statuses have many orders.
+
+#Do we want to break this file up into separate model
+#  files? E.g. statusModels.py, userModels.py
+
+# id (number), office code (string), sequence_num (numerical), description (text)
+#Status notes (Where orders are from)
+#  id (number),
+#  office code (string),
+#  sequence_num (numerical),
+#  description (text)
+
+#User Table notes
+#  uuid, user_id, can_set_status (if they scan), (one to many)

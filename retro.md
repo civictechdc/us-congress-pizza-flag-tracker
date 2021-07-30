@@ -7,6 +7,15 @@ Retro questions:
 
 Retro questions:
 
+## July 28
+(Short meeting about status table)
+
+## July 21
+- How did you feel?
+  - Interest from new folks!
+- Like
+  - Flesh out status table
+  - Learning about our work.
 ## July 14
 
 - How do you feel?
@@ -22,7 +31,6 @@ Retro questions:
 - What would you like to do next time? (task)
   Options: blog, write up, authority, status table, security
   Status for two houses - different statusses
-
 ## July 7
 
 - How do you feel?

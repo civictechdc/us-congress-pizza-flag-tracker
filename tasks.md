@@ -114,7 +114,7 @@
 - query database on multiple criteria
 
 ### Later / authorization tests
-
+- table for us_states/congressional offices for those states, and on front-end change free text to dropdown for all options (AJAX).
 - tests for admin authorization
 - tests for update status authorization
 - tests and UI for creating and getting all attributes for an order
