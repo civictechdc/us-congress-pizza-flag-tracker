@@ -68,9 +68,13 @@ def update_order(uuid):
     print(request_json, type(request_json))
     # for x in request_json.keys():
     #     print(x,request_json[x])
-
     usa_state = request_json[u'usa_state']
     idbased_order_number = request_json[u'order_number']
     coffice = request_json[u'coffice']
     updated_order = OrderActions.update_order( uuid, usa_state, idbased_order_number , coffice)
-    return updated_order
+    order_dict = {}
+    order_dict['order_number'] = updated_order.order_number
+    order_dict['usa_state'] = updated_order.usa_state
+    order_dict['coffice'] = updated_order.coffice
+    order_dict['uuid'] = updated_order.uuid
+    return order_dict

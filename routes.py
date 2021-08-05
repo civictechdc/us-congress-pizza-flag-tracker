@@ -21,4 +21,4 @@ app.add_url_rule('/orders/<uuid>', view_func=get_order_by_uuid, methods=["GET"])
 
 app.add_url_rule('/info', view_func=info, methods=["GET"])
 
-app.add_url_rule('/update/<uuid>', view_func=update_order, methods=["POST"])
+app.add_url_rule('/orders/<uuid>', view_func=update_order, methods=["PUT"])

@@ -6,7 +6,19 @@ Retro questions:
 - What would you like to do next time? (task)
 
 Retro questions:
+## Aug 4 
+- How do you feel?
+  - Good about progress -Rajinder 
+  - Grateful for knowledge shared, feels like a bigger project -Juan
+- What did you like?
+  - Fixed the connection/.env issue and have new programmer!
+  - Seeing react in a real live project! -Juan
+ - Put/Update wired well.
 
+- What would you do differently next time (process)
+  - More structure, focus on specific problem, see route, solve it. More strucutre.
+- What would you like to do next time? (task)
+  - Continue working on props/editing permissions issue 
 ## July 28
 (Short meeting about status table)
 
