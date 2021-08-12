@@ -39,9 +39,10 @@ If database is not created in your local environment:
 `DEBUG=True FLASK_APP=app.py flask db init`
 
 If database is created but you want to recreate
-`rm -rf migrations`
+`git checkout ./migrations`
 `DEBUG=True FLASK_APP=app.py flask db init`
 DEBUG=True FLASK_APP=app.py flask db migrate
+DEBUG=True FLASK_APP=app.py flask db upgrade
 
 After the database has been created:
 

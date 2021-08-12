@@ -12,6 +12,7 @@ class OrderModel(db.Model):
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     usa_state = db.Column(db.String(255))
     coffice = db.Column(db.String(255))
+    home_office_code = db.relationship("agency_offices", foreign_keys=["agency_office_code"])
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
@@ -20,6 +21,27 @@ class OrderModel(db.Model):
        self.order_number = order_number
        self.coffice = coffice
        self.uuid = theUuid
+
+
+class AgencyOfficeModel(db.Model):
+    __tablename__ = "agency_offices"
+    agency_office_code = db.Column(db.String(50), primary_key=True, nullable=False)
+    uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
+    usa_state = db.Column(db.String(20))
+    agency_office_name = db.Column(db.String(255))
+    can_set_status = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+     
+    def __init__(self, agency_office_code, uuid, usa_state, agency_office_name, can_set_status):
+        self.agency_office_code = agency_office_code
+        self.uuid = uuid
+        self.usa_state = usa_state
+        self.agency_office_name = agency_office_name
+        self.can_set_status = can_set_status
+
+
+
 
 # Terence: When we create the new table for statuses
 #  we'll need foreign keys in our ORM
