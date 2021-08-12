@@ -6,6 +6,19 @@ Retro questions:
 - What would you like to do next time? (task)
 
 Retro questions:
+## Aug 11
+- How do you feel?
+  - Good about planning -RM -TS
+  - Balance toward thinking about what customers need. -TK
+  - 
+- What did you like?
+  - Seeing how to create a relationship table. -RM
+- What would you do differently next time (process)
+  
+- What would you like to do next time? (task)
+  - learn about customer needs.
+  - get front end functionality. 
+
 ## Aug 4 
 - How do you feel?
   - Good about progress -Rajinder 
