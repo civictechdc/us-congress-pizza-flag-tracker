@@ -25,8 +25,8 @@ class OrderActions():
 
     @ classmethod
     def get_order_by_order_number(cls, order_number):
-        orders = OrderModel.query.filter(OrderModel.order_number == order_number).first()
-        return orders
+        order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
+        return order
 
     @ classmethod
     def get_order_by_uuid(cls, uuid):
