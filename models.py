@@ -12,7 +12,7 @@ class OrderModel(db.Model):
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     usa_state = db.Column(db.String(255))
     coffice = db.Column(db.String(255))
-    home_office_code = db.relationship("agency_offices", foreign_keys=["agency_office_code"])
+    #home_office_code = db.relationship("agency_offices", foreign_keys=["agency_office_code"])
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
