@@ -51,6 +51,12 @@
   - [ ] - [ ] Deployment
   - [ ] - [ ] Identify where we are not modular - [ ] Blueprints?
       - [ ] Figure out code coverage - [ ] Comment out untested code - [ ] Use named parameters instead of positional! - [ ] Set up guide in readme: how to deploy locally and in cloud - [ ] Add black, pytest, pytest-cov, pytest-watch to requirements.txt - [ ] Create test for route controller
+  - [ ] Add tests for order num endpoint
+  - [ ] Add comments for code thats currently commented out and dead code(And get it to work!!) (db.relationships in particular)
+  - [ ] Console.log
+  - [ ] Search by title -> search by order number
+  - [ ] remove unneccessary import of dropbox
+  - [ ] Combobox https://reach.tech/combobox/
 - [x] rename state to status in figma documentation
 - [x] review create test and code
 - [ ] adding an order:

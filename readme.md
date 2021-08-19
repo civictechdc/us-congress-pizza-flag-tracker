@@ -70,8 +70,8 @@ or run `sqlite`
 ### To Deploy to Heroku
 ```
 
-heroku create
-heroku buildpacks:add --index 1 heroku-community/apt
+heroku create 
+heroku git:remote -a codefordc-flag
 heroku config:set FLASK_APP=app.py FLASK_ENV=development
 heroku run flask db init
 heroku run flask db migrate
