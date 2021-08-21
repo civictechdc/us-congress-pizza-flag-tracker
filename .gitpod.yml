@@ -1,10 +1,16 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - init: echo 'init script' # runs during prebuild
+  - name: start
+    init: echo 'init script' # runs during prebuild
     command: |
-      mkdir xyz
       export PIP_USER=false
       pip3 install -r requirements.txt
+      DEBUG=True FLASK_APP=app.py flask db init
+      DEBUG=True FLASK_APP=app.py flask db migrate
+      DEBUG=True FLASK_APP=app.py flask db upgrade
+
+  - name: server
+    command: FLASK_APP=app.py FLASK_ENV=development flask run
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
