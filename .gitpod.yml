@@ -2,6 +2,7 @@
 tasks:
   - init: echo 'init script' # runs during prebuild
     command: |
+      mkdir xyz
       export PIP_USER=false
       pip3 install -r requirements.txt
 
