@@ -11,8 +11,9 @@ app = Flask(__name__)
 qrcode = QRcode(app)
 
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ['DATABASE_URL']
-app.config['FRONTEND_URI'] = os.environ['FRONTEND_URI']
+print("config")
+# app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ['DATABASE_URL']
+# app.config['FRONTEND_URI'] = os.environ['FRONTEND_URI']
 
 db = SQLAlchemy(app)
 

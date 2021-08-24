@@ -25,11 +25,11 @@ def create_order():
     print(request_json, type(request_json))
     # for x in request_json.keys():
     #     print(x,request_json[x])
-
+    
     usa_state = request_json[u'usa_state']
     idbased_order_number = request_json[u'order_number']
-    coffice = request_json[u'coffice']
-    order = OrderActions.create( usa_state,  idbased_order_number , coffice)
+    office_code = request_json[u'office_code']
+    order = OrderActions.create( usa_state,  idbased_order_number , office_code)
     return f'Created one'
 
 def get_orders():
@@ -42,7 +42,7 @@ def get_order_by_uuid(uuid):
     order_dict = {}
     order_dict['order_number'] = order_obj.order_number
     order_dict['usa_state'] = order_obj.usa_state
-    order_dict['coffice'] = order_obj.coffice
+    order_dict['office_code'] = order_obj.office_code
     order_dict['uuid'] = order_obj.uuid
     return order_dict
 
@@ -53,7 +53,7 @@ def get_order_by_order_number(order_number):
     order_dict = {}
     order_dict['order_number'] = order_obj.order_number
     order_dict['usa_state'] = order_obj.usa_state
-    order_dict['coffice'] = order_obj.coffice
+    order_dict['office_code'] = order_obj.office_code
     order_dict['uuid'] = order_obj.uuid
     return {"orders":[order_dict]}
 
@@ -81,11 +81,11 @@ def update_order(uuid):
     #     print(x,request_json[x])
     usa_state = request_json[u'usa_state']
     idbased_order_number = request_json[u'order_number']
-    coffice = request_json[u'coffice']
-    updated_order = OrderActions.update_order( uuid, usa_state, idbased_order_number , coffice)
+    office_code = request_json[u'office_code']
+    updated_order = OrderActions.update_order( uuid, usa_state, idbased_order_number , office_code)
     order_dict = {}
     order_dict['order_number'] = updated_order.order_number
     order_dict['usa_state'] = updated_order.usa_state
-    order_dict['coffice'] = updated_order.coffice
+    order_dict['office_code'] = updated_order.office_code
     order_dict['uuid'] = updated_order.uuid
     return order_dict
