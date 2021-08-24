@@ -13,7 +13,6 @@ class TestOrderActions():
         order = OrderActions.create( "MD",  unique_order_number , "MD06")
         retrievedOrder = OrderActions.get_order_by_order_number(unique_order_number)
         assert(retrievedOrder.order_number == unique_order_number)
-        x = retr
         # assert(retrievedOrder.status_id == 1)
         
 

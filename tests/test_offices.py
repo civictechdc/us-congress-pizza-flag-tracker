@@ -63,15 +63,6 @@ class TestOfficeActions():
                 assert(office["office_name"] == self.default_office_name2)
         assert(found)
 
-gi    def test_get_office(self):
-        unique_office_code = random.randint(1,1000000)
-        created_office = OfficeActions.create( "MD",  unique_office_code , "MD06")
-        actual_office=OfficeActions.get_office_by_office_code(created_office.office_code)
-        
-        assert(actual_office.usa_state == "MD")
-        assert(actual_office.office_code == "MD06")
-        assert(actual_office.office_code == unique_office_code)
-
     # def test_controllers_get_office_by_uuid(self):
     #     unique_office_code = random.randint(1,1000000)
     #     created_office = OfficeActions.create( "OH",  unique_office_code , "OH06")
