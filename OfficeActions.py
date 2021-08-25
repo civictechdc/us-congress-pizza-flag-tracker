@@ -13,6 +13,10 @@ class OfficeActions():
         return new_office
 
     @ classmethod
+    def delete(cls):
+        OfficeModel.query.delete()
+
+    @ classmethod
     def get_offices(cls):
         offices = OfficeModel.query.all()
         return {"offices": [
@@ -20,11 +24,11 @@ class OfficeActions():
              "office_code": office.office_code, 
              "office_name": office.office_name
             } 
-          for office in offices]}
+          for office in offices]}["offices"]
 
     @ classmethod
     def get_by_code(cls, office_code: str):
-        return OfficeModel.query.filter(OfficeModel.office_code == office_code)
+        return OfficeModel.query.filter(OfficeModel.office_code == office_code).first()
 
     @ classmethod
     def update_office(cls, uuid, usa_state, office_number , office_code):
