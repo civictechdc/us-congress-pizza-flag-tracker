@@ -22,10 +22,6 @@ def index():
 
 def create_order():
     request_json = request.get_json()
-    print(request_json, type(request_json))
-    # for x in request_json.keys():
-    #     print(x,request_json[x])
-    
     usa_state = request_json[u'usa_state']
     idbased_order_number = request_json[u'order_number']
     office_code = request_json[u'office_code']
@@ -76,9 +72,6 @@ def info():
 
 def update_order(uuid):
     request_json = request.get_json()
-    print(request_json, type(request_json))
-    # for x in request_json.keys():
-    #     print(x,request_json[x])
     usa_state = request_json[u'usa_state']
     idbased_order_number = request_json[u'order_number']
     office_code = request_json[u'office_code']

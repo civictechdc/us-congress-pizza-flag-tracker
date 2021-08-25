@@ -15,7 +15,6 @@ class TestOfficeActions():
     number_of_seconds_in_a_day = 24*60*60
     
     def setup_method(self, method):
-        print("setup")
         OfficeActions.delete()
 
     def test_create(self):
