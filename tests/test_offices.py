@@ -38,8 +38,7 @@ class TestOfficeActions():
             office_name= self.default_office_name
         )
         retrieved_office = OfficeActions.get_by_code(office_code=self.default_office_code)
-        print("xxxx", retrieved_office)
-        assert(retrieved_office.office_code == self.default_office_code)        
+        assert(retrieved_office.office_code == self.default_office_code)
         assert(retrieved_office.usa_state == self.default_usa_state)        
         assert(retrieved_office.office_name == self.default_office_name)
 

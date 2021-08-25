@@ -15,6 +15,7 @@ class OfficeActions():
     @ classmethod
     def delete(cls):
         OfficeModel.query.delete()
+        db.session.commit()
 
     @ classmethod
     def get_offices(cls):
