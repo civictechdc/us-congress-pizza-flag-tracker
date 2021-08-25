@@ -19,12 +19,12 @@ class OfficeActions():
     @ classmethod
     def get_offices(cls):
         offices = OfficeModel.query.all()
-        return {"offices": [
+        return [
             {"usa_state": office.usa_state,
              "office_code": office.office_code, 
              "office_name": office.office_name
             } 
-          for office in offices]}["offices"]
+          for office in offices]
 
     @ classmethod
     def get_by_code(cls, office_code: str):
