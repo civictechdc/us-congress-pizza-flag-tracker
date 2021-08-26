@@ -9,7 +9,7 @@ from config import db
 
 class OfficeModel(db.Model):
     __tablename__ = "offices"
-    usa_state = db.Column(db.String(2))
+    usa_state = db.Column(db.String(10))
     office_code = db.Column(db.String(10), primary_key=True, nullable=False)
     office_name = db.Column(db.String(255))
     created_at = db.Column(db.DateTime)
@@ -27,7 +27,7 @@ class OrderModel(db.Model):
     __tablename__ = "orders"
     order_number = db.Column(db.Integer, primary_key=True, nullable=False)
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
-    usa_state = db.Column(db.String(2))
+    usa_state = db.Column(db.String(10))
     office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
     #home_office_code = db.relationship("offices", foreign_keys=["office_code"])
     created_at = db.Column(db.DateTime)

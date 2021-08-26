@@ -9,9 +9,15 @@ class TestOfficeActions():
     default_usa_state = "MA"
     default_office_code = default_usa_state + "-18"
     default_office_name = "Office "+default_office_code
+
     default_usa_state2 = "NH"
     default_office_code2 = default_usa_state2 + "-03"
     default_office_name2 = "Office "+default_office_code2
+
+    default_hoss_usa_state = "HOSS"
+    default_hoss_office_code = default_hoss_usa_state + "-01"
+    default_hoss_office_name = "Office "+default_hoss_office_code
+
     number_of_seconds_in_a_day = 24*60*60
     
     def setup_method(self, method):
@@ -28,9 +34,24 @@ class TestOfficeActions():
         assert office.office_code == self.default_office_code 
         assert(office.usa_state == self.default_usa_state)        
         assert(office.office_name == self.default_office_name)   
-        assert (total_seconds_since_created < 1)
+        assert(total_seconds_since_created < 1)
+        assert(total_seconds_since_updated < 1) 
 
-    def test_get_given_office_created_(self):
+    def test_create_hoss(self):
+        office = OfficeActions.create(
+            usa_state = self.default_hoss_usa_state, 
+            office_code=self.default_hoss_office_code, 
+            office_name=self.default_hoss_office_name
+        )
+        total_seconds_since_created = (datetime.datetime.now()-office.created_at).total_seconds()
+        total_seconds_since_updated = (datetime.datetime.now()-office.updated_at).total_seconds()
+        assert office.office_code == self.default_hoss_office_code 
+        assert(office.usa_state == self.default_hoss_usa_state)        
+        assert(office.office_name == self.default_hoss_office_name)   
+        assert (total_seconds_since_created < 1)
+        assert(total_seconds_since_updated < 1) 
+
+    def test_get_given_office_created(self):
         OfficeActions.create(
             office_code=self.default_office_code, 
             usa_state = self.default_usa_state, 
