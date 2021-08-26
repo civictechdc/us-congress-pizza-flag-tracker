@@ -6,6 +6,33 @@ Retro questions:
 - What would you like to do next time? (task)
 
 Retro questions:
+
+##- How do you feel? 
+    - Happy TK, R, Ethan
+    - Content - Merrit, Ethan
+    - Thankful - Juan
+
+- What did you like and/or learn? 
+  - Catching up
+  - Thankful Juan and Merrit Thad
+  - Made progress Ethan, Rajinder
+  - Parts could recognize - Merrit
+  - Got stuff done - Ethan
+  - Learned error message doesn't necessarily point to correct, CORS being inappropriate
+- What would you do differently next time (process)
+  - Figure out way to write comments such as chat or something
+  
+- What would you like to do next time? (task)
+  - Make tasks for people that want them in React
+      - Auth (FLASK SESSIONS?) Start over chat
+      - Finish the tests
+      - Pull states & offices from server
+      - Flag statusses (requires some more elaboration)
+      - Figure out why getting CORS errors instead of 500 errors
+      - Disabling button if errors
+      - Improve state / office UI 
+      
+
 ## Aug 11
 - How do you feel?
   - Good about planning -RM -TS

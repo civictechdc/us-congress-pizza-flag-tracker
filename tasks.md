@@ -1,5 +1,14 @@
 ## Next task
 
+- Tasks to do between sessions
+    - Auth (FLASK SESSIONS?) Start over chat
+    - Finish the tests
+    - Pull states & offices from server
+    - Flag statusses (requires some more elaboration)
+    - Figure out why getting CORS errors instead of 500 errors
+    - Disabling button if errors
+    - Improve state / office UI 
+
 - Discuss MVP
 
   - Update orders and see the status of the order
