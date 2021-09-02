@@ -5,6 +5,23 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+# Sept 1
+
+- How do you feel?
+  - Happy -R +1 -Terence 
+  - Positive -T
+- What did you like?
+  - Fixed my git frontend remote -R
+  - Realizing there was no special library for select and explaining states.js -T
+- What would you do differently next time (process)
+  - Better mob ettiquette in switching off. Navigator navigating. -R
+  - Figure out balance between quality assurance testing in meeting -Thad
+  - Ethan suggested Github Issues?
+- What would you like to do next time? (task)
+  - TBD -Rajinder
+  - something about statuses -Thad
+  - more coding done (but stay on same page and looking at big picture) -Terence
+
 Retro questions:
 
 ##- How do you feel? 

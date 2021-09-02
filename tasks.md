@@ -1,12 +1,15 @@
 ## Next task
 
 - Tasks to do between sessions
-    - Auth (FLASK SESSIONS?) Start over chat
-    - Finish the tests
-    - Pull states & offices from server
-    - Flag statusses (requires some more elaboration)
-    - Figure out why getting CORS errors instead of 500 errors
-    - Disabling button if errors
+    - [] Auth (FLASK SESSIONS?) Start over chat
+    - [] Componentizing the front end to not repeat ourselves (DRY)
+    - [x] Finish the tests
+    - [] Entering the states.js into offices table automatically.
+    - [] Pull states & offices from server
+    - [] Flag statuses mockup with static data?
+    - [] Flag statusses from backend (requires some more elaboration)
+    - [] Figure out why getting CORS errors instead of 500 errors
+    - [x] Disabling button if errors
     - Improve state / office UI 
 
 - Discuss MVP

@@ -14,6 +14,9 @@ class TestOfficeActions():
     default_office_code2 = default_usa_state2 + "-03"
     default_office_name2 = "Office "+default_office_code2
 
+    # TODO: We need a way to distinguish states/offices that should be
+    #  shown in state picker and the ones that should not.
+    # We could do a pseudo-state like for "Fed" and filter those out.
     default_hoss_usa_state = "HOSS"
     default_hoss_office_code = default_hoss_usa_state + "-01"
     default_hoss_office_name = "Office "+default_hoss_office_code
