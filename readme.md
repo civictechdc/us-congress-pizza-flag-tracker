@@ -13,7 +13,9 @@ See todos list: https://github.com/codefordc/us-congress-pizza-flag-tracker/blob
 To run:
 TODO: https://dev.to/mburszley/an-introduction-to-poetry-2b6n ?
 
-**If using conda, and if environment not set up before:**
+# Local Deployment
+
+If using conda:
 
     conda create --name myenv
     
@@ -35,16 +37,16 @@ Then:
     pip install -r requirements.txt
     
 
-**Then, if database is not created in your local environment:**
+To create the database:
 
-`DEBUG=True FLASK_APP=app.py flask db init`
-
-If database is created but you want to recreate: 
-
-`git checkout ./migrations`
-`DEBUG=True FLASK_APP=app.py flask db init`
-`DEBUG=True FLASK_APP=app.py flask db migrate`
-`DEBUG=True FLASK_APP=app.py flask db upgrade`
+```
+rm -rf migrations
+rm flag*.db
+DEBUG=True FLASK_APP=app.py flask db init
+DEBUG=True FLASK_APP=app.py flask db migrate
+DEBUG=True FLASK_APP=app.py flask db upgrade
+cp flag.db flagtests.db
+```
 
 After the database has been created:
 
@@ -68,7 +70,7 @@ or run `sqlite`
 
 ```
 
-heroku create 
+heroku create
 heroku git:remote -a codefordc-flag
 heroku config:set FLASK_APP=app.py FLASK_ENV=development
 heroku run flask db init

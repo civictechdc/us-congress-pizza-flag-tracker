@@ -1,3 +1,6 @@
+# misc
+*.db
+.idea
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -63,7 +66,6 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-flag.db
 
 # Flask stuff:
 instance/
@@ -134,4 +136,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 env/
- 
+
