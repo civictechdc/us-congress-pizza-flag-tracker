@@ -10,8 +10,7 @@ from config import db
 class OfficeModel(db.Model):
     __tablename__ = "offices"
     usa_state = db.Column(db.String(10))
-    office_code = db.Column(db.String(10), primary_key=True, nullable=False)
-    office_name = db.Column(db.String(255))
+    office_code = db.Column(db.String(10), primary_key=True, nullable=False) 
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
     orders = db.relationship("OrderModel")
@@ -19,7 +18,6 @@ class OfficeModel(db.Model):
     def __init__(self, usa_state, office_code, office_name):
         self.office_code = office_code
         self.usa_state = usa_state
-        self.office_name = office_name
         self.created_at = func.now()
         self.updated_at = server_default = func.now()
         
