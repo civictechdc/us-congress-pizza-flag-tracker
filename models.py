@@ -14,6 +14,7 @@ class OfficeModel(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
     orders = db.relationship("OrderModel")
+    statuses = db.relationship("StatusModel")
      
     def __init__(self, usa_state, office_code, office_name):
         self.office_code = office_code
@@ -39,11 +40,6 @@ class OrderModel(db.Model):
         created_at = db.Column(db.DateTime, server_default=func.now())
         updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
-
-
-
-
-
 # Terence: When we create the new table for statuses
 #  we'll need foreign keys in our ORM
 #  for statuses. Every order has a status but
@@ -58,6 +54,24 @@ class OrderModel(db.Model):
 #  office code (string),
 #  sequence_num (numerical),
 #  description (text)
+class StatusModel(db.Model):
+    __tablename__ = "status"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
+    sequence_num = db.Column(db.Integer)
+    description = db.Column(db.String(255))
+    created_at = db.Column(db.DateTime)
+    updated_at = db.Column(db.DateTime)
+    
+    def __init__(self, id, office_code, sequence_num, description):
+        self.id = id
+        self.office_code = office_code
+        self.sequence_num = sequence_num
+        self.description = description
+        created_at = db.Column(db.DateTime, server_default=func.now())
+        updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+
 
 #User Table notes
 #  uuid, user_id, can_set_status (if they scan), (one to many)
+

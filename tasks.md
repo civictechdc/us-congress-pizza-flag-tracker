@@ -2,14 +2,13 @@
 
 - Tasks to do between sessions
     - [] Auth (FLASK SESSIONS?) Start over chat
-    - [] Componentizing the front end to not repeat ourselves (DRY)
-    - [x] Finish the tests
-    - [] Entering the states.js into offices table automatically.
+    - [] Componentizing the front end to not repeat ourselves (RK)
+    - [] Entering the states.js into offices table automatically. Add uuid to offices. (RM)
     - [] Pull states & offices from server
-    - [] Flag statuses mockup with static data?
+    - [] Flag statuses mockup with static data? (MB)
     - [] Flag statusses from backend (requires some more elaboration)
-    - [] Figure out why getting CORS errors instead of 500 errors
-    - [x] Disabling button if errors
+    - [] Figure out why getting CORS errors instead of 500 errors (A)
+    - [] Support the DELETE command on backend for an order
     - Improve state / office UI 
 
 - Discuss MVP
@@ -66,7 +65,7 @@
   - [ ] Add tests for order num endpoint
   - [ ] Add comments for code thats currently commented out and dead code(And get it to work!!) (db.relationships in particular)
   - [ ] Console.log
-  - [ ] Search by title -> search by order number
+  - [x] Search by title -> search by order number
   - [ ] remove unneccessary import of dropbox
   - [ ] Combobox https://reach.tech/combobox/
 - [x] rename state to status in figma documentation
@@ -99,10 +98,10 @@
 - [ ] Explore deploying the app frontend/backend for QR code demo
   - [x] Set up https://codefordc-flag.herokuapp.com/
   - START HERE
-  - [ ] Get Postgres working with the app deployed on Heroku
+  - [x] Get Postgres working with the app deployed on Heroku
   - [x] Un-hard code and reference environment variable <frontendBaseURL> of the frontend inside QR code.
 - [ ] Screen for changing status
-  - [ ] React: Create React route for `(https://localhost:3000/)show?id=<uuid>` that fetches details for the specified order
+  - [x] React: Create React route for `(https://localhost:3000/)orders/<uuid>` that fetches details for the specified order
   - [ ] Add a hard coded drop down list (temporary)
   - [ ] Add a Submit button that calls backend route for updating status (see update status below)
 - [x] getting list of orders
