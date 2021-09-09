@@ -6,8 +6,8 @@ import uuid
 class OfficeActions():
 # Table actions:
     @classmethod
-    def create(cls, usa_state: str, office_code: str, office_name: str):
-        new_office = OfficeModel(usa_state=usa_state, office_code=office_code,office_name=office_name)
+    def create(cls, usa_state: str, office_code: str):
+        new_office = OfficeModel(usa_state=usa_state, office_code=office_code)
         db.session.add(new_office)
         db.session.commit()
         return new_office
@@ -22,8 +22,7 @@ class OfficeActions():
         offices = OfficeModel.query.all()
         return [
             {"usa_state": office.usa_state,
-             "office_code": office.office_code, 
-             "office_name": office.office_name
+             "office_code": office.office_code
             } 
           for office in offices]
 
