@@ -5,6 +5,16 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+
+# Sept 8
+- How do you feel?
+  - 
+- What did you like?
+  - Got feedback on my code. - RM 
+- What would you do differently next time (process)
+- What would you like to do next time? (task) 
+  - More coding - RK
+
 # Sept 1
 
 - How do you feel?
