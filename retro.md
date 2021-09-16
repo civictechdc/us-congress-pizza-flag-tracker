@@ -5,7 +5,27 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+# Sept 15
 
+- How do you feel?
+  - Enthusiastic - TK
+  - Motivated by progress - TS
+  - Tired, pleased - ES
+  - Motivated by progress - Merritt + Rajinder
+  - Greatful - Juan
+- What did you like?
+  - Go through tasks in structured way - TK
+  - Glad we have the architecture developing on front/backend - TS
+  - Liked that there are so many people and the progress that is happening. Like the collab. - ES + Rajinder
+  - Everyone is supportive, got feel for the scope + sublties going forward - Merritt
+  - Understanding how things interact - Juan
+- What would you do differently next time (process)
+  - Tighten up tasks review - TK
+  - Timebox the task review, and standup structure for progress reports, stop using initials - Ethan
+  - Timebox - Terence
+  - Set agenda for meeting - Juan
+- What would you like to do next time? (task)
+  - Get to work on my tasks - Merritt
 # Sept 8
 - How do you feel?
   - 

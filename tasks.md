@@ -1,13 +1,13 @@
 ## Next task
 
 - Tasks to do between sessions
-    - [] Auth (FLASK SESSIONS?) Start over chat
-    - [] Componentizing the front end to not repeat ourselves (RK)
-    - [] Entering the states.js into offices table automatically. Add uuid to offices. (RM)
+    - [] Auth (FLASK COOKIECUTTER or SESSIONS?) Start over chat (Ethan)
+    - [] Componentizing the front end to not repeat ourselves (Rachel)
+    - [] Entering the states.js into offices table automatically. Add uuid to offices. (Rajinder)
     - [] Pull states & offices from server
-    - [] Flag statuses mockup with static data? (MB)
+    - [] Flag statuses mockup with static data? (Merritt)
     - [] Flag statusses from backend (requires some more elaboration)
-    - [] Figure out why getting CORS errors instead of 500 errors (A)
+    - [] Figure out why getting CORS errors instead of 500 errors (Aaron)
     - [] Support the DELETE command on backend for an order
     - Improve state / office UI 
 

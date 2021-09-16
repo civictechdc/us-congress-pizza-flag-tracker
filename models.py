@@ -24,16 +24,19 @@ class OrderModel(db.Model):
     order_number = db.Column(db.Integer, primary_key=True, nullable=False)
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     usa_state = db.Column(db.String(10))
-    office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
-    #home_office_code = db.relationship("offices", foreign_keys=["office_code"])
+    updated_by = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
+    home_office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
+    # Ordermodel needs status relationship
+    # Need status relationship
 
     def __init__(self, theUuid, usa_state, order_number, office_code):
         self.uuid = theUuid
         self.usa_state = usa_state
         self.order_number = order_number
-        self.office_code = office_code
+        self.home_office_code = home_office_code
+        self.updated_by = updated_by
         created_at = db.Column(db.DateTime, server_default=func.now())
         updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
