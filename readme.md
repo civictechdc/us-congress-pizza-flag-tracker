@@ -15,20 +15,26 @@ TODO: https://dev.to/mburszley/an-introduction-to-poetry-2b6n ?
 
 # Local Deployment
 
-If using conda:
+## Conda Environment
 
+If you have not created the conda environment for this project:
+
+    ```
     conda create --name myenv
+    ```
     
 
-Then:
+If the conda environment has been created:
 
     conda activate myenv
     pip install -r requirements.txt
     
 
-**OR if using python, set up your Python environment:**
+## Python Environment without Conda
     
-    python3 -m venv myenv
+ If you have not created a Python environment for this project:
+
+   python3 -m venv myenv
     
 
 Then:
@@ -37,7 +43,7 @@ Then:
     pip install -r requirements.txt
     
 
-To create the database:
+## Creating the database:
 
 ```
 rm -rf migrations
@@ -45,18 +51,17 @@ rm flag*.db
 DEBUG=True FLASK_APP=app.py flask db init
 DEBUG=True FLASK_APP=app.py flask db migrate
 DEBUG=True FLASK_APP=app.py flask db upgrade
-cp flag.db flagtests.db
 ```
 
 After the database has been created:
 
     FLASK_APP=app.py FLASK_ENV=development flask run
 
-### Running tests
+# Running tests
 
     pytest -s --verbose
 
-### To look at the database
+# Viewing Data
 
 `pip install datasette` first if needed
 `datasette flag.db`
@@ -66,7 +71,7 @@ click the link (typically port 8001 on localhost)
 
 or run `sqlite`
 
-### To Deploy to Heroku
+### Deploying to Heroku
 
 ```
 

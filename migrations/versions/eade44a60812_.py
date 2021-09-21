@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2ab14f693706
+Revision ID: eade44a60812
 Revises: 
-Create Date: 2021-09-08 17:53:17.590350
+Create Date: 2021-09-21 11:25:49.418467
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2ab14f693706'
+revision = 'eade44a60812'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,10 +21,19 @@ def upgrade():
     op.create_table('offices',
     sa.Column('usa_state', sa.String(length=10), nullable=True),
     sa.Column('office_code', sa.String(length=10), nullable=False),
-    sa.Column('office_name', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('office_code')
+    )
+    op.create_table('users',
+    sa.Column('name', sa.String(length=10), nullable=False),
+    sa.Column('password', sa.String(length=100), nullable=True),
+    sa.Column('can_update_orders_for', sa.String(length=10), nullable=True),
+    sa.Column('can_change_password_for', sa.String(length=10), nullable=True),
+    sa.Column('can_read_orders', sa.String(length=1), nullable=True),
+    sa.Column('can_delete_orders', sa.String(length=1), nullable=True),
+    sa.Column('is_admin', sa.String(length=1), nullable=True),
+    sa.PrimaryKeyConstraint('name')
     )
     op.create_table('orders',
     sa.Column('order_number', sa.Integer(), nullable=False),
@@ -55,5 +64,6 @@ def downgrade():
     op.drop_table('status')
     op.drop_index(op.f('ix_orders_uuid'), table_name='orders')
     op.drop_table('orders')
+    op.drop_table('users')
     op.drop_table('offices')
     # ### end Alembic commands ###

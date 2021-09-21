@@ -1,8 +1,5 @@
 # ORM models for State, Order, User and Log db
-from flask_sqlalchemy import sqlalchemy
-from flask_migrate import Migrate
 from sqlalchemy import func
-from sqlalchemy.orm import relationship
 from config import db
 
 # id, State, Order Number, COffice, created_at , updated_at
@@ -75,3 +72,16 @@ class StatusModel(db.Model):
 #User Table notes
 #  uuid, user_id, can_set_status (if they scan), (one to many)
 
+class UserModel(db.Model):
+    __tablename__ = "users"
+    name = db.Column(db.String(10), primary_key=True)
+    password = db.Column(db.String(100))
+    can_update_orders_for = db.Column(db.String(10))
+    can_change_password_for = db.Column(db.String(10))
+    can_read_orders = db.Column(db.String(1))
+    can_delete_orders = db.Column(db.String(1))
+    is_admin = db.Column(db.String(1))
+
+    def __init__(self, name, password):
+        self.name = name
+        self.password = password
