@@ -5,6 +5,7 @@ from config import app
 from models import UserModel
 import jwt
 
+<<<<<<< HEAD
 global_current_user: UserModel = {}
 
 def get_exception_if_no_create_update_delete_orders():
@@ -17,6 +18,8 @@ def get_exception_if_no_create_update_delete_orders():
 
 def get_current_user():
     return global_current_user
+=======
+>>>>>>> 34b152c (Signup manually tested through postman and corrected)
 
 def token_required(f):
     @wraps(f)
@@ -26,6 +29,7 @@ def token_required(f):
             token = request.headers["x-access-tokens"]
 
         if not token:
+<<<<<<< HEAD
             return {"message": "a valid token is missing"}, 401
         try:
             data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
@@ -35,5 +39,15 @@ def token_required(f):
             return jsonify({"message": "token is invalid "+token}), 401
 
         return f(*args, **kwargs)
+=======
+            return jsonify({"message": "a valid token is missing"})
+        try:
+            data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
+            current_user = UserModel.query.filter_by(name=data["bane"]).first()
+        except:
+            return jsonify({"message": "token is invalid"})
+
+        return f(current_user, *args, **kwargs)
+>>>>>>> 34b152c (Signup manually tested through postman and corrected)
 
     return decorator

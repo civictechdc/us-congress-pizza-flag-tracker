@@ -59,8 +59,6 @@ rm flag*.db
 DEBUG=True FLASK_APP=app.py flask db init
 DEBUG=True FLASK_APP=app.py flask db migrate
 DEBUG=True FLASK_APP=app.py flask db upgrade
-DEBUG=True FLASK_APP=app.py flask init-db
-cp flag.db flagtests.db
 ```
 
 *or make the restart script executable to run all above commands*
@@ -76,6 +74,7 @@ After the database has been created:
 
     FLASK_APP=app.py FLASK_ENV=development flask run
 
+<<<<<<< HEAD
 ## Security Configuration
 All routes require log in except for create user, as this might get in the way of development.
 Adding an order requires, create_update_delete_orders option must be set to Y.
@@ -93,6 +92,8 @@ heroku run flask db init
 heroku run flask db migrate
 heroku run flask db upgrade
 ```
+=======
+>>>>>>> 34b152c (Signup manually tested through postman and corrected)
 # Running tests
 
     pytest -s --verbose
@@ -107,6 +108,20 @@ click the link (typically port 8001 on localhost)
 
 or run `sqlite`
 
+<<<<<<< HEAD
+=======
+### Deploying to Heroku
+
+```
+
+heroku create
+heroku git:remote -a codefordc-flag
+heroku config:set FLASK_APP=app.py FLASK_ENV=development
+heroku run flask db init
+heroku run flask db migrate
+heroku run flask db upgrade
+```
+>>>>>>> 34b152c (Signup manually tested through postman and corrected)
 
 # TODOs:
 

@@ -93,3 +93,16 @@ class UserModel(db.Model):
         self.is_admin = user_values.is_admin
 
 
+class UserModel(db.Model):
+    __tablename__ = "users"
+    name = db.Column(db.String(10), primary_key=True)
+    password = db.Column(db.String(100))
+    can_update_orders_for = db.Column(db.String(10))
+    can_change_password_for = db.Column(db.String(10))
+    can_read_orders = db.Column(db.String(1))
+    can_delete_orders = db.Column(db.String(1))
+    is_admin = db.Column(db.String(1))
+
+    def __init__(self, name, password):
+        self.name = name
+        self.password = password

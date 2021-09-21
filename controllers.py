@@ -1,14 +1,10 @@
-from flask import render_template, redirect, request, session, send_file
+from flask import render_template, request, send_file, jsonify
 import flask
-from config import app, db, qrcode
-from models import OrderModel
-import cv2
+from config import app, qrcode
 import qrcode
 # from './http-common.js' import baseURL
 
-
-import random
-import json
+# from './http-common.js' import baseURL
 
 from OrderActions import OrderActions
 import io
@@ -17,8 +13,10 @@ import io
 # https://flask-session.readthedocs.io/en/latest/
 # https://github.com/marcoagner/Flask-QRcode
 
+
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
+
 
 
 def create_order():
