@@ -2,6 +2,7 @@ from flask import render_template, request, send_file, jsonify
 import flask
 
 import UserActions
+from authorize import token_required
 from config import app, qrcode
 import qrcode
 
@@ -29,6 +30,7 @@ def create_order():
     return f"Created one"
 
 
+@token_required
 def get_orders():
     orders = OrderActions.get()
     return orders
@@ -99,3 +101,9 @@ def create_user():
     password = request_json["password"]
     UserActions.create(name, password)
     return jsonify({"message": "registered successfully"})
+
+@app.route("/signin", methods=["POST"])
+def login_user():
+    response = UserActions.login_user()
+    return response
+
