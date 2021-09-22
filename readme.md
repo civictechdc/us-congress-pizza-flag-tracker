@@ -102,6 +102,10 @@ or run `sqlite`
 - https://anydesk.com
 
 # Security
+To implement security, two tutorials were used: https://www.bacancytechnology.com/blog/flask-jwt-authentication and 
+https://www.bezkoder.com/react-hooks-jwt-auth/.  Since the two tutorials were written separately, the flask app was tested 
+with postman and then the react tutorial was modified to match up with what the flask was expecting.  This took some work
+to do.
 
 Security is based on fields in users table:
 - office_code - home office code.  Each office will have two accounts, one that can change passwords and one that can't.
