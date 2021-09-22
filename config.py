@@ -10,11 +10,11 @@ import qrcode
 app = Flask(__name__)
 qrcode = QRcode(app)
 
-CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ['DATABASE_URL']
+CORS(app, resources=r'/api/*')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['FRONTEND_URI'] = os.environ['FRONTEND_URI']
 
 db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
-app.secret_key="the#flag#app#key"
+app.secret_key = "the#flag#app#key"
