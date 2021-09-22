@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: eade44a60812
+Revision ID: 8b1058b1e19f
 Revises: 
-Create Date: 2021-09-21 11:25:49.418467
+Create Date: 2021-09-21 15:52:27.349917
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'eade44a60812'
+revision = '8b1058b1e19f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,14 +26,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('office_code')
     )
     op.create_table('users',
-    sa.Column('name', sa.String(length=10), nullable=False),
+    sa.Column('username', sa.String(length=10), nullable=False),
     sa.Column('password', sa.String(length=100), nullable=True),
-    sa.Column('can_update_orders_for', sa.String(length=10), nullable=True),
-    sa.Column('can_change_password_for', sa.String(length=10), nullable=True),
-    sa.Column('can_read_orders', sa.String(length=1), nullable=True),
-    sa.Column('can_delete_orders', sa.String(length=1), nullable=True),
+    sa.Column('can_update_status_for', sa.String(length=10), nullable=True),
+    sa.Column('can_update_password_for', sa.String(length=10), nullable=True),
+    sa.Column('can_create_update_delete_orders', sa.String(length=1), nullable=True),
     sa.Column('is_admin', sa.String(length=1), nullable=True),
-    sa.PrimaryKeyConstraint('name')
+    sa.PrimaryKeyConstraint('username')
     )
     op.create_table('orders',
     sa.Column('order_number', sa.Integer(), nullable=False),

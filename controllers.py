@@ -1,8 +1,10 @@
+import json
+
 from flask import render_template, request, send_file, jsonify
 import flask
 
 import UserActions
-from authorize import token_required
+from authorize import token_required, get_current_user, get_exception_if_no_create_update_delete_orders
 from config import app, qrcode
 import qrcode
 
@@ -15,6 +17,8 @@ import io
 
 # https://flask-session.readthedocs.io/en/latest/
 # https://github.com/marcoagner/Flask-QRcode
+from models import UserModel
+from util import table_record_to_json
 
 
 def index():
@@ -32,6 +36,9 @@ def create_order():
 
 @token_required
 def get_orders():
+    error_msg = get_exception_if_no_create_update_delete_orders()
+    if (error_msg):
+        return { "message": error_msg}
     orders = OrderActions.get()
     return orders
 
@@ -97,13 +104,24 @@ def update_order(uuid):
 @app.route("/signup", methods=["POST"])
 def create_user():
     request_json = request.get_json()
-    name = request_json["name"]
+    username = request_json["username"]
     password = request_json["password"]
-    UserActions.create(name, password)
+    can_create_update_delete_orders = request_json["can_create_update_delete_orders"]
+    can_update_password_for = request_json["can_update_password_for"]
+    can_update_status_for = request_json["can_update_status_for"]
+    is_admin = request_json["is_admin"]
+    new_user = UserActions.create(
+        username,
+        password,
+        can_create_update_delete_orders,
+        can_update_password_for,
+        can_update_status_for,
+        is_admin,
+    )
     return jsonify({"message": "registered successfully"})
+
 
 @app.route("/signin", methods=["POST"])
 def login_user():
     response = UserActions.login_user()
     return response
-

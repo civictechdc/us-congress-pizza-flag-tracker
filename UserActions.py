@@ -8,6 +8,8 @@ from flask_sqlalchemy import sqlalchemy
 from config import db, app
 import uuid
 
+from util import table_record_to_json
+
 
 class UserActions:
     # Table actions:
@@ -16,24 +18,47 @@ class UserActions:
     def login_user(cls):
         auth = request.authorization
         if not auth or not auth.username or not auth.password:
-            return make_response('could not verify', 401, {'Authentication': 'login required"'})
-
-        user = UserModel.query.filter_by(name=auth.username).first()
+            return make_response(
+                "could not verify", 401, {"Authentication": 'login required"'}
+            )
+        user = UserModel.query.filter_by(username=auth.username).first()
         # if check_password_hash(user.password, auth.password):
         if user.password == auth.password:
             token = jwt.encode(
-                {'public_id': user.name, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=45)},
-                app.config['SECRET_KEY'], "HS256")
-            return jsonify({'token': token})
+                {
+                    "public_id": user.username,
+                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=45),
+                },
+                app.config["SECRET_KEY"],
+                "HS256",
+            )
+            return jsonify({"accessToken": token})
 
-        return make_response('could not verify', 401, {'Authentication': '"login required"'})
+        return make_response(
+            "could not verify", 401, {"Authentication": '"login required"'}
+        )
 
     @classmethod
-    def create(cls, name: str, password: str):
-        new_user = UserModel(name=name, password=password)
+    def create(
+        cls,
+        username: str,
+        password: str,
+        is_admin = "N",
+        can_create_update_delete_orders = "NONE",
+        can_update_password_for = "SELF",
+        can_update_status_for = "SELF",
+    ):
+        new_user = UserModel(
+            username=username,
+            password=password,
+            is_admin = is_admin,
+            can_create_update_delete_orders = can_create_update_delete_orders,
+            can_update_password_for = can_update_password_for,
+            can_update_status_for = can_update_status_for
+        )
         db.session.add(new_user)
         db.session.commit()
-        return new_user
+        return table_record_to_json(new_user)
 
     @classmethod
     def delete(cls):
@@ -43,15 +68,15 @@ class UserActions:
     @classmethod
     def get_users(cls):
         users = UserModel.query.all()
-        return [{"name": user.name, "password": user.password} for user in users]
+        return [{"username": user.username, "password": user.password} for user in users]
 
     @classmethod
-    def get_by_name(cls, name: str):
-        return UserModel.query.filter(UserModel.name == name).first()
+    def get_by_name(cls, username: str):
+        return UserModel.query.filter(UserModel.username == username).first()
 
     @classmethod
-    def update_user(cls, name, password):
-        user = cls.get_by_name(name)
+    def update_user(cls, username, password):
+        user = cls.get_by_name(username)
         user.password = password
         db.session.commit()
         return user
