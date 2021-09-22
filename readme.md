@@ -40,7 +40,15 @@ If the conda environment has been created:
 Then:
     
     source myenv/bin/activate
-    pip install -r requirements.txt
+    
+Choose:
+    
+    pip install -r requirements.txt --use-deprecated=legacy-resolver (faster)
+     
+        OR 
+        
+    pip install -r requirements.txt (takes a very long time - might be fixed in subsequent versions of pip)
+    See https://stackoverflow.com/questions/65122957/resolving-new-pip-backtracking-runtime-issue for one article on the issue.
     
 
 ## Creating the database:
@@ -57,6 +65,17 @@ After the database has been created:
 
     FLASK_APP=app.py FLASK_ENV=development flask run
 
+## Deploying to Heroku
+
+```
+
+heroku create
+heroku git:remote -a codefordc-flag
+heroku config:set FLASK_APP=app.py FLASK_ENV=development
+heroku run flask db init
+heroku run flask db migrate
+heroku run flask db upgrade
+```
 # Running tests
 
     pytest -s --verbose
@@ -71,24 +90,33 @@ click the link (typically port 8001 on localhost)
 
 or run `sqlite`
 
-### Deploying to Heroku
 
-```
-
-heroku create
-heroku git:remote -a codefordc-flag
-heroku config:set FLASK_APP=app.py FLASK_ENV=development
-heroku run flask db init
-heroku run flask db migrate
-heroku run flask db upgrade
-```
-
-### TODOs:
+# TODOs:
 
 - Plug some data in there along lines of the [Figma](https://www.figma.com/file/Lzq30lUA6N0hevjn8JVU6z/flag-requests)
 
 
-## Ensemble Programming Environment
+# Ensemble Programming Environment
 
 - https://mobti.me/flagpizza
 - https://anydesk.com
+
+# Security
+
+Security is based on fields in users table:
+- office_code - home office code.  Each office will have two accounts, one that can change passwords and one that can't.
+For example, MA-01 and MA-01-ADMIN.  There will also be an account just called ADMIN with a home office of FED-ADMIN.
+- can_crate_update_delete_orders: Y or N.  If Y, the user can create
+orders and update and delete any orders.  This priv would be 
+given to FED-ADMIN, FED-HOSS, and FED-XX offices.
+- can_update_status_for: ALL, <office-code>, or NONE (might not need NONE).  If ALL, user can update any order.  
+This would apply to all FED accounts and ADMIN.  <office-code> would be given to normal office accounts and admin accounts
+(MA-01-ADMIN, MA-o1)
+- can_update_password_for: ALL, <office_code>, SELF, NONE
+- ALL would be given to ADMIN
+- <office_code> would be given to admin for an office (for instance, office code of MA-01-ADMIN would be MA-01) and 
+would allow that person to update their own password and the password for any user where office_code is MA-01.
+- SELF would be given to office if you want an account to be able to change their own password.  Recommend only letting 
+MA-01-ADMIN do that.
+- NONE Could be given to office account (MA-01): choose between SELF and NONE
+ 
