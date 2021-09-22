@@ -22,7 +22,12 @@ from flask_sqlalchemy import sqlalchemy
 from config import db, app
 import uuid
 
+<<<<<<< HEAD
 >>>>>>> 34b152c (Signup manually tested through postman and corrected)
+=======
+from util import table_record_to_json
+
+>>>>>>> 5c64b23 (Debug frontend sync w/backend security)
 
 class UserActions:
     # Table actions:
@@ -43,25 +48,53 @@ class UserActions:
     def login_user(cls):
         auth = request.authorization
         if not auth or not auth.username or not auth.password:
-            return make_response('could not verify', 401, {'Authentication': 'login required"'})
-
-        user = UserModel.query.filter_by(name=auth.username).first()
+            return make_response(
+                "could not verify", 401, {"Authentication": 'login required"'}
+            )
+        user = UserModel.query.filter_by(username=auth.username).first()
         # if check_password_hash(user.password, auth.password):
         if user.password == auth.password:
             token = jwt.encode(
-                {'public_id': user.name, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=45)},
-                app.config['SECRET_KEY'], "HS256")
-            return jsonify({'token': token})
+                {
+                    "public_id": user.username,
+                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=45),
+                },
+                app.config["SECRET_KEY"],
+                "HS256",
+            )
+            return jsonify({"accessToken": token})
 
-        return make_response('could not verify', 401, {'Authentication': '"login required"'})
+        return make_response(
+            "could not verify", 401, {"Authentication": '"login required"'}
+        )
 
     @classmethod
+<<<<<<< HEAD
 >>>>>>> 6c52a99 (debugged sign in)
     def create(cls, name: str, password: str):
         new_user = UserModel(name=name, password=password)
+=======
+    def create(
+        cls,
+        username: str,
+        password: str,
+        is_admin = "N",
+        can_create_update_delete_orders = "NONE",
+        can_update_password_for = "SELF",
+        can_update_status_for = "SELF",
+    ):
+        new_user = UserModel(
+            username=username,
+            password=password,
+            is_admin = is_admin,
+            can_create_update_delete_orders = can_create_update_delete_orders,
+            can_update_password_for = can_update_password_for,
+            can_update_status_for = can_update_status_for
+        )
+>>>>>>> 5c64b23 (Debug frontend sync w/backend security)
         db.session.add(new_user)
         db.session.commit()
-        return new_user
+        return table_record_to_json(new_user)
 
     @classmethod
     def delete(cls):
@@ -72,6 +105,7 @@ class UserActions:
     @classmethod
     def get_users(cls):
         users = UserModel.query.all()
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         return users
@@ -93,12 +127,16 @@ class UserActions:
 =======
         return [{"name": user.name, "password": user.password} for user in users]
 >>>>>>> 6c52a99 (debugged sign in)
+=======
+        return [{"username": user.username, "password": user.password} for user in users]
+>>>>>>> 5c64b23 (Debug frontend sync w/backend security)
 
     @classmethod
-    def get_by_name(cls, name: str):
-        return UserModel.query.filter(UserModel.name == name).first()
+    def get_by_name(cls, username: str):
+        return UserModel.query.filter(UserModel.username == username).first()
 
     @classmethod
+<<<<<<< HEAD
 <<<<<<< HEAD
     def update_user(cls, uuid, name, user_number, email):
         user = cls.get_user_by_uuid(uuid)
@@ -109,6 +147,10 @@ class UserActions:
 =======
     def update_user(cls, name, password):
         user = cls.get_by_name(name)
+=======
+    def update_user(cls, username, password):
+        user = cls.get_by_name(username)
+>>>>>>> 5c64b23 (Debug frontend sync w/backend security)
         user.password = password
 >>>>>>> 6c52a99 (debugged sign in)
         db.session.commit()
