@@ -1,48 +1,56 @@
-import json
+from flask import render_template, request, send_file
 
-from flask import render_template, request, send_file, jsonify
-import flask
-
-import UserActions
-from authorize import token_required, get_current_user, get_exception_if_no_create_update_delete_orders
+from authorize import token_required, get_exception_if_no_create_update_delete_orders
 from config import app, qrcode
 import qrcode
 
 # from './http-common.js' import baseURL
 
 from OrderActions import OrderActions
-from UserActions import UserActions
 import io
 
 
 # https://flask-session.readthedocs.io/en/latest/
 # https://github.com/marcoagner/Flask-QRcode
-from models import UserModel
+from models import UserParams
 from util import table_record_to_json
 
+# @app.route("/users/create", methods=["POST"])
+# def create_user():
+#     request_json = request.get_json()
+#     userParams = UserParams()
+#     userParams.username = request_json["username"]
+#     userParams.password = request_json["password"]
+#     userParams.can_create_update_delete_orders = request_json["can_create_update_delete_orders"]
+#     userParams.can_update_password_for = request_json["can_update_password_for"]
+#     userParams.can_update_status_for = request_json["can_update_status_for"]
+#     userParams.is_admin = request_json["is_admin"]
+#     new_user = UserActions.create(userParams)
+#     return new_user;
 
 def index():
     return render_template("index.html")
 
-
+@token_required
 def create_order():
+    e = get_exception_if_no_create_update_delete_orders()
+    if (e):
+        return {"message": e.message}, e.status_code
     request_json = request.get_json()
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]
     office_code = request_json["office_code"]
     order = OrderActions.create(usa_state, idbased_order_number, office_code)
-    return f"Created one"
+    return table_record_to_json(order)
 
 
 @token_required
 def get_orders():
-    error_msg = get_exception_if_no_create_update_delete_orders()
-    if (error_msg):
-        return { "message": error_msg}
     orders = OrderActions.get()
     return orders
 
 
+@token_required
 def get_order_by_uuid(uuid):
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_uuid(uuid)
@@ -54,6 +62,7 @@ def get_order_by_uuid(uuid):
     return order_dict
 
 
+@token_required
 def get_order_by_order_number(order_number):
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_order_number(order_number)
@@ -65,7 +74,7 @@ def get_order_by_order_number(order_number):
     return {"orders": [order_dict]}
 
 
-# generate qr code
+@token_required
 def get_qrcode(uuid):
     frontendURL = app.config["FRONTEND_URI"]
     img = qrcode.make(frontendURL + "/orders/" + uuid)
@@ -74,17 +83,12 @@ def get_qrcode(uuid):
     buf.seek(0)
     return buf
 
-
+@token_required
 def send_file_qrcode(uuid):
     q = get_qrcode(uuid)
     return send_file(q, mimetype="image/jpeg")
 
-
-def info():
-    headers = flask.request.headers
-    return "Request headers:\n" + str(headers)
-
-
+@token_required
 def update_order(uuid):
     request_json = request.get_json()
     usa_state = request_json["usa_state"]
@@ -101,27 +105,3 @@ def update_order(uuid):
     return order_dict
 
 
-@app.route("/signup", methods=["POST"])
-def create_user():
-    request_json = request.get_json()
-    username = request_json["username"]
-    password = request_json["password"]
-    can_create_update_delete_orders = request_json["can_create_update_delete_orders"]
-    can_update_password_for = request_json["can_update_password_for"]
-    can_update_status_for = request_json["can_update_status_for"]
-    is_admin = request_json["is_admin"]
-    new_user = UserActions.create(
-        username,
-        password,
-        can_create_update_delete_orders,
-        can_update_password_for,
-        can_update_status_for,
-        is_admin,
-    )
-    return jsonify({"message": "registered successfully"})
-
-
-@app.route("/signin", methods=["POST"])
-def login_user():
-    response = UserActions.login_user()
-    return response

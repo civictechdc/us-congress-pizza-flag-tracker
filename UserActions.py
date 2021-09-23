@@ -3,12 +3,12 @@ import datetime
 import jwt
 from flask import request, make_response, jsonify
 
-from models import UserModel, OrderModel
+from models import UserModel, OrderModel, UserParams
 from flask_sqlalchemy import sqlalchemy
 from config import db, app
 import uuid
 
-from util import table_record_to_json
+from util import table_record_to_json, table_to_json
 
 
 class UserActions:
@@ -41,42 +41,29 @@ class UserActions:
     @classmethod
     def create(
         cls,
-        username: str,
-        password: str,
-        is_admin = "N",
-        can_create_update_delete_orders = "NONE",
-        can_update_password_for = "SELF",
-        can_update_status_for = "SELF",
+        user_values: UserParams
     ):
-        new_user = UserModel(
-            username=username,
-            password=password,
-            is_admin = is_admin,
-            can_create_update_delete_orders = can_create_update_delete_orders,
-            can_update_password_for = can_update_password_for,
-            can_update_status_for = can_update_status_for
-        )
+        new_user = UserModel(user_values)
         db.session.add(new_user)
         db.session.commit()
         return table_record_to_json(new_user)
 
     @classmethod
-    def delete(cls):
-        UserModel.query.delete()
-        db.session.commit()
-
-    @classmethod
     def get_users(cls):
         users = UserModel.query.all()
-        return [{"username": user.username, "password": user.password} for user in users]
+        return users
 
     @classmethod
     def get_by_name(cls, username: str):
         return UserModel.query.filter(UserModel.username == username).first()
 
     @classmethod
-    def update_user(cls, username, password):
-        user = cls.get_by_name(username)
-        user.password = password
+    def update_user(cls, user_values: UserParams):
+        user = cls.get_by_name(user_values.username)
+        user.password = user_values.password
+        user.can_create_update_delete_orders = user_values.can_create_update_delete_orders
+        user.can_update_password_for=user_values.can_update_password_for
+        user.can_update_status_for=user_values.can_update_status_for
+        user.is_admin = user_values.is_admin
         db.session.commit()
         return user

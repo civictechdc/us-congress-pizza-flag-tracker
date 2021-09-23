@@ -1,8 +1,6 @@
-import routes
 from config import app
-from controllers import (
+from OrderController import (
     get_order_by_order_number,
-    info,
     send_file_qrcode,
     create_order,
     get_orders,
@@ -10,7 +8,8 @@ from controllers import (
     get_order_by_uuid,
     update_order,
 )
-
+from WebController import info
+import UserController, AuthController
 
 # TODO: refactor out this from routes:
 from flask import Flask, render_template, request, send_file

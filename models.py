@@ -71,6 +71,14 @@ class StatusModel(db.Model):
 
 #User Table notes
 #  uuid, user_id, can_set_status (if they scan), (one to many)
+class UserParams:
+    username: str
+    password: str
+    can_create_update_delete_orders: str
+    can_update_password_for: str
+    can_update_status_for: str
+    is_admin: str
+
 
 class UserModel(db.Model):
     __tablename__ = "users"
@@ -81,12 +89,14 @@ class UserModel(db.Model):
     can_create_update_delete_orders = db.Column(db.String(1))
     is_admin = db.Column(db.String(1))
 
-    def __init__(self, username, password, can_create_update_delete_orders, can_update_status_for, can_update_password_for, is_admin):
-        self.username = username
-        self.password = password
-        self.can_create_update_delete_orders = can_create_update_delete_orders
-        self.can_update_status_for = can_update_status_for
-        self.can_update_password_for = can_update_password_for
-        self.is_admin = is_admin
+
+
+    def __init__(self, user_values: UserParams):
+        self.username = user_values.username
+        self.password = user_values.password
+        self.can_create_update_delete_orders = user_values.can_create_update_delete_orders
+        self.can_update_status_for = user_values.can_update_status_for
+        self.can_update_password_for = user_values.can_update_password_for
+        self.is_admin = user_values.is_admin
 
 

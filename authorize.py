@@ -9,11 +9,15 @@ global_current_user: UserModel = {}
 
 def get_exception_if_no_create_update_delete_orders():
     if (global_current_user.can_create_update_delete_orders != "Y"):
-        return "You don't have privileges"
+        e = Exception()
+        e.message = "You do not have the privileges"
+        e.status_code = 401
+        return e
     return None
 
 def get_current_user():
     return global_current_user
+
 def token_required(f):
     @wraps(f)
     def decorator(*args, **kwargs):
@@ -22,13 +26,13 @@ def token_required(f):
             token = request.headers["x-access-tokens"]
 
         if not token:
-            return jsonify({"message": "a valid token is missing"})
+            return {"message": "a valid token is missing"}, 401
         try:
             data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
             global global_current_user
             global_current_user = UserModel.query.filter_by(username=data["public_id"]).first()
         except:
-            return jsonify({"message": "token is invalid "+token})
+            return jsonify({"message": "token is invalid "+token}), 401
 
         return f(*args, **kwargs)
 

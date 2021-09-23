@@ -124,3 +124,11 @@ would allow that person to update their own password and the password for any us
 MA-01-ADMIN do that.
 - NONE Could be given to office account (MA-01): choose between SELF and NONE
  
+# Guidelines
+Backend
+- When returning an error, use format  {"message": "<error message>", <error_number>).  For example, ???.  See ???.
+- Use a parameter class for passing info
+- Use table_record_to_json or table_to_json to convert from sqlalchemy to json
+- Convert in the controller, not the actions
+
+Front end
