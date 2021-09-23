@@ -5,6 +5,23 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+# Sept 22
+- How do you feel?
+  - Low energy, overall well - Thad
+  - Overall good - Rajinder
+  - Mildly disappointed with errors, and obsessed until getting those fixed - Ethan
+  - Drained, but excited about work done - Terence
+  - Feeling good i got to contribute - Aaron
+- What did you like?
+  - Overall energy from everyone, using github issues - Thad + Ethan + Terence + Aaron
+  - Increase in pace of project - Ethan 
+  - Things are getting organized on github, idea of wiki - Rajinder
+- What would you do differently next time (process)
+  - 
+- What would you like to do next time? (task)
+  - Integrate pull requests - Thad + Terence
+  - looking for new problem to solve - Aaron
+
 # Sept 15
 
 - How do you feel?
