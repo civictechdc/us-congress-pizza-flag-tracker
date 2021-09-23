@@ -65,11 +65,17 @@ After the database has been created:
 
     FLASK_APP=app.py FLASK_ENV=development flask run
 
+## Security Configuration
+All routes require log in except for create user, as this might get in the way of development.
+Adding an order requires, create_update_delete_orders option must be set to Y.
+To enable access to the routes, you can either: create an ADMIN account either with Add User option, 
+log in to ADMIN without creating an account and specify any password (works only once) or (3) populating
+with a script.  ADMIN options should have either ALL or Y specified.  At the time of this 
+readme.md, only add user enforces the security authorization rules.
+
 ## Deploying to Heroku
 
-```
-
-heroku create
+```heroku create
 heroku git:remote -a codefordc-flag
 heroku config:set FLASK_APP=app.py FLASK_ENV=development
 heroku run flask db init
@@ -102,11 +108,15 @@ or run `sqlite`
 - https://anydesk.com
 
 # Security
+
+## Resources used
+
 To implement security, two tutorials were used: https://www.bacancytechnology.com/blog/flask-jwt-authentication and 
 https://www.bezkoder.com/react-hooks-jwt-auth/.  Since the two tutorials were written separately, the flask app was tested 
 with postman and then the react tutorial was modified to match up with what the flask was expecting.  This took some work
 to do.
 
+## User Security Options
 Security is based on fields in users table:
 - office_code - home office code.  Each office will have two accounts, one that can change passwords and one that can't.
 For example, MA-01 and MA-01-ADMIN.  There will also be an account just called ADMIN with a home office of FED-ADMIN.
@@ -123,12 +133,55 @@ would allow that person to update their own password and the password for any us
 - SELF would be given to office if you want an account to be able to change their own password.  Recommend only letting 
 MA-01-ADMIN do that.
 - NONE Could be given to office account (MA-01): choose between SELF and NONE
+
+## Population
+Here are how sample accounts should be populated:
+
+ADMIN
+
+Username ADMIN
+office_code FED-ADMIN
+can_update_status_for ALL
+can_update_password_for NONE or SELF
+can_create_update_delete_orders Y
+is_admin Y
+
+Username FED-HOSS / FED-AOC
+office_code FED-HOSS / AOC-HOSS
+can_update_status_for ALL
+can_update_password_for NONE or SELF
+can_create_update_delete__orders Y
+is_admin N
+
+FED-HOSS-ADMIN / AOC-HOS-ADMIN - same as above (including office code) except can_update_password_for 
+would be FOS-HOSS or FED-AOC which would allow the admin to update password for FED-HOSS or FED-AOC
+
+NJ-02
+office_code NJ-o2
+can_update_status_for NJ-02
+can_update_password_for NONE or SELF
+can_create_update_delete__orders N
+is_admin N
+
+NJ-02-ADMIN - same as above (including office code) except can_update_password_for 
+would be FOS-HOSS or FED-AOC which would allow the admin to update password for NJ-02
+
+
+office_code FED-HOSS / AOC-HOSS
+can_update_status_for ALL
+can_update_password_for NONE or SELF
+can_create_update_delete__orders Y
+is_admin N
  
 # Guidelines
+## Proposed
 Backend
 - When returning an error, use format  {"message": "<error message>", <error_number>).  For example, ???.  See ???.
 - Use a parameter class for passing info
-- Use table_record_to_json or table_to_json to convert from sqlalchemy to json
+- Use table_record_to_json or table_to_json to convert from sqlalchemy to json in util.py
 - Convert in the controller, not the actions
+- If a function requires three or  more parameters, create a class to hold those params.  See UserParams
+as an example.  This simplifies a bunch of code so you don't need to repeat.
 
-Front end
+
+## Accepted
