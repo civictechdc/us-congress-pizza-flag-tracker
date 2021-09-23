@@ -1,5 +1,5 @@
 from flask import render_template, request, send_file
-
+from util import table_record_to_json
 from authorize import token_required, get_exception_if_no_create_update_delete_orders
 from config import app, qrcode
 import qrcode
@@ -8,25 +8,6 @@ import qrcode
 
 from OrderActions import OrderActions
 import io
-
-
-# https://flask-session.readthedocs.io/en/latest/
-# https://github.com/marcoagner/Flask-QRcode
-from models import UserParams
-from util import table_record_to_json
-
-# @app.route("/users/create", methods=["POST"])
-# def create_user():
-#     request_json = request.get_json()
-#     userParams = UserParams()
-#     userParams.username = request_json["username"]
-#     userParams.password = request_json["password"]
-#     userParams.can_create_update_delete_orders = request_json["can_create_update_delete_orders"]
-#     userParams.can_update_password_for = request_json["can_update_password_for"]
-#     userParams.can_update_status_for = request_json["can_update_status_for"]
-#     userParams.is_admin = request_json["is_admin"]
-#     new_user = UserActions.create(userParams)
-#     return new_user;
 
 def index():
     return render_template("index.html")
@@ -42,7 +23,6 @@ def create_order():
     office_code = request_json["office_code"]
     order = OrderActions.create(usa_state, idbased_order_number, office_code)
     return table_record_to_json(order)
-
 
 @token_required
 def get_orders():
@@ -66,14 +46,18 @@ def get_order_by_uuid(uuid):
 def get_order_by_order_number(order_number):
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_order_number(order_number)
-    order_dict = {}
-    order_dict["order_number"] = order_obj.order_number
-    order_dict["usa_state"] = order_obj.usa_state
-    order_dict["office_code"] = order_obj.office_code
-    order_dict["uuid"] = order_obj.uuid
-    return {"orders": [order_dict]}
+    if order_obj is None:
+        return {"error": "order not found"}
+    else:
+        order_dict = {}
+        order_dict["order_number"] = order_obj.order_number
+        order_dict["usa_state"] = order_obj.usa_state
+        order_dict["office_code"] = order_obj.office_code
+        order_dict["uuid"] = order_obj.uuid
+        return {"orders": [order_dict]}
 
 
+# generate qr code
 @token_required
 def get_qrcode(uuid):
     frontendURL = app.config["FRONTEND_URI"]
@@ -95,13 +79,12 @@ def update_order(uuid):
     idbased_order_number = request_json["order_number"]
     office_code = request_json["office_code"]
     updated_order = OrderActions.update_order(
-        uuid, usa_state, idbased_order_number, office_code
-    )
+        uuid, usa_state, idbased_order_number, office_code)
     order_dict = {}
-    order_dict["order_number"] = updated_order.order_number
-    order_dict["usa_state"] = updated_order.usa_state
-    order_dict["office_code"] = updated_order.office_code
-    order_dict["uuid"] = updated_order.uuid
+    order_dict['order_number'] = updated_order.order_number
+    order_dict['usa_state'] = updated_order.usa_state
+    order_dict['office_code'] = updated_order.office_code
+    order_dict['uuid'] = updated_order.uuid
     return order_dict
 
 
