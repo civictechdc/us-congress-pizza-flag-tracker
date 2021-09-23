@@ -1,7 +1,4 @@
-import datetime
 
-import jwt
-from flask import request, make_response, jsonify
 
 from models import UserModel, OrderModel, UserParams
 from flask_sqlalchemy import sqlalchemy
@@ -13,30 +10,6 @@ from util import table_record_to_json, table_to_json
 
 class UserActions:
     # Table actions:
-
-    @classmethod
-    def login_user(cls):
-        auth = request.authorization
-        if not auth or not auth.username or not auth.password:
-            return make_response(
-                "could not verify", 401, {"Authentication": 'login required"'}
-            )
-        user = UserModel.query.filter_by(username=auth.username).first()
-        # if check_password_hash(user.password, auth.password):
-        if user.password == auth.password:
-            token = jwt.encode(
-                {
-                    "public_id": user.username,
-                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=45),
-                },
-                app.config["SECRET_KEY"],
-                "HS256",
-            )
-            return jsonify({"accessToken": token})
-
-        return make_response(
-            "could not verify", 401, {"Authentication": '"login required"'}
-        )
 
     @classmethod
     def create(
