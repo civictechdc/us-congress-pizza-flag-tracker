@@ -9,14 +9,16 @@ from config import db
 
 class OfficeModel(db.Model):
     __tablename__ = "offices"
-    usa_state = db.Column(db.String(10))
+    uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     office_code = db.Column(db.String(10), primary_key=True, nullable=False) 
+    usa_state = db.Column(db.String(10))
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
-    orders = db.relationship("OrderModel")
-    statuses = db.relationship("StatusModel")
+    #orders = db.relationship("OrderModel")
+    #statuses = db.relationship("StatusModel")
      
-    def __init__(self, usa_state, office_code, office_name):
+    def __init__(self, theUuid, office_code, usa_state):
+        self.uuid = theUuid
         self.office_code = office_code
         self.usa_state = usa_state
         self.created_at = func.now()
@@ -34,7 +36,7 @@ class OrderModel(db.Model):
     # Ordermodel needs status relationship
     # Need status relationship
 
-    def __init__(self, theUuid, usa_state, order_number, office_code):
+    def __init__(self, theUuid, usa_state, order_number):
         self.uuid = theUuid
         self.usa_state = usa_state
         self.order_number = order_number
