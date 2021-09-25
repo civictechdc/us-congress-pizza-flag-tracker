@@ -17,5 +17,8 @@ app.config["SECRET_KEY"] = "0846b992676081f8785b3012c380097d"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 db = SQLAlchemy(app)
 
+from init_db import init_app
+init_app(app)
+
 migrate = Migrate(app, db)
 app.secret_key = "the#flag#app#key"
