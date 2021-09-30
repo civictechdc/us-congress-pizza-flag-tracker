@@ -9,13 +9,15 @@ class OfficeModel(db.Model):
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     office_code = db.Column(db.String(10), primary_key=True, nullable=False) 
     usa_state = db.Column(db.String(10))
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
-    #orders = db.relationship("OrderModel")
-    #statuses = db.relationship("StatusModel")
-     
-    def __init__(self, theUuid, office_code, usa_state):
-        self.uuid = theUuid
+    orders = db.relationship("OrderModel")
+    statuses = db.relationship("StatusModel")
+    created_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+
+    def __init__(self, usa_state, office_code):
+        
+        #see above about not needing uuid
+        # self.uuid = theUuid
         self.office_code = office_code
         self.usa_state = usa_state 
         

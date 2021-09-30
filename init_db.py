@@ -4,7 +4,7 @@ from flask import current_app, g
 from config import db
 from models import OfficeModel
 import json
-import uuid
+# import uuid
 
 def close_db(e=None):
     db = g.pop('db', None)
@@ -17,13 +17,15 @@ def init_db():
         office_codes_list = json.load(office_codes_json)
     
     for state_offices in office_codes_list:
-        state = state_offices["usa_state"]
+        usa_state = state_offices["usa_state"]
         for office_code in state_offices["office_code"]:
-            theUuid = str(uuid.uuid4())
-            office = OfficeModel(theUuid, office_code, state)
+            # TODO(tdk): we may not need uuids, discuss
+            # theUuid = str(uuid.uuid4())
+            office = OfficeModel(usa_state, office_code)
             db.session.add(office)
- 
     db.session.commit()
+ 
+    
 
 @click.command('init-db')
 @with_appcontext
