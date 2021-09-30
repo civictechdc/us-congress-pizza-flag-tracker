@@ -38,21 +38,23 @@ def upgrade():
     sa.Column('order_number', sa.Integer(), nullable=False),
     sa.Column('uuid', sa.String(length=40), nullable=False),
     sa.Column('usa_state', sa.String(length=10), nullable=True),
-    sa.Column('office_code', sa.String(length=10), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['office_code'], ['offices.office_code'], ),
+    sa.Column('updated_by', sa.String(length=10), nullable=True),
+    sa.Column('home_office_code', sa.String(length=10), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.ForeignKeyConstraint(['home_office_code'], ['offices.office_code'], ),
+    sa.ForeignKeyConstraint(['updated_by'], ['offices.office_code'], ),
     sa.PrimaryKeyConstraint('order_number')
     )
     op.create_index(op.f('ix_orders_uuid'), 'orders', ['uuid'], unique=True)
     op.create_table('status',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('office_code', sa.String(length=10), nullable=True),
+    sa.Column('status_federal_office_code', sa.String(length=10), nullable=True),
     sa.Column('sequence_num', sa.Integer(), nullable=True),
     sa.Column('description', sa.String(length=255), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['office_code'], ['offices.office_code'], ),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.ForeignKeyConstraint(['status_federal_office_code'], ['offices.office_code'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

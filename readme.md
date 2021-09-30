@@ -61,6 +61,15 @@ DEBUG=True FLASK_APP=app.py flask db migrate
 DEBUG=True FLASK_APP=app.py flask db upgrade
 ```
 
+*or make the restart script executable to run all above commands*
+'''
+chmod +x restart.sh
+'''
+*then run*
+'''
+./restart.sh
+'''
+
 After the database has been created:
 
     FLASK_APP=app.py FLASK_ENV=development flask run

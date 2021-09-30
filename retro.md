@@ -5,6 +5,18 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+# Sept 29
+
+- How do you feel?
+  - Happy -Merritt
+- What did you like?
+  - Glad to work on the database -M & R, T
+- What would you do differently next time (process)
+  - Merritt requests to see merge process. Thad will show how to merge the pull requests. he might knock out one if it seems like a precursor to all during the week but will explain the process.
+- What would you like to do next time? (task)
+  - Run backend CI on pull request
+
+
 # Sept 22
 - How do you feel?
   - Low energy, overall well - Thad
