@@ -16,5 +16,8 @@ app.config['FRONTEND_URI'] = os.environ['FRONTEND_URI']
 
 db = SQLAlchemy(app)
 
+from init_db import init_app
+init_app(app)
+
 migrate = Migrate(app, db)
 app.secret_key="the#flag#app#key"
