@@ -6,9 +6,9 @@ import uuid
 class OrderActions():
 # Table actions:
     @classmethod
-    def create(cls, usastate: str, order_number: int, office_code: str):
+    def create(cls, usastate: str, order_number: int, home_office_code: str):
         theUuid = str(uuid.uuid4())
-        new_order = OrderModel(theUuid, usastate, order_number,office_code)
+        new_order = OrderModel(theUuid, usastate, order_number,home_office_code)
         db.session.add(new_order)
         db.session.commit()
         return new_order
@@ -16,7 +16,7 @@ class OrderActions():
     @ classmethod
     def get(cls):
         orders = OrderModel.query.all()
-        return {"orders": [{"order_number": i.order_number, "uuid": i.uuid, "usa_state": i.usa_state, "office_code": i.office_code} 
+        return {"orders": [{"order_number": i.order_number, "uuid": i.uuid, "usa_state": i.usa_state, "home_office_code": i.home_office_code} 
           for i in orders]}
 
     # @ classmethod
@@ -35,15 +35,15 @@ class OrderActions():
         return order
 
     @ classmethod
-    def get_office_code(cls, office_code):
-        return OrderModel.query.filter(OrderModel.office_code == office_code)
+    def get_home_office_code(cls, home_office_code):
+        return OrderModel.query.filter(OrderModel.home_office_code == home_office_code)
 
     @ classmethod
-    def update_order(cls, uuid, usa_state, order_number , office_code):
+    def update_order(cls, uuid, usa_state, order_number , home_office_code):
         order = cls.get_order_by_uuid(uuid)
         order.order_number = order_number
         order.usa_state = usa_state
-        order.office_code = office_code 
+        order.home_office_code = home_office_code 
         db.session.commit()
         return order
      

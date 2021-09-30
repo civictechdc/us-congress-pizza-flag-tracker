@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2ab14f693706
+Revision ID: eef339400d38
 Revises: 
-Create Date: 2021-09-08 17:53:17.590350
+Create Date: 2021-09-29 17:37:52.747413
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2ab14f693706'
+revision = 'eef339400d38'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,30 +21,31 @@ def upgrade():
     op.create_table('offices',
     sa.Column('usa_state', sa.String(length=10), nullable=True),
     sa.Column('office_code', sa.String(length=10), nullable=False),
-    sa.Column('office_name', sa.String(length=255), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.PrimaryKeyConstraint('office_code')
     )
     op.create_table('orders',
     sa.Column('order_number', sa.Integer(), nullable=False),
     sa.Column('uuid', sa.String(length=40), nullable=False),
     sa.Column('usa_state', sa.String(length=10), nullable=True),
-    sa.Column('office_code', sa.String(length=10), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['office_code'], ['offices.office_code'], ),
+    sa.Column('updated_by', sa.String(length=10), nullable=True),
+    sa.Column('home_office_code', sa.String(length=10), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.ForeignKeyConstraint(['home_office_code'], ['offices.office_code'], ),
+    sa.ForeignKeyConstraint(['updated_by'], ['offices.office_code'], ),
     sa.PrimaryKeyConstraint('order_number')
     )
     op.create_index(op.f('ix_orders_uuid'), 'orders', ['uuid'], unique=True)
     op.create_table('status',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('office_code', sa.String(length=10), nullable=True),
+    sa.Column('status_federal_office_code', sa.String(length=10), nullable=True),
     sa.Column('sequence_num', sa.Integer(), nullable=True),
     sa.Column('description', sa.String(length=255), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['office_code'], ['offices.office_code'], ),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.ForeignKeyConstraint(['status_federal_office_code'], ['offices.office_code'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

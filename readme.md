@@ -48,6 +48,15 @@ DEBUG=True FLASK_APP=app.py flask db upgrade
 cp flag.db flagtests.db
 ```
 
+*or make the restart script executable to run all above commands*
+'''
+chmod +x restart.sh
+'''
+*then run*
+'''
+./restart.sh
+'''
+
 After the database has been created:
 
     FLASK_APP=app.py FLASK_ENV=development flask run

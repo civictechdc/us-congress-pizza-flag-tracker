@@ -42,7 +42,7 @@ class TestOrderActions():
         actual_order=OrderActions.get_order_by_order_number(created_order.order_number)
         
         assert(actual_order.usa_state == "MD")
-        assert(actual_order.office_code == "MD06")
+        assert(actual_order.home_office_code == "MD06")
         assert(actual_order.order_number == unique_order_number)
 
     def test_get_order_by_uuid(self):
@@ -51,7 +51,7 @@ class TestOrderActions():
         actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
         
         assert(actual_order.usa_state == "OH")
-        assert(actual_order.office_code == "OH06")
+        assert(actual_order.home_office_code == "OH06")
         assert(actual_order.order_number == unique_order_number)
         assert(actual_order.uuid == created_order.uuid)
 
@@ -61,7 +61,7 @@ class TestOrderActions():
         actual_order=controllers_get_order_by_uuid(created_order.uuid)
         
         assert(actual_order['usa_state'] == "OH")
-        assert(actual_order['office_code'] == "OH06")
+        assert(actual_order['home_office_code'] == "OH06")
         assert(actual_order['order_number'] == unique_order_number)
         assert(actual_order['uuid'] == created_order.uuid)       
 
@@ -71,13 +71,13 @@ class TestOrderActions():
         actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
 
         usa_state = "VA"
-        office_code = "031E"
+        home_office_code = "031E"
         order_number = random.randint(1,1000000)
         uuid = actual_order.uuid
-        updated_order = OrderActions.update_order(uuid, usa_state, order_number , office_code)
+        updated_order = OrderActions.update_order(uuid, usa_state, order_number , home_office_code)
 
         refreshed_actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
         assert(refreshed_actual_order.usa_state == usa_state)
-        assert(refreshed_actual_order.office_code == office_code)
+        assert(refreshed_actual_order.home_office_code == home_office_code)
         assert(refreshed_actual_order.order_number == order_number)
 
