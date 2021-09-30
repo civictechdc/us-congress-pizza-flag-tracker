@@ -14,6 +14,9 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ['DATABASE_URL']
 app.config['FRONTEND_URI'] = os.environ['FRONTEND_URI']
 
+#squelch warning, per https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
 from init_db import init_app

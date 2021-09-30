@@ -12,12 +12,11 @@ class OfficeModel(db.Model):
     # TODO(tdk): commenting out uuid as this may not be needed with un/pw login
     # uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     office_code = db.Column(db.String(10), primary_key=True, nullable=False) 
+    usa_state = db.Column(db.String(10))
     orders = db.relationship("OrderModel")
     statuses = db.relationship("StatusModel")
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-    usa_state = db.Column(db.String(10))
-
 
     def __init__(self, usa_state, office_code):
         
