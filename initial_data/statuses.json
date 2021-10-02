@@ -20,7 +20,7 @@
     "description": "AOC has flown flag and added certificate" 
   }, {
     "id": 5,
-    "status_federal_office_code": "Mail Services",
+    "status_federal_office_code": "MAIL",
     "sequence_num": 5,
     "description": "Mail Services picked up flag from AOC"
   }, {
