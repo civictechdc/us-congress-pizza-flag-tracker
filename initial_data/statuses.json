@@ -38,4 +38,9 @@
     "status_federal_office_code": "STATE",
     "sequence_num": 8,
     "description": "Constituent notified"
-  }]
+  }, {
+    "id": 9,
+    "status_federal_office_code": "ALL",
+    "sequence_num": 9,
+    "description": "Order canceled"
+    }]

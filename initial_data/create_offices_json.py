@@ -1,6 +1,12 @@
 import pandas as pd
 import json
 
+# Run this script to update the office_codes.json with updated congressional offices.
+
+def add_fed_offices_to_list(offices_list): 
+    fed_offices = {"usa_state": "FED", "office_code": ["HOSS","AOC","MAIL"]}
+    offices_list.insert(0,fed_offices)
+
 def df_to_list(df):
     cols = df.columns
     df_list = []
@@ -10,9 +16,10 @@ def df_to_list(df):
 
 def create_offices_df():
     '''Creates a JSON file containing list of records for each congressional office.
-    Each record includes 1. state_code 2. office_number 3. office_name.
-    EG: {"state_code":"MA","office_number":"06","office_name":"MA-06"}'''
+    Each record includes 1. state_code 2. office code.
+    EG: {"usa_state":"MA","home_office_code":"MA-06"}'''
 
+    # Public updated list of congressional offices.
     url_csv = 'https://raw.githubusercontent.com/CivilServiceUSA/us-house/master/us-house/data/us-house.csv'
     # Get dataframe listing congressional offices
     offices = pd.read_csv(url_csv,header=0)
@@ -23,17 +30,18 @@ def create_offices_df():
     # Convert ints to strings in proper format
     offices['district'] = offices['district'].apply(lambda x: f"{x:02}")
     # Create new column from two previous columns.
-    offices['home_office_code'] = offices['state_code'] + '-' + offices['district'] 
+    offices['office_code'] = offices['state_code'] + '-' + offices['district'] 
     # Rename state columns
     offices.rename(columns= {'state_code':'usa_state'},inplace=True)
     offices.drop(columns=['district'],inplace=True) 
     # group by states
-    offices_gp = pd.DataFrame(offices.groupby('usa_state')['home_office_code'].apply(list).reset_index()) 
+    offices_gp = pd.DataFrame(offices.groupby('usa_state')['office_code'].apply(list).reset_index()) 
     return offices_gp
 
 if __name__ == '__main__':
     offices_df = create_offices_df()
     offices_list = df_to_list(offices_df)
-    offices_json = json.dumps(offices_list)
-    with open('home_office_codes.json','w') as file:
+    add_fed_offices_to_list(offices_list)
+    #offices_json = json.dumps(offices_list)
+    with open('office_codes.json','w') as file:
         json.dump(offices_list,file)
