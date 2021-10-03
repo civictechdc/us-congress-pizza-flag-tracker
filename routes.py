@@ -1,6 +1,5 @@
 from config import app
-from controllers import get_order_by_order_number, info, send_file_qrcode, create_order, get_orders, index, get_order_by_uuid, update_order
-
+from controllers import get_order_by_order_number, info, send_file_qrcode, create_order, get_orders, index, get_order_by_uuid, update_order, get_all_states, get_offices_by_state
 
 # TODO: refactor out this from routes:
 from flask import Flask, render_template, request, send_file
@@ -28,3 +27,7 @@ app.add_url_rule('/api/order_num/<order_number>',
 app.add_url_rule('/api/info', view_func=info, methods=["GET"])
 
 app.add_url_rule('/api/orders/<uuid>', view_func=update_order, methods=["PUT"])
+
+app.add_url_rule('/api/states',view_func=get_all_states,methods = ["GET"])
+
+app.add_url_rule('/api/state_offices/<state>',view_func=get_offices_by_state,methods=["GET"])

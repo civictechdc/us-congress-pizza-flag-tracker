@@ -10,6 +10,7 @@ import random
 import json
 
 from OrderActions import OrderActions
+from OfficeActions import OfficeActions
 import io
 
 
@@ -54,7 +55,7 @@ def get_order_by_order_number(order_number):
         order_dict = {}
         order_dict['order_number'] = order_obj.order_number
         order_dict['usa_state'] = order_obj.usa_state
-        order_dict['office_code'] = order_obj.office_code
+        order_dict['office_code'] = order_obj.home_office_code
         order_dict['uuid'] = order_obj.uuid
         return {"orders": [order_dict]}
 
@@ -93,3 +94,13 @@ def update_order(uuid):
     order_dict['home_office_code'] = updated_order.home_office_code
     order_dict['uuid'] = updated_order.uuid
     return order_dict
+
+
+def get_all_states():
+    return {"states": OfficeActions.get_states()}
+
+def get_offices_by_state(state):
+    return {state: OfficeActions.get_offices_by_state(state)}
+
+
+
