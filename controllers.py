@@ -7,7 +7,6 @@ import UserActions
 from authorize import token_required, get_exception_if_no_create_update_delete_orders
 from config import app, qrcode
 import qrcode
-# from './http-common.js' import baseURL
 
 # from './http-common.js' import baseURL
 
@@ -27,18 +26,18 @@ def index():
 
 def create_order():
     request_json = request.get_json()
-    usa_state = request_json[u'usa_state']
-    idbased_order_number = request_json[u'order_number']
-    office_code = request_json[u'office_code']
-    order = OrderActions.create(usa_state,  idbased_order_number, office_code)
-    return f'Created one'
+    usa_state = request_json["usa_state"]
+    idbased_order_number = request_json["order_number"]
+    office_code = request_json["office_code"]
+    order = OrderActions.create(usa_state, idbased_order_number, office_code)
+    return f"Created one"
 
 
 @token_required
 def get_orders():
     error_msg = get_exception_if_no_create_update_delete_orders()
-    if (error_msg):
-        return { "message": error_msg}
+    if error_msg:
+        return {"message": error_msg}
     orders = OrderActions.get()
     return orders
 
@@ -47,10 +46,10 @@ def get_order_by_uuid(uuid):
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = {}
-    order_dict['order_number'] = order_obj.order_number
-    order_dict['usa_state'] = order_obj.usa_state
-    order_dict['office_code'] = order_obj.office_code
-    order_dict['uuid'] = order_obj.uuid
+    order_dict["order_number"] = order_obj.order_number
+    order_dict["usa_state"] = order_obj.usa_state
+    order_dict["office_code"] = order_obj.office_code
+    order_dict["uuid"] = order_obj.uuid
     return order_dict
 
 
@@ -92,16 +91,17 @@ def info():
 
 def update_order(uuid):
     request_json = request.get_json()
-    usa_state = request_json[u'usa_state']
-    idbased_order_number = request_json[u'order_number']
-    office_code = request_json[u'office_code']
+    usa_state = request_json["usa_state"]
+    idbased_order_number = request_json["order_number"]
+    office_code = request_json["office_code"]
     updated_order = OrderActions.update_order(
-        uuid, usa_state, idbased_order_number, office_code)
+        uuid, usa_state, idbased_order_number, office_code
+    )
     order_dict = {}
-    order_dict['order_number'] = updated_order.order_number
-    order_dict['usa_state'] = updated_order.usa_state
-    order_dict['office_code'] = updated_order.office_code
-    order_dict['uuid'] = updated_order.uuid
+    order_dict["order_number"] = updated_order.order_number
+    order_dict["usa_state"] = updated_order.usa_state
+    order_dict["office_code"] = updated_order.office_code
+    order_dict["uuid"] = updated_order.uuid
     return order_dict
 
 
