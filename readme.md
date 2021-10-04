@@ -27,7 +27,8 @@ If you have not created the conda environment for this project:
 If the conda environment has been created:
 
     conda activate myenv
-    pip install -r requirements.txt
+    
+Skip next section, go to section on pip install
     
 
 ## Python Environment without Conda
@@ -41,7 +42,7 @@ Then:
     
     source myenv/bin/activate
     
-Choose:
+## pip install
     
     pip install -r requirements.txt --use-deprecated=legacy-resolver (faster)
      
