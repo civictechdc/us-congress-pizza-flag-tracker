@@ -28,10 +28,6 @@ class UserActions:
         return table_record_to_json(new_user)
 
     @classmethod
-    def create(cls, name: str, password: str):
-        new_user = UserModel(name=name, password=password)
-
-    @classmethod
     def delete(cls):
         UserModel.query.delete()
         db.session.commit()
@@ -55,7 +51,3 @@ class UserActions:
         user.can_update_password_for = user_values.can_update_password_for
         user.can_update_status_for = user_values.can_update_status_for
         user.is_admin = user_values.is_admin
-
-    def get_users(cls):
-        users = UserModel.query.all()
-        return users

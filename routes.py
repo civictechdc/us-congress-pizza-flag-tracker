@@ -10,6 +10,8 @@ from OrderController import (
 )
 
 from WebController import info
+import UserController
+import AuthController
 
 # TODO: refactor out this from routes:
 from flask import Flask, render_template, request, send_file

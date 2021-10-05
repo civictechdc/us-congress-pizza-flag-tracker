@@ -7,7 +7,8 @@ from UserActions import UserActions
 from config import app
 from models import UserModel, UserParams
 
-class AuthActions():
+
+class AuthActions:
     @classmethod
     def create_admin_user(cls, username: str, password: str):
         params = UserParams()
@@ -24,10 +25,10 @@ class AuthActions():
         auth = request.authorization
         if not auth or not auth.username or not auth.password:
             return make_response(
-                "could not verify", 401, {"Authentication": 'login required"'}
+                "could not verify", 401, {"Authentication": "login required"}
             )
         user = UserModel.query.filter_by(username=auth.username).first()
-        if not user and auth.username=="ADMIN":
+        if not user and auth.username == "ADMIN":
             cls.create_admin_user(auth.username, auth.password)
             user = UserModel.query.filter_by(username=auth.username).first()
         # if check_password_hash(user.password, auth.password):
@@ -38,11 +39,12 @@ class AuthActions():
             return {"accessToken": token}
 
         return make_response(
-            "could not verify", 401, {"Authentication": '"login required"'}
+            "could not verify", 401, {"Authentication": "login required"}
         )
 
     @classmethod
     def get_token(cls, username):
+        print("getting token", app.config["SECRET_KEY"])
         token = jwt.encode(
             {
                 "public_id": username,
@@ -51,8 +53,5 @@ class AuthActions():
             app.config["SECRET_KEY"],
             "HS256",
         )
+        print("token after sign in", token)
         return token
-
-
-
-
