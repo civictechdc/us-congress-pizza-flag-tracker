@@ -6,6 +6,7 @@ from flask import request, make_response
 from UserActions import UserActions
 from config import app
 from models import UserModel, UserParams
+from util import table_record_to_json
 
 
 class AuthActions:
@@ -32,11 +33,10 @@ class AuthActions:
             cls.create_admin_user(auth.username, auth.password)
             user = UserModel.query.filter_by(username=auth.username).first()
         # if check_password_hash(user.password, auth.password):
-        print("User", user)
-        print("Name", user.username)
         if user.password == auth.password:
-            token = AuthActions.get_token(user.username)
-            return {"accessToken": token}
+            ret_val = table_record_to_json(user)
+            ret_val["accessToken"] = AuthActions.get_token(user.username)
+            return ret_val
 
         return make_response(
             "could not verify", 401, {"Authentication": "login required"}
@@ -44,7 +44,6 @@ class AuthActions:
 
     @classmethod
     def get_token(cls, username):
-        print("getting token", app.config["SECRET_KEY"])
         token = jwt.encode(
             {
                 "public_id": username,
@@ -53,5 +52,4 @@ class AuthActions:
             app.config["SECRET_KEY"],
             "HS256",
         )
-        print("token after sign in", token)
         return token

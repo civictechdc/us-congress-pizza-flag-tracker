@@ -73,12 +73,7 @@ def get_qrcode(uuid):
 # not secured as it is provided in a link where token
 # cannot be sent
 def send_file_qrcode(uuid):
-    print("send file", qrcode)
     q = get_qrcode(uuid)
-    if not q:
-        print("not q")
-    else:
-        print("q")
     return send_file(q, mimetype="image/jpeg")
 
 

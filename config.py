@@ -15,7 +15,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
 app.config["FRONTEND_URI"] = os.environ["FRONTEND_URI"]
 app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-print("secret", app.config["SECRET_KEY"])
 db = SQLAlchemy(app)
 
 from init_db import init_app
