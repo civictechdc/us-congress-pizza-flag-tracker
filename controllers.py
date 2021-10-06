@@ -54,7 +54,7 @@ def get_order_by_order_number(order_number):
         order_dict = {}
         order_dict['order_number'] = order_obj.order_number
         order_dict['usa_state'] = order_obj.usa_state
-        order_dict['office_code'] = order_obj.office_code
+        order_dict['home_office_code'] = order_obj.home_office_code
         order_dict['uuid'] = order_obj.uuid
         return {"orders": [order_dict]}
 
