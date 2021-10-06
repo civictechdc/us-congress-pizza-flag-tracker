@@ -49,14 +49,10 @@ DEBUG=True FLASK_APP=app.py flask init-db
 cp flag.db flagtests.db
 ```
 
-*or make the restart script executable to run all above commands*
-'''
-chmod +x restart.sh
-'''
-*then run*
-'''
+*or run the restart script*
+```
 ./restart.sh
-'''
+```
 
 After the database has been created:
 
