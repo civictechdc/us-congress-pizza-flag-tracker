@@ -3,7 +3,7 @@ import random
 from OrderActions import OrderActions 
 from models import OrderModel
 from config import *
-from controllers import get_order_by_uuid as controllers_get_order_by_uuid
+from OrderController import get_order_by_uuid as controllers_get_order_by_uuid
 
 
 class TestOrderActions():
