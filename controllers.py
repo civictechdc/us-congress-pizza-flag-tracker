@@ -24,6 +24,7 @@ def index():
     return render_template("index.html")
 
 
+
 def create_order():
     request_json = request.get_json()
     usa_state = request_json["usa_state"]
@@ -46,10 +47,10 @@ def get_order_by_uuid(uuid):
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = {}
-    order_dict["order_number"] = order_obj.order_number
-    order_dict["usa_state"] = order_obj.usa_state
-    order_dict["office_code"] = order_obj.office_code
-    order_dict["uuid"] = order_obj.uuid
+    order_dict['order_number'] = order_obj.order_number
+    order_dict['usa_state'] = order_obj.usa_state
+    order_dict['home_office_code'] = order_obj.home_office_code
+    order_dict['uuid'] = order_obj.uuid
     return order_dict
 
 
@@ -57,22 +58,20 @@ def get_order_by_order_number(order_number):
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_order_number(order_number)
     if order_obj is None:
-        return {"error": "order not found"}
+        return {"error": 'order not found'}
     else:
         order_dict = {}
-        order_dict["order_number"] = order_obj.order_number
-        order_dict["usa_state"] = order_obj.usa_state
-        order_dict["office_code"] = order_obj.office_code
-        order_dict["uuid"] = order_obj.uuid
+        order_dict['order_number'] = order_obj.order_number
+        order_dict['usa_state'] = order_obj.usa_state
+        order_dict['home_office_code'] = order_obj.home_office_code
+        order_dict['uuid'] = order_obj.uuid
         return {"orders": [order_dict]}
-
 
 # generate qr code
 
-
 def get_qrcode(uuid):
-    frontendURL = app.config["FRONTEND_URI"]
-    img = qrcode.make(frontendURL + "/orders/" + uuid)
+    frontendURL = app.config['FRONTEND_URI']
+    img = qrcode.make(frontendURL+'/orders/'+uuid)
     buf = io.BytesIO()
     img.save(buf)
     buf.seek(0)
@@ -100,7 +99,7 @@ def update_order(uuid):
     order_dict = {}
     order_dict["order_number"] = updated_order.order_number
     order_dict["usa_state"] = updated_order.usa_state
-    order_dict["office_code"] = updated_order.office_code
+    order_dict["home_office_code"] = updated_order.home_office_code
     order_dict["uuid"] = updated_order.uuid
     return order_dict
 

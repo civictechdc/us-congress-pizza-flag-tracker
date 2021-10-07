@@ -52,6 +52,9 @@ Then:
     See https://stackoverflow.com/questions/65122957/resolving-new-pip-backtracking-runtime-issue for one article on the issue.
     
 
+## The environment:
+Copy .env.example to .env
+
 ## Creating the database:
 
 ```
@@ -60,20 +63,23 @@ rm flag*.db
 DEBUG=True FLASK_APP=app.py flask db init
 DEBUG=True FLASK_APP=app.py flask db migrate
 DEBUG=True FLASK_APP=app.py flask db upgrade
+DEBUG=True FLASK_APP=app.py flask init-db
+cp flag.db flagtests.db
 ```
 
-*or make the restart script executable to run all above commands*
-'''
-chmod +x restart.sh
-'''
-*then run*
-'''
+*or run the restart script*
+```
 ./restart.sh
-'''
+```
 
 After the database has been created:
 
     FLASK_APP=app.py FLASK_ENV=development flask run
+    
+*or run the run script*S    
+```
+./run.sh
+```
 
 ## Security Configuration
 All routes require log in except for create user, as this might get in the way of development.

@@ -6,7 +6,8 @@ from config import db
 
 class OfficeModel(db.Model):
     __tablename__ = "offices"
-    uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
+    # TODO(tdk): commenting out uuid as this may not be needed with un/pw login
+    # uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     office_code = db.Column(db.String(10), primary_key=True, nullable=False) 
     usa_state = db.Column(db.String(10))
     orders = db.relationship("OrderModel")
