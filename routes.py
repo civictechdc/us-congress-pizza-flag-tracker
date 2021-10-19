@@ -1,4 +1,5 @@
 from config import app
+
 from OrderController import (
     get_order_by_order_number,
     send_file_qrcode,
@@ -38,3 +39,7 @@ app.add_url_rule('/api/order_num/<order_number>',
 app.add_url_rule('/api/info', view_func=info, methods=["GET"])
 
 app.add_url_rule('/api/orders/<uuid>', view_func=update_order, methods=["PUT"])
+
+app.add_url_rule('/api/states',view_func=get_all_states,methods = ["GET"])
+
+app.add_url_rule('/api/state_offices/<state>',view_func=get_offices_by_state,methods=["GET"])
