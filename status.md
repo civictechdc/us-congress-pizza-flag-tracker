@@ -4,6 +4,44 @@
 - What do you plan on doing next week?
 
 
+### Oct 13
+
+Rajinder
+- What did you work on / complete?
+    - Autopop user table
+- Where do you need help?
+    - What does frontend need?
+- What do you plan on doing next week?
+    - ???
+
+
+Rachel
+- What did you work on / complete?
+    - Waiting on PR
+- Where do you need help?
+    - My PR failed several checks, why?
+    - Show login/logout as appropriate. Where is login state stored?
+- What do you plan on doing next week?
+    - Retry husky/prettier
+
+
+Merritt
+- What did you work on / complete?
+    - Still waiting on merge PR
+- Where do you need help?
+    - Retrieving status / writing status
+- What do you plan on doing next week?
+    - Integrate passing status back and forth.
+
+
+Aaron
+- What did you work on / complete?
+    - Still waiting on PR merge
+- Where do you need help?
+    - Finding issue / review security and authorization (jwt enough?)
+- What do you plan on doing next week?
+
+
 ### Sept 22
 
 Rajinder

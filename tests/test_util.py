@@ -3,7 +3,7 @@ import cv2
 from io import BytesIO
 # from qrtools.qrtools import QR
 from app import app
-from controllers import get_qrcode
+from OrderController import get_qrcode
 import io
 import numpy as np
 from cachelib import file

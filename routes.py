@@ -1,13 +1,25 @@
 from config import app
-from controllers import get_order_by_order_number, info, send_file_qrcode, create_order, get_orders, index, get_order_by_uuid, update_order, get_all_states, get_offices_by_state
+
+from OrderController import (
+    get_order_by_order_number,
+    send_file_qrcode,
+    create_order,
+    get_orders,
+    index,
+    get_order_by_uuid,
+    update_order,
+)
+
+from WebController import info
+import UserController
+import AuthController
 
 # TODO: refactor out this from routes:
 from flask import Flask, render_template, request, send_file
 
 # add routes below
-app.add_url_rule('/', view_func=index)
-# create qr code
-#app.add_url_rule('/createqrcode/<orderid>', view_func=send_file_qrcode, methods=["GET"])
+app.add_url_rule("/api", view_func=index)
+app.add_url_rule("/api/qrcode/<uuid>", view_func=send_file_qrcode, methods=["GET"])
 
 app.add_url_rule('/api/qrcode/<uuid>',
                  view_func=send_file_qrcode, methods=["GET"])

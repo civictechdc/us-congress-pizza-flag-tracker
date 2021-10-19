@@ -5,6 +5,20 @@ Retro questions:
 - What would you do differently next time (process)
 - What would you like to do next time? (task)
 
+# Oct 13
+
+- How do you feel?
+  - Good - Merritt, Rachel, Juan
+  - Happy w progress - Terence, Aaron
+  - Excited about last weeks merge -Rajinder
+- What did you like?
+  - Able to deconflict/clarify several issues - Merritt, Rachel, Terence, Raj, Aaron
+  - Catching up and absorbing - Juan
+- What would you do differently next time (process)
+  - Want to get PRs merged! Rachel, Raj, Thad
+- What would you like to do next time? (task)
+
+
 # Sept 29
 
 - How do you feel?
