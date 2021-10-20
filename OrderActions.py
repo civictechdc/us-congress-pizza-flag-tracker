@@ -6,9 +6,9 @@ import uuid
 class OrderActions():
 # Table actions:
     @classmethod
-    def create(cls, usastate: str, order_number: int, home_office_code: str):
+    def create(cls, usastate: str, order_number: int, home_office_code: str, order_status:int):
         theUuid = str(uuid.uuid4())
-        new_order = OrderModel(theUuid, usastate, order_number,home_office_code)
+        new_order = OrderModel(theUuid, usastate, order_number,home_office_code,order_status)
         db.session.add(new_order)
         db.session.commit()
         return new_order
