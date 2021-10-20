@@ -23,7 +23,8 @@ def create_order():
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]
     home_office_code = request_json["home_office_code"]
-    order = OrderActions.create(usa_state, idbased_order_number, home_office_code)
+    order_status = 1
+    order = OrderActions.create(usa_state, idbased_order_number, home_office_code, order_status)
     return table_record_to_json(order)
 
 

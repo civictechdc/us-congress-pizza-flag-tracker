@@ -30,7 +30,8 @@ def create_order():
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]
     office_code = request_json["office_code"]
-    order = OrderActions.create(usa_state, idbased_order_number, office_code)
+    order_status = 1
+    order = OrderActions.create(usa_state, idbased_order_number, office_code, order_status)
     return f"Created one"
 
 
