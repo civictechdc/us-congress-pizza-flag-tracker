@@ -10,6 +10,7 @@ class OfficeModel(db.Model):
     # uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     office_code = db.Column(db.String(10), primary_key=True, nullable=False) 
     usa_state = db.Column(db.String(10))
+    users = db.relationship("UserModel")
     orders = db.relationship("OrderModel")
     statuses = db.relationship("StatusModel")
     created_at = db.Column(db.DateTime, server_default=func.now())
@@ -72,16 +73,18 @@ class StatusModel(db.Model):
 class UserParams:
     username: str
     password: str
+    office_code: str
     can_create_update_delete_orders: str
     can_update_password_for: str
     can_update_status_for: str
     is_admin: str
 class UserModel(db.Model):
     __tablename__ = "users"
-    username = db.Column(db.String(10), primary_key=True)
+    username = db.Column(db.String(20), primary_key=True)
     password = db.Column(db.String(100))
-    can_update_status_for = db.Column(db.String(10))
-    can_update_password_for = db.Column(db.String(10))
+    office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
+    can_update_status_for = db.Column(db.String(20))
+    can_update_password_for = db.Column(db.String(20))
     can_create_update_delete_orders = db.Column(db.String(1))
     is_admin = db.Column(db.String(1))
 
@@ -90,6 +93,7 @@ class UserModel(db.Model):
     def __init__(self, user_values: UserParams):
         self.username = user_values.username
         self.password = user_values.password
+        self.office_code = user_values.office_code
         self.can_create_update_delete_orders = user_values.can_create_update_delete_orders
         self.can_update_status_for = user_values.can_update_status_for
         self.can_update_password_for = user_values.can_update_password_for

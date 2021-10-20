@@ -11,6 +11,7 @@ import qrcode
 # from './http-common.js' import baseURL
 
 from OrderActions import OrderActions
+from OfficeActions import OfficeActions
 import io
 
 
@@ -104,6 +105,12 @@ def update_order(uuid):
     order_dict["uuid"] = updated_order.uuid
     return order_dict
 
+
+def get_all_states():
+    return {"states": OfficeActions.get_states()}
+
+def get_offices_by_state(state):
+    return {state: OfficeActions.get_offices_by_state(state)}
 
 @app.route("/signup", methods=["POST"])
 def create_user():
