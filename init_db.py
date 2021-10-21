@@ -3,7 +3,6 @@ import click
 from flask.cli import with_appcontext
 from flask import current_app, g 
 from config import db
-from models import OfficeModel, StatusModel, UserParams, UserModel
 import json
 # import uuid
 
@@ -14,6 +13,8 @@ def close_db(e=None):
         db.close()
 
 def init_db():
+    # imports are inside, otherwise we get circular import during testing
+    from models import OfficeModel, StatusModel, UserParams, UserModel
     with open('./initial_data/office_codes.json',) as office_codes_json:
         office_codes_list = json.load(office_codes_json)
     
