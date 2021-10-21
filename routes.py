@@ -14,6 +14,8 @@ from WebController import info
 import UserController
 import AuthController
 import OfficeController
+import StatusController
+
 
 # TODO: refactor out this from routes:
 from flask import Flask, request
@@ -48,5 +50,11 @@ app.add_url_rule(
 app.add_url_rule(
     "/api/state_offices/<state>",
     view_func=OfficeController.get_offices_by_state,
+    methods=["GET"],
+)
+
+app.add_url_rule(
+    "/api/statuses",
+    view_func=StatusController.get_statuses,
     methods=["GET"],
 )
