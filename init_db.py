@@ -4,7 +4,10 @@ from flask.cli import with_appcontext
 from flask import current_app, g 
 from config import db
 import json
-# import uuid
+
+from initial_data.init_office_table import init_office_table
+from initial_data.init_user_table import init_user_table_state_users, init_user_table_fed_users
+from initial_data.init_status_table import init_status_table
 
 def close_db(e=None):
     db = g.pop('db', None)
@@ -14,73 +17,26 @@ def close_db(e=None):
 
 def init_db():
     # imports are inside, otherwise we get circular import during testing
-    from models import OfficeModel, StatusModel, UserParams, UserModel
     with open('./initial_data/office_codes.json',) as office_codes_json:
         office_codes_list = json.load(office_codes_json)
     
-    # add state offices to office table
-    for state_offices in office_codes_list:
-        usa_state = state_offices["usa_state"]
-        for office_code in state_offices["office_code"]:
-            # TODO(tdk): we may not need uuids, discuss
-            # theUuid = str(uuid.uuid4())
-            office = OfficeModel(usa_state, office_code)
-            db.session.add(office)
-
-    # add state office users to user table
-    for state_offices in office_codes_list[1:]:
-        usa_state = state_offices["usa_state"]
-        for office_code in state_offices["office_code"]:
-            # Normal users
-            params = UserParams()
-            params.username = office_code
-            params.password = office_code + "-1010"
-            params.office_code = office_code
-            params.can_create_update_delete_orders = "N"
-            params.can_update_status_for = "office_code"
-            params.can_update_password_for = "NONE"
-            params.is_admin = "N"
-            user = UserModel(params)
-            db.session.add(user)
-            # Admin users
-            params.username = office_code + "-ADMIN"
-            params.password = office_code + "-ADMIN-1010"
-            params.office_code = office_code
-            params.can_update_password_for = office_code
-            user = UserModel(params)
-            db.session.add(user)
-
     with open('./initial_data/users.json') as users_json:
         users_list = json.load(users_json)
-
-    for user in users_list:
-        params = UserParams()
-        params.username = user["username"]
-        params.password = user["password"]
-        params.office_code = user["office_code"]
-        params.can_create_update_delete_orders = user["can_create_update_delete_orders"]
-        params.can_update_status_for = user["can_update_status_for"]
-        params.can_update_password_for = user["can_update_password_for"]
-        params.is_admin = user["is_admin"]
-
-        user_ = UserModel(params)
-        db.session.add(user_)
-
+  
     with open('./initial_data/statuses.json') as statuses_json:
         statuses_list = json.load(statuses_json)
 
-    for status in statuses_list:
-        id = status["id"]
-        status_federal_office_code = status["status_federal_office_code"]
-        sequence_num = status["sequence_num"]
-        description = status["description"]
-        status = StatusModel(id,status_federal_office_code,sequence_num,description)
-        db.session.add(status)
+    # add FED and state offices to office table
+    init_office_table(office_codes_list,db)  
+    # add state office users to user table
+    init_user_table_state_users(office_codes_list,db)
+    # add fed office users to user table
+    init_user_table_fed_users(users_list,db)
+    # add flag statuses to status table
+    init_status_table(statuses_list,db)
 
     db.session.commit()
  
-    
-
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
