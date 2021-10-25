@@ -4,7 +4,8 @@ from flask import render_template, request, send_file, jsonify
 import flask
 
 import UserActions
-from authorize import token_required, get_exception_if_no_create_update_delete_orders
+from authorize import get_exception_if_no_create_update_delete_orders
+from AuthController import set_authorize_current_user
 from config import app, qrcode
 import qrcode
 
@@ -35,8 +36,8 @@ def create_order():
     return f"Created one"
 
 
-@token_required
 def get_orders():
+    set_authorize_current_user()
     error_msg = get_exception_if_no_create_update_delete_orders()
     if error_msg:
         return {"message": error_msg}
