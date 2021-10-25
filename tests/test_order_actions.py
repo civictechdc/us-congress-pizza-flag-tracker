@@ -3,7 +3,9 @@ import random
 from OrderActions import OrderActions 
 from models import OrderModel
 from config import *
+import OrderController
 from OrderController import get_order_by_uuid as controllers_get_order_by_uuid
+import authorize
 
 
 class TestOrderActions():
@@ -45,7 +47,7 @@ class TestOrderActions():
         assert(actual_order.home_office_code == "MD06")
         assert(actual_order.order_number == unique_order_number)
 
-    def test_get_order_by_uuid(self):
+    def test_get_order_by_uuid(self, mocker):
         unique_order_number = random.randint(1,1000000)
         created_order = OrderActions.create( "OH",  unique_order_number , "OH06")
         actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
@@ -54,16 +56,6 @@ class TestOrderActions():
         assert(actual_order.home_office_code == "OH06")
         assert(actual_order.order_number == unique_order_number)
         assert(actual_order.uuid == created_order.uuid)
-
-    def test_controllers_get_order_by_uuid(self):
-        unique_order_number = random.randint(1,1000000)
-        created_order = OrderActions.create( "OH",  unique_order_number , "OH06")
-        actual_order=controllers_get_order_by_uuid(created_order.uuid)
-        
-        assert(actual_order['usa_state'] == "OH")
-        assert(actual_order['home_office_code'] == "OH06")
-        assert(actual_order['order_number'] == unique_order_number)
-        assert(actual_order['uuid'] == created_order.uuid)       
 
     def test_update_order(self):
         unique_order_number = random.randint(1,1000000)

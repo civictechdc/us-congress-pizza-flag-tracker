@@ -3,7 +3,7 @@ from util import table_record_to_json
 from authorize import token_required, get_exception_if_no_create_update_delete_orders
 from config import app, qrcode
 import qrcode
-
+from authorize import raise_exception_if_invalid_token_else_set_current_user
 # from './http-common.js' import baseURL
 
 from OrderActions import OrderActions
@@ -14,7 +14,7 @@ def index():
     return render_template("index.html")
 
 
-@token_required
+# @token_required
 def create_order():
     e = get_exception_if_no_create_update_delete_orders()
     if e:
@@ -34,9 +34,9 @@ def get_orders():
     return orders
 
 
-@token_required
 def get_order_by_uuid(uuid):
     # Return a dictionary(json) object for use by frontend
+    raise_exception_if_invalid_token_else_set_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = {}
     order_dict["order_number"] = order_obj.order_number
@@ -78,8 +78,8 @@ def send_file_qrcode(uuid):
     return send_file(q, mimetype="image/jpeg")
 
 
-@token_required
 def update_order(uuid):
+    raise_exception_if_invalid_token_else_set_current_user()
     request_json = request.get_json()
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]

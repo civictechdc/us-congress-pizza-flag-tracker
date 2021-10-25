@@ -31,6 +31,7 @@ class OrderActions():
     @ classmethod
     def get_order_by_uuid(cls, uuid):
         # Return OrderModel object for use by backend
+
         order = OrderModel.query.filter(OrderModel.uuid == uuid).first()
         return order
 
