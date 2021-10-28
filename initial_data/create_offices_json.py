@@ -15,9 +15,11 @@ def df_to_list(df):
     return df_list
 
 def create_offices_df():
-    '''Creates a JSON file containing list of records for each congressional office.
-    Each record includes 1. state_code 2. office code.
-    EG: {"usa_state":"MA","home_office_code":"MA-06"}'''
+    '''
+    Creates a pandas df with 
+    columns: usa_state, office_code
+    row (EG): "CA", ["CA-01","CA-02",...]
+    '''
 
     # Public updated list of congressional offices.
     url_csv = 'https://raw.githubusercontent.com/CivilServiceUSA/us-house/master/us-house/data/us-house.csv'
