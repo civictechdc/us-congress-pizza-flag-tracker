@@ -49,7 +49,7 @@ def get_order_by_uuid(uuid):
 @token_required
 def get_order_by_order_number(order_number):
     # Return a dictionary(json) object for use by frontend
-    order_obj = OrderActions.get_order_by_order_number(order_number)
+    order_obj, status_obj = OrderActions.get_order_by_order_number(order_number)
     if order_obj is None:
         return {"error": "order not found"}
     else:
@@ -58,8 +58,11 @@ def get_order_by_order_number(order_number):
         order_dict["usa_state"] = order_obj.usa_state
         order_dict["home_office_code"] = order_obj.home_office_code
         order_dict["uuid"] = order_obj.uuid
-        return {"orders": [order_dict]}
-
+        status_dict = {}
+        status_dict["status_federal_office_code"] = status_obj.status_federal_office_code
+        status_dict["sequence_num"] = status_obj.sequence_num
+        status_dict["description"] = status_obj.description
+        return {"orders": [order_dict], "status": [status_dict]}
 
 # generate qr code
 def get_qrcode(uuid):
