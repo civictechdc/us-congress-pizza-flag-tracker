@@ -23,9 +23,7 @@ class AuthActions:
 
     @classmethod
     def login_user(cls, username, password):
-        print("user debug", username, password)
         user = UserModel.query.filter_by(username=username).first()
-         # if check_password_hash(user.password, auth.password):
         if user.password == password:
             ret_val = table_record_to_json(user)
             ret_val["accessToken"] = AuthActions.get_token(user.username)

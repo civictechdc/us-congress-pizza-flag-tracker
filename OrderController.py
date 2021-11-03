@@ -1,4 +1,6 @@
 from flask import render_template, request, send_file
+
+from tests.test_helper import dict_keyvalue_or_default
 from util import table_record_to_json
 from config import flask_app, qrcode
 import qrcode
@@ -22,10 +24,9 @@ def create_order():
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]
     home_office_code = request_json["home_office_code"]
-    order_status = 1
+    order_status = dict_keyvalue_or_default (request_json, "order_status", 1)
     order = OrderActions.create(usa_state, idbased_order_number, home_office_code, order_status)
     return table_record_to_json(order)
-
 
 def get_orders():
     set_authorize_current_user()
@@ -34,7 +35,6 @@ def get_orders():
 
 
 def get_order_by_uuid(uuid):
-    # Return a dictionary(json) object for use by frontend
     set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = {"order_number": order_obj.order_number, "usa_state": order_obj.usa_state,
@@ -44,7 +44,6 @@ def get_order_by_uuid(uuid):
 
 def get_order_by_order_number(order_number):
     set_authorize_current_user()
-    # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_order_number(order_number)
     if order_obj is None:
         return {"error": "order not found"}
