@@ -2,7 +2,7 @@ import pytest
 import cv2
 from io import BytesIO
 # from qrtools.qrtools import QR
-from app import app
+from app import flask_app
 from OrderController import get_qrcode
 import io
 import numpy as np
@@ -11,7 +11,7 @@ class TestUtils():
     @pytest.mark.skip(reason="function works, but test does not")
     def test_qrcode(self):
         qrcodeValue = "https://example.com/A43X2Q3"
-        with app.test_client() as c:
+        with flask_app.test_client() as c:
             response = c.get('/qrcode?value=' + qrcodeValue)
             imgData = BytesIO(response.data)
             imgData.seek(0)

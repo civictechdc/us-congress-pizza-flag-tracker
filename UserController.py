@@ -1,11 +1,11 @@
 from flask import request
 
 from UserActions import UserActions
-from config import app
+from config import flask_app
 from models import UserParams
 
 
-@app.route("/api/users/create", methods=["POST"])
+@flask_app.route("/api/users/create", methods=["POST"])
 def create_user():
     request_json = request.get_json()
     userParams = UserParams()

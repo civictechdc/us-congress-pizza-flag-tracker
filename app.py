@@ -1,4 +1,4 @@
-from config import app, db
+from config import flask_app, db
 import routes
 from flask import Flask, jsonify, make_response, request
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -7,4 +7,4 @@ from functools import wraps
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    flask_app.run(debug=True)

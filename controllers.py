@@ -6,7 +6,7 @@ import flask
 import UserActions
 from authorize import get_exception_if_no_create_update_delete_orders
 from AuthController import set_authorize_current_user
-from config import app, qrcode
+from config import flask_app, qrcode
 import qrcode
 
 # from './http-common.js' import baseURL
@@ -74,7 +74,7 @@ def get_order_by_order_number(order_number):
 
 
 def get_qrcode(uuid):
-    frontendURL = app.config["FRONTEND_URI"]
+    frontendURL = flask_app.config["FRONTEND_URI"]
     img = qrcode.make(frontendURL + "/orders/" + uuid)
     buf = io.BytesIO()
     img.save(buf)
@@ -108,7 +108,7 @@ def update_order(uuid):
     return order_dict
 
 
-@app.route("/signup", methods=["POST"])
+@flask_app.route("/signup", methods=["POST"])
 def create_user():
     request_json = request.get_json()
     username = request_json["username"]
@@ -128,7 +128,7 @@ def create_user():
     return jsonify({"message": "registered successfully"})
 
 
-@app.route("/signin", methods=["POST"])
+@flask_app.route("/signin", methods=["POST"])
 def login_user():
     response = UserActions.login_user()
     return response

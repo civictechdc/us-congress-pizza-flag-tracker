@@ -4,7 +4,7 @@ import jwt
 from flask import request, make_response
 
 from UserActions import UserActions
-from config import app
+from config import flask_app
 from models import UserModel, UserParams
 from util import table_record_to_json
 
@@ -49,7 +49,7 @@ class AuthActions:
                 "public_id": username,
                 "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=45),
             },
-            app.config["SECRET_KEY"],
+            flask_app.config["SECRET_KEY"],
             "HS256",
         )
         return token

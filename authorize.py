@@ -2,7 +2,7 @@ from flask import jsonify, request
 
 # from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
-from config import app
+from config import flask_app
 from models import UserModel
 import jwt
 

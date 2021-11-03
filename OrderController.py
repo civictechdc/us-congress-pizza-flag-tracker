@@ -1,7 +1,7 @@
 from flask import render_template, request, send_file
 from util import table_record_to_json
 from authorize import get_exception_if_no_create_update_delete_orders
-from config import app, qrcode
+from config import flask_app, qrcode
 import qrcode
 from AuthController import set_authorize_current_user
 # from './http-common.js' import baseURL
@@ -57,7 +57,7 @@ def get_order_by_order_number(order_number):
 
 # generate qr code
 def get_qrcode(uuid):
-    frontend_url = app.config["FRONTEND_URI"]
+    frontend_url = flask_app.config["FRONTEND_URI"]
     img = qrcode.make(frontend_url + "/api/orders/" + uuid)
     buf = io.BytesIO()
     img.save(buf)

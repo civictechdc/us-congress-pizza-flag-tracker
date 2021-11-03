@@ -7,19 +7,19 @@ from flask_qrcode import QRcode
 import os
 import qrcode
 
-app = Flask(__name__)
-qrcode = QRcode(app)
+flask_app = Flask(__name__)
+qrcode = QRcode(flask_app)
 
-CORS(app, resources=r"/api/*")
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
-app.config["FRONTEND_URI"] = os.environ["FRONTEND_URI"]
-app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
+CORS(flask_app, resources=r"/api/*")
+flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
+flask_app.config["FRONTEND_URI"] = os.environ["FRONTEND_URI"]
+flask_app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
 #squelch warning, per https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
+flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(flask_app)
 
 from init_db import init_app
 
-init_app(app)
+init_app(flask_app)
 
-migrate = Migrate(app, db)
+migrate = Migrate(flask_app, db)
