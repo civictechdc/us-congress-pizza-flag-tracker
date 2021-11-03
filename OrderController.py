@@ -1,7 +1,6 @@
 from flask import render_template, request, send_file
 
-from tests.test_helper import dict_keyvalue_or_default
-from util import table_record_to_json
+from util import table_record_to_json, dict_keyvalue_or_default
 from config import flask_app, qrcode
 import qrcode
 from AuthController import set_authorize_current_user, get_exception_if_no_create_update_delete_orders
