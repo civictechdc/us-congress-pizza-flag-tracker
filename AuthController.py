@@ -2,6 +2,7 @@ import jwt
 from flask import request, make_response
 
 from AuthActions import AuthActions
+from OrderActions import OrderActions
 from config import flask_app
 from models import UserModel
 global_current_user: UserModel = {}
@@ -46,3 +47,7 @@ def get_exception_if_no_create_update_delete_orders():
 
 def get_current_user():
     return global_current_user
+
+
+def okay_to_update_order(order: OrderActions):
+    return True
