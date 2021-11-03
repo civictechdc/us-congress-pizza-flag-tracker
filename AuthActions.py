@@ -22,18 +22,11 @@ class AuthActions:
         UserActions.create(params)
 
     @classmethod
-    def login_user(cls):
-        auth = request.authorization
-        if not auth or not auth.username or not auth.password:
-            return make_response(
-                "could not verify", 401, {"Authentication": "login required"}
-            )
-        user = UserModel.query.filter_by(username=auth.username).first()
-        if not user and auth.username == "ADMIN":
-            cls.create_admin_user(auth.username, auth.password)
-            user = UserModel.query.filter_by(username=auth.username).first()
-        # if check_password_hash(user.password, auth.password):
-        if user.password == auth.password:
+    def login_user(cls, username, password):
+        print("user debug", username, password)
+        user = UserModel.query.filter_by(username=username).first()
+         # if check_password_hash(user.password, auth.password):
+        if user.password == password:
             ret_val = table_record_to_json(user)
             ret_val["accessToken"] = AuthActions.get_token(user.username)
             return ret_val

@@ -1,9 +1,8 @@
 from flask import render_template, request, send_file
 from util import table_record_to_json
-from authorize import get_exception_if_no_create_update_delete_orders
 from config import flask_app, qrcode
 import qrcode
-from AuthController import set_authorize_current_user
+from AuthController import set_authorize_current_user, get_exception_if_no_create_update_delete_orders
 # from './http-common.js' import baseURL
 
 from OrderActions import OrderActions

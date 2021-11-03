@@ -4,8 +4,7 @@ from flask import render_template, request, send_file, jsonify
 import flask
 
 import UserActions
-from authorize import get_exception_if_no_create_update_delete_orders
-from AuthController import set_authorize_current_user
+from AuthController import set_authorize_current_user, get_exception_if_no_create_update_delete_orders
 from config import flask_app, qrcode
 import qrcode
 

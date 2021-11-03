@@ -1,12 +1,11 @@
 from config import flask_app
 
-from tests.test_util import get_token
-
+from tests.auth_helper import get_token
 
 def test_orders():
     username = "FED-ADMIN"
     password = "FED-ADMIN-1010"
-    token = get_token(password, username)
+    token = get_token(username, password)
     response = flask_app.test_client().get(
         '/api/orders',
         headers={"x-access-tokens": token},
