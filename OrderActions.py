@@ -38,7 +38,6 @@ class OrderActions(OrderModel):
         self.usa_state = usa_state or self.usa_state
         self.home_office_code = home_office_code or self.home_office_code
         self.order_status = order_status or self.order_status
-        print('debug', usa_state, home_office_code, self.usa_state, self.home_office_code)
 
     @ classmethod
     def update_order_by_uuid(cls, uuid, usa_state=None, order_number=None , home_office_code=None, order_status=None):
