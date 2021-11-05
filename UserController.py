@@ -5,7 +5,6 @@ from config import flask_app
 from models import UserParams
 
 
-@flask_app.route("/api/users/create", methods=["POST"])
 def create_user():
     request_json = request.get_json()
     userParams = UserParams()

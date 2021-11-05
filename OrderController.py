@@ -3,8 +3,7 @@ from flask import render_template, request, send_file
 from util import table_record_to_json, dict_keyvalue_or_default
 from config import flask_app, qrcode
 import qrcode
-from AuthController import set_authorize_current_user, get_exception_if_no_create_update_delete_orders, \
-    okay_to_update_order
+import AuthController
 # from './http-common.js' import baseURL
 
 from OrderActions import OrderActions
@@ -16,10 +15,8 @@ def index():
 
 
 def create_order():
-    set_authorize_current_user()
-    e = get_exception_if_no_create_update_delete_orders()
-    if e:
-        return {"message": e.message}, e.status_code
+    AuthController.set_authorize_current_user()
+    AuthController.check_update_order_allowed()
     request_json = request.get_json()
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]
@@ -29,13 +26,13 @@ def create_order():
     return table_record_to_json(order)
 
 def get_orders():
-    set_authorize_current_user()
+    AuthController.set_authorize_current_user()
     orders = OrderActions.get()
     return orders
 
 
 def get_order_by_uuid(uuid):
-    set_authorize_current_user()
+    AuthController.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = {"order_number": order_obj.order_number, "usa_state": order_obj.usa_state,
                   "home_office_code": order_obj.home_office_code, "uuid": order_obj.uuid}
@@ -43,7 +40,7 @@ def get_order_by_uuid(uuid):
 
 
 def get_order_by_order_number(order_number):
-    set_authorize_current_user()
+    AuthController.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_order_number(order_number)
     if order_obj is None:
         return {"error": "order not found"}
@@ -70,19 +67,29 @@ def send_file_qrcode(uuid):
 
 
 def update_order(uuid):
-    set_authorize_current_user()
+    AuthController.set_authorize_current_user()
     order: OrderActions = OrderActions.get_order_by_uuid(uuid)
-    if not okay_to_update_order(order):
-        pass
+    AuthController.check_update_order_allowed(order)
 
     request_json =  request.get_json()
     usa_state = dict_keyvalue_or_default(request_json, "usa_state", None)
     home_office_code = dict_keyvalue_or_default(request_json, "home_office_code", None)
     order_number = dict_keyvalue_or_default(request_json, "order_number", None)
-    order_status = dict_keyvalue_or_default(request_json, "order_number", None)
+    order_status = dict_keyvalue_or_default(request_json, "order_status", None)
     updated_order = order.update_order(
         uuid, usa_state, order_number, home_office_code, order_status
     )
     order_dict = {"order_number": updated_order.order_number, "usa_state": updated_order.usa_state,
                   "home_office_code": updated_order.office_code, "uuid": updated_order.uuid}
     return order_dict
+
+def update_order_status(uuid):
+    AuthController.set_authorize_current_user()
+    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
+    AuthController.check_update_order_allowed()
+
+    request_json =  request.get_json()
+    order_status = dict_keyvalue_or_default(request_json, "order_status", None)
+    updated_order = order.update_order(
+        uuid, order_status = order_status
+    )
