@@ -1,18 +1,28 @@
 from config import flask_app
 
 from tests.auth_helper import get_token
+class TestAuth:
+    def test_orders(self):
+        username = "FED-ADMIN"
+        password = "FED-ADMIN-1010"
+        token = get_token(username, password)
+        response = flask_app.test_client().get(
+            '/api/orders',
+            headers={"x-access-tokens": token},
+            content_type='application/json',
+        )
+        assert response.status_code == 200
 
-def test_orders():
-    username = "FED-ADMIN"
-    password = "FED-ADMIN-1010"
-    token = get_token(username, password)
-    response = flask_app.test_client().get(
-        '/api/orders',
-        headers={"x-access-tokens": token},
-        content_type='application/json',
-    )
-    assert response.status_code == 200
-
+    def test_if_not_is_admin_cannot_add_user(self):
+        username = "FED-ADMIN"
+        password = "FED-ADMIN-1010"
+        token = get_token(username, password)
+        response = flask_app.test_client().post(
+            '/api/users/create',
+            headers={"x-access-tokens": token},
+            content_type='application/json',
+        )
+        assert response.status_code == 401
 # import base64
 # # from config2 import app
 # from hello_add import app

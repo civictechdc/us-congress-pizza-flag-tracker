@@ -1,6 +1,6 @@
 import jwt
 from flask import request, make_response
-from werkzeug.exceptions import Unauthorized
+from werkzeug.exceptions import Unauthorized, BadRequest
 
 from AuthActions import AuthActions
 from OrderActions import OrderActions
@@ -37,21 +37,34 @@ def login_user():
 
 def set_authorize_current_user():
     global __current_user__
-    token = None
 
+    token = get_token()
+    token_username = get_token_username(token)
+    __current_user__ = get_user(token_username)
+
+
+def get_token():
+    tokrn = None
     if "x-access-tokens" in request.headers:
         token = request.headers["x-access-tokens"]
-
     if not token:
-        raise RuntimeError("A valid token is missing")
+        raise BadRequest("Credential issue ""Token is missing"", try logging in again.")
+    return token
 
+
+def get_user(token_username):
+    try:
+        return UserModel.query.filter_by(username=token_username).first()
+    except Exception as exception:
+        raise BadRequest(f'Invalid username {token_username} in token. Message: "{str(exception)}".  Try logging in again')
+
+def get_token_username(token):
     try:
         token_data = jwt.decode(token, flask_app.config["SECRET_KEY"], algorithms=["HS256"])
         token_username = token_data["public_id"]
-        if global_user_is_not_set(token_username):
-            __current_user__ = UserModel.query.filter_by(username=token_username).first()
-    except:
-        raise RuntimeError("Invalid username in token")
+    except Exception as exception:
+        raise BadRequest(f'Credential issue: {str(exception)}.  Try logging in again.')
+    return token_username
 
 
 def global_user_is_not_set(token_username):

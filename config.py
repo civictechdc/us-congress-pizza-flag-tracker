@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+import sys
+
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from flask_migrate import Migrate
@@ -6,6 +8,7 @@ from flask_cors import CORS
 from flask_qrcode import QRcode
 import os
 import qrcode
+from werkzeug.exceptions import HTTPException
 
 flask_app = Flask(__name__)
 qrcode = QRcode(flask_app)
@@ -19,6 +22,13 @@ flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(flask_app)
 
 from init_db import init_app
+
+@flask_app.errorhandler(Exception)
+def handle_error(e):
+    code = 500
+    if isinstance(e, HTTPException):
+        code = e.code
+    return jsonify(error=str(e)), code
 
 init_app(flask_app)
 
