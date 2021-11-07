@@ -6,6 +6,7 @@ from models import UserParams
 
 
 def create_user():
+    print("Here")
     request_json = request.get_json()
     userParams = UserParams()
     userParams.username = request_json["username"]

@@ -73,7 +73,7 @@ class StatusModel(db.Model):
 
 # User Table notes
 #  uuid, user_id, can_set_status (if they scan), (one to many)
-class UserParams:
+class UserParams():
     username: str
     password: str
     office_code: str
@@ -81,6 +81,7 @@ class UserParams:
     can_update_password_for: str
     can_update_status_for: str
     is_admin: str
+
 
 class UserModel(db.Model):
     __tablename__ = "users"
