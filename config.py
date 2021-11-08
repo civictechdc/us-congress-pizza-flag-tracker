@@ -1,4 +1,5 @@
 import sys
+import traceback
 
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -28,6 +29,8 @@ def handle_error(e):
     code = 500
     if isinstance(e, HTTPException):
         code = e.code
+    print("Message:",str(e))
+    print(traceback.print_exc())
     return jsonify(error=str(e)), code
 
 init_app(flask_app)

@@ -8,7 +8,7 @@ class TestOrderActions():
         unique_order_number = random.randint(1,1000000)
         order = OrderActions.create( "MD",  unique_order_number , "MD06")
         retrievedOrder = OrderActions.get_order_by_order_number(unique_order_number)
-        assert(retrievedOrder.order_number == unique_order_number)
+        assert(retrievedOrder.order_number == str(unique_order_number))
         # assert(retrievedOrder.status_id == 1)
         
 
@@ -60,7 +60,7 @@ class TestOrderActions():
         home_office_code = "031E"
         order_number = random.randint(1,1000000)
         uuid = actual_order.uuid
-        updated_order = OrderActions.update_order_by_uuid(uuid, usa_state, order_number, home_office_code)
+        OrderActions.update_order_by_uuid(uuid, usa_state, order_number, home_office_code)
 
         refreshed_actual_order=OrderActions.get_order_by_uuid(created_order.uuid)
         assert(refreshed_actual_order.usa_state == usa_state)

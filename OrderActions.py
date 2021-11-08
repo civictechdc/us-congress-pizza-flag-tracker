@@ -1,5 +1,4 @@
 from models import OrderModel, StatusModel
-from flask_sqlalchemy import sqlalchemy
 from config import db
 import uuid
 
@@ -37,16 +36,10 @@ class OrderActions(OrderModel):
     def get_by_home_office_code(cls, home_office_code):
         return OrderActions.query.filter(OrderActions.home_office_code == home_office_code)
 
-    def update_this_order(self, usa_state=None, order_number=None , home_office_code=None, order_status=None):
-        self.order_number = order_number or self.order_number
-        self.usa_state = usa_state or self.usa_state
-        self.home_office_code = home_office_code or self.home_office_code
-        self.order_status = order_status or self.order_status
-
     @ classmethod
     def update_order_by_uuid(cls, uuid, usa_state=None, order_number=None , home_office_code=None, order_status=None):
         order: OrderActions = cls.get_order_by_uuid(uuid)
-        order.update_this_order(usa_state, order_number, home_office_code, order_status)
+        order.update_order(usa_state, order_number, home_office_code, order_status)
         db.session.commit()
         return order
      

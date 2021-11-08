@@ -1,1 +1,0 @@
-CONSTANT_A = 2

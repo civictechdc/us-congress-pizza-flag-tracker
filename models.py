@@ -15,7 +15,8 @@ class OfficeModel(db.Model):
     orders = db.relationship("OrderModel")
     statuses = db.relationship("StatusModel")
     created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+    updated_at = db.Column(
+        db.DateTime, server_default=func.now(), onupdate=func.now())
 
     def __init__(self, usa_state, office_code):
         # see above about not needing uuid
@@ -29,13 +30,15 @@ class OrderModel(db.Model):
     order_number = db.Column(db.Integer, primary_key=True, nullable=False)
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     usa_state = db.Column(db.String(10))
-    # updated_by = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code)) 
+    # updated_by = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
     # error when you uncomment ^
     # sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'mapped class OfficeModel->offices'. Original exception was: Could not determine join condition between parent/child tables on relationship OfficeModel.orders - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
     order_status = db.Column(db.Integer, db.ForeignKey('status.id'))
-    home_office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
+    home_office_code = db.Column(
+        db.String(10), db.ForeignKey(OfficeModel.office_code))
     created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+    updated_at = db.Column(
+        db.DateTime, server_default=func.now(), onupdate=func.now())
 
     # Ordermodel needs status relationship
     # Need status relationship
@@ -49,6 +52,12 @@ class OrderModel(db.Model):
         self.order_status = order_status
         # self.updated_by = "HOSS"
 
+    def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status=None):
+        self.order_number = order_number or self.order_number
+        self.usa_state = usa_state or self.usa_state
+        self.home_office_code = home_office_code or self.home_office_code
+        self.order_status = order_status or self.order_status
+
 
 # Do we want to break this file up into separate model
 #  files? E.g. statusModels.py, userModels.py
@@ -56,13 +65,15 @@ class OrderModel(db.Model):
 class StatusModel(db.Model):
     __tablename__ = "status"
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    status_federal_office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
+    status_federal_office_code = db.Column(
+        db.String(10), db.ForeignKey(OfficeModel.office_code))
     sequence_num = db.Column(db.Integer)
     description = db.Column(db.String(255))
     order = db.relationship('OrderModel', backref='status', lazy=True)
     # order_no = db.Column(db.Integer, db.ForeignKey('orders.order_number'))
     created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+    updated_at = db.Column(
+        db.DateTime, server_default=func.now(), onupdate=func.now())
 
     def __init__(self, id, status_federal_office_code, sequence_num, description):
         self.id = id
@@ -73,7 +84,7 @@ class StatusModel(db.Model):
 
 # User Table notes
 #  uuid, user_id, can_set_status (if they scan), (one to many)
-class UserParams():
+class UserParams:
     username: str
     password: str
     office_code: str
@@ -87,7 +98,8 @@ class UserModel(db.Model):
     __tablename__ = "users"
     username = db.Column(db.String(20), primary_key=True)
     password = db.Column(db.String(100))
-    office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
+    office_code = db.Column(
+        db.String(10), db.ForeignKey(OfficeModel.office_code))
     can_update_status_for = db.Column(db.String(20))
     can_update_password_for = db.Column(db.String(20))
     can_create_update_delete_orders = db.Column(db.String(1))

@@ -4,7 +4,6 @@ import AuthController
 from OrderActions import OrderActions
 import OrderController
 from tests.mock_request import mock_request
-from tests.mock_helper import MockingHelper
 import tests.mock_auth_controller
 
 class TestOrderController():
@@ -18,7 +17,7 @@ class TestOrderController():
 
         assert (actual_order['usa_state'] == "OH")
         assert (actual_order['home_office_code'] == "OH06")
-        assert (actual_order['order_number'] == unique_order_number)
+        assert (actual_order['order_number'] == str(unique_order_number))
         assert (actual_order['uuid'] == created_order.uuid)
 
     def test_create_order(self, mocker):
