@@ -12,7 +12,7 @@ class OfficeActions():
         db.session.commit()
         return new_office
 
-    @ classmethod
+    @classmethod
     def delete(cls):
         OfficeModel.query.delete()
         db.session.commit()
