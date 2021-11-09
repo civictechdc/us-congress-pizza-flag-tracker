@@ -12,7 +12,7 @@ routes = [
     ["/api/orders/create", OrderController.create_order, "POST"],
     ["/api/orders", OrderController.get_orders, "GET"],
     ["/api/orders/<uuid>", OrderController.get_order_by_uuid, "GET"],
-    ["/api/order_num/<order_number>", OrderController.get_order_by_order_number, "GET"],
+    ["/api/order_num/<order_number>", OrderController.get_order_by_order_number_as_tuple, "GET"],
     ["/api/info", WebController.info, "GET"],
     ["/api/orders/<uuid>", OrderController.update_order, "PUT"],
     ["/api/signin", AuthController.login_user, "POST"],

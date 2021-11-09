@@ -7,7 +7,7 @@ class TestOrderActions():
     def test_create(self):
         unique_order_number = random.randint(1,1000000)
         order = OrderActions.create( "MD",  unique_order_number , "MD06")
-        retrievedOrder = OrderActions.get_order_by_order_number(unique_order_number)[0]
+        retrievedOrder = OrderActions.get_order_by_order_number_as_tuple(unique_order_number)[0]
         assert(retrievedOrder.order_number == unique_order_number)
         # assert(retrievedOrder.status_id == 1)
         
@@ -16,9 +16,9 @@ class TestOrderActions():
         unique_order_number1 = random.randint(1,1000000)
         unique_order_number2 = random.randint(1,1000000)
         OrderActions.create("MD", unique_order_number1, "MD06")
-        order1 = OrderActions.get_order_by_order_number(unique_order_number1)[0]
+        order1 = OrderActions.get_order_by_order_number_as_tuple(unique_order_number1)[0]
         OrderActions.create("MA", unique_order_number2, "MA08")
-        order2 = OrderActions.get_order_by_order_number(unique_order_number2)[0]
+        order2 = OrderActions.get_order_by_order_number_as_tuple(unique_order_number2)[0]
         assert(order1.uuid != order2.uuid)
 
     def test_get_orders(self):
@@ -35,7 +35,7 @@ class TestOrderActions():
     def test_get_order(self):
         unique_order_number = random.randint(1,1000000)
         created_order = OrderActions.create( "MD",  unique_order_number , "MD06")
-        actual_order=OrderActions.get_order_by_order_number(created_order.order_number)[0]
+        actual_order=OrderActions.get_order_by_order_number_as_tuple(created_order.order_number)[0]
         
         assert(actual_order.usa_state == "MD")
         assert(actual_order.home_office_code == "MD06")

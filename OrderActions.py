@@ -19,7 +19,7 @@ class OrderActions(OrderModel):
 
 
     @ classmethod
-    def get_order_by_order_number(cls, order_number):
+    def get_order_by_order_number_as_tuple(cls, order_number):
         order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
         status = None
         if order != None:

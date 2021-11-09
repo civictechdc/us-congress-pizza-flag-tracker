@@ -41,10 +41,10 @@ def get_order_by_uuid(uuid):
     return order_dict
 
 
-def get_order_by_order_number(order_number):
+def get_order_by_order_number_as_tuple(order_number):
     AuthController.set_authorize_current_user()
     # Return a dictionary(json) object for use by frontend
-    order_obj, status_obj = OrderActions.get_order_by_order_number(
+    order_obj, status_obj = OrderActions.get_order_by_order_number_as_tuple(
         order_number)
     if order_obj is None:
         return {"error": "order not found"}
