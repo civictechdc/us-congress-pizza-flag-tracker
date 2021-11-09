@@ -10,7 +10,7 @@ charset-normalizer==2.0.7
 click==8.0.3
 colorclass==2.2.0
 coverage==6.0.2
-DateTime==4.3
+datetime==4.3
 docopt==0.6.2
 Flask==2.0.2
 Flask-Bcrypt==0.7.1
@@ -21,7 +21,7 @@ Flask-QRcode==3.0.0
 Flask-Session==0.4.0
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
-gunicorn==20.1.0
+gunicorn==20.1.0; python_version >= "3.4" # is this needed?
 idna==3.3
 iniconfig==1.1.1
 itsdangerous==2.0.1
