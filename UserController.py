@@ -1,12 +1,14 @@
 from flask import request
 
+from AuthController import set_authorize_current_user, check_is_admin
 from UserActions import UserActions
-from config import flask_app
 from models import UserParams
 
 
 def create_user():
-    print(request)
+    print("Creating")
+    set_authorize_current_user()
+    check_is_admin()
     request_json = request.get_json()
     userParams = UserParams()
     userParams.username = request_json["username"]

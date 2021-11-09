@@ -11,6 +11,7 @@ __current_user__: UserModel = {}
 
 
 def check_is_admin():
+    print("Checking", __current_user__.is_admin)
     if __current_user__.is_admin != "Y":
         raise Unauthorized("Unauthorized.  Admin privileges required.")
 

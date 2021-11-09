@@ -14,8 +14,8 @@ class TestAuth:
         assert response.status_code == 200
 
     def test_if_not_is_admin_cannot_add_user(self):
-        username = "FED-ADMIN"
-        password = "FED-ADMIN-1010"
+        username = "FED-AOC"
+        password = "FED-AOC-1010"
         token = get_token(username, password)
         response = flask_app.test_client().post(
             '/api/users/create',

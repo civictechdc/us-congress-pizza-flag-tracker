@@ -8,6 +8,7 @@ import json
 from initial_data.init_office_table import init_office_table
 from initial_data.init_user_table import init_user_table_state_users, init_user_table_fed_users
 from initial_data.init_status_table import init_status_table
+from initial_data.init_orders_table import init_orders_table
 
 def close_db(e=None):
     db = g.pop("db", None)

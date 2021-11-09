@@ -1,5 +1,5 @@
 from flask import render_template, request, send_file
-from models import OrderModel
+from OrderActions import OrderActions
 
 from util import table_record_to_json, dict_keyvalue_or_default
 from config import flask_app, qrcode
@@ -76,8 +76,8 @@ def send_file_qrcode(uuid):
 
 def update_order(uuid):
     AuthController.set_authorize_current_user()
-    order: OrderModel = OrderModel.get_order_by_uuid(uuid)
-    AuthController.check_update_order_allowed(order)
+    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
+    AuthController.check_update_order_allowed()
 
     request_json = request.get_json()
     usa_state = dict_keyvalue_or_default(request_json, "usa_state", None)
@@ -85,7 +85,7 @@ def update_order(uuid):
         request_json, "home_office_code", None)
     order_number = dict_keyvalue_or_default(request_json, "order_number", None)
     order_status = dict_keyvalue_or_default(request_json, "order_status", None)
-    order.update_order(uuid, usa_state, order_number,
+    order.update_order(usa_state, order_number,
                        home_office_code, order_status)
     order_dict = table_record_to_json(order)
     return order_dict
