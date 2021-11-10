@@ -1,3 +1,4 @@
+import datetime
 import jwt
 from flask import request
 from werkzeug.exceptions import BadRequest
@@ -10,14 +11,27 @@ from util import get_http_response
 __current_user__: UserModel = {}
 
 
+@classmethod
+def derive_token_from_username(cls, username):
+    token = jwt.encode(
+        {
+            "public_id": username,
+            "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=45),
+        },
+        flask_app.config["SECRET_KEY"],
+        "HS256",
+    )
+    return token
+
+
 def login_user():
     auth = request.authorization
     if not auth or not auth.username or not auth.password:
         return get_http_response("Username or password missing.", 401)
-    ret_val["accessToken"] = get_token_with_username(user.username)
+    ret_val = AuthActions.fetch_user(auth.username, auth.password)
+    token = derive_token_from_username(auth.username)
+    ret_val["accessToken"] = token
     return ret_val
-
-    return AuthActions.login_user(auth.username, auth.password)
 
 
 def set_authorize_current_user():

@@ -1,8 +1,9 @@
 
 
 def init_user_table_state_users(office_codes_list, db):
-    from models import UserParams # imported here to prevent circular reference
-    from UserActions import UserActions # imported here to prevent circular reference
+    from models import UserParams  # imported here to prevent circular reference
+    # imported here to prevent circular reference
+    from UserActions import UserActions
 
     state_office_codes_list = [
         offices for offices in office_codes_list if offices["usa_state"] != "FED"]
@@ -11,6 +12,7 @@ def init_user_table_state_users(office_codes_list, db):
 
         params = UserParams()
         params.can_update_password_for = "NONE"
+        params.can_create_update_delete_orders = "N"
         params.is_admin = "N"
 
         for office_code in state_offices["office_code"]:
@@ -29,7 +31,8 @@ def init_user_table_state_users(office_codes_list, db):
 
 
 def init_user_table_fed_users(users_list, db):
-    from models import UserParams, UserModel
+    from models import UserParams
+    from UserActions import UserActions
     for user in users_list:
         params = UserParams()
 
