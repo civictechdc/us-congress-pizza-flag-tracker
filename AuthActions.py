@@ -1,46 +1,23 @@
-import datetime
+import bcrypt
+from util import get_http_response
 
-import jwt
-from flask import request, make_response
-
-from UserActions import UserActions
-from config import flask_app
 from models import UserModel, UserParams
 from util import table_record_to_json
-
+from AuthController import get_token_with_username
 
 class AuthActions:
     @classmethod
-    def create_admin_user(cls, username: str, password: str):
-        params = UserParams()
-        params.username = username
-        params.password = password
-        params.can_update_status_for = "ALL"
-        params.can_update_password_for = "ALL"
-        params.can_create_update_delete_orders = "Y"
-        params.is_admin = "Y"
-        UserActions.create(params)
-
-    @classmethod
-    def login_user(cls, username, password):
+    def login_user(cls, username: str, password: str):
         user = UserModel.query.filter_by(username=username).first()
-        if user.password == password:
-            ret_val = table_record_to_json(user)
-            ret_val["accessToken"] = AuthActions.get_token(user.username)
-            return ret_val
+        if not user:
+            return get_http_response("Invalid username.", 401)
 
-        return make_response(
-            "could not verify", 401, {"Authentication": "login required"}
-        )
+        if not bcrypt.checkpw(password.encode(), user.password):
+            return get_http_response("Invalid password.  Try logging in again.", 401)
 
-    @classmethod
-    def get_token(cls, username):
-        token = jwt.encode(
-            {
-                "public_id": username,
-                "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=45),
-            },
-            flask_app.config["SECRET_KEY"],
-            "HS256",
-        )
-        return token
+        ret_val = table_record_to_json(user)
+        ret_val["accessToken"] = get_token_with_username(user.username)
+        return ret_val
+
+
+
