@@ -1,7 +1,7 @@
 import pytest
 import datetime
 import random
-from OfficeActions import OfficeActions 
+from OfficeActions import OfficeActions
 from models import OfficeModel
 from config import *
 
