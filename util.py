@@ -23,13 +23,13 @@ def make_json_value(record, column_name):
         return table_record_to_json(value)
     return str(value)
 
-def is_legit_column(column_name):
+def is_legit_column(record, column_name):
     return not column_name.startswith('_')
 
 def table_record_to_json(record, exclude_column_names = []):
     modelClass = type(record)
     column_names = [column_name for column_name in \
-                 filter(lambda column_name: is_legit_column(column_name),
+                 filter(lambda column_name: is_legit_column(record, column_name),
                  modelClass.__dict__)]
     json_value = {column_name: make_json_value(record, column_name) for \
                   column_name in column_names}
