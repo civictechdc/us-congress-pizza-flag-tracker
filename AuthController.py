@@ -11,8 +11,7 @@ from util import get_http_response
 __current_user__: UserModel = {}
 
 
-@classmethod
-def derive_token_from_username(cls, username):
+def derive_token_from_username(username):
     token = jwt.encode(
         {
             "public_id": username,
