@@ -19,8 +19,7 @@ class TestUtils():
         order.status = status
         t = table_record_to_json(order)
         print("t", t)
-        t2 = table_record_to_json(order, ["order"])
-        print("t2",t2)
+
 
     @pytest.mark.skip(reason="function works, but test does not.  openCV is an issue, so may delete this test.")
     def test_qrcode(self):

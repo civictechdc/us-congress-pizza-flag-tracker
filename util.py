@@ -16,20 +16,22 @@ def is_primitive(thing):
     primitive = (int, str, bool)
     return isinstance(thing, primitive)
 
-def make_json_value(value, exclude_column_names):
+def make_json_value(record, column_name):
+    value = getattr(record, column_name)
+    print(value,column_name)
     if not is_primitive(value):
-        return table_record_to_json(value, exclude_column_names)
+        return table_record_to_json(value)
     return str(value)
 
-def is_legit_column(column_name, exclude_column_names):
-    return not column_name.startswith('_') and not column_name in exclude_column_names
+def is_legit_column(column_name):
+    return not column_name.startswith('_')
 
 def table_record_to_json(record, exclude_column_names = []):
     modelClass = type(record)
     column_names = [column_name for column_name in \
-                 filter(lambda column_name: is_legit_column(column_name, exclude_column_names=["order"]),
+                 filter(lambda column_name: is_legit_column(column_name),
                  modelClass.__dict__)]
-    json_value = {column_name: make_json_value(getattr(record, column_name), exclude_column_names) for \
+    json_value = {column_name: make_json_value(record, column_name) for \
                   column_name in column_names}
     return json_value
 
