@@ -21,6 +21,10 @@ def make_json_value(record, column_name):
     if not value:
         return ""
     if not is_primitive(value):
+        print("x", column_name)
+        if column_name == "time":
+            raise BaseException
+
         return table_record_to_json(value)
     return str(value)
 
