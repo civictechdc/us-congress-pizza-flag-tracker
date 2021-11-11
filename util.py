@@ -24,7 +24,9 @@ def make_json_value(record, column_name):
     return str(value)
 
 def is_legit_column(record, column_name):
-    return not column_name.startswith('_')
+    if column_name.startswith('_'):
+        return False
+    return True
 
 def table_record_to_json(record, exclude_column_names = []):
     modelClass = type(record)
