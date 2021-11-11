@@ -24,6 +24,10 @@ def check_update_status_allowed(order: OrderActions):
 def is_admin():
     return get_current_user().is_admin == "Y"
 
+def is_logged_in():
+    if not get_current_user():
+        return False
+    return True
 
 def is_update_order_allowed():
     return get_current_user().can_create_update_delete_orders == "Y"

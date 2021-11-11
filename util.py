@@ -3,6 +3,7 @@ import traceback
 
 from flask import make_response, jsonify
 from werkzeug.exceptions import HTTPException
+from datetime import datetime
 
 from config import flask_app
 
@@ -23,8 +24,12 @@ def handle_exceptions_for_app(e):
     code = 500
     if isinstance(e, HTTPException):
         code = e.code
-    print("Message:",str(e))
     print(traceback.print_exc())
+    print("Message:",str(e))
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print("Current Time =", current_time)
+    print()
     return jsonify(error=str(e)), code
 
 def table_record_to_json(record):
