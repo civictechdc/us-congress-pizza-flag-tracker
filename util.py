@@ -14,21 +14,30 @@ def get_http_response(error_message: str, status: int):
 
 def is_primitive(thing):
     primitive = (int, str, bool)
-    return isinstance(thing, primitive)
+    return isinstance(thing, primitive) or not thing
 
 def make_json_value(record, column_name):
     value = getattr(record, column_name)
-    print(value,column_name)
+    if not value:
+        return ""
     if not is_primitive(value):
         return table_record_to_json(value)
     return str(value)
 
 def is_legit_column(record, column_name):
+    value = getattr(record, column_name)
     if column_name.startswith('_'):
+        return False
+    if is_primitive(value):
+        return True
+
+    dict = type(value).__dict__
+
+    if "append" in dict:
         return False
     return True
 
-def table_record_to_json(record, exclude_column_names = []):
+def table_record_to_json(record):
     modelClass = type(record)
     column_names = [column_name for column_name in \
                  filter(lambda column_name: is_legit_column(record, column_name),
