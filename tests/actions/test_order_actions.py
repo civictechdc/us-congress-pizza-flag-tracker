@@ -1,8 +1,6 @@
 import pytest
 import random
 from OrderActions import OrderActions
-from models import OrderModel
-
 
 class TestOrderActions():
     

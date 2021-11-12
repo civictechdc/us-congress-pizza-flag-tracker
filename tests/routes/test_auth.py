@@ -9,13 +9,11 @@ class TestAuth:
         username = "FED-ADMIN"
         password = "FED-ADMIN-1010"
         token = derive_token_from_username(username)
-        print("token", token)
         response = flask_app.test_client().get(
             '/api/orders',
             headers={"x-access-tokens": token},
             content_type='application/json',
         )
-        print(response)
         assert response.status_code == 200
 
     def test_if_not_is_admin_cannot_add_user(self):
