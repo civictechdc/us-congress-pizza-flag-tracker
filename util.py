@@ -1,3 +1,5 @@
+import datetime
+
 from flask import jsonify
 
 
@@ -13,20 +15,21 @@ def get_http_response(error_message: str, status: int):
 
 
 def is_primitive(thing):
-    primitive = (int, str, bool)
+    primitive = (int, str, bool, datetime.datetime)
     return isinstance(thing, primitive) or not thing
+
 
 def make_json_value(record, column_name):
     value = getattr(record, column_name)
     if not value:
         return ""
     if not is_primitive(value):
-        print("x", column_name)
         if column_name == "time":
             raise BaseException
 
         return table_record_to_json(value)
     return str(value)
+
 
 def is_legit_column(record, column_name):
     value = getattr(record, column_name)
@@ -41,17 +44,16 @@ def is_legit_column(record, column_name):
         return False
     return True
 
+
 def table_record_to_json(record):
     modelClass = type(record)
-    column_names = [column_name for column_name in \
-                 filter(lambda column_name: is_legit_column(record, column_name),
-                 modelClass.__dict__)]
-    json_value = {column_name: make_json_value(record, column_name) for \
+    column_names = [column_name for column_name in
+                    filter(lambda column_name: is_legit_column(record, column_name),
+                           modelClass.__dict__)]
+    json_value = {column_name: make_json_value(record, column_name) for
                   column_name in column_names}
     return json_value
 
 
 def table_to_json(table):
     return {"data": [table_record_to_json(record) for record in table]}
-
-

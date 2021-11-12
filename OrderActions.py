@@ -4,9 +4,9 @@ import uuid
 
 class OrderActions():
     @classmethod
-    def create(cls, usastate: str, order_number: int, home_office_code: str, order_status:int = 1):
+    def create(cls, usa_state: str, order_number: int, home_office_code: str, order_status:int = 1):
         theUuid = str(uuid.uuid4())
-        new_order = OrderModel(theUuid, usastate, order_number,home_office_code,order_status)
+        new_order = OrderModel(theUuid, usa_state, order_number,home_office_code,order_status)
         db.session.add(new_order)
         db.session.commit()
         return new_order
@@ -29,7 +29,7 @@ class OrderActions():
 
     @ classmethod
     def get_order_by_uuid(cls, uuid):
-        order = OrderModel.query.filter(OrderActions.uuid == uuid).first()
+        order = OrderModel.query.filter(OrderModel.uuid == uuid).first()
         return order
 
     @ classmethod
