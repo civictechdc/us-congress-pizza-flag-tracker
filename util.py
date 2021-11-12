@@ -1,11 +1,7 @@
-import json
-import traceback
+import datetime
+import sys
 
-from flask import make_response, jsonify
-from werkzeug.exceptions import HTTPException
-from datetime import datetime
-
-from config import flask_app
+from flask import jsonify
 
 
 def get_dict_keyvalue_or_default(dict, key_value, default):
@@ -19,27 +15,51 @@ def get_http_response(error_message: str, status: int):
     # return make_response(error_message, status)
 
 
-@flask_app.errorhandler(Exception)
-def handle_exceptions_for_app(e):
-    code = 500
-    if isinstance(e, HTTPException):
-        code = e.code
-    print(traceback.print_exc())
-    print("Message:",str(e))
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    print("Current Time =", current_time)
-    print()
-    return jsonify(error=str(e)), code
+def is_primitive(thing):
+    primitive = (int, str, bool, datetime.datetime)
+    return isinstance(thing, primitive) or not thing
+
+
+def make_json_value(record, column_name):
+    value = getattr(record, column_name)
+    if not value:
+        return ""
+    if not is_primitive(value):
+        if column_name == "time":
+            raise BaseException
+
+        return table_record_to_json(value)
+    return str(value)
+
+
+def is_legit_column(record, column_name):
+    value = getattr(record, column_name)
+    if column_name.startswith('_'):
+        return False
+    if is_primitive(value):
+        return True
+
+    dict = type(value).__dict__
+
+    if "append" in dict:
+        return False
+    return True
+
+# Good for debugging
+def print_to_debug_log(message):
+    original_stdout = sys.stdout
+    with open('debug.log', 'a+') as f:
+        sys.stdout = f  # Change the standard output to the file we created.
+        print(datetime.datetime.now(), message)
+        sys.stdout = original_stdout
 
 def table_record_to_json(record):
     modelClass = type(record)
-    columns = [record for record in filter(lambda item: not item.startswith('_'), modelClass.__dict__)]
-    json_value = {column_name: str(getattr(record, column_name)) for column_name in columns}
+    column_names = [column_name for column_name in modelClass.__dict__ if(is_legit_column(record, column_name))]
+    json_value = {column_name: make_json_value(record, column_name) for
+                  column_name in column_names}
     return json_value
 
 
 def table_to_json(table):
     return {"data": [table_record_to_json(record) for record in table]}
-
-

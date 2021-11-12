@@ -23,7 +23,7 @@ flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(flask_app)
 
 from init_db import init_app
-from util import handle_exceptions_for_app
+from error_handler import handle_exceptions_for_app
 
 init_app(flask_app)
 
