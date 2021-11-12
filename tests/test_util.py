@@ -8,7 +8,7 @@ import io
 import numpy as np
 from cachelib import file
 class TestUtils():
-    @pytest.mark.skip(reason="function works, but test does not")
+    @pytest.mark.skip(reason="function works, but test does not.  openCV is an issue, so may delete this test.")
     def test_qrcode(self):
         qrcodeValue = "https://example.com/A43X2Q3"
         # with app.test_client() as c:

@@ -1,7 +1,9 @@
 from flask import render_template, request, send_file
+
+import AuthPrivileges
 from OrderActions import OrderActions
 
-from util import table_record_to_json, dict_keyvalue_or_default
+from util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode
 import qrcode
 import AuthController
@@ -17,12 +19,12 @@ def index():
 
 def create_order():
     AuthController.set_authorize_current_user()
-    AuthController.check_update_order_allowed()
+    AuthPrivileges.check_update_order_allowed()
     request_json = request.get_json()
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]
     home_office_code = request_json["home_office_code"]
-    order_status = dict_keyvalue_or_default(request_json, "order_status", 1)
+    order_status = get_dict_keyvalue_or_default(request_json, "order_status", 1)
     order = OrderActions.create(
         usa_state, idbased_order_number, home_office_code, order_status)
     return table_record_to_json(order)
@@ -77,14 +79,14 @@ def send_file_qrcode(uuid):
 def update_order(uuid):
     AuthController.set_authorize_current_user()
     order: OrderActions = OrderActions.get_order_by_uuid(uuid)
-    AuthController.check_update_order_allowed()
+    AuthPrivileges.check_update_order_allowed()
 
     request_json = request.get_json()
-    usa_state = dict_keyvalue_or_default(request_json, "usa_state", None)
-    home_office_code = dict_keyvalue_or_default(
+    usa_state = get_dict_keyvalue_or_default(request_json, "usa_state", None)
+    home_office_code = get_dict_keyvalue_or_default(
         request_json, "home_office_code", None)
-    order_number = dict_keyvalue_or_default(request_json, "order_number", None)
-    order_status = dict_keyvalue_or_default(request_json, "order_status", None)
+    order_number = get_dict_keyvalue_or_default(request_json, "order_number", None)
+    order_status = get_dict_keyvalue_or_default(request_json, "order_status", None)
     order.update_order(usa_state, order_number,
                        home_office_code, order_status)
     order_dict = table_record_to_json(order)
@@ -94,10 +96,10 @@ def update_order(uuid):
 def update_order_status(uuid):
     AuthController.set_authorize_current_user()
     order: OrderActions = OrderActions.get_order_by_uuid(uuid)
-    AuthController.check_update_order_allowed()
+    AuthPrivileges.check_update_order_allowed()
 
     request_json = request.get_json()
-    order_status = dict_keyvalue_or_default(request_json, "order_status", None)
+    order_status = get_dict_keyvalue_or_default(request_json, "order_status", None)
     updated_order = order.update_order(
         uuid, order_status=order_status
     )

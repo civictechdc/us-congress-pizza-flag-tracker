@@ -1,3 +1,6 @@
+import bcrypt
+
+import AuthPrivileges
 from models import UserModel, OrderModel, UserParams
 from flask_sqlalchemy import sqlalchemy
 from config import db, flask_app
@@ -23,9 +26,12 @@ class UserActions:
     @classmethod
     def create(cls, user_values: UserParams):
         new_user = UserModel(user_values)
+        salt = bcrypt.gensalt(10)
+        hashed_password = bcrypt.hashpw(new_user.password.encode(), salt)
+        new_user.password = hashed_password
         db.session.add(new_user)
         db.session.commit()
-        return table_record_to_json(new_user)
+        return new_user
 
     @classmethod
     def delete(cls):
@@ -50,4 +56,4 @@ class UserActions:
         )
         user.can_update_password_for = user_values.can_update_password_for
         user.can_update_status_for = user_values.can_update_status_for
-        user.is_admin = user_values.is_admin
+        AuthPrivileges.is_admin = user_values.is_admin
