@@ -1,4 +1,5 @@
 import datetime
+import sys
 
 from flask import jsonify
 
@@ -44,12 +45,17 @@ def is_legit_column(record, column_name):
         return False
     return True
 
+# Good for debugging
+def print_to_debug_log(message):
+    original_stdout = sys.stdout
+    with open('debug.log', 'a+') as f:
+        sys.stdout = f  # Change the standard output to the file we created.
+        print(datetime.datetime.now(), message)
+        sys.stdout = original_stdout
 
 def table_record_to_json(record):
     modelClass = type(record)
-    column_names = [column_name for column_name in
-                    filter(lambda column_name: is_legit_column(record, column_name),
-                           modelClass.__dict__)]
+    column_names = [column_name for column_name in modelClass.__dict__ if(is_legit_column(record, column_name))]
     json_value = {column_name: make_json_value(record, column_name) for
                   column_name in column_names}
     return json_value

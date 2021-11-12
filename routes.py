@@ -7,6 +7,7 @@ import OfficeController
 import StatusController
 
 # add routes below®
+print("routes")
 routes = [
     ["/api", OrderController.index, "GET"],
     ["/api/orders/create", OrderController.create_order, "POST"],
