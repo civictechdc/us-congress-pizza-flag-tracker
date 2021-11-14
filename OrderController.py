@@ -34,7 +34,7 @@ def create_order():
 def get_orders():
     AuthController.set_authorize_current_user()
     orders = OrderActions.get()
-    return orders
+    return {"orders": [table_record_to_json(order) for order in orders]} 
 
 
 def get_order_by_uuid(uuid):
@@ -47,17 +47,11 @@ def get_order_by_uuid(uuid):
 def get_order_by_order_number_as_tuple(order_number):
     AuthController.set_authorize_current_user()
     # Return a dictionary(json) object for use by frontend
-    order_obj, status_obj = OrderActions.get_order_by_order_number_as_tuple(
-        order_number)
+    order_obj = OrderActions.get_order_by_order_number_as_tuple(order_number)
     if order_obj is None:
         return {"error": "order not found"}
     else:
-        order_dict = table_record_to_json(order_obj)
-        status_dict = {}
-        status_dict["status_federal_office_code"] = status_obj.status_federal_office_code
-        status_dict["sequence_num"] = status_obj.sequence_num
-        status_dict["description"] = status_obj.description
-        return {"orders": [order_dict], "status": [status_dict]}
+        return {"orders":[table_record_to_json(order_obj)]} 
 
 # generate qr code
 
