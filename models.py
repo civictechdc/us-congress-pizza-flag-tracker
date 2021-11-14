@@ -1,5 +1,6 @@
 # ORM models for State, Order, User and Log db
 from sqlalchemy import func
+from sqlalchemy.sql.expression import join
 from config import db
 
 
@@ -69,7 +70,7 @@ class StatusModel(db.Model):
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     sequence_num = db.Column(db.Integer)
     description = db.Column(db.String(255))
-    order = db.relationship('OrderModel', backref='status', lazy=True)
+    order = db.relationship('OrderModel', lazy=True, backref= db.backref('status',lazy = 'joined'))
     # order_no = db.Column(db.Integer, db.ForeignKey('orders.order_number'))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(

@@ -21,11 +21,7 @@ class OrderActions():
     @ classmethod
     def get_order_by_order_number_as_tuple(cls, order_number):
         order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
-        status = None
-        if order != None:
-            order_status = order.order_status
-            status = StatusModel.query.filter(StatusModel.id == order_status).first()
-        return order, status
+        return order
 
     @ classmethod
     def get_order_by_uuid(cls, uuid):
