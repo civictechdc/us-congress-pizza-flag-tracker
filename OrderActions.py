@@ -13,9 +13,8 @@ class OrderActions():
 
     @ classmethod
     def get(cls):
-        orders = OrderModel.query.all()
-        return {"orders": [{"order_number": i.order_number, "uuid": i.uuid, "usa_state": i.usa_state, "home_office_code": i.home_office_code} 
-          for i in orders]}
+        orders = OrderModel.query.all() 
+        return orders
 
 
     @ classmethod
