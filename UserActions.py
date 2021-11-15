@@ -1,3 +1,5 @@
+import os
+
 import bcrypt
 
 import AuthPrivileges
@@ -26,7 +28,8 @@ class UserActions:
     @classmethod
     def create(cls, user_values: UserParams):
         new_user = UserModel(user_values)
-        salt = bcrypt.gensalt(10)
+        bcrypt_rounds = int (os.environ["BCRYPT_ROUNDS"])
+        salt = bcrypt.gensalt(bcrypt_rounds)
         hashed_password = bcrypt.hashpw(new_user.password.encode(), salt)
         new_user.password = hashed_password
         db.session.add(new_user)
