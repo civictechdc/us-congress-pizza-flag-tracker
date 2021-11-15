@@ -11,4 +11,4 @@ Live version is available at https://codefordc-flag.netlify.app/
 To run:
 TODO: https://dev.to/mburszley/an-introduction-to-poetry-2b6n ?
 
-Development group meets every Wed.  Development details are available here: https://github.com/codefordc/us-congress-pizza-flag-tracker/wiki.
+There is a meeting via Code for DC every Wednesday 7pm ET. Development details are available here: https://github.com/codefordc/us-congress-pizza-flag-tracker/wiki.
