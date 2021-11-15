@@ -6,7 +6,7 @@ from werkzeug.exceptions import BadRequest
 from AuthActions import AuthActions
 from config import flask_app
 from models import UserModel
-from util import get_http_response
+from util import get_http_response, table_record_to_json
 
 __current_user__: UserModel = {}
 
@@ -27,7 +27,7 @@ def login_user():
     auth = request.authorization
     if not auth or not auth.username or not auth.password:
         return get_http_response("Username or password missing.", 401)
-    ret_val = AuthActions.fetch_user(auth.username, auth.password)
+    ret_val = table_record_to_json(AuthActions.fetch_user(auth.username, auth.password))
     token = derive_token_from_username(auth.username)
     ret_val["accessToken"] = token
     return ret_val
