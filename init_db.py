@@ -2,13 +2,17 @@ from typing import NamedTuple
 import click
 from flask.cli import with_appcontext
 from flask import current_app, g
-from config import db
+from config import db, flask_app
 import json
 
 from initial_data.init_office_table import init_office_table
-from initial_data.init_user_table import init_user_table_state_users, init_user_table_fed_users
+from initial_data.init_user_table import (
+    init_user_table_state_users,
+    init_user_table_fed_users,
+)
 from initial_data.init_status_table import init_status_table
 from initial_data.init_orders_table import init_orders_table
+
 
 def close_db(e=None):
     db = g.pop("db", None)
@@ -38,8 +42,12 @@ def init_db():
     init_user_table_fed_users(users_list, db)
     # add flag statuses to status table
     init_status_table(statuses_list, db)
-    # initialize orders table with fake orders--REMOVE WHEN PRODUCTION READY
-    init_orders_table(office_codes_list, db)
+    # initialize orders table with fake orders if in dev mode
+    print("DB is in debug mode: " + str(flask_app.debug))
+    print("DB is in mode: " + str(flask_app.env))
+    if flask_app.env == "development":
+
+        init_orders_table(office_codes_list, db)
 
     db.session.commit()
 
