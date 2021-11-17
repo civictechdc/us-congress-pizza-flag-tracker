@@ -47,11 +47,16 @@ class OrderModel(db.Model):
     # Need status relationship
     # order_status_id = db.relationship('StatusModel',backref = 'orders', lazy = True)
 
+<<<<<<< HEAD
     def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id, order_status=None):
+=======
+    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id):
+>>>>>>> 66fd9f5 (rename order_status to order_status_id)
         self.uuid = theUuid
         self.usa_state = usa_state
         self.order_number = order_number
         self.home_office_code = home_office_code
+<<<<<<< HEAD
         if order_status_id:
             self.order_status_id = order_status_id
         elif order_status:
@@ -66,6 +71,16 @@ class OrderModel(db.Model):
             self.order_status_id = order_status_id
         else:
             self.order_status = order_status
+=======
+        self.order_status_id = order_status_id
+        # self.updated_by = "HOSS"
+
+    def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status_id=None):
+        self.order_number = order_number or self.order_number
+        self.usa_state = usa_state or self.usa_state
+        self.home_office_code = home_office_code or self.home_office_code
+        self.order_status_id = order_status_id or self.order_status_id
+>>>>>>> 66fd9f5 (rename order_status to order_status_id)
 
 
 # Do we want to break this file up into separate model
@@ -78,9 +93,14 @@ class StatusModel(db.Model):
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     sequence_num = db.Column(db.Integer)
     description = db.Column(db.String(255))
+<<<<<<< HEAD
     active_status = db.Column(db.String(255))
     status_code = db.Column(db.String(255))
     orders = db.relationship('OrderModel', back_populates="status")
+=======
+    order = db.relationship('OrderModel', lazy=True,
+                            backref=db.backref('status', lazy='joined'))
+>>>>>>> 66fd9f5 (rename order_status to order_status_id)
     # order_no = db.Column(db.Integer, db.ForeignKey('orders.order_number'))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(

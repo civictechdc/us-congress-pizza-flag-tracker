@@ -24,7 +24,12 @@ def create_order():
     home_office_code = request_json["home_office_code"]
     order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", 1)
+<<<<<<< HEAD
     order = OrderActions.create(usa_state, idbased_order_number, home_office_code, order_status_id)
+=======
+    order = OrderActions.create(
+        usa_state, idbased_order_number, home_office_code, order_status_id)
+>>>>>>> 66fd9f5 (rename order_status to order_status_id)
     return table_record_to_json(order)
 
 
@@ -81,8 +86,13 @@ def update_order(uuid):
         request_json, "order_number", None)
     order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", None)
+<<<<<<< HEAD
     order = OrderActions.update_order_by_uuid(
         uuid, usa_state, order_number, home_office_code, order_status_id)
+=======
+    order.update_order(usa_state, order_number,
+                       home_office_code, order_status_id)
+>>>>>>> 66fd9f5 (rename order_status to order_status_id)
     order_dict = table_record_to_json(order)
     return order_dict
 
