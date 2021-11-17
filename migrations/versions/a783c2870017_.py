@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 50bdd1768052
+Revision ID: a783c2870017
 Revises: 
-Create Date: 2021-11-15 14:30:14.517164
+Create Date: 2021-11-17 15:05:44.673432
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '50bdd1768052'
+revision = 'a783c2870017'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -50,12 +50,12 @@ def upgrade():
     sa.Column('order_number', sa.Integer(), nullable=False),
     sa.Column('uuid', sa.String(length=40), nullable=False),
     sa.Column('usa_state', sa.String(length=10), nullable=True),
-    sa.Column('order_status', sa.Integer(), nullable=True),
+    sa.Column('order_status_id', sa.Integer(), nullable=True),
     sa.Column('home_office_code', sa.String(length=10), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.ForeignKeyConstraint(['home_office_code'], ['offices.office_code'], ),
-    sa.ForeignKeyConstraint(['order_status'], ['status.id'], ),
+    sa.ForeignKeyConstraint(['order_status_id'], ['status.id'], ),
     sa.PrimaryKeyConstraint('order_number')
     )
     op.create_index(op.f('ix_orders_uuid'), 'orders', ['uuid'], unique=True)

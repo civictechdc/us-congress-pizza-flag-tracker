@@ -34,7 +34,7 @@ class OrderModel(db.Model):
     # updated_by = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
     # error when you uncomment ^
     # sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'mapped class OfficeModel->offices'. Original exception was: Could not determine join condition between parent/child tables on relationship OfficeModel.orders - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
-    order_status = db.Column(db.Integer, db.ForeignKey('status.id'))
+    order_status_id = db.Column(db.Integer, db.ForeignKey('status.id'))
     home_office_code = db.Column(
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     created_at = db.Column(db.DateTime, server_default=func.now())
@@ -43,21 +43,21 @@ class OrderModel(db.Model):
 
     # Ordermodel needs status relationship
     # Need status relationship
-    # order_status = db.relationship('StatusModel',backref = 'orders', lazy = True)
+    # order_status_id = db.relationship('StatusModel',backref = 'orders', lazy = True)
 
-    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status):
+    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id):
         self.uuid = theUuid
         self.usa_state = usa_state
         self.order_number = order_number
         self.home_office_code = home_office_code
-        self.order_status = order_status
+        self.order_status_id = order_status_id
         # self.updated_by = "HOSS"
 
-    def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status=None):
+    def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status_id=None):
         self.order_number = order_number or self.order_number
         self.usa_state = usa_state or self.usa_state
         self.home_office_code = home_office_code or self.home_office_code
-        self.order_status = order_status or self.order_status
+        self.order_status_id = order_status_id or self.order_status_id
 
 
 # Do we want to break this file up into separate model
@@ -70,7 +70,8 @@ class StatusModel(db.Model):
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     sequence_num = db.Column(db.Integer)
     description = db.Column(db.String(255))
-    order = db.relationship('OrderModel', lazy=True, backref= db.backref('status',lazy = 'joined'))
+    order = db.relationship('OrderModel', lazy=True,
+                            backref=db.backref('status', lazy='joined'))
     # order_no = db.Column(db.Integer, db.ForeignKey('orders.order_number'))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
