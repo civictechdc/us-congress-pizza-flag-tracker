@@ -40,6 +40,7 @@ class OrderModel(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
         db.DateTime, server_default=func.now(), onupdate=func.now())
+    status=db.relationship("StatusModel", back_populates="orders")
 
     # Ordermodel needs status relationship
     # Need status relationship
@@ -70,8 +71,7 @@ class StatusModel(db.Model):
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     sequence_num = db.Column(db.Integer)
     description = db.Column(db.String(255))
-    order = db.relationship('OrderModel', lazy=True,
-                            backref=db.backref('status', lazy='joined'))
+    orders = db.relationship('OrderModel', back_populates="status")
     # order_no = db.Column(db.Integer, db.ForeignKey('orders.order_number'))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
