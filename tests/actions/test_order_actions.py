@@ -1,6 +1,6 @@
 import pytest
 import random
-from OrderActions import OrderActions 
+from OrderActions import OrderActions
 
 class TestOrderActions():
     

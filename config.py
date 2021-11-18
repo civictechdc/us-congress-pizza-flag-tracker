@@ -30,15 +30,7 @@ flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(flask_app)
 
 from init_db import init_app
-
-@flask_app.errorhandler(Exception)
-def handle_error(e):
-    code = 500
-    if isinstance(e, HTTPException):
-        code = e.code
-    print("Message:",str(e))
-    print(traceback.print_exc())
-    return jsonify(error=str(e)), code
+from error_handler import handle_exceptions_for_app
 
 init_app(flask_app)
 
