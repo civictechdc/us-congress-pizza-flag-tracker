@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -rf migrations
+git rm -r migrations
 rm flag*.db
 DEBUG=True FLASK_ENV=development FLASK_APP=app.py flask db init
 DEBUG=True FLASK_ENV=development FLASK_APP=app.py flask db migrate
