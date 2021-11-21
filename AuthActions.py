@@ -3,13 +3,7 @@ import datetime
 import bcrypt
 import jwt
 from werkzeug.exceptions import Unauthorized
-
-from util import get_http_response
-from config import flask_app
-
-from models import UserModel, UserParams
-from util import table_record_to_json
-
+from models import UserModel
 
 class AuthActions:
     @classmethod
@@ -21,4 +15,4 @@ class AuthActions:
         if not bcrypt.checkpw(password.encode(), user.password):
             raise Unauthorized("Invalid password.")
 
-        return table_record_to_json(user)
+        return user

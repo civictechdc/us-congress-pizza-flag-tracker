@@ -32,13 +32,14 @@ def init_orders_table(office_codes_list, db):
         theUuid = fakeUUIDs[x]
         usa_state_object = office_codes_list[x + x + 2]
         usa_state = usa_state_object.get("usa_state")
+
         if x > 0 and x <= 9:
-            order_status = x
+            order_status_id = x
         else:
-            order_status = 1
+            order_status_id = 1
         home_office_code = usa_state_object.get("office_code")[0]
 
         order_ = OrderModel(
-            theUuid, usa_state, order_number, home_office_code, order_status
+            theUuid, usa_state, order_number, home_office_code, order_status_id
         )
         db.session.add(order_)

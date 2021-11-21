@@ -25,16 +25,17 @@ def create_order():
     usa_state = request_json["usa_state"]
     idbased_order_number = request_json["order_number"]
     home_office_code = request_json["home_office_code"]
-    order_status = get_dict_keyvalue_or_default(request_json, "order_status", 1)
+    order_status_id = get_dict_keyvalue_or_default(
+        request_json, "order_status_id", 1)
     order = OrderActions.create(
-        usa_state, idbased_order_number, home_office_code, order_status)
+        usa_state, idbased_order_number, home_office_code, order_status_id)
     return table_record_to_json(order)
 
 
 def get_orders():
     AuthController.set_authorize_current_user()
     orders = OrderActions.get()
-    return {"orders": [table_record_to_json(order) for order in orders]} 
+    return {"orders": [table_record_to_json(order) for order in orders]}
 
 
 def get_order_by_uuid(uuid):
@@ -51,7 +52,7 @@ def get_order_by_order_number_as_tuple(order_number):
     if order_obj is None:
         return {"error": "order not found"}
     else:
-        return {"orders":[table_record_to_json(order_obj)]} 
+        return {"orders": [table_record_to_json(order_obj)]}
 
 # generate qr code
 
@@ -80,21 +81,26 @@ def update_order(uuid):
     usa_state = get_dict_keyvalue_or_default(request_json, "usa_state", None)
     home_office_code = get_dict_keyvalue_or_default(
         request_json, "home_office_code", None)
-    order_number = get_dict_keyvalue_or_default(request_json, "order_number", None)
-    order_status = get_dict_keyvalue_or_default(request_json, "order_status", None)
+    order_number = get_dict_keyvalue_or_default(
+        request_json, "order_number", None)
+    order_status_id = get_dict_keyvalue_or_default(
+        request_json, "order_status_id", None)
     order.update_order(usa_state, order_number,
-                       home_office_code, order_status)
+                       home_office_code, order_status_id)
     order_dict = table_record_to_json(order)
     return order_dict
 
 
 def update_order_status(uuid):
     AuthController.set_authorize_current_user()
-    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
     AuthPrivileges.check_update_order_allowed()
 
+    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
+
     request_json = request.get_json()
-    order_status = get_dict_keyvalue_or_default(request_json, "order_status", None)
-    updated_order = order.update_order(
-        uuid, order_status=order_status
+    order_status_id = get_dict_keyvalue_or_default(
+        request_json, "order_status_id", None)
+    order.update_order(
+        uuid, order_status_id=order_status_id
     )
+    return table_record_to_json(order)
