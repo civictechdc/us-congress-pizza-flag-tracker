@@ -1,5 +1,6 @@
 #/bin/sh
 conda create --name myenv
-read -p "Press [Enter] key to continue, Ctrl-C to break..."
+echo If you answer Y environment will be refreshed (pip install, flask db upgrade, etc)
+./check_continue.sh || exit
 ./refresh_conda.sh
 

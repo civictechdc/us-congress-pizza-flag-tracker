@@ -1,4 +1,5 @@
 #/bin/sh
 python3 -m venv myenv
-read -p "Press [Enter] key to continue, Ctrl-C to break..."
+echo If you answer Y environment will be refreshed (pip install, flask db upgrade, etc)
+./check_continue.sh
 ./refresh_python.sh
