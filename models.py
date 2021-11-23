@@ -71,17 +71,21 @@ class StatusModel(db.Model):
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     sequence_num = db.Column(db.Integer)
     description = db.Column(db.String(255))
+    active_status = db.Column(db.String(255))
+    status_code = db.Column(db.String(255))
     orders = db.relationship('OrderModel', back_populates="status")
     # order_no = db.Column(db.Integer, db.ForeignKey('orders.order_number'))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
         db.DateTime, server_default=func.now(), onupdate=func.now())
 
-    def __init__(self, id, status_federal_office_code, sequence_num, description):
+    def __init__(self, id, status_federal_office_code, sequence_num, description, active_status, status_code):
         self.id = id
         self.status_federal_office_code = status_federal_office_code
         self.sequence_num = sequence_num
         self.description = description
+        self.active_status = active_status
+        self.status_code = status_code
 
 
 # User Table notes
