@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 populate_seed_data.py
+python populate_seed_data.py
