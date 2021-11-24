@@ -1,3 +1,4 @@
+import json
 import traceback
 from datetime import datetime
 
@@ -14,6 +15,11 @@ def handle_exceptions_for_app(e: HTTPException):
     if isinstance(e, HTTPException):
         code = e.code
         response = e.response
+        if (response):
+            response["error"] = str(e)
+        else:
+            response = {"error": str(e)}
+        print("Response", response)
     print("Code:", code)
     print(traceback.print_exc())
     print("Message:",str(e))
@@ -21,4 +27,9 @@ def handle_exceptions_for_app(e: HTTPException):
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)
     print()
-    return jsonify(error=str(e)), code, response
+    response = flask_app.response_class(
+        response=json.dumps(response),
+        status=code,
+        mimetype='application/json'
+    )
+    return response

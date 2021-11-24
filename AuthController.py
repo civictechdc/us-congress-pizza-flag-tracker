@@ -51,7 +51,7 @@ def get_token_from_request():
     if "x-access-tokens" in request.headers:
         token = request.headers["x-access-tokens"]
     if not token:
-        raise BadRequest(
+        raise Unauthorized(
             "Credential issue ""Token is missing"", try logging in again.")
     return token
 
@@ -60,7 +60,7 @@ def get_user(token_username):
     try:
         return UserModel.query.filter_by(username=token_username).first()
     except Exception as exception:
-        raise BadRequest(
+        raise Unauthorized(
             f'Invalid username {token_username} in token. Message: "{str(exception)}".  Try logging in again')
 
 def check_valid_token(token):
@@ -68,7 +68,7 @@ def check_valid_token(token):
     try:
         token_data = jwt.decode(token, flask_app.config["SECRET_KEY"], algorithms=["HS256"])
         token_exp_date = datetime.datetime.utcfromtimestamp(token_data["exp"])
-        token_expire_days = float(os.environ["TOKEN_EXPIRE_DAYS_DAYS"])
+        token_expire_days = float(os.environ["TOKEN_EXPIRE_DAYS"])
         token_refresh_after_days = float(os.environ["TOKEN_REFRESH_AFTER_DAYS"])
         refresh_before_exp_date_days = token_expire_days - token_refresh_after_days
         token_refresh_date = token_exp_date - datetime.timedelta(days=refresh_before_exp_date_days)
@@ -79,7 +79,7 @@ def check_valid_token(token):
     except Unauthorized as exception:
         raise exception
     except Exception as exception:
-        raise BadRequest(f'Credential issue: {str(exception)}.  Try logging in again.')
+        raise Unauthorized(f'Credential issue: {str(exception)}.  Try logging in again.')
 
 
 
@@ -93,7 +93,7 @@ def get_token_username(token):
         token_username = token_data["public_id"]
         return token_username
     except Exception as exception:
-        raise BadRequest(
+        raise Unauthorized(
             f'Credential issue: {str(exception)}.  Try logging in again.')
 
 
