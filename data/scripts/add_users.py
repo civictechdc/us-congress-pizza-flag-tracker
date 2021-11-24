@@ -31,8 +31,6 @@ def add_state_office_users(office_codes_list, db):
             UserActions.create(params)
         db.session.commit()
 
-
-
 def add_fed_users(users_list, db):
     print("Adding FED users and encrypting password")
 
@@ -51,3 +49,4 @@ def add_fed_users(users_list, db):
         UserActions.create(params)
 
     db.session.commit()
+
