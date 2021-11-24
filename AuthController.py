@@ -1,7 +1,10 @@
 import datetime
+import os
+import sys
+
 import jwt
-from flask import request
-from werkzeug.exceptions import BadRequest
+from flask import request, jsonify
+from werkzeug.exceptions import BadRequest, Unauthorized
 
 from AuthActions import AuthActions
 from config import flask_app
@@ -12,10 +15,11 @@ __current_user__: UserModel = {}
 
 
 def derive_token_from_username(username):
+    days = float(os.environ["TOKEN_EXPIRE_DAYS"])
     token = jwt.encode(
         {
             "public_id": username,
-            "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=45),
+            "exp": datetime.datetime.utcnow() + datetime.timedelta(days=days),
         },
         flask_app.config["SECRET_KEY"],
         "HS256",
@@ -37,6 +41,7 @@ def set_authorize_current_user():
     global __current_user__
 
     token = get_token_from_request()
+    check_valid_token(token)
     token_username = get_token_username(token)
     __current_user__ = get_user(token_username)
 
@@ -58,16 +63,38 @@ def get_user(token_username):
         raise BadRequest(
             f'Invalid username {token_username} in token. Message: "{str(exception)}".  Try logging in again')
 
+def check_valid_token(token):
+    print("**** Checking token ****", file=sys.stdout)
+    try:
+        token_data = jwt.decode(token, flask_app.config["SECRET_KEY"], algorithms=["HS256"])
+        print("Expires", token_data["exp"])
+        token_exp_date = datetime.datetime.utcfromtimestamp(token_data["exp"])
+        grace_time_days = float(os.environ["TOKEN_GRACE_PERIOD_DAYS"])
+        token_refresh_date = token_exp_date - datetime.timedelta(days=grace_time_days)
+        print("Now", datetime.datetime.utcnow(), "Expires", token_exp_date, "Renews", token_refresh_date, file=sys.stdout)
+        if (token_refresh_date < datetime.datetime.utcnow()):
+            token_username = token_data["public_id"]
+            token = derive_token_from_username(token_username)
+            raise Unauthorized("Token is past renew date.  See token in response.", {"refreshedToken": token})
+    except Unauthorized as exception:
+        raise exception
+    except Exception as exception:
+        raise BadRequest(f'Credential issue: {str(exception)}.  Try logging in again.')
+
+
+
+
+
 
 def get_token_username(token):
     try:
         token_data = jwt.decode(
             token, flask_app.config["SECRET_KEY"], algorithms=["HS256"])
         token_username = token_data["public_id"]
+        return token_username
     except Exception as exception:
         raise BadRequest(
             f'Credential issue: {str(exception)}.  Try logging in again.')
-    return token_username
 
 
 def get_current_user():
