@@ -1,14 +1,11 @@
 from flask import render_template, request, send_file
 
 import AuthPrivileges
-from OrderActions import OrderActions
 
 from util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode
 import qrcode
 import AuthController
-from util import print_to_debug_log
-# from './http-common.js' import baseURL
 
 from OrderActions import OrderActions
 import io
@@ -45,7 +42,7 @@ def get_order_by_uuid(uuid):
     return order_dict
 
 
-def get_order_by_order_number_as_tuple(order_number):
+def get_order_by_order_number(order_number):
     AuthController.set_authorize_current_user()
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_order_number_as_tuple(order_number)
