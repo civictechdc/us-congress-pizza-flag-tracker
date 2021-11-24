@@ -5,4 +5,5 @@ then
   echo Script exit
   exit 1
 fi
+export
 echo Script continue
