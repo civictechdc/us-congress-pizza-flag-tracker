@@ -15,11 +15,14 @@ def handle_exceptions_for_app(e: HTTPException):
     if isinstance(e, HTTPException):
         code = e.code
         response = e.response
+<<<<<<< HEAD
         if (response):
             response["error"] = str(e)
         else:
             response = {"error": str(e)}
         print("Response", response)
+=======
+>>>>>>> b7e63f8 (Fixed PR findings, added refresh token)
     print("Code:", code)
     print(traceback.print_exc())
     print("Message:",str(e))

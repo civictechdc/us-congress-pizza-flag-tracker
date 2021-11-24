@@ -12,7 +12,10 @@ def add_offices(office_codes_list, db):
             db.session.add(office)
     db.session.commit()
 
+<<<<<<< HEAD
 =======
             db.session.add(office)
     db.session.commit()
 >>>>>>> 37d73cd (WIP populate seed data as separate script)
+=======
+>>>>>>> b7e63f8 (Fixed PR findings, added refresh token)

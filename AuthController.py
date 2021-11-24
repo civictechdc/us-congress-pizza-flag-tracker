@@ -68,7 +68,11 @@ def check_valid_token(token):
     try:
         token_data = jwt.decode(token, flask_app.config["SECRET_KEY"], algorithms=["HS256"])
         token_exp_date = datetime.datetime.utcfromtimestamp(token_data["exp"])
+<<<<<<< HEAD
         token_expire_days = float(os.environ["TOKEN_EXPIRE_DAYS"])
+=======
+        token_expire_days = float(os.environ["TOKEN_EXPIRE_DAYS_DAYS"])
+>>>>>>> b7e63f8 (Fixed PR findings, added refresh token)
         token_refresh_after_days = float(os.environ["TOKEN_REFRESH_AFTER_DAYS"])
         refresh_before_exp_date_days = token_expire_days - token_refresh_after_days
         token_refresh_date = token_exp_date - datetime.timedelta(days=refresh_before_exp_date_days)

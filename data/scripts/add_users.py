@@ -31,12 +31,15 @@ def add_state_office_users(office_codes_list, db):
             UserActions.create(params)
         db.session.commit()
 
+<<<<<<< HEAD
 def add_fed_users(users_list, db):
     print("Adding FED users and encrypting password")
 
 <<<<<<< HEAD
 =======
 
+=======
+>>>>>>> b7e63f8 (Fixed PR findings, added refresh token)
 def add_fed_users(users_list, db):
     print("Adding FED users and encrypting password")
 
@@ -57,6 +60,10 @@ def add_fed_users(users_list, db):
 
     db.session.commit()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 37d73cd (WIP populate seed data as separate script)
+=======
+
+>>>>>>> b7e63f8 (Fixed PR findings, added refresh token)
