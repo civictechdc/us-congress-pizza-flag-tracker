@@ -1,9 +1,13 @@
 #!/bin/bash
-read -p "Enter Y to continue, N to abort: " -n1 ans
-if [ "$ans" != "Y" -a "$ans" != "y" ];
+echo
+echo "*** CHECK ABOVE FOR ERRORS ***"
+echo
+echo $1
+echo
+read -p "Enter Y to continue, N to abort: " -n1 answer
+echo
+# -a is shell script for AND
+if [ "$answer" != "Y" -a "$answer" != "y" ];
 then
-  echo Script exit
   exit 1
 fi
-export
-echo Script continue
