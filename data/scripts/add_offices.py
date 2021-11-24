@@ -1,4 +1,5 @@
-def init_office_table(office_codes_list,db):
+def add_offices(office_codes_list, db):
+    print("Adding offices")
     from models import OfficeModel
     for state_offices in office_codes_list:
         usa_state = state_offices["usa_state"]
@@ -7,3 +8,4 @@ def init_office_table(office_codes_list,db):
             # theUuid = str(uuid.uuid4())
             office = OfficeModel(usa_state, office_code)
             db.session.add(office)
+    db.session.commit()

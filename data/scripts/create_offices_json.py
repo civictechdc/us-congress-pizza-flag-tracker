@@ -45,5 +45,5 @@ if __name__ == '__main__':
     offices_list = df_to_list(offices_df)
     add_fed_offices_to_list(offices_list)
     #offices_json = json.dumps(offices_list)
-    with open('office_codes.json','w') as file:
+    with open('../office_codes.json', 'w') as file:
         json.dump(offices_list,file)
