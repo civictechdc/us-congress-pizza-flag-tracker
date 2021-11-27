@@ -35,8 +35,10 @@ class OrderActions():
 
     @ classmethod
     def update_order_by_uuid(cls, uuid, usa_state=None, order_number=None, home_office_code=None, order_status_id=None):
-        order: OrderActions = cls.get_order_by_uuid(uuid)
-        order.update_order(usa_state, order_number,
-                           home_office_code, order_status_id)
+        order = cls.get_order_by_uuid(uuid)
+        order.order_number = order_number or order.order_number
+        order.usa_state = usa_state or order.usa_state
+        order.home_office_code = home_office_code or order.home_office_code
+        order.order_status_id = order_status_id or order.order_status_id
         db.session.commit()
         return order
