@@ -87,7 +87,6 @@ def update_order(uuid):
         request_json, "order_status_id", None)
     order = OrderActions.update_order_by_uuid(
         uuid, usa_state, order_number, home_office_code, order_status_id)
-
     order_dict = table_record_to_json(order)
     return order_dict
 
