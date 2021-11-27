@@ -46,19 +46,25 @@ class OrderModel(db.Model):
     # Need status relationship
     # order_status_id = db.relationship('StatusModel',backref = 'orders', lazy = True)
 
-    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id):
+    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id, order_status):
         self.uuid = theUuid
         self.usa_state = usa_state
         self.order_number = order_number
         self.home_office_code = home_office_code
-        self.order_status_id = order_status_id
-        # self.updated_by = "HOSS"
+        if order_status_id:
+            self.order_status_id = order_status_id
+        elif order_status:
+            self.order_status_id = order_status.id
+        # self.updated_by = "HOSS"uus
 
-    def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status_id=None):
+    def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status_id=None, order_status=None):
         self.order_number = order_number or self.order_number
         self.usa_state = usa_state or self.usa_state
         self.home_office_code = home_office_code or self.home_office_code
-        self.order_status_id = order_status_id or self.order_status_id
+        if order_status_id:
+            self.order_status_id = order_status_id
+        else:
+            self.order_status = order_status
 
 
 # Do we want to break this file up into separate model
