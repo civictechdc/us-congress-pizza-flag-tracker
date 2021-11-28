@@ -24,8 +24,7 @@ def create_order():
     home_office_code = request_json["home_office_code"]
     order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", 1)
-    order = OrderActions.create(
-        usa_state, idbased_order_number, home_office_code, order_status_id)
+    order = OrderActions.create(usa_state, idbased_order_number, home_office_code, order_status_id)
     return table_record_to_json(order)
 
 
@@ -45,7 +44,7 @@ def get_order_by_uuid(uuid):
 def get_order_by_order_number(order_number):
     AuthController.set_authorize_current_user()
     # Return a dictionary(json) object for use by frontend
-    order_obj = OrderActions.get_order_by_order_number_as_tuple(order_number)
+    order_obj = OrderActions.get_order_by_order_number(order_number)
     if order_obj is None:
         return {"error": "order not found"}
     else:
