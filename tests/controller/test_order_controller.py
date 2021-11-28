@@ -4,10 +4,14 @@ import AuthController
 import AuthPrivileges
 from OrderActions import OrderActions
 import OrderController
+from StatusActions import StatusActions
 from tests.mock_request import mock_request
 import tests.mock_auth_controller
 import tests.mock_auth_privileges
 import pytest
+
+from util import table_record_to_json
+
 
 class TestOrderController():
 
@@ -24,18 +28,46 @@ class TestOrderController():
         assert (actual_order['uuid'] == created_order.uuid)
 
     # @pytest.mark.skip(reason="Test fails because not mocked properly, skipping until fixed")
-    def test_create_order(self, mocker):
-
-        unique_order_number = random.randint(1, 100000000)
-
-        order_request_json = {"usa_state": "OH", "home_office_code": "OH06", "order_number": unique_order_number}
-        mock_request.mock_request_json = order_request_json;
+    def test_create_Update_order(self, mocker):
 
         mocker.patch.object(OrderController, 'request', mock_request)
         mocker.patch.object(OrderController, AuthController.__name__, tests.mock_auth_controller)
         mocker.patch.object(OrderController, AuthPrivileges.__name__, tests.mock_auth_privileges)
 
+        unique_order_number = random.randint(1, 100000000)
+        status = StatusActions.get_statuses()[2]
+        order_request_json = {"usa_state": "OH", "home_office_code": "OH06",
+                              "order_number": unique_order_number, "order_status_id":status.id}
+        mock_request.mock_request_json = order_request_json;
+
+
         response = OrderController.create_order()
-        assert (response['usa_state'] == "OH")
-        assert (response['home_office_code'] == "OH06")
-        assert (response['order_number'] == str(unique_order_number))
+
+        TestOrderController.assertExpectedOrder(order_request_json, response, status)
+
+        status = StatusActions.get_statuses()[2]
+        order_request_json = {"usa_state": "MA", "home_office_code": "MA06",
+                              "order_number": unique_order_number+1, "order_status_id":status.id}
+        mock_request.mock_request_json = order_request_json;
+
+        response = OrderController.update_order(uuid=response['uuid'])
+
+        TestOrderController.assertExpectedOrder(order_request_json, response, status)
+
+
+    @staticmethod
+    def assertExpectedOrder(order_request_json, response, status):
+        assert (response['usa_state'] == order_request_json['usa_state'])
+        assert (response['home_office_code'] == order_request_json['home_office_code'])
+        assert (response['order_number'] == str(order_request_json['order_number']))
+        assert (response['status']['description']) == status.description;
+        order = OrderActions.get_order_by_uuid(response['uuid']);
+        assert (order.usa_state == order_request_json['usa_state'])
+        assert (order.home_office_code == order_request_json['home_office_code'])
+        assert (order.order_number == order_request_json['order_number'])
+        assert (order.status.description) == status.description;
+
+
+
+
+
