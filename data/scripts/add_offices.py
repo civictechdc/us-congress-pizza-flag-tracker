@@ -9,3 +9,4 @@ def add_offices(office_codes_list, db):
             office = OfficeModel(usa_state, office_code)
             db.session.add(office)
     db.session.commit()
+

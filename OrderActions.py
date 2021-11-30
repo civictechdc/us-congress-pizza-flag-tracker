@@ -5,10 +5,11 @@ import uuid
 
 class OrderActions():
     @classmethod
-    def create(cls, usa_state: str, order_number: int, home_office_code: str, order_status_id: int = 1):
+    def create(cls, usa_state: str, order_number: int, home_office_code: str,
+               order_status_id: int = None, order_status: OrderModel = None):
         theUuid = str(uuid.uuid4())
         new_order = OrderModel(
-            theUuid, usa_state, order_number, home_office_code, order_status_id)
+            theUuid, usa_state, order_number, home_office_code, order_status_id, order_status)
         db.session.add(new_order)
         db.session.commit()
         return new_order
@@ -19,7 +20,7 @@ class OrderActions():
         return orders
 
     @ classmethod
-    def get_order_by_order_number_as_tuple(cls, order_number):
+    def get_order_by_order_number(cls, order_number):
         order = OrderModel.query.filter(
             OrderModel.order_number == order_number).first()
         return order

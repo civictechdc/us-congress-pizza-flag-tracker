@@ -13,7 +13,7 @@ class TestOrderActions():
         OrderActions.create(
             usa_state="MD",  order_number=unique_order_number, home_office_code="MD06",
             order_status_id=status_id)
-        retrievedOrder: OrderModel = OrderActions.get_order_by_order_number_as_tuple(
+        retrievedOrder: OrderModel = OrderActions.get_order_by_order_number(
             unique_order_number)
         assert(retrievedOrder.order_number == unique_order_number)
         assert(retrievedOrder.order_status_id == status_id)
@@ -23,10 +23,10 @@ class TestOrderActions():
         unique_order_number1 = random.randint(1, 1000000)
         unique_order_number2 = random.randint(1, 1000000)
         OrderActions.create("MD", unique_order_number1, "MD06")
-        order1 = OrderActions.get_order_by_order_number_as_tuple(
+        order1 = OrderActions.get_order_by_order_number(
             unique_order_number1)
         OrderActions.create("MA", unique_order_number2, "MA08")
-        order2 = OrderActions.get_order_by_order_number_as_tuple(
+        order2 = OrderActions.get_order_by_order_number(
             unique_order_number2)
         assert(order1.uuid != order2.uuid)
 
@@ -44,7 +44,7 @@ class TestOrderActions():
     def test_get_order(self):
         unique_order_number = random.randint(1, 1000000)
         created_order = OrderActions.create("MD",  unique_order_number, "MD06")
-        actual_order = OrderActions.get_order_by_order_number_as_tuple(
+        actual_order = OrderActions.get_order_by_order_number(
             created_order.order_number)
 
         assert(actual_order.usa_state == "MD")
