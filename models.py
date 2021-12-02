@@ -1,4 +1,5 @@
 # ORM models for State, Order, User and Log db
+from pickle import NONE
 from sqlalchemy import func
 from sqlalchemy.sql.expression import join
 from config import db
@@ -46,7 +47,7 @@ class OrderModel(db.Model):
     # Need status relationship
     # order_status_id = db.relationship('StatusModel',backref = 'orders', lazy = True)
 
-    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id, order_status):
+    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id, order_status=None):
         self.uuid = theUuid
         self.usa_state = usa_state
         self.order_number = order_number

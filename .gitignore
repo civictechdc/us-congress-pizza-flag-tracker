@@ -90,6 +90,7 @@ ipython_config.py
 
 # pyenv
 .python-version
+py3Pizzaflag
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
