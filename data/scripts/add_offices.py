@@ -7,6 +7,7 @@ def add_offices(office_codes_list, db):
             # TODO(tdk): we may not need uuids, discuss
             # theUuid = str(uuid.uuid4())
             office = OfficeModel(usa_state, office_code)
+            print("Adding office", office_code)
             db.session.add(office)
     db.session.commit()
 
