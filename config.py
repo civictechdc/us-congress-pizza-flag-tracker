@@ -18,8 +18,8 @@ CORS(flask_app, resources=r"/api/*")
 
 #workaround for heroku and sqlalchemy 1.4 https://stackoverflow.com/a/66794960
 uri = os.getenv("DATABASE_URL")
-if uri.startswith("postgres://"):
-     uri = uri.replace("postgres://", "postgresql://", 1)
+# if uri.startswith("postgres://"):
+#      uri = uri.replace("postgres://", "postgresql://", 1)
 
 flask_app.config["SQLALCHEMY_DATABASE_URI"] = uri
 
