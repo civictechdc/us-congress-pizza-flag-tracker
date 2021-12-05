@@ -11,4 +11,7 @@ else
 fi
 $pycommand -m venv myenv
 
+# ./check_continue.sh returns false if uses exit to exit
+./check_continue.sh "If you answer Y python environment will be activated)"
+
 ./refresh_python.sh
