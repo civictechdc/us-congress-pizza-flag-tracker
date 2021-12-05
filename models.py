@@ -110,7 +110,7 @@ class UserParams:
 class UserModel(db.Model):
     __tablename__ = "users"
     username = db.Column(db.String(20), primary_key=True)
-    password = db.Column(db.String(100))
+    password = db.Column(db.String(400))
     office_code = db.Column(
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     can_update_status_for = db.Column(db.String(20))
