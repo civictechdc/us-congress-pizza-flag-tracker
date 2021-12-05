@@ -7,12 +7,18 @@ def add_statuses(statuses_list, db):
         sequence_num = status["sequence_num"]
         description = status["description"]
 <<<<<<< HEAD
+<<<<<<< HEAD
         active_status = status["active_status"]
         status_code = status["status_code"]
         status = StatusModel(id=id,status_federal_office_code=status_federal_office_code,sequence_num=sequence_num,description=description,active_status=active_status,status_code=status_code)
 =======
         status = StatusModel(id,status_federal_office_code,sequence_num,description)
 >>>>>>> 37d73cd (WIP populate seed data as separate script)
+=======
+        active_status = status["active_status"]
+        status_code = status["status_code"]
+        status = StatusModel(id=id,status_federal_office_code=status_federal_office_code,sequence_num=sequence_num,description=description,active_status=active_status,status_code=status_code)
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         db.session.add(status)
 
     db.session.commit()

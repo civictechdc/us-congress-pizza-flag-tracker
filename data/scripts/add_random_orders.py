@@ -16,11 +16,19 @@ def add_random_orders(office_codes_list, db):
         theUuid = str(uuid.uuid4())
         usa_state_object = random.choice(office_codes_list)
         usa_state = usa_state_object.get("usa_state")
+<<<<<<< HEAD
         order_status_id = random.randint(1, 10)
         home_office_code = random.choice(usa_state_object.get("office_code"))
 
         order_ = OrderModel(
             theUuid, usa_state, order_number, home_office_code, order_status_id
+=======
+        order_status = random.randint(1, 10)
+        home_office_code = random.choice(usa_state_object.get("office_code"))
+
+        order_ = OrderModel(
+            theUuid, usa_state, order_number, home_office_code, order_status
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         )
         db.session.add(order_)
     db.session.commit()

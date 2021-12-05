@@ -31,6 +31,7 @@ def add_state_office_users(office_codes_list, db):
             UserActions.create(params)
         db.session.commit()
 
+<<<<<<< HEAD:data/scripts/add_users.py
 <<<<<<< HEAD
 def add_fed_users(users_list, db):
     print("Adding FED users and encrypting password")
@@ -44,6 +45,11 @@ def add_fed_users(users_list, db):
     print("Adding FED users and encrypting password")
 
 >>>>>>> 37d73cd (WIP populate seed data as separate script)
+=======
+def add_fed_users(users_list, db):
+    print("Adding FED users and encrypting password")
+
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50:initial_data/init_user_table.py
     from models import UserParams
     from UserActions import UserActions
     for user in users_list:
@@ -59,6 +65,7 @@ def add_fed_users(users_list, db):
         UserActions.create(params)
 
     db.session.commit()
+<<<<<<< HEAD:data/scripts/add_users.py
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -67,3 +74,6 @@ def add_fed_users(users_list, db):
 =======
 
 >>>>>>> b7e63f8 (Fixed PR findings, added refresh token)
+=======
+
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50:initial_data/init_user_table.py

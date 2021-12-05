@@ -6,6 +6,7 @@ import uuid
 class OrderActions():
     @classmethod
 <<<<<<< HEAD
+<<<<<<< HEAD
     def create(cls, usa_state: str, order_number: int, home_office_code: str,
                order_status_id: int = None, order_status: OrderModel = None):
         theUuid = str(uuid.uuid4())
@@ -17,6 +18,13 @@ class OrderActions():
         new_order = OrderModel(
             theUuid, usa_state, order_number, home_office_code, order_status_id)
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+    def create(cls, usa_state: str, order_number: int, home_office_code: str,
+               order_status_id: int = None, order_status: OrderModel = None):
+        theUuid = str(uuid.uuid4())
+        new_order = OrderModel(
+            theUuid, usa_state, order_number, home_office_code, order_status_id, order_status)
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         db.session.add(new_order)
         db.session.commit()
         return new_order
@@ -28,10 +36,14 @@ class OrderActions():
 
     @ classmethod
 <<<<<<< HEAD
+<<<<<<< HEAD
     def get_order_by_order_number(cls, order_number):
 =======
     def get_order_by_order_number_as_tuple(cls, order_number):
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+    def get_order_by_order_number(cls, order_number):
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         order = OrderModel.query.filter(
             OrderModel.order_number == order_number).first()
         return order
@@ -48,15 +60,21 @@ class OrderActions():
     @ classmethod
     def update_order_by_uuid(cls, uuid, usa_state=None, order_number=None, home_office_code=None, order_status_id=None):
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         order = cls.get_order_by_uuid(uuid)
         order.order_number = order_number or order.order_number
         order.usa_state = usa_state or order.usa_state
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
+<<<<<<< HEAD
 =======
         order: OrderActions = cls.get_order_by_uuid(uuid)
         order.update_order(usa_state, order_number,
                            home_office_code, order_status_id)
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         db.session.commit()
         return order

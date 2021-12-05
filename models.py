@@ -48,20 +48,28 @@ class OrderModel(db.Model):
     # order_status_id = db.relationship('StatusModel',backref = 'orders', lazy = True)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id, order_status=None):
 =======
     def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id):
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+    def __init__(self, theUuid, usa_state, order_number, home_office_code, order_status_id, order_status=None):
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         self.uuid = theUuid
         self.usa_state = usa_state
         self.order_number = order_number
         self.home_office_code = home_office_code
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         if order_status_id:
             self.order_status_id = order_status_id
         elif order_status:
             self.order_status_id = order_status.id
         # self.updated_by = "HOSS"uus
+<<<<<<< HEAD
 
     def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status_id=None, order_status=None):
         self.order_number = order_number or self.order_number
@@ -81,6 +89,17 @@ class OrderModel(db.Model):
         self.home_office_code = home_office_code or self.home_office_code
         self.order_status_id = order_status_id or self.order_status_id
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+
+    def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status_id=None, order_status=None):
+        self.order_number = order_number or self.order_number
+        self.usa_state = usa_state or self.usa_state
+        self.home_office_code = home_office_code or self.home_office_code
+        if order_status_id:
+            self.order_status_id = order_status_id
+        else:
+            self.order_status = order_status
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
 
 
 # Do we want to break this file up into separate model
@@ -95,6 +114,7 @@ class StatusModel(db.Model):
     description = db.Column(db.String(255))
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     active_status = db.Column(db.String(255))
     status_code = db.Column(db.String(255))
     orders = db.relationship('OrderModel', back_populates="status")
@@ -105,6 +125,11 @@ class StatusModel(db.Model):
 =======
     orders = db.relationship('OrderModel', back_populates="status")
 >>>>>>> 588fcc6 (added specific attribute status to OrderModel)
+=======
+    active_status = db.Column(db.String(255))
+    status_code = db.Column(db.String(255))
+    orders = db.relationship('OrderModel', back_populates="status")
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
     # order_no = db.Column(db.Integer, db.ForeignKey('orders.order_number'))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(

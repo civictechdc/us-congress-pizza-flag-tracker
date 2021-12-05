@@ -27,6 +27,7 @@ class TestUtils():
         order_number = unique_number
         usa_state = "MA"
 <<<<<<< HEAD
+<<<<<<< HEAD
         order_statuses: [StatusModel] = StatusActions.get_statuses()
         order_status = order_statuses[0]
         home_office_code = "FED-ADMIN"
@@ -53,6 +54,21 @@ class TestUtils():
         assert (json["usa_state"] == usa_state)
         assert (json["status"]["description"] == description)
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+        order_statuses: [StatusModel] = StatusActions.get_statuses()
+        order_status = order_statuses[0]
+        home_office_code = "FED-ADMIN"
+        order = OrderActions.create(order_number=order_number, usa_state=usa_state,
+                                    home_office_code=home_office_code, order_status=order_status)
+        # description = "The first status"
+        # active_status =
+        # status = StatusModel(id=unique_number, status_federal_office_code="FED-ADMIN", sequence_num=unique_number,
+        #                      description=description, active_status=active_status, status_code=status_code)
+        # order.status = status
+        json = table_record_to_json(order)
+        assert (json["usa_state"] == order.usa_state)
+        assert (json["status"]["description"] == order_status.description)
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
 
     @pytest.mark.skip(reason="function works, but test does not.  openCV is an issue, so may delete this test.")
     def test_qrcode(self):

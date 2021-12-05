@@ -3,9 +3,12 @@ from OrderActions import OrderActions
 from StatusActions import StatusActions
 from models import OrderModel, StatusModel
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
 
 
 class TestOrderActions():
@@ -13,14 +16,18 @@ class TestOrderActions():
     def test_create(self):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         unique_order_number = random.randint(1, 1000000)
         expected_status: StatusModel = StatusActions.get_statuses()[0]
         status_id = expected_status.id
         OrderActions.create(
             usa_state="MD",  order_number=unique_order_number, home_office_code="MD06",
             order_status_id=status_id)
+<<<<<<< HEAD
 <<<<<<< HEAD
         retrievedOrder: OrderModel = OrderActions.get_order_by_order_number(
             unique_order_number)
@@ -33,6 +40,10 @@ class TestOrderActions():
         retrievedOrder: OrderModel = OrderActions.get_order_by_order_number_as_tuple(
             unique_order_number)
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+        retrievedOrder: OrderModel = OrderActions.get_order_by_order_number(
+            unique_order_number)
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         assert(retrievedOrder.order_number == unique_order_number)
         assert(retrievedOrder.order_status_id == status_id)
         assert(retrievedOrder.status == expected_status)
@@ -41,6 +52,7 @@ class TestOrderActions():
         unique_order_number1 = random.randint(1, 1000000)
         unique_order_number2 = random.randint(1, 1000000)
         OrderActions.create("MD", unique_order_number1, "MD06")
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         order1 = OrderActions.get_order_by_order_number(
@@ -62,10 +74,17 @@ class TestOrderActions():
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
         OrderActions.create("MA", unique_order_number2, "MA08")
         order2 = OrderActions.get_order_by_order_number_as_tuple(
+=======
+        order1 = OrderActions.get_order_by_order_number(
+            unique_order_number1)
+        OrderActions.create("MA", unique_order_number2, "MA08")
+        order2 = OrderActions.get_order_by_order_number(
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
             unique_order_number2)
         assert(order1.uuid != order2.uuid)
 
     def test_get_orders(self):
+<<<<<<< HEAD
 <<<<<<< HEAD
         unique_order_number = random.randint(1,1000000)
         order = OrderActions.create( "MD",  unique_order_number , "MD06")
@@ -76,6 +95,11 @@ class TestOrderActions():
         order = OrderActions.create("MD",  unique_order_number, "MD06")
         get_orders = OrderActions.get()
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+        unique_order_number = random.randint(1, 1000000)
+        order = OrderActions.create("MD",  unique_order_number, "MD06")
+        get_orders = OrderActions.get()
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         found = False
 
         for order in get_orders:
@@ -86,11 +110,15 @@ class TestOrderActions():
     def test_get_order(self):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         unique_order_number = random.randint(1, 1000000)
         created_order = OrderActions.create("MD",  unique_order_number, "MD06")
         actual_order = OrderActions.get_order_by_order_number(
             created_order.order_number)
 
+<<<<<<< HEAD
 =======
         unique_order_number = random.randint(1,1000000)
         created_order = OrderActions.create( "MD",  unique_order_number , "MD06")
@@ -104,6 +132,8 @@ class TestOrderActions():
             created_order.order_number)
 
 >>>>>>> 66fd9f5 (rename order_status to order_status_id)
+=======
+>>>>>>> e5b60bac93655058362969d53e983eb182261f50
         assert(actual_order.usa_state == "MD")
         assert(actual_order.home_office_code == "MD06")
         assert(actual_order.order_number == unique_order_number)

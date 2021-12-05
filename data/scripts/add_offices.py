@@ -7,15 +7,6 @@ def add_offices(office_codes_list, db):
             # TODO(tdk): we may not need uuids, discuss
             # theUuid = str(uuid.uuid4())
             office = OfficeModel(usa_state, office_code)
-<<<<<<< HEAD
-            print("Adding office", office_code)
             db.session.add(office)
     db.session.commit()
 
-<<<<<<< HEAD
-=======
-            db.session.add(office)
-    db.session.commit()
->>>>>>> 37d73cd (WIP populate seed data as separate script)
-=======
->>>>>>> b7e63f8 (Fixed PR findings, added refresh token)
