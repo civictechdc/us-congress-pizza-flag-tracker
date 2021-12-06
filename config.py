@@ -16,16 +16,16 @@ qrcode = QRcode(flask_app)
 
 CORS(flask_app, resources=r"/api/*")
 
-#workaround for heroku and sqlalchemy 1.4 https://stackoverflow.com/a/66794960
+# workaround for heroku and sqlalchemy 1.4 https://stackoverflow.com/a/66794960
 uri = os.getenv("DATABASE_URL")
-# if uri.startswith("postgres://"):
-#      uri = uri.replace("postgres://", "postgresql://", 1)
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 
 flask_app.config["SQLALCHEMY_DATABASE_URI"] = uri
 
 flask_app.config["FRONTEND_URI"] = os.environ["FRONTEND_URI"]
 flask_app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
-#squelch warning, per https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications
+# squelch warning, per https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications
 flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(flask_app)
 
