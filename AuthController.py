@@ -29,6 +29,7 @@ def derive_token_from_username(username):
 
 def login_user():
     auth = request.authorization
+    print("We are here")
     if not auth or not auth.username or not auth.password:
         return get_http_response("Username or password missing.", 401)
     ret_val = table_record_to_json(AuthActions.fetch_user(auth.username, auth.password))

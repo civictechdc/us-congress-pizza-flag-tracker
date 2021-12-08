@@ -43,3 +43,5 @@ def add_stable_orders(office_codes_list, db):
             theUuid, usa_state, order_number, home_office_code, order_status_id
         )
         db.session.add(order_)
+    
+    db.session.commit()
