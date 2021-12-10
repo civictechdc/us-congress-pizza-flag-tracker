@@ -15,7 +15,6 @@ class OfficeModel(db.Model):
     usa_state = db.Column(db.String(10))
     users = db.relationship("UserModel")
     orders = db.relationship("OrderModel")
-    statuses = db.relationship("StatusModel")
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
         db.DateTime, server_default=func.now(), onupdate=func.now())
@@ -74,8 +73,6 @@ class OrderModel(db.Model):
 class StatusModel(db.Model):
     __tablename__ = "status"
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    status_federal_office_code = db.Column(
-        db.String(10), db.ForeignKey(OfficeModel.office_code))
     sequence_num = db.Column(db.Integer)
     description = db.Column(db.String(255))
     active_status = db.Column(db.String(255))
@@ -86,9 +83,8 @@ class StatusModel(db.Model):
     updated_at = db.Column(
         db.DateTime, server_default=func.now(), onupdate=func.now())
 
-    def __init__(self, id, status_federal_office_code, sequence_num, description, active_status, status_code):
+    def __init__(self, id, sequence_num, description, active_status, status_code):
         self.id = id
-        self.status_federal_office_code = status_federal_office_code
         self.sequence_num = sequence_num
         self.description = description
         self.active_status = active_status
@@ -110,7 +106,7 @@ class UserParams:
 class UserModel(db.Model):
     __tablename__ = "users"
     username = db.Column(db.String(20), primary_key=True)
-    password = db.Column(db.String(400))
+    password = db.Column(db.LargeBinary(length=2048))
     office_code = db.Column(
         db.String(10), db.ForeignKey(OfficeModel.office_code))
     can_update_status_for = db.Column(db.String(20))
