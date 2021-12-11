@@ -29,7 +29,6 @@ def derive_token_from_username(username):
 
 def login_user():
     auth = request.authorization
-    print("We are here")
     if not auth or not auth.username or not auth.password:
         return get_http_response("Username or password missing.", 401)
     ret_val = table_record_to_json(AuthActions.fetch_user(auth.username, auth.password))
@@ -65,7 +64,6 @@ def get_user(token_username):
             f'Invalid username {token_username} in token. Message: "{str(exception)}".  Try logging in again')
 
 def check_valid_token(token):
-    print("**** Checking token ****", file=sys.stdout)
     try:
         token_data = jwt.decode(token, flask_app.config["SECRET_KEY"], algorithms=["HS256"])
         token_exp_date = datetime.datetime.utcfromtimestamp(token_data["exp"])
