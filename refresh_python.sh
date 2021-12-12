@@ -9,6 +9,6 @@ then
   export PATH=$PATH
 else
   echo Running myenv/Scripts/activate
-  myenv/Scripts/activate
+  source myenv/Scripts/activate
 fi
 
