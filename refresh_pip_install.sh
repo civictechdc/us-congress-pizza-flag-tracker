@@ -13,5 +13,5 @@ echo NOTE: if this takes more than about 2 minutes, you can use alternative belo
 echo .
 echo . pip install -r requirements.txt --use-deprecated=legacy-resolver
 echo .
-pip install -r requirements.txt
+$pycommand install -r requirements.txt
 echo Done
