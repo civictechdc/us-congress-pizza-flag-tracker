@@ -3,10 +3,7 @@ tasks:
   - name: intialize
     init: |
       echo 'init script' # runs during prebuild
-      export PIP_USER=false
-      cp .env.example .env
-      pip3 install -r requirements.txt
-      DEBUG=True FLASK_APP=app.py flask db upgrade
+      source ./gitpod_init.sh
 
     command: FLASK_APP=app.py FLASK_ENV=development flask run
 
@@ -15,4 +12,4 @@ ports:
   - port: 3000
     onOpen: open-preview
   - port: 5000
-    onOpen: ignore
+    visibility: public

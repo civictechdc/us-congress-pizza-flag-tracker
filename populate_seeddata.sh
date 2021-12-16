@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/bash
 pyv="$(python3 -V 2>&1)"
 
 if [[ "$pyv" != *"command not found"* ]];
@@ -9,6 +9,5 @@ else
   echo Using python
   pycommand="python"
 fi
-$pycommand -m venv myenv
-chmod 700 myenv/bin/*
-chmod 700 myenv/bin/*.*
+
+$pyv populate_seed_data.py
