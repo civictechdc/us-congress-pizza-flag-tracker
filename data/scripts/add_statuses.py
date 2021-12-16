@@ -14,7 +14,7 @@ def add_statuses(statuses_list, db):
           description=description,
           permission=permission,
           active_status=active_status,
-          status_code=status_code,)
+          status_code=status_code)
         db.session.add(status)
 
     db.session.commit()
