@@ -50,7 +50,7 @@ def get_order_by_order_number(order_number):
     else:
         return {"orders": [table_record_to_json(order_obj)]}
 
-# generate qr code
+# generate qr code - qr code points to Scan view on frontend
 
 
 def get_qrcode(uuid):
