@@ -37,21 +37,21 @@
     "id": 6,
     "sequence_num": 6,
     "description": "Congressional Staffer received flag",
-    "permission": "STAFF",
+    "permission": "STATE",
     "active_status": "OPEN",
     "status_code": "STAFF_RECEIVED"
   }, {
     "id": 7,
     "sequence_num": 7,
     "description": "Staffer order closed (Flag ready for shipment)",
-    "permission": "STAFF",
+    "permission": "STATE",
     "active_status": "OPEN",
     "status_code": "STAFF_CLOSED"
   }, {
     "id": 8,
     "sequence_num": 8,
     "description": "Constituent notified",
-    "permission": "STAFF",
+    "permission": "STATE",
     "active_status": "CLOSED",
     "status_code": "CONST_NOTIFIED"
   }, {
