@@ -96,7 +96,7 @@ def update_order_status(uuid):
     request_json = request.get_json()
     order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", None)
-    order.update_order(
-        uuid, order_status_id=order_status_id
-    )
-    return table_record_to_json(order)
+    order = OrderActions.update_order_status_by_uuid(
+        uuid, order_status_id)
+    order_dict = table_record_to_json(order)
+    return order_dict

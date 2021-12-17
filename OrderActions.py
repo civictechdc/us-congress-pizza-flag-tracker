@@ -42,4 +42,11 @@ class OrderActions():
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
         db.session.commit()
+        return order   
+
+    @ classmethod
+    def update_order_status_by_uuid(cls, uuid, order_status_id=None):
+        order = cls.get_order_by_uuid(uuid)
+        order.order_status_id = order_status_id or order.order_status_id
+        db.session.commit()
         return order
