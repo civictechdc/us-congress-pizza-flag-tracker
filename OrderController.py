@@ -55,7 +55,9 @@ def get_order_by_order_number(order_number):
 
 def get_qrcode(uuid):
     frontend_url = flask_app.config["FRONTEND_URI"]
-    img = qrcode.make(frontend_url + "/api/scan/" + uuid)
+
+    # remember this is the frontend URL, so no need for /api/ prefix
+    img = qrcode.make(frontend_url + "/scan/" + uuid)
     buf = io.BytesIO()
     img.save(buf)
     buf.seek(0)
