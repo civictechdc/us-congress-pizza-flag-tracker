@@ -1,9 +1,10 @@
 #/bin/sh
-./refresh_pip_install.sh
+# ./refresh_pip_install.sh
 # ./check_continue.sh returns false if uses exit to exit
-./check_continue.sh "If you enter Y, db will be upgraded if necessary"|| exit
+x=${./check_continue.sh "If you enter Y, db will be upgraded if necessary"|| exit}
+echo x is $x
 
-./refresh_db_upgrade.sh
+db_schema.sh
 # ./check_continue.sh returns false if uses exit to exit
 ./check_continue.sh "If you enter Y, data will be populated if necessary" || exit
 
