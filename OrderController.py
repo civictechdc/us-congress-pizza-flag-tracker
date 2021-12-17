@@ -106,3 +106,15 @@ def update_order_status(uuid):
 
     order_dict = table_record_to_json(order)
     return order_dict
+
+def revert_order_status(uuid):
+    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
+    
+    request_json = request.get_json()
+    order_status_id = get_dict_keyvalue_or_default(
+        request_json, "order_status_id", None)
+    order = OrderActions.revert_update_order_status_by_uuid(
+        uuid, order_status_id)
+
+    order_dict = table_record_to_json(order)
+    return order_dict    
