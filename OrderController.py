@@ -91,9 +91,8 @@ def update_order(uuid):
 
 def update_order_status(uuid):
     AuthController.set_authorize_current_user()
-    AuthPrivileges.check_update_order_allowed()
-
     order: OrderActions = OrderActions.get_order_by_uuid(uuid)
+    AuthPrivileges.check_update_order_allowed()
 
     request_json = request.get_json()
     order_status_id = get_dict_keyvalue_or_default(

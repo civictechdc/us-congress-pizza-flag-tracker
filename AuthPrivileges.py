@@ -1,5 +1,4 @@
 from werkzeug.exceptions import Unauthorized
-
 from AuthController import get_current_user
 from OrderActions import OrderActions
 
