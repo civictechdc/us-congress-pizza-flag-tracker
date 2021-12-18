@@ -1,4 +1,6 @@
 echo 'init script' # runs during prebuild
+echo Script will execute the following scripts:
+
 export PIP_USER=false
 export PATH=$PATH:$PWD/setup
 cp .env.example.mysql .env
