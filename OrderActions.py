@@ -69,4 +69,4 @@ class OrderActions:
         order = cls.get_order_by_uuid(uuid)
         db.session.delete(order)
         db.session.commit()
-        return "Deleted"
+        return "Deleted", 204
