@@ -36,7 +36,4 @@ def is_update_order_allowed():
 def is_update_status_allowed(order):
     return \
         get_current_user().can_update_status_for == "ALL" or \
-        get_current_user().can_update_status_for == ("HOSS" and order.status.permission) or \
-        get_current_user().can_update_status_for == ("AOC" and order.status.permission) or \
-        get_current_user().can_update_status_for == ("MAIL" and order.status.permission) or \
-        (get_current_user().can_update_status_for == ("STATE" and order.status.permission)) and (get_current_user().office_code == order.home_office_code)         
+        get_current_user().can_update_status_for == order.home_office_code       
