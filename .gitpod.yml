@@ -3,13 +3,13 @@ tasks:
   - name: intialize
     init: |
       echo 'init script' # runs during prebuild
-      source ./gitpod_init.sh
+      source ./run_gitpod_init.sh
 
     command: FLASK_APP=app.py FLASK_ENV=development flask run
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000
-    onOpen: open-preview
+    onOpen: open-browser
   - port: 5000
     visibility: public

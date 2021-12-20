@@ -17,6 +17,8 @@ fakeUUIDs = [
 
 def add_stable_orders(office_codes_list, db):
 
+    print("Adding sample orders (stable)");
+
     from models import OrderModel
 
     for x in range(10):
