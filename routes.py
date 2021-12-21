@@ -17,7 +17,6 @@ routes = [
     ["/api/info", WebController.info, "GET"],
     ["/api/orders/<uuid>", OrderController.update_order, "PUT"],
     ["/api/scan/<uuid>", OrderController.update_order_status, "PUT"],
-    ["/api/revert/<uuid>", OrderController.revert_order_status, "PUT"],
     ["/api/signin", AuthController.login_user, "POST"],
     ["/api/qrcode/<uuid>", OrderController.send_file_qrcode, "GET"],
     ["/api/states", OfficeController.get_all_states, "GET"],

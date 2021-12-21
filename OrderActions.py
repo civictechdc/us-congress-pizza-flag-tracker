@@ -42,21 +42,3 @@ class OrderActions():
         order.order_status_id = order_status_id or order.order_status_id
         db.session.commit()
         return order   
-
-    @ classmethod
-    def prepare_update_order_status_by_uuid(cls, uuid, order_status_id=None):
-        order = cls.get_order_by_uuid(uuid)
-        order.order_status_id = order_status_id or order.order_status_id
-        return order
-
-    @ classmethod
-    def commit_update_order_status_by_uuid(cls, order):
-        db.session.commit()
-        return order
-
-    @ classmethod
-    def revert_update_order_status_by_uuid(cls, uuid, order_status_id=None):
-        order = cls.get_order_by_uuid(uuid)
-        order.order_status_id = order_status_id or order.order_status_id
-        db.session.commit()
-        return order

@@ -3,7 +3,7 @@ from flask import render_template, request, send_file
 import AuthPrivileges
 
 from util import table_record_to_json, get_dict_keyvalue_or_default
-from config import flask_app, qrcode
+from config import flask_app, qrcode, db
 import qrcode
 import AuthController
 
@@ -91,30 +91,17 @@ def update_order(uuid):
 
 def update_order_status(uuid):
     AuthController.set_authorize_current_user()
-    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
+#    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
 
     request_json = request.get_json()
     order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", None)
-    order = OrderActions.prepare_update_order_status_by_uuid(
-        uuid, order_status_id)
+    order = OrderActions.get_order_by_uuid(uuid)
+    order.order_status_id = order_status_id or order.order_status_id
 
     AuthPrivileges.check_update_status_allowed(order)
 
-    order = OrderActions.commit_update_order_status_by_uuid(
-        order)
+    db.session.commit()
 
     order_dict = table_record_to_json(order)
-    return order_dict
-
-def revert_order_status(uuid):
-    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
-    
-    request_json = request.get_json()
-    order_status_id = get_dict_keyvalue_or_default(
-        request_json, "order_status_id", None)
-    order = OrderActions.revert_update_order_status_by_uuid(
-        uuid, order_status_id)
-
-    order_dict = table_record_to_json(order)
-    return order_dict    
+    return order_dict  
