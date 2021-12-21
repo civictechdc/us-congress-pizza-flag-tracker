@@ -2,6 +2,7 @@ from models import OrderModel, StatusModel
 from config import db
 import uuid
 
+
 class OrderActions():
     @classmethod
     def create(cls, usa_state: str, order_number: int, home_office_code: str,
