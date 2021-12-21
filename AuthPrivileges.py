@@ -38,4 +38,4 @@ def is_update_order_allowed():
 def is_update_status_allowed(order):
     return \
         get_current_user().can_update_status_for == "ALL" or \
-        get_current_user().can_update_status_for == order.home_office_code       
+        get_current_user().can_update_status_for == order.home_office_code
