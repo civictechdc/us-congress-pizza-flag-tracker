@@ -6,7 +6,7 @@ import random
 #         for office_code in state_offices["office_code"]:
 
 
-def add_sample_orders(office_codes_list, db):
+def add_random_orders(office_codes_list, db):
     print("Adding sample orders")
 
     from models import OrderModel

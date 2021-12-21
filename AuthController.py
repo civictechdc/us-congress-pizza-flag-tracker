@@ -64,7 +64,6 @@ def get_user(token_username):
             f'Invalid username {token_username} in token. Message: "{str(exception)}".  Try logging in again')
 
 def check_valid_token(token):
-    print("**** Checking token ****", file=sys.stdout)
     try:
         token_data = jwt.decode(token, flask_app.config["SECRET_KEY"], algorithms=["HS256"])
         token_exp_date = datetime.datetime.utcfromtimestamp(token_data["exp"])

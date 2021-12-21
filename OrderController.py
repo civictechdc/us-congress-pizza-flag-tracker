@@ -3,12 +3,12 @@ from flask import render_template, request, send_file
 import AuthPrivileges
 
 from util import table_record_to_json, get_dict_keyvalue_or_default
-from config import flask_app, qrcode
+from config import flask_app, qrcode, db
 import qrcode
 import AuthController
 
 from OrderActions import OrderActions
-import io
+import i0
 
 
 def index():
@@ -61,13 +61,13 @@ def get_order_by_order_number(order_number):
     else:
         return {"orders": [table_record_to_json(order_obj)]}
 
-
-# generate qr code
-
+# generate qr code - qr code points to Scan view on frontend
 
 def get_qrcode(uuid):
     frontend_url = flask_app.config["FRONTEND_URI"]
-    img = qrcode.make(frontend_url + "/api/orders/" + uuid)
+
+    # remember this is the frontend URL, so no need for /api/ prefix
+    img = qrcode.make(frontend_url + "/scan/" + uuid)
     buf = io.BytesIO()
     img.save(buf)
     buf.seek(0)
@@ -103,13 +103,15 @@ def update_order(uuid):
 
 def update_order_status(uuid):
     AuthController.set_authorize_current_user()
-    AuthPrivileges.check_update_order_allowed()
-
-    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
 
     request_json = request.get_json()
     order_status_id = get_dict_keyvalue_or_default(
-        request_json, "order_status_id", None
-    )
-    order.update_order(uuid, order_status_id=order_status_id)
-    return table_record_to_json(order)
+        request_json, "order_status_id", None)
+    order = OrderActions.get_order_by_uuid(uuid)
+    order.order_status_id = order_status_id or order.order_status_id
+
+    AuthPrivileges.check_update_status_allowed(order)
+
+    db.session.commit()
+    order_dict = table_record_to_json(order)
+    return order_dict  

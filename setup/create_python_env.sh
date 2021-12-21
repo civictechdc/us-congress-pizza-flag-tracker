@@ -10,5 +10,11 @@ else
   pycommand="python"
 fi
 $pycommand -m venv myenv
-
-./refresh_python.sh
+if test -f "myenv/bin/activate"
+then
+  chmod 700 myenv/bin/*
+  chmod 700 myenv/bin/*.*
+else
+  chmod 700 myenv/Scripts/*
+  chmod 700 myenv/Scripts/*.*
+fi
