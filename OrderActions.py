@@ -41,4 +41,4 @@ class OrderActions():
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
         db.session.commit()
-        return order   
+        return order
