@@ -70,3 +70,8 @@ class OrderActions:
         db.session.delete(order)
         db.session.commit()
         return "Deleted", 204
+
+    @classmethod
+    def commit_status_update(cls):
+        db.session.commit()
+        return
