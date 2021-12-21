@@ -8,7 +8,7 @@ import qrcode
 import AuthController
 
 from OrderActions import OrderActions
-import i0
+import io
 
 
 def index():
@@ -112,6 +112,7 @@ def update_order_status(uuid):
 
     AuthPrivileges.check_update_status_allowed(order)
 
-    db.session.commit()
+    OrderActions.commit_status_update()
+
     order_dict = table_record_to_json(order)
     return order_dict  
