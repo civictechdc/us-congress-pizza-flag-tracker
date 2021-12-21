@@ -13,6 +13,7 @@ routes = [
     ["/api/orders/create", OrderController.create_order, "POST"],
     ["/api/orders", OrderController.get_orders, "GET"],
     ["/api/orders/<uuid>", OrderController.get_order_by_uuid, "GET"],
+    ["/api/orders/<uuid>", OrderController.delete_order_by_uuid, "DELETE"],
     ["/api/order_num/<order_number>", OrderController.get_order_by_order_number, "GET"],
     ["/api/info", WebController.info, "GET"],
     ["/api/orders/<uuid>", OrderController.update_order, "PUT"],
@@ -20,10 +21,10 @@ routes = [
     ["/api/signin", AuthController.login_user, "POST"],
     ["/api/qrcode/<uuid>", OrderController.send_file_qrcode, "GET"],
     ["/api/states", OfficeController.get_all_states, "GET"],
-    ["/api/state_offices/<state>",OfficeController.get_offices_by_state,"GET"],
-    ["/api/statuses",StatusController.get_statuses,"GET"],
-    ["/api/users/create", UserController.create_user, "POST"]
-  ]
+    ["/api/state_offices/<state>", OfficeController.get_offices_by_state, "GET"],
+    ["/api/statuses", StatusController.get_statuses, "GET"],
+    ["/api/users/create", UserController.create_user, "POST"],
+]
 
 for route in routes:
     flask_app.add_url_rule(route[0], view_func=route[1], methods=[route[2]])
