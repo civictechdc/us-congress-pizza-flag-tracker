@@ -4,9 +4,7 @@ from sqlalchemy import func
 from sqlalchemy.sql.expression import join
 from config import db
 
-
 # id, State, Order Number, COffice, created_at , updated_at
-
 class OfficeModel(db.Model):
     __tablename__ = "offices"
     # TODO(tdk): commenting out uuid as this may not be needed with un/pw login
@@ -122,3 +120,6 @@ class UserModel(db.Model):
         self.can_update_status_for = user_values.can_update_status_for
         self.can_update_password_for = user_values.can_update_password_for
         self.is_admin = user_values.is_admin
+
+#Log Table
+#id, order_number, home_office_code, status_code, active_status, status_description, order_updated_at
