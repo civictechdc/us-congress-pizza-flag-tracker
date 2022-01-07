@@ -6,7 +6,7 @@ import jwt
 from flask import request, jsonify
 from werkzeug.exceptions import BadRequest, Unauthorized
 
-from AuthActions import AuthActions
+from src.auth.auth_actions import AuthActions
 from config import flask_app
 from models import UserModel
 from util import get_http_response, table_record_to_json
