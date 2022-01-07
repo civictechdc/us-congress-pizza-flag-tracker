@@ -1,4 +1,4 @@
-from models import OfficeModel
+from src.office.office_model import OfficeModel
 from src.status.status_model import StatusModel
 from flask_sqlalchemy import sqlalchemy
 from config import db

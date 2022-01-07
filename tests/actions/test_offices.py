@@ -1,8 +1,8 @@
 import pytest
 import datetime
 import random
-from OfficeActions import OfficeActions
-from models import OfficeModel
+from src.office.office_actions import OfficeActions
+from src.office.office_model import OfficeModel
 from config import *
 
 class TestOfficeActions():

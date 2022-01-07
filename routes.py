@@ -3,7 +3,7 @@ import WebController
 import UserController
 import src.auth.auth_controller as auth_controller
 from src.order import order_controller
-import OfficeController
+from src.office import office_controller
 from src.status import status_controller
 
 # add routes below®
@@ -20,8 +20,8 @@ routes = [
     ["/api/scan/<uuid>", order_controller.update_order_status, "PUT"],
     ["/api/signin", auth_controller.login_user, "POST"],
     ["/api/qrcode/<uuid>", order_controller.send_file_qrcode, "GET"],
-    ["/api/states", OfficeController.get_all_states, "GET"],
-    ["/api/state_offices/<state>", OfficeController.get_offices_by_state, "GET"],
+    ["/api/states", office_controller.get_all_states, "GET"],
+    ["/api/state_offices/<state>", office_controller.get_offices_by_state, "GET"],
     ["/api/statuses", status_controller.get_statuses, "GET"],
     ["/api/users/create", UserController.create_user, "POST"],
 ]

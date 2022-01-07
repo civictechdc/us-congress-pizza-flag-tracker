@@ -1,4 +1,4 @@
-from models import OfficeModel
+from src.office.office_model import OfficeModel
 from flask_sqlalchemy import sqlalchemy
 from config import db
 import uuid

@@ -1,5 +1,5 @@
 from config import db
-from models import OfficeModel
+from src.office.office_model import OfficeModel
 from pickle import NONE
 from sqlalchemy import func
 from sqlalchemy.sql.expression import join
