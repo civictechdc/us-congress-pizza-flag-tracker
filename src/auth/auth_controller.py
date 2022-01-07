@@ -8,7 +8,7 @@ from werkzeug.exceptions import BadRequest, Unauthorized
 
 from src.auth.auth_actions import AuthActions
 from config import flask_app
-from models import UserModel
+from src.user.user_model import UserModel
 from util import get_http_response, table_record_to_json
 
 __current_user__: UserModel = {}

@@ -3,7 +3,7 @@ import sys
 from dotenv import load_dotenv
 
 load_dotenv()
-from models import UserModel
+from src.user.user_model import UserModel
 from data.scripts.add_offices import add_offices
 from data.scripts.add_stable_orders import add_stable_orders
 from data.scripts.add_statuses import add_statuses

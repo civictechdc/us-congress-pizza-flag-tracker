@@ -3,7 +3,7 @@ import datetime
 import bcrypt
 import jwt
 from werkzeug.exceptions import Unauthorized
-from models import UserModel
+from src.user.user_model import UserModel
 
 class AuthActions:
     @classmethod

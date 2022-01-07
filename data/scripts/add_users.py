@@ -2,9 +2,9 @@
 
 def add_state_office_users(office_codes_list, db):
     print("Adding office users and encrypting password")
-    from models import UserParams  # imported here to prevent circular reference
+    from src.user.user_model import UserParams  # imported here to prevent circular reference
     # imported here to prevent circular reference
-    from UserActions import UserActions
+    from src.user.user_actions import UserActions
 
     state_office_codes_list = [
         offices for offices in office_codes_list if offices["usa_state"] != "FED"]
@@ -34,8 +34,8 @@ def add_state_office_users(office_codes_list, db):
 def add_fed_users(users_list, db):
     print("Adding FED users and encrypting password")
 
-    from models import UserParams
-    from UserActions import UserActions
+    from src.user.user_model import UserParams
+    from src.user.user_actions import UserActions
     for user in users_list:
         params = UserParams()
 

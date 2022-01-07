@@ -1,6 +1,6 @@
 from config import flask_app
 import WebController
-import UserController
+from src.user import user_controller
 import src.auth.auth_controller as auth_controller
 from src.order import order_controller
 from src.office import office_controller
@@ -23,7 +23,7 @@ routes = [
     ["/api/states", office_controller.get_all_states, "GET"],
     ["/api/state_offices/<state>", office_controller.get_offices_by_state, "GET"],
     ["/api/statuses", status_controller.get_statuses, "GET"],
-    ["/api/users/create", UserController.create_user, "POST"],
+    ["/api/users/create", user_controller.create_user, "POST"],
 ]
 
 for route in routes:
