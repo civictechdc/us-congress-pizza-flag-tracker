@@ -1,7 +1,7 @@
 from config import flask_app
 import WebController
 import UserController
-import AuthController
+import src.auth.auth_controller as auth_controller
 import OrderController
 import OfficeController
 import StatusController
@@ -18,7 +18,7 @@ routes = [
     ["/api/info", WebController.info, "GET"],
     ["/api/orders/<uuid>", OrderController.update_order, "PUT"],
     ["/api/scan/<uuid>", OrderController.update_order_status, "PUT"],
-    ["/api/signin", AuthController.login_user, "POST"],
+    ["/api/signin", auth_controller.login_user, "POST"],
     ["/api/qrcode/<uuid>", OrderController.send_file_qrcode, "GET"],
     ["/api/states", OfficeController.get_all_states, "GET"],
     ["/api/state_offices/<state>", OfficeController.get_offices_by_state, "GET"],

@@ -1,6 +1,6 @@
 from flask import request
 
-from AuthController import set_authorize_current_user
+from src.auth.auth_controller import set_authorize_current_user
 from AuthPrivileges import check_is_admin
 from UserActions import UserActions
 from models import UserParams

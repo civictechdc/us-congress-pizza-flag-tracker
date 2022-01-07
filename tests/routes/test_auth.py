@@ -1,7 +1,7 @@
 import app  # this resolves circular references
 from config import flask_app
 
-from AuthController import derive_token_from_username
+from src.auth.auth_controller import derive_token_from_username
 
 
 class TestAuth:

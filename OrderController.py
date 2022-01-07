@@ -5,7 +5,7 @@ import AuthPrivileges
 from util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode, db
 import qrcode
-import AuthController
+from src.auth import auth_controller
 
 from OrderActions import OrderActions
 import io
@@ -16,7 +16,7 @@ def index():
 
 
 def create_order():
-    AuthController.set_authorize_current_user()
+    auth_controller.set_authorize_current_user()
     AuthPrivileges.check_update_order_allowed()
     request_json = request.get_json()
     usa_state = request_json["usa_state"]
@@ -30,20 +30,20 @@ def create_order():
 
 
 def get_orders():
-    AuthController.set_authorize_current_user()
+    auth_controller.set_authorize_current_user()
     orders = OrderActions.get()
     return {"orders": [table_record_to_json(order) for order in orders]}
 
 
 def get_order_by_uuid(uuid):
-    AuthController.set_authorize_current_user()
+    auth_controller.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = table_record_to_json(order_obj)
     return order_dict
 
 
 def delete_order_by_uuid(uuid):
-    AuthController.set_authorize_current_user()
+    auth_controller.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     if order_obj is None:
         return {"error": "order not found"}
@@ -53,7 +53,7 @@ def delete_order_by_uuid(uuid):
 
 
 def get_order_by_order_number(order_number):
-    AuthController.set_authorize_current_user()
+    auth_controller.set_authorize_current_user()
     # Return a dictionary(json) object for use by frontend
     order_obj = OrderActions.get_order_by_order_number(order_number)
     if order_obj is None:
@@ -81,7 +81,7 @@ def send_file_qrcode(uuid):
 
 
 def update_order(uuid):
-    AuthController.set_authorize_current_user()
+    auth_controller.set_authorize_current_user()
     order: OrderActions = OrderActions.get_order_by_uuid(uuid)
     AuthPrivileges.check_update_order_allowed()
 
@@ -102,7 +102,7 @@ def update_order(uuid):
 
 
 def update_order_status(uuid):
-    AuthController.set_authorize_current_user()
+    auth_controller.set_authorize_current_user()
 
     request_json = request.get_json()
     order_status_id = get_dict_keyvalue_or_default(

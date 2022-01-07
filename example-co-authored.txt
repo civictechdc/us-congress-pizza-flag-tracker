@@ -1,0 +1,3 @@
+Moved AuthActions to src/auth/auth_actions 
+
+Co-authored-by: Terence Stone  <terence.stone25@gmail.com>
