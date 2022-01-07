@@ -1,8 +1,8 @@
 import random
 
 from src.auth import auth_controller, auth_privileges
-from OrderActions import OrderActions
-import OrderController
+from src.order.order_actions import OrderActions
+from src.order import order_controller
 from StatusActions import StatusActions
 from tests.mock_request import mock_request
 import tests.mock_auth_controller
@@ -16,11 +16,11 @@ class TestOrderController():
 
     def test_controllers_get_order_by_uuid(self, mocker):
         # TODO refactor this to auth_controller.__name__
-        mocker.patch.object(OrderController,"auth_controller", #auth_controller.__name__,
+        mocker.patch.object(order_controller, "auth_controller",  #auth_controller.__name__,
                             tests.mock_auth_controller)
         unique_order_number = random.randint(1, 1000000)
         created_order = OrderActions.create("OH", unique_order_number, "OH06")
-        actual_order = OrderController.get_order_by_uuid(created_order.uuid)
+        actual_order = order_controller.get_order_by_uuid(created_order.uuid)
 
         assert (actual_order['usa_state'] == "OH")
         assert (actual_order['home_office_code'] == "OH06")
@@ -30,11 +30,11 @@ class TestOrderController():
     # @pytest.mark.skip(reason="Test fails because not mocked properly, skipping until fixed")
     def test_create_Update_order(self, mocker):
 
-        mocker.patch.object(OrderController, 'request', mock_request)
+        mocker.patch.object(order_controller, 'request', mock_request)
         # TODO refactor this to auth_controller.__name__
-        mocker.patch.object(OrderController, "auth_controller", #auth_controller.__name__, 
-            tests.mock_auth_controller)
-        mocker.patch.object(OrderController, "auth_privileges", tests.mock_auth_privileges)
+        mocker.patch.object(order_controller, "auth_controller",  #auth_controller.__name__,
+                            tests.mock_auth_controller)
+        mocker.patch.object(order_controller, "auth_privileges", tests.mock_auth_privileges)
 
         unique_order_number = random.randint(1, 100000000)
         status = StatusActions.get_statuses()[2]
@@ -43,7 +43,7 @@ class TestOrderController():
         mock_request.mock_request_json = order_request_json;
 
 
-        response = OrderController.create_order()
+        response = order_controller.create_order()
 
         TestOrderController.assertExpectedOrder(order_request_json, response, status)
 
@@ -52,7 +52,7 @@ class TestOrderController():
                               "order_number": unique_order_number+1, "order_status_id":status.id}
         mock_request.mock_request_json = order_request_json;
 
-        response = OrderController.update_order(uuid=response['uuid'])
+        response = order_controller.update_order(uuid=response['uuid'])
 
         TestOrderController.assertExpectedOrder(order_request_json, response, status)
 

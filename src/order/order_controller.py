@@ -5,7 +5,7 @@ from config import flask_app, qrcode, db
 import qrcode
 from src.auth import auth_controller, auth_privileges
 
-from OrderActions import OrderActions
+from src.order.order_actions import OrderActions
 import io
 
 

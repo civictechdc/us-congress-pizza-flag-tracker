@@ -1,7 +1,7 @@
 from werkzeug.exceptions import Unauthorized
 
 from src.auth.auth_controller import get_current_user
-from OrderActions import OrderActions
+from src.order.order_actions import OrderActions
 
 
 def check_is_admin():

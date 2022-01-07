@@ -3,7 +3,8 @@ import os
 import bcrypt
 
 from src.auth import auth_privileges
-from models import UserModel, OrderModel, UserParams
+from models import UserModel, UserParams
+from order_models import OrderModel
 from flask_sqlalchemy import sqlalchemy
 from config import db, flask_app
 import uuid

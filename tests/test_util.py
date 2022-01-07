@@ -14,10 +14,11 @@ import pytest
 
 from cachelib import file
 
-from OrderActions import OrderActions
+from src.order.order_actions import OrderActions
 from StatusActions import StatusActions
 
-from models import OrderModel, StatusModel
+from models import StatusModel
+from order_models import OrderModel
 from util import table_record_to_json
 
 
