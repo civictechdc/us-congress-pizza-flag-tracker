@@ -9,7 +9,7 @@ import random
 def add_random_orders(office_codes_list, db):
     print("Adding sample orders")
 
-    from order_models import OrderModel
+    from src.order.order_models import OrderModel
 
     for x in range(10):
         order_number = x + 1

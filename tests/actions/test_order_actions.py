@@ -2,7 +2,7 @@ import random
 from src.order.order_actions import OrderActions
 from StatusActions import StatusActions
 from models import StatusModel
-from order_models import OrderModel
+from src.order.order_models import OrderModel
 
 
 class TestOrderActions():

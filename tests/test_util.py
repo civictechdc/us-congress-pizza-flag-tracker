@@ -18,7 +18,7 @@ from src.order.order_actions import OrderActions
 from StatusActions import StatusActions
 
 from models import StatusModel
-from order_models import OrderModel
+from src.order.order_models import OrderModel
 from util import table_record_to_json
 
 
