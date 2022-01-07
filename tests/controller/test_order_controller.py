@@ -16,6 +16,7 @@ from util import table_record_to_json
 class TestOrderController():
 
     def test_controllers_get_order_by_uuid(self, mocker):
+        # TODO refactor this to auth_controller.__name__
         mocker.patch.object(OrderController,"auth_controller", #auth_controller.__name__,
                             tests.mock_auth_controller)
         unique_order_number = random.randint(1, 1000000)
@@ -31,6 +32,7 @@ class TestOrderController():
     def test_create_Update_order(self, mocker):
 
         mocker.patch.object(OrderController, 'request', mock_request)
+        # TODO refactor this to auth_controller.__name__
         mocker.patch.object(OrderController, "auth_controller", #auth_controller.__name__, 
             tests.mock_auth_controller)
         mocker.patch.object(OrderController, AuthPrivileges.__name__, tests.mock_auth_privileges)
