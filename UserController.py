@@ -1,7 +1,7 @@
 from flask import request
 
 from src.auth.auth_controller import set_authorize_current_user
-from AuthPrivileges import check_is_admin
+from src.auth.auth_privileges import check_is_admin
 from UserActions import UserActions
 from models import UserParams
 from util import table_record_to_json

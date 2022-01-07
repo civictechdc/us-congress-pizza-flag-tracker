@@ -1,7 +1,6 @@
 import random
 
-from  src.auth import auth_controller
-import AuthPrivileges
+from src.auth import auth_controller, auth_privileges
 from OrderActions import OrderActions
 import OrderController
 from StatusActions import StatusActions
@@ -35,7 +34,7 @@ class TestOrderController():
         # TODO refactor this to auth_controller.__name__
         mocker.patch.object(OrderController, "auth_controller", #auth_controller.__name__, 
             tests.mock_auth_controller)
-        mocker.patch.object(OrderController, AuthPrivileges.__name__, tests.mock_auth_privileges)
+        mocker.patch.object(OrderController, "auth_privileges", tests.mock_auth_privileges)
 
         unique_order_number = random.randint(1, 100000000)
         status = StatusActions.get_statuses()[2]

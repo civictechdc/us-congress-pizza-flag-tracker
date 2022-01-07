@@ -2,7 +2,7 @@ import os
 
 import bcrypt
 
-import AuthPrivileges
+from src.auth import auth_privileges
 from models import UserModel, OrderModel, UserParams
 from flask_sqlalchemy import sqlalchemy
 from config import db, flask_app
@@ -59,4 +59,4 @@ class UserActions:
         )
         user.can_update_password_for = user_values.can_update_password_for
         user.can_update_status_for = user_values.can_update_status_for
-        AuthPrivileges.is_admin = user_values.is_admin
+        auth_privileges.is_admin = user_values.is_admin
