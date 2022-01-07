@@ -3,7 +3,7 @@ import random
 from src.auth import auth_controller, auth_privileges
 from src.order.order_actions import OrderActions
 from src.order import order_controller
-from StatusActions import StatusActions
+from src.status.status_actions import StatusActions
 from tests.mock_request import mock_request
 import tests.mock_auth_controller
 import tests.mock_auth_privileges

@@ -4,7 +4,7 @@ import UserController
 import src.auth.auth_controller as auth_controller
 from src.order import order_controller
 import OfficeController
-import StatusController
+from src.status import status_controller
 
 # add routes below®
 
@@ -22,7 +22,7 @@ routes = [
     ["/api/qrcode/<uuid>", order_controller.send_file_qrcode, "GET"],
     ["/api/states", OfficeController.get_all_states, "GET"],
     ["/api/state_offices/<state>", OfficeController.get_offices_by_state, "GET"],
-    ["/api/statuses", StatusController.get_statuses, "GET"],
+    ["/api/statuses", status_controller.get_statuses, "GET"],
     ["/api/users/create", UserController.create_user, "POST"],
 ]
 

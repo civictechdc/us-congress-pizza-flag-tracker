@@ -1,5 +1,5 @@
-from models import StatusModel
-from src.order.order_models import OrderModel
+from src.status.status_model import StatusModel
+from src.order.order_model import OrderModel
 from config import db
 import uuid
 

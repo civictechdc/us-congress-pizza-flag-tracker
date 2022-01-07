@@ -1,6 +1,6 @@
 from flask import render_template, request, send_file
 
-from StatusActions import StatusActions
+from src.status.status_actions import StatusActions
 
 from util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode

@@ -1,4 +1,5 @@
-from models import StatusModel, OfficeModel
+from models import OfficeModel
+from src.status.status_model import StatusModel
 from flask_sqlalchemy import sqlalchemy
 from config import db
 import uuid
