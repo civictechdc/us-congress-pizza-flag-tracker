@@ -19,7 +19,7 @@ from src.status.status_actions import StatusActions
 
 from src.status.status_model import StatusModel
 from src.order.order_model import OrderModel
-from util import table_record_to_json
+from src.util import table_record_to_json
 
 
 class TestUtils():

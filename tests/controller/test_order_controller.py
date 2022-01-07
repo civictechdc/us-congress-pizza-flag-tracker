@@ -9,7 +9,7 @@ import tests.mock_auth_controller
 import tests.mock_auth_privileges
 import pytest
 
-from util import table_record_to_json
+from src.util import table_record_to_json
 
 
 class TestOrderController():

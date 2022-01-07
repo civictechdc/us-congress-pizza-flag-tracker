@@ -9,7 +9,7 @@ from flask_sqlalchemy import sqlalchemy
 from config import db, flask_app
 import uuid
 
-from util import table_record_to_json, table_to_json
+from src.util import table_record_to_json, table_to_json
 
 import datetime
 
@@ -20,7 +20,7 @@ from flask_sqlalchemy import sqlalchemy
 from config import db, flask_app
 import uuid
 
-from util import table_record_to_json, table_to_json
+from src.util import table_record_to_json, table_to_json
 
 
 class UserActions:

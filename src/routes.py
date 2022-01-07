@@ -1,5 +1,5 @@
 from config import flask_app
-import WebController
+from src import WebController
 from src.user import user_controller
 import src.auth.auth_controller as auth_controller
 from src.order import order_controller

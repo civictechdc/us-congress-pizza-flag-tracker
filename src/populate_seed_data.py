@@ -18,14 +18,14 @@ if users_exist:
     print("Seed data has already been populated.")
     sys.exit()
 with open(
-    "data/office_codes.json",
+        "../data/office_codes.json",
 ) as office_codes_json:
     office_codes_list = json.load(office_codes_json)
 
-with open("data/users.json") as users_json:
+with open("../data/users.json") as users_json:
     users_list = json.load(users_json)
 
-with open("data/statuses.json") as statuses_json:
+with open("../data/statuses.json") as statuses_json:
     statuses_list: object = json.load(statuses_json)
 
 add_offices(office_codes_list, db)

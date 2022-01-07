@@ -1,4 +1,4 @@
-import app  # this resolves circular references
+import app
 from config import flask_app
 
 from src.auth.auth_controller import derive_token_from_username

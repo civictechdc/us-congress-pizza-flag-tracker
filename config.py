@@ -29,8 +29,8 @@ flask_app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
 flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(flask_app)
 
-from init_app_close_db import init_app
-from error_handler import handle_exceptions_for_app
+from src.init_app_close_db import init_app
+from src.error_handler import handle_exceptions_for_app
 
 init_app(flask_app)
 

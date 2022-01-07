@@ -4,7 +4,7 @@ from src.auth.auth_controller import set_authorize_current_user
 from src.auth.auth_privileges import check_is_admin
 from src.user.user_actions import UserActions
 from src.user.user_model import UserParams
-from util import table_record_to_json
+from src.util import table_record_to_json
 
 
 def create_user():
