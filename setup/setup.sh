@@ -43,7 +43,7 @@ if [ $step == "1" ];then
 fi
 
 if [ $step -le "2" ];then
-  activate_$env\_env.sh 
+  source activate_$env\_env.sh
 fi
 
 if [ $step == "3" ]; then

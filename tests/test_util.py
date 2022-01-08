@@ -13,7 +13,7 @@ import pytest
 # import numpy as np
 
 from cachelib import file
-
+from config import db
 from src.order.order_actions import OrderActions
 from src.status.status_actions import StatusActions
 

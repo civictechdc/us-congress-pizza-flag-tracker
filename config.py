@@ -35,3 +35,8 @@ from src.error_handler import handle_exceptions_for_app
 init_app(flask_app)
 
 migrate = Migrate(flask_app, db)
+
+from src.office.office_model import OfficeModel
+from src.order.order_model import OrderModel
+from src.user.user_model import UserModel
+from src.status.status_model import StatusModel
