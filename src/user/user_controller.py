@@ -1,6 +1,6 @@
 from flask import request
 
-from src.auth.auth_controller import set_authorize_current_user
+from src.auth.auth_controller import get_current_user, set_authorize_current_user 
 from src.auth.auth_privileges import check_is_admin
 from src.user.user_actions import UserActions
 from src.user.user_model import UserParams
@@ -22,3 +22,10 @@ def create_user():
     userParams.is_admin = request_json["is_admin"]
     new_user = UserActions.create(userParams)
     return table_record_to_json(new_user), 201
+
+def get_current_office():
+    current_office = get_current_user().office_code
+    if 'FED' == current_office[:3]:
+        return 'FED'
+    else:
+        return current_office

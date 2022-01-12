@@ -28,8 +28,11 @@ class OrderActions:
         return new_order
 
     @classmethod
-    def get(cls):
-        orders = OrderModel.query.all()
+    def get(cls,office):
+        if office == 'FED':
+            orders = OrderModel.query.all()
+        else:
+            orders = OrderModel.query.filter(OrderModel.home_office_code == office)
         return orders
 
     @classmethod
