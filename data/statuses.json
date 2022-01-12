@@ -1,7 +1,7 @@
 [{
     "id": 1,
     "sequence_num": 1,
-    "description": "Constituent request in",
+    "description": "Constituent request sent into HOSS",
     "permission": "FED-HOSS",
     "active_status": "OPEN",
     "status_code": "HOSS_RECEIVED"
@@ -50,7 +50,7 @@
   }, {
     "id": 8,
     "sequence_num": 8,
-    "description": "Constituent notified",
+    "description": "Constituent notified by Congressional Staff",
     "permission": "STATE",
     "active_status": "CLOSED",
     "status_code": "CONST_NOTIFIED"
