@@ -5,6 +5,7 @@ from config import flask_app, qrcode, db
 import qrcode
 from src.auth import auth_controller, auth_privileges
 
+from src.user.user_controller import get_current_office
 from src.order.order_actions import OrderActions
 import io
 
@@ -29,7 +30,8 @@ def create_order():
 
 def get_orders():
     auth_controller.set_authorize_current_user()
-    orders = OrderActions.get()
+    current_office = get_current_office()
+    orders = OrderActions.get(current_office)
     return {"orders": [table_record_to_json(order) for order in orders]}
 
 
