@@ -29,3 +29,5 @@ def get_current_office():
         return 'FED'
     else:
         return current_office
+
+#function for user to update password
