@@ -29,7 +29,7 @@ with open("data/users.json") as users_json:
 with open("data/statuses.json") as statuses_json:
     statuses_list: object = json.load(statuses_json)
 
-add_offices(office_codes_list, db)
+add_offices(office_codes_list=office_codes_list, db=db)
 add_state_office_users(office_codes_list, db)
 add_fed_users(users_list, db)
 add_statuses(statuses_list, db)
