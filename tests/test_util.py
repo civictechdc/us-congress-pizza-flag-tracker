@@ -13,12 +13,13 @@ import pytest
 # import numpy as np
 
 from cachelib import file
+from config import db
+from src.order.order_actions import OrderActions
+from src.status.status_actions import StatusActions
 
-from OrderActions import OrderActions
-from StatusActions import StatusActions
-
-from models import OrderModel, StatusModel
-from util import table_record_to_json
+from src.status.status_model import StatusModel
+from src.order.order_model import OrderModel
+from src.util import table_record_to_json
 
 
 class TestUtils():
@@ -31,11 +32,6 @@ class TestUtils():
         home_office_code = "FED-ADMIN"
         order = OrderActions.create(order_number=order_number, usa_state=usa_state,
                                     home_office_code=home_office_code, order_status=order_status)
-        # description = "The first status"
-        # active_status =
-        # status = StatusModel(id=unique_number, status_federal_office_code="FED-ADMIN", sequence_num=unique_number,
-        #                      description=description, active_status=active_status, status_code=status_code)
-        # order.status = status
         json = table_record_to_json(order)
         assert (json["usa_state"] == order.usa_state)
         assert (json["status"]["description"] == order_status.description)

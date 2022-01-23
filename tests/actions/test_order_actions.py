@@ -1,7 +1,8 @@
 import random
-from OrderActions import OrderActions
-from StatusActions import StatusActions
-from models import OrderModel, StatusModel
+from src.order.order_actions import OrderActions
+from src.status.status_actions import StatusActions
+from src.status.status_model import StatusModel
+from src.order.order_model import OrderModel
 
 
 class TestOrderActions():

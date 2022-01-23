@@ -1,64 +1,64 @@
 [{
     "id": 1,
-    "status_federal_office_code": "HOSS",
     "sequence_num": 1,
-    "description": "Constituent request in",
+    "description": "Constituent request sent into HOSS",
+    "permission": "FED-HOSS",
     "active_status": "OPEN",
     "status_code": "HOSS_RECEIVED"
   }, {
     "id": 2,
-    "status_federal_office_code": "HOSS",
     "sequence_num": 2,
     "description": "HOSS verified as printed and scanned physical QR code",
+    "permission": "FED-HOSS",
     "active_status": "OPEN",
     "status_code": "HOSS_VERIFIED"
   }, {
     "id": 3,
-    "status_federal_office_code": "AOC",
     "sequence_num": 3,
     "description": "AOC received flag from HOSS",
+    "permission": "FED-AOC",
     "active_status": "OPEN",
     "status_code": "AOC_RECEIVED"
   }, {
     "id": 4,
-    "status_federal_office_code": "AOC",
     "sequence_num": 4,
     "description": "AOC has flown flag and added certificate",
+    "permission": "FED-AOC",
     "active_status": "OPEN",
     "status_code": "AOC_FLOWN"
   }, {
     "id": 5,
-    "status_federal_office_code": "MAIL",
     "sequence_num": 5,
     "description": "Mail Services picked up flag from AOC",
+    "permission": "FED-MAIL",
     "active_status": "OPEN",
     "status_code": "MAIL_RECEIVED"
   }, {
     "id": 6,
-    "status_federal_office_code": "STATE",
     "sequence_num": 6,
     "description": "Congressional Staffer received flag",
+    "permission": "STATE",
     "active_status": "OPEN",
     "status_code": "STAFF_RECEIVED"
   }, {
     "id": 7,
-    "status_federal_office_code": "STATE",
     "sequence_num": 7,
     "description": "Staffer order closed (Flag ready for shipment)",
+    "permission": "STATE",
     "active_status": "OPEN",
     "status_code": "STAFF_CLOSED"
   }, {
     "id": 8,
-    "status_federal_office_code": "STATE",
     "sequence_num": 8,
-    "description": "Constituent notified",
+    "description": "Constituent notified by Congressional Staff",
+    "permission": "STATE",
     "active_status": "CLOSED",
     "status_code": "CONST_NOTIFIED"
   }, {
     "id": 9,
-    "status_federal_office_code": "ALL",
     "sequence_num": 9,
-    "description": "Order canceled",
+    "description": "Order canceled",    
+    "permission": "ALL",
     "active_status": "CANCELED",
     "status_code": "CANCELED"
     }]
