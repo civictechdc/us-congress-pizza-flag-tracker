@@ -24,6 +24,8 @@ routes = [
     ["/api/state_offices/<state>", office_controller.get_offices_by_state, "GET"],
     ["/api/statuses", status_controller.get_statuses, "GET"],
     ["/api/users/create", user_controller.create_user, "POST"],
+    ["/api/users/self/update/password",user_controller.self_update_password,"POST"],
+    ["/api/users/admin/update/password",user_controller.admin_update_password,"POST"],
 ]
 
 for route in routes:

@@ -8,11 +8,6 @@ from config import db
 # id, State, Order Number, COffice, created_at , updated_at
 from src.office.office_model import OfficeModel
 
-
-# Do we want to break this file up into separate model
-#  files? E.g. statusModels.py, userModels.py
-
-
 # User Table notes
 #  uuid, user_id, can_set_status (if they scan), (one to many)
 class UserParams:

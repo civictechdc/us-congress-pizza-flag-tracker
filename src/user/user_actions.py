@@ -2,7 +2,7 @@ from hashlib import new
 import os
 
 import bcrypt
-
+from werkzeug.exceptions import Unauthorized
 from src.auth import auth_privileges
 from src.auth.auth_actions import AuthActions
 from src.user.user_model import UserModel, UserParams
@@ -66,14 +66,36 @@ class UserActions:
         auth_privileges.is_admin = user_values.is_admin
         db.session.commit()
         return user
-    
+
     @classmethod
-    def update_password(cls, username, new_password, old_password = ""):
-        user = AuthActions.fetch_user(username, old_password)
+    def update_password(cls, user, new_password):
         user.password = new_password
         bcrypt_rounds = int (os.environ["BCRYPT_ROUNDS"])
         salt = bcrypt.gensalt(bcrypt_rounds)
         new_hashed_password = bcrypt.hashpw(user.password.encode(), salt)
         user.password = new_hashed_password
+        db.session.commit()
+        return
+
+    @classmethod
+    def self_update_password(cls, username, new_password, old_password):
+        user = AuthActions.fetch_user(username, old_password)
+        cls.update_password(user, new_password)
         return username
 
+    @classmethod
+    def admin_update_password(cls, username, new_password):
+        has_permission = False
+        current_user = get_current_user()
+        user = cls.get_by_name(username)
+        if current_user.username == "FED-ADMIN":
+            has_permission = True
+        elif current_user.is_admin and current_user.office_code == user.office_code:
+            has_permission = True
+        if has_permission:
+            cls.update_password(user, new_password)
+            return
+        else:
+            raise Unauthorized("Unauthorized. Admin privileges required.")
+
+            
