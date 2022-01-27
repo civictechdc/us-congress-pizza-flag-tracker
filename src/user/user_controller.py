@@ -1,4 +1,5 @@
 from flask import request
+from src.auth import auth_controller
 
 from src.auth.auth_controller import get_current_user, set_authorize_current_user 
 from src.auth.auth_privileges import check_is_admin
@@ -31,3 +32,11 @@ def get_current_office():
         return current_office
 
 #function for user to update password
+def self_update_password(new_password, old_password):
+    username = auth_controller.get_current_user().username
+    UserActions.self_update_password(username, new_password, old_password)
+    return username
+
+def admin_update_password(username, new_password):
+    UserActions.admin_update_password(username, new_password)
+    return 
