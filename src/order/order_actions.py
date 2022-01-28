@@ -28,8 +28,8 @@ class OrderActions:
         return new_order
 
     @classmethod
-    def get(cls,office):
-        if office == 'FED':
+    def get(cls, office):
+        if office == "FED":
             orders = OrderModel.query.all()
         else:
             orders = OrderModel.query.filter(OrderModel.home_office_code == office)
@@ -73,7 +73,6 @@ class OrderActions:
         order = cls.get_order_by_uuid(uuid)
         db.session.delete(order)
         db.session.commit()
-        return "Deleted", 204
 
     @classmethod
     def commit_status_update(cls):

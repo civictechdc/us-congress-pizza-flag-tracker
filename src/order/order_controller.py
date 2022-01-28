@@ -1,4 +1,4 @@
-from flask import render_template, request, send_file
+from flask import render_template, request, send_file, Response
 
 from src.util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode, db
@@ -46,10 +46,10 @@ def delete_order_by_uuid(uuid):
     auth_controller.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     if order_obj is None:
-        return {"error": "order not found"}
+        return Response(response="Error:order not found", status=404)
     else:
         OrderActions.delete_order_by_uuid(uuid)
-        return {"Deleted": 204}
+        return "Deleted", 204
 
 
 def get_order_by_order_number(order_number):
