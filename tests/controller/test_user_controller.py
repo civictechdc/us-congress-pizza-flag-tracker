@@ -5,7 +5,7 @@ from src.auth import auth_controller
 
 from src.auth.auth_controller import get_current_user, set_authorize_current_user 
 from src.auth.auth_privileges import check_is_admin
-from src.user.user_controller import update_own_password
+from src.user.user_controller import self_update_password
 from src.user.user_actions import UserActions
 from src.user.user_model import UserParams
 from src.util import table_record_to_json
@@ -13,7 +13,7 @@ from src.util import table_record_to_json
 #How to set user for current session in test
 #Will reseaerch JWT 
 class TestUserControllers():
-    def test_update_own_password():
+    def test_self_update_password():
         new_user_params = UserParams()
 
         new_user_params.username = "Test_Admin" + str(random.randint(1,1000))
