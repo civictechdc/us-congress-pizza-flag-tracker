@@ -3,6 +3,7 @@ from config import flask_app
 
 from src.auth.auth_controller import derive_token_from_username
 
+# We set this flag as true to theoretically get more debug info from the test--if these tests fail without it, python will just throw an error, but of course we want to capture the error rather than just throw it.
 flask_app.testing = True
 
 
