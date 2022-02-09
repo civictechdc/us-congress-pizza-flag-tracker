@@ -1,10 +1,11 @@
 from flask import render_template, request, send_file
+from src.log import log_controller
 
 from src.util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode, db
 import qrcode
 from src.auth import auth_controller, auth_privileges
-
+from src.log.log_controller import log_new_order, update_order_log
 from src.user.user_controller import get_current_office
 from src.order.order_actions import OrderActions
 import io
@@ -25,7 +26,8 @@ def create_order():
     order = OrderActions.create(
         usa_state, idbased_order_number, home_office_code, order_status_id
     )
-    return table_record_to_json(order)
+    log_order = log_controller.log_new_order(usa_state, idbased_order_number, home_office_code, order_status_id)
+    return table_record_to_json(order, log_order)
 
 
 def get_orders():

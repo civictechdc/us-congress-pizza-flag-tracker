@@ -5,11 +5,12 @@ from src.log.log_actions import LogActions
 from src.order.order_actions import OrderActions 
 import io
 
-def log_new_order(order):
-    log_order = LogActions.log(order)
-    return 
+def log_new_order(usa_state, idbased_order_number, home_office_code, order_status_id):
+    log_order = LogActions.log(usa_state, idbased_order_number, home_office_code, order_status_id)
+    return log_order
 
 def update_order_log(order):
+    log_update = LogActions.update(order)
     return
 
 def get_logs():

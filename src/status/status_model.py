@@ -1,4 +1,4 @@
-from config import db
+ chrom from config import db
 
 from pickle import NONE
 from sqlalchemy import func
