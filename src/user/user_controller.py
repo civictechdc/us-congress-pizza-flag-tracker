@@ -47,6 +47,8 @@ def self_update_password():
         return Response(response=username, status=200)
     else:
         return
+        # this will NOT tell the user if their old password is incorrect--we need to add some additional error handling that will send responses back from the server, not just raise an exception.
+        # See https://flask.palletsprojects.com/en/2.0.x/errorhandling/ for one approach using decorators to catch exceptions
 
 
 def admin_update_password(username, new_password):
