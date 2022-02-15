@@ -1,6 +1,6 @@
 
 
-def add_state_office_users(office_codes_list, db):
+def add_state_office_users(*, office_codes_list, db):
     print("Adding office users and encrypting password")
     from src.user.user_model import UserParams  # imported here to prevent circular reference
     # imported here to prevent circular reference
@@ -31,7 +31,7 @@ def add_state_office_users(office_codes_list, db):
             UserActions.create(params)
         db.session.commit()
 
-def add_fed_users(users_list, db):
+def add_fed_users(*, users_list, db):
     print("Adding FED users and encrypting password")
 
     from src.user.user_model import UserParams

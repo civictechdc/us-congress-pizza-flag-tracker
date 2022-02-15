@@ -15,7 +15,7 @@ fakeUUIDs = [
 ]
 
 
-def add_stable_orders(office_codes_list, db):
+def add_stable_orders(*, office_codes_list, db):
 
     print("Adding sample orders (stable)");
 

@@ -1,4 +1,4 @@
-def add_statuses(statuses_list, db):
+def add_statuses(*, statuses_list, db):
     print("Adding statuses")
     from src.status.status_model import StatusModel
     for status in statuses_list:
