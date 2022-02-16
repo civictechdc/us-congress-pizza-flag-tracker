@@ -38,4 +38,7 @@ def is_update_order_allowed():
 def is_update_status_allowed(order):
     return \
         get_current_user().can_update_status_for == "ALL" or \
-        get_current_user().office_code == order.home_office_code
+        get_current_user().office_code == "FED-HOSS" and next_status.permission == "FED-HOSS" or \
+        get_current_user().office_code == "FED-AOC" and next_status.permission == "FED-AOC" or \
+        get_current_user().office_code == "FED-MAIL" and next_status.permission == "FED-MAIL" or \
+        get_current_user().office_code == order.home_office_code and next_status.permission == "STATE"
