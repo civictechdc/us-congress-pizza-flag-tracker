@@ -22,7 +22,7 @@ def add_state_office_users(office_codes_list, db):
             params.username = office_code
             params.office_code = office_code
             params.can_update_status_for = office_code
-            # UserActions.create(params)
+            UserActions.create(params)
 
             # Admin users
             params.username = office_code + "-ADMIN"
