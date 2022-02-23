@@ -7,12 +7,12 @@ from config import db
 class LogActions:
     @classmethod
     def log(cls, usa_state, idbased_order_number, home_office_code, order_status_id):
+        #get order number id based on the order number
+        get_order_log_id = LogModel.query.order_by(order_number.previous_order_log_id.desc()).first() #this should query the last update
+        home_office_code = usa_state
         order_number = idbased_order_number
-        current_status = StatusModel.query.filter_by(order_status_id).first() 
-        active_status = current_status.active_status
-        status_description = current_status.status_description
-        previous_status_code = active_status
-        new_log= LogModel(usa_state, order_number, home_office_code, order_status_id, active_status, status_description, previous_status_code)
+        previous_order_log_id = get_order_log_id
+        new_log= LogModel(order_number, home_office_code, previous_order_log_id, home_office_code, order_status_id)
         db.session.add(new_log)
         db.session.commit()
         return
@@ -23,6 +23,6 @@ class LogActions:
         return get_logs
     
     @classmethod
-    def get_all_order_logs_by_order_number(cls, order):
-        db.session.commit()
-        return
+    def get_all_order_logs_by_order_number(cls, order_number):
+        get_all_logs_by_order_number = LogModel.query.order_by(order_number).all()
+        return get_all_logs_by_order_number

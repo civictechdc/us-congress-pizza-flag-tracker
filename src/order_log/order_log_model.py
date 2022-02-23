@@ -8,7 +8,7 @@ from src.office.office_model import OfficeModel
 class OrderLogModel(db.Model):
     __tablename__ = "order_logs"
     uuid = db.Column(db.String(40), unique=True, index=True, primary_key=True, nullable=False)
-    previous_order_log_id = db.Column(db.String(255))
+    previous_order_log_id = db.Column(db.String(255)) #Where the order was last
     order_updated_at = db.Column(db.DateTime)
     order_number = db.Column(db.Interger)
     order_uuid = db.Column(db.String(40), db.ForiegnKey(OrderModel.uuid))

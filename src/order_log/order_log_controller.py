@@ -10,7 +10,9 @@ def get_logs():
     return logs
 
 def get_all_order_logs_by_order_number(order_number):
-    return
+    get_all_logs_by_order_number = LogActions.get_all_order_logs_by_order_number(order_number)
+    return get_all_logs_by_order_number
 
 def search_order_progress(order_number):
+    #log order progress in sequentional order
     return
