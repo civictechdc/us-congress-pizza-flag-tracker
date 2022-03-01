@@ -49,6 +49,8 @@ class UserActions:
     def get_users(cls):
         users = UserModel.query.all()
         return users
+        #only admin can see users
+        #need a verify user function to check for admin previlages
 
     @classmethod
     def get_by_name(cls, username: str):
@@ -75,7 +77,7 @@ class UserActions:
         new_hashed_password = bcrypt.hashpw(user.password.encode(), salt)
         user.password = new_hashed_password
         db.session.commit()
-        return
+        return user
 
     @classmethod
     def self_update_password(cls, username, new_password, old_password):
