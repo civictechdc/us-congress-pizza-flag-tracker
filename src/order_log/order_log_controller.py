@@ -6,8 +6,8 @@ from src.order.order_actions import OrderActions
 import io
 
 def get_logs():
-    logs = LogActions.get_all_logs()
-    return logs
+    order_logs = LogActions.get_all_logs()
+    return order_logs
 
 def get_all_order_logs_by_order_number(order_number):
     get_all_logs_by_order_number = LogActions.get_all_order_logs_by_order_number(order_number)
@@ -15,4 +15,4 @@ def get_all_order_logs_by_order_number(order_number):
 
 def search_order_progress(order_number):
     #log order progress in sequentional order
-    return
+    return 

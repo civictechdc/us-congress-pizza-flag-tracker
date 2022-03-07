@@ -15,7 +15,7 @@ class LogActions:
         new_log= LogModel(order_number, home_office_code, previous_order_log_id, home_office_code, order_status_id)
         db.session.add(new_log)
         db.session.commit()
-        return
+        return new_log
 
     @classmethod
     def get_all_logs(cls):
