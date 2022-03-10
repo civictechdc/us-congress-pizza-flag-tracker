@@ -27,6 +27,7 @@ def create_user():
     return table_record_to_json(new_user), 201
 
 def get_all_users():
+    check_is_admin()
     all_users = UserActions.get_users()
     return table_record_to_json(all_users), 201
     
@@ -39,6 +40,7 @@ def get_current_office():
 
 
 # function for user to update password
+# function needs to be refactored
 def self_update_password():
     request_json = request.get_json()["data"]
     old_password = request_json["old_password"]
@@ -49,7 +51,7 @@ def self_update_password():
     if UserActions.self_update_password(username, new_password, old_password):
         return Response(response=username, status=200)
     else:
-        return 
+        return
         # this will NOT tell the user if their old password is incorrect--we need to add some additional error handling that will send responses back from the server, not just raise an exception.
         # See https://flask.palletsprojects.com/en/2.0.x/errorhandling/ for one approach using decorators to catch exceptions
 
