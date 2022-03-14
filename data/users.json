@@ -2,8 +2,9 @@
  {"username":"FED-HOSS-ADMIN","password":"FED-HOSS-ADMIN-1010","office_code":"FED-HOSS","can_create_update_delete_orders":"Y","can_update_status_for":"ALL","can_update_password_for":"FED-HOSS","is_admin":"N"},
  {"username":"FED-AOC","password":"FED-AOC-1010","office_code":"FED-AOC","can_create_update_delete_orders":"Y","can_update_status_for":"ALL","can_update_password_for":"NONE","is_admin":"N"},
  {"username":"FED-AOC-ADMIN","password":"FED-AOC-ADMIN-1010","office_code":"FED-AOC","can_create_update_delete_orders":"Y","can_update_status_for":"ALL","can_update_password_for":"FED-AOC","is_admin":"N"},
+ {"username":"FED-MAIL","password":"FED-MAIL-1010","office_code":"FED-MAIL","can_create_update_delete_orders":"Y","can_update_status_for":"ALL","can_update_password_for":"NONE","is_admin":"N"},
+ {"username":"FED-MAIL-ADMIN","password":"FED-MAIL-ADMIN-1010","office_code":"FED-MAIL","can_create_update_delete_orders":"Y","can_update_status_for":"ALL","can_update_password_for":"NONE","is_admin":"N"},
  {"username":"FED-ADMIN","password":"FED-ADMIN-1010","office_code":"FED-ADMIN","can_create_update_delete_orders":"Y","can_update_status_for":"ALL","can_update_password_for":"ALL","is_admin":"Y"},
  {"username":"FLAG","password":"FLAG-1010","office_code":"FED-ADMIN","can_create_update_delete_orders":"N","can_update_status_for":"NONE","can_update_password_for":"NONE","is_admin":"N"},
- {"username":"MA-01","password":"MA-01-1010","office_code":"MA-01","can_create_update_delete_orders":"N","can_update_status_for":"MA-01","can_update_password_for":"NONE","is_admin":"N"},
- {"username":"MA-01-READONLY","password":"MA-01-READONLY-1010","office_code":"MA-01","can_create_update_delete_orders":"N","can_update_status_for":"NONE","can_update_password_for":"NONE","is_admin":"N"}
+ {"username":"MA-01-READONLY","password":"MA-01-READONLY-1010","office_code":"MA-01","can_create_update_delete_orders":"N","can_update_status_for":"NONE","can_update_password_for":"NONE","is_admin":"N"} 
 ]

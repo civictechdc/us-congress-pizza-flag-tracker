@@ -49,10 +49,10 @@ def delete_order_by_uuid(uuid):
     auth_controller.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     if order_obj is None:
-        return {"error": "order not found"}
+        return Response(response="Error:order not found", status=404)
     else:
         OrderActions.delete_order_by_uuid(uuid)
-        return {"": ""}
+        return "Deleted", 204
 
 
 def get_order_by_order_number(order_number):
@@ -64,7 +64,9 @@ def get_order_by_order_number(order_number):
     else:
         return {"orders": [table_record_to_json(order_obj)]}
 
+
 # generate qr code - qr code points to Scan view on frontend
+
 
 def get_qrcode(uuid):
     frontend_url = flask_app.config["FRONTEND_URI"]
@@ -110,7 +112,8 @@ def update_order_status(uuid):
 
     request_json = request.get_json()
     order_status_id = get_dict_keyvalue_or_default(
-        request_json, "order_status_id", None)
+        request_json, "order_status_id", None
+    )
     order = OrderActions.get_order_by_uuid(uuid)
     order.order_status_id = order_status_id or order.order_status_id
 
@@ -119,4 +122,4 @@ def update_order_status(uuid):
     OrderActions.commit_status_update()
 
     order_dict = table_record_to_json(order)
-    return order_dict  
+    return order_dict
