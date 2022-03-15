@@ -26,4 +26,3 @@ class OrderLogModel(db.Model):
         self.order_uuid = order_uuid 
         self.home_office_code = home_office_code
         order_status_id = order_status_id
-        

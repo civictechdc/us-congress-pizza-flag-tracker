@@ -26,3 +26,4 @@ class LogActions:
     def get_all_order_logs_by_order_number(cls, order_number):
         get_all_logs_by_order_number = LogModel.query.order_by(order_number).all()
         return get_all_logs_by_order_number
+        
