@@ -14,7 +14,7 @@ class OrderLogModel(db.Model):
     order_uuid = db.Column(db.String(40), db.ForeignKey(OrderModel.uuid))
     home_office_code=db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
     order_status_id = db.Column(db.String(255), db.ForeignKey('status.id'))
-    status= db.relationship('Status Model', back_populates='orders')
+    status= db.relationship('StatusModel', back_populates='orders')
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 

@@ -1,9 +1,9 @@
-from flask import render_template, request, send_file
+# from flask import render_template, request
 
-from config import flask_app, qrcode, db
+from config import db
 from src.order_log.order_log_actions import LogActions
-from src.order.order_actions import OrderActions 
-import io
+# from src.order.order_actions import OrderActions 
+# import io
 
 def get_logs():
     order_logs = LogActions.get_all_logs()

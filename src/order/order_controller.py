@@ -1,6 +1,6 @@
 from flask import render_template, request, send_file, Response
-from src.order_log import order_log_controller
-from src.order_log import order_log_actions
+# from src.order_log import order_log_controller
+# from src.order_log import order_log_actions
 
 from src.util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode, db
