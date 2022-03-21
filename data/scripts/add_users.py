@@ -1,5 +1,3 @@
-
-
 def add_state_office_users(office_codes_list, db):
     print("Adding office users and encrypting password")
     from src.user.user_model import UserParams  # imported here to prevent circular reference
@@ -48,13 +46,17 @@ def add_fed_admin_user():
     params = UserParams()
     params.username = "FED-ADMIN"
     params.password = "FED-ADMIN-1010"
-    params.manage_all_users = "Y"
-    params.manage_office_users = "Y"
+    params.office_code = "FED-ADMIN"
+    params.manage_all_orders = "Y"
+    params.update_all_statuses = "Y"
     params.view_all_orders = "Y"
     params.manage_all_users = "Y"
     params.manage_office_users = "Y"
     params.update_own_password = "Y"
     params.can_update_password_for = "ALL"
+    params.can_update_status_for = "ALL"
+    params.can_create_update_delete_orders = "Y"
+    params.is_admin = "Y"
     UserActions.create(params)
 
 
@@ -71,18 +73,21 @@ def add_fed_users(office_codes_list, db):
         params.username = user["username"]
         params.password = params.username + "-1010"
         params.office_code = user["office_code"]
+
         params.manage_all_orders = user["manage_all_orders"]
         params.update_all_statuses = user["update_all_statuses"]
         params.view_all_orders = user["view_all_orders"]
-        params.can_create_update_delete_orders = user["can_create_update_delete_orders"]
-        params.can_update_status_for = user["can_update_status_for"]
 
-        params.is_admin = "N"
-
-        params.password = params.username + "-1010"
         params.manage_all_users = "N"
         params.manage_office_users = "N"
         params.update_own_password = "N"
+
+        params.can_create_update_delete_orders = user["can_create_update_delete_orders"]
+        params.can_update_status_for = user["can_update_status_for"]
+        params.is_admin = "N"
+
+        params.password = params.username + "-1010"
+
         params.can_update_password_for = "N"
         UserActions.create(params)
 
@@ -92,6 +97,7 @@ def add_fed_users(office_codes_list, db):
         params.manage_office_users = "Y"
         params.update_own_password = "Y"
         params.can_update_password_for = params.office_code
+        params.is_admin = "Y"
         UserActions.create(params)
 
 

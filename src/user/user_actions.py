@@ -4,6 +4,7 @@ import os
 import bcrypt
 from werkzeug.exceptions import Unauthorized
 from src.auth import auth_privileges
+from src.util import populate_object_from_json
 from src.auth.auth_actions import AuthActions
 from src.user.user_model import UserModel, UserParams
 from src.order.order_model import OrderModel
@@ -32,6 +33,7 @@ class UserActions:
     @classmethod
     def create(cls, user_values: UserParams):
         new_user = UserModel(user_values)
+        print('action create', new_user.username)
         bcrypt_rounds = int (os.environ["BCRYPT_ROUNDS"])
         salt = bcrypt.gensalt(bcrypt_rounds)
         hashed_password = bcrypt.hashpw(new_user.password.encode(), salt)
@@ -59,13 +61,7 @@ class UserActions:
     @classmethod
     def update_user(cls, user_values: UserParams):
         user = cls.get_by_name(user_values.username)
-        user.password = user_values.password
-        user.can_create_update_delete_orders = (
-            user_values.can_create_update_delete_orders
-        )
-        user.can_update_password_for = user_values.can_update_password_for
-        user.can_update_status_for = user_values.can_update_status_for
-        auth_privileges.is_admin = user_values.is_admin
+        user = user_values
         db.session.commit()
         return user
 

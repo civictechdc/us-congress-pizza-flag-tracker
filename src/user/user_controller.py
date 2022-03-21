@@ -5,24 +5,17 @@ from src.auth.auth_controller import get_current_user, set_authorize_current_use
 from src.auth.auth_privileges import check_is_admin
 from src.user.user_actions import UserActions
 from src.user.user_model import UserParams
-from src.util import table_record_to_json
+from src.util import populate_object_from_json, table_record_to_json
 
 
 def create_user():
     set_authorize_current_user()
     check_is_admin()
     request_json = request.get_json()
-
     userParams = UserParams()
-    userParams.username = request_json["username"]
-    userParams.password = request_json["password"]
-    userParams.can_create_update_delete_orders = request_json[
-        "can_create_update_delete_orders"
-    ]
-    userParams.office_code = request_json["office_code"]
-    userParams.can_update_password_for = request_json["can_update_password_for"]
-    userParams.can_update_status_for = request_json["can_update_status_for"]
-    userParams.is_admin = request_json["is_admin"]
+    populate_object_from_json(userParams, request_json)
+    print('here', userParams)
+
     new_user = UserActions.create(userParams)
     return table_record_to_json(new_user), 201
 
