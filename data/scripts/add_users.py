@@ -55,24 +55,24 @@ def add_fed_admin_user():
     params.manage_office_users = "Y"
     params.update_own_password = "Y"
     params.can_update_password_for = "ALL"
+    UserActions.create(params)
+
 
 def add_fed_users(office_codes_list, db):
     print("Adding FED users and encrypting password")
-    fed_office_codes_list = [
-        offices for offices in office_codes_list if offices["usa_state"] == "FED"]
 
     from src.user.user_model import UserParams
     from src.user.user_actions import UserActions
     add_fed_admin_user()
-    for user in fed_office_codes_list:
+    for user in office_codes_list:
 
         params = UserParams()
 
         params.username = user["username"]
-        params.password = user["password"]
+        params.password = params.username + "-1010"
         params.office_code = user["office_code"]
         params.manage_all_orders = user["manage_all_orders"]
-        params.manage_office_users = user["manage_office_users"]
+        params.update_all_statuses = user["update_all_statuses"]
         params.view_all_orders = user["view_all_orders"]
         params.can_create_update_delete_orders = user["can_create_update_delete_orders"]
         params.can_update_status_for = user["can_update_status_for"]
@@ -88,7 +88,7 @@ def add_fed_users(office_codes_list, db):
 
         params.username = params.username + "-ADMIN"
         params.password = params.username + "-1010"
-        params.manage_all_users = "Y"
+        params.manage_all_users = "N"
         params.manage_office_users = "Y"
         params.update_own_password = "Y"
         params.can_update_password_for = params.office_code
