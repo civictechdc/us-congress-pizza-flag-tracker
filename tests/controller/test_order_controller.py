@@ -1,6 +1,5 @@
 import random
 
-from src.auth import auth_controller, auth_privileges
 from src.order.order_actions import OrderActions
 from src.order import order_controller
 from src.status.status_actions import StatusActions
