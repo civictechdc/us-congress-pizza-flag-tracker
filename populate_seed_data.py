@@ -23,7 +23,7 @@ with open(
 ) as office_codes_json:
     office_codes_list = json.load(office_codes_json)
 
-with open("data/users.json") as users_json:
+with open("data/fed_users_order_privs.json") as users_json:
     users_list = json.load(users_json)
 
 with open("data/statuses.json") as statuses_json:

@@ -1,0 +1,4 @@
+[{"username":"FED-HOSS","office_code":"FED-HOSS", "manage_all_orders":"Y", "update_all_statuses": "Y", "view_all_orders": "Y", " can_create_update_delete_orders":"Y", "can_update_status_for":  "ALL"},
+ {"username":"FED-AOC", "office_code":"FED-AOC", "manage_all_orders":"N", "update_all_statuses": "N", "view_all_orders": "N", "can_create_update_delete_orders":"N","can_update_status_for":"ALL"},
+ {"username":"FED-MAIL","office_code":"FED-MAIL","manage_all_orders":"N", "update_all_statuses": "N", "view_all_orders": "N", "can_create_update_delete_orders":"N","can_update_status_for":"ALL"}
+]
