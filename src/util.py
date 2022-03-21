@@ -43,11 +43,15 @@ def make_json_value(record, column_name):
         return table_record_to_json(value)
     return str(value)
 
-def populate_object_from_json(object, json):
-    print('pop',object)
+def object_from_json(json):
+    json = {}
     for key, value in json:
         setattr(object, key, value)
-    print('pop 2', object)
+
+
+def populate_object_from_json(object, json):
+    for key, value in json:
+        setattr(object, key, value)
 
 # Good for debugging
 def print_to_debug_log(message):

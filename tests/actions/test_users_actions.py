@@ -27,12 +27,9 @@ class TestUserActions():
         new_user_params.is_admin = "Y"
     
         new_user = UserActions.create(new_user_params)
-        print('new user', new_user.username)
 
         new_user.office_code = "CA-02"
-        new_user = UserActions.update_user(new_user)
-        print('new user2', new_user.username)
-    
+        new_user = UserActions.update_user(new_user)    
 
         updated_user = UserActions.get_by_name(new_user.username)
         assert(updated_user.office_code == new_user.office_code)
