@@ -64,7 +64,7 @@ class TestUserController():
             response_data = response[0]
         else:
             response_data = response
-        assert (response_data['username'] == user_request_json['username'])
+        assert (sorted(response_data) == sorted(user_request_json))
 
 
 
