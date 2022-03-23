@@ -23,14 +23,14 @@ with open(
 ) as office_codes_json:
     office_codes_list = json.load(office_codes_json)
 
-with open("data/users.json") as users_json:
+with open("data/fed_users_order_privs.json") as users_json:
     users_list = json.load(users_json)
 
 with open("data/statuses.json") as statuses_json:
     statuses_list: object = json.load(statuses_json)
 
 add_offices(office_codes_list=office_codes_list, db=db)
-add_state_office_users(office_codes_list, db)
 add_fed_users(users_list, db)
+add_state_office_users(office_codes_list, db)
 add_statuses(statuses_list, db)
 add_stable_orders(office_codes_list, db)

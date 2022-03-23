@@ -11,7 +11,16 @@ class TestUserActions():
 
         new_user_params.username = "Test_Admin" + str(random.randint(1,1000))
         new_user_params.password = "1234"
-        new_user_params.office_code = "AA-01"
+        new_user_params.office_code = "CA-01"
+        new_user_params.manage_all_orders = "Y"
+        new_user_params.update_all_statuses = "Y"
+        new_user_params.view_all_orders = "Y"
+
+        new_user_params.manage_all_users = "Y"
+        new_user_params.manage_office_users = "Y"
+        new_user_params.update_own_password = "Y"
+
+
         new_user_params.can_create_update_delete_orders = "Y"
         new_user_params.can_update_status_for = "self"
         new_user_params.can_update_password_for = "self"
@@ -19,9 +28,8 @@ class TestUserActions():
     
         new_user = UserActions.create(new_user_params)
 
-        new_user.office_code = "AA-02"
-        new_user = UserActions.update_user(new_user)
-    
+        new_user.office_code = "CA-02"
+        new_user = UserActions.update_user(new_user)    
 
         updated_user = UserActions.get_by_name(new_user.username)
         assert(updated_user.office_code == new_user.office_code)

@@ -1,6 +1,5 @@
 import random
 
-from src.auth import auth_controller, auth_privileges
 from src.order.order_actions import OrderActions
 from src.order import order_controller
 from src.status.status_actions import StatusActions
@@ -28,7 +27,7 @@ class TestOrderController():
         assert (actual_order['uuid'] == created_order.uuid)
 
     # @pytest.mark.skip(reason="Test fails because not mocked properly, skipping until fixed")
-    def test_create_Update_order(self, mocker):
+    def test_create_update_order(self, mocker):
 
         mocker.patch.object(order_controller, 'request', mock_request)
         # TODO refactor this to auth_controller.__name__

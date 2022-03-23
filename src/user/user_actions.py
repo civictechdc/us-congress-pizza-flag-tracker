@@ -59,13 +59,7 @@ class UserActions:
     @classmethod
     def update_user(cls, user_values: UserParams):
         user = cls.get_by_name(user_values.username)
-        user.password = user_values.password
-        user.can_create_update_delete_orders = (
-            user_values.can_create_update_delete_orders
-        )
-        user.can_update_password_for = user_values.can_update_password_for
-        user.can_update_status_for = user_values.can_update_status_for
-        auth_privileges.is_admin = user_values.is_admin
+        user = user_values
         db.session.commit()
         return user
 

@@ -19,19 +19,6 @@ def is_primitive(thing):
     primitive = (int, str, bool, datetime.datetime)
     return isinstance(thing, primitive) or not thing
 
-
-def make_json_value(record, column_name):
-    value = getattr(record, column_name)
-    if not value:
-        return ""
-    if not is_primitive(value):
-        if column_name == "time":
-            raise BaseException
-
-        return table_record_to_json(value)
-    return str(value)
-
-
 def is_legit_column(record, column_name):
     value = getattr(record, column_name)
     if column_name.startswith('_'):
@@ -44,6 +31,23 @@ def is_legit_column(record, column_name):
     if "append" in dict:
         return False
     return True
+
+def make_json_value(record, column_name):
+    value = getattr(record, column_name)
+    if not value:
+        return ""
+    if not is_primitive(value):
+        if column_name == "time":
+            raise BaseException
+
+        return table_record_to_json(value)
+    return str(value)
+
+def populate_object_from_json(object, json):
+    for key in json:
+        setattr(object, key, json[key])
+    return object
+
 
 # Good for debugging
 def print_to_debug_log(message):

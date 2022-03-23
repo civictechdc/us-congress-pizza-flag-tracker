@@ -22,7 +22,6 @@ class TestAuth:
     def test_if_not_is_admin_cannot_add_user(self):
         username = "MA-01"
         token = derive_token_from_username(username)
-        print("token:", token)
         response = flask_app.test_client().post(
             "/api/users/create",
             headers={
@@ -39,5 +38,4 @@ class TestAuth:
                 "can_update_status_for": "MA-01",
             },
         )
-        print("response:", response)
         assert response.status_code == 401
