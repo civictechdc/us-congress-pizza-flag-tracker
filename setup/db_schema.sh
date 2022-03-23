@@ -2,8 +2,8 @@
 echo Upgrading db...
 # bring existing db up to date or create new db
 DEBUG=True FLASK_APP=app.py flask db upgrade
-# create script for any schema changes
+# create additional migration scripts if there are any changes to schema
 DEBUG=True FLASK_APP=app.py flask db migrate
-# apply those changes to the db
+# run upgrade again to apply any schema changes from previous step to the current db
 DEBUG=True FLASK_APP=app.py flask db upgrade
 echo Done
