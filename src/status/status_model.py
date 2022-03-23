@@ -3,6 +3,7 @@ from config import db
 from pickle import NONE
 from sqlalchemy import func
 from sqlalchemy.sql.expression import join
+from src.order_log.order_log_model import OrderLogModel
 
 class StatusModel(db.Model):
     __tablename__ = "status"
@@ -13,6 +14,7 @@ class StatusModel(db.Model):
     active_status = db.Column(db.String(255))
     status_code = db.Column(db.String(255))
     orders = db.relationship('OrderModel', back_populates="status")
+    order_logs = db.relationship('OrderLogModel', back_populates="status")
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
         db.DateTime, server_default=func.now(), onupdate=func.now())
