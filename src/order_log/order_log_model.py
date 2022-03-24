@@ -10,12 +10,13 @@ from src.office.office_model import OfficeModel
 class OrderLogModel(db.Model):
     __tablename__ = "order_logs"
     uuid = db.Column(db.String(40), unique=True, index=True, primary_key=True, nullable=False)
-    previous_order_log_id = db.Column(db.String(255)) #Where the order was last
+    previous_order_log_id = db.Column(db.String(255), nullable = True) #Where the order was last
     order_updated_at = db.Column(db.DateTime)
     order_number = db.Column(db.Integer)
     usa_state = db.Column(db.String(10))
     order_uuid = db.Column(db.String(40), db.ForeignKey(OrderModel.uuid))
     home_office_code=db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
+    #order_status_id = db.Column(db.Integer)
     order_status_id = db.Column(db.Integer, db.ForeignKey('status.id'))
     status = db.relationship('StatusModel', back_populates='order_logs') #back ref order_logs
     created_at = db.Column(db.DateTime, server_default=func.now())

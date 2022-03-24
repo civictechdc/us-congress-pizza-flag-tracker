@@ -5,7 +5,7 @@ from src.order.order_actions import OrderActions
 
 def log_new_order(order_num):
     new_order_log = OrderActions.get_order_by_order_number(order_num)
-    get_previous_order_log_id = "NewOrder"
+    get_previous_order_log_id = None
     #get_previous_order_log_id = LogActions.get_order_log_id(order_num) This query is returning a NoneType error
     previous_order_log_id = get_previous_order_log_id
     print(new_order_log.order_status_id)
@@ -14,7 +14,7 @@ def log_new_order(order_num):
     usa_state = new_order_log.usa_state
     home_office_code = new_order_log.home_office_code
     order_status_id = new_order_log.order_status_id
-    new_log = LogActions.log(previous_order_log_id, order_number, order_uuid, usa_state, home_office_code, order_status_id)
+    new_log = LogActions.log(previous_order_log_id = previous_order_log_id, order_number = order_number, order_uuid = order_uuid, usa_state = usa_state, home_office_code = home_office_code, order_status_id = order_status_id)
     return new_log
 
 def get_logs():

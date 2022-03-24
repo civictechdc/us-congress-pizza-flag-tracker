@@ -7,7 +7,8 @@ import uuid
 
 class LogActions:
     @classmethod
-    def log(cls, previous_order_log_id, order_number, order_uuid, usa_state, home_office_code, order_status_id):
+    def log(cls, *, previous_order_log_id, order_number, order_uuid, usa_state, home_office_code, order_status_id):
+        #add asterix to remove positional arguments
         logUuid = str(uuid.uuid4())
         new_log = OrderLogModel(logUuid, previous_order_log_id, order_number, order_uuid, usa_state, home_office_code, order_status_id)
         db.session.add(new_log)
@@ -18,11 +19,11 @@ class LogActions:
     def get_order_log_id(cls, order_num):
         order_num = OrderLogModel.query.filter(OrderLogModel.order_number == order_num).first()
         if order_num.previous_order_log_id == None:
-            previous_log_id = "NewOrder"
-            return previous_log_id
+            previous_log_id = "NewOrder" #None
+            return previous_log_id # Simplify
         else:
             previous_log_id = order_num.previous_order_log_id 
-            return previous_log_id
+            return previous_log_id #Simplify
     
     @classmethod
     def get_all_logs(cls):
