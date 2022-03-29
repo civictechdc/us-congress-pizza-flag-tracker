@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 7b95539c3fec
+Revision ID: 7ed8fe8bf743
 Revises: 
-Create Date: 2022-03-23 17:46:31.018418
+Create Date: 2022-03-28 22:50:12.243961
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7b95539c3fec'
+revision = '7ed8fe8bf743'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -62,11 +62,11 @@ def upgrade():
     )
     op.create_table('order_logs',
     sa.Column('uuid', sa.String(length=40), nullable=False),
-    sa.Column('previous_order_log_id', sa.String(length=255), nullable=True),
-    sa.Column('order_updated_at', sa.DateTime(), nullable=True),
     sa.Column('order_number', sa.Integer(), nullable=True),
-    sa.Column('usa_state', sa.String(length=10), nullable=True),
+    sa.Column('previous_order_log_uuid', sa.String(length=255), nullable=True),
+    sa.Column('order_updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('order_uuid', sa.String(length=40), nullable=True),
+    sa.Column('usa_state', sa.String(length=10), nullable=True),
     sa.Column('home_office_code', sa.String(length=10), nullable=True),
     sa.Column('order_status_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),

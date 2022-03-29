@@ -27,8 +27,8 @@ def create_order():
     order = OrderActions.create(
         usa_state, idbased_order_number, home_office_code, order_status_id
     )
-    log_order = order_log_controller.log_new_order(idbased_order_number)
-    return table_record_to_json(order, log_order)
+    log_order = LogActions.log(usa_state, idbased_order_number, home_office_code, order_status_id)
+    return table_record_to_json(order) #new order log needs to be sent to the front-end (log_order)
 
 
 def get_orders():
@@ -102,8 +102,9 @@ def update_order(uuid):
     order = OrderActions.update_order_by_uuid(
         uuid, usa_state, order_number, home_office_code, order_status_id
     )
-    update_log_order = order_log_controller.log(order_number)
-    order_dict = table_record_to_json(order, update_log_order)
+    update_order_log = LogActions.log(
+        usa_state, order_number, home_office_code, order_status_id)
+    order_dict = table_record_to_json(order) #order log update needs to be sent to the front-end (update_order_log)
     return order_dict
 
 
