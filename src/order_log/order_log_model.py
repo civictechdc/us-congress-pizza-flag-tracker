@@ -11,13 +11,13 @@ class OrderLogModel(db.Model):
     __tablename__ = "order_logs"
     uuid = db.Column(db.String(40), unique=True, index=True, primary_key=True, nullable=False)
     order_number = db.Column(db.Integer)
-    previous_order_log_uuid = db.Column(db.String(255), nullable = True) #Previous uuid for this order number
+    previous_order_log_uuid = db.Column(db.String(255), nullable = True)
     order_updated_at = db.Column(db.DateTime, server_default=func.now())
     order_uuid = db.Column(db.String(40), db.ForeignKey(OrderModel.uuid))
     usa_state = db.Column(db.String(10))
     home_office_code=db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
     order_status_id = db.Column(db.Integer, db.ForeignKey('status.id'))
-    status = db.relationship('StatusModel', back_populates='order_logs') #back ref order_logs
+    status = db.relationship('StatusModel', back_populates='order_logs')
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
