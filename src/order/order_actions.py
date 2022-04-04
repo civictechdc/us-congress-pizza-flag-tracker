@@ -1,5 +1,6 @@
 from src.status.status_model import StatusModel
 from src.order.order_model import OrderModel
+from src.order_log.order_log_actions import LogActions
 from config import db
 import uuid
 
@@ -23,6 +24,7 @@ class OrderActions:
             order_status_id,
             order_status,
         )
+        LogActions.create_order_log(theUuid, usa_state, order_number, home_office_code, order_status_id)
         db.session.add(new_order)
         db.session.commit()
         return new_order
@@ -65,6 +67,7 @@ class OrderActions:
         order.usa_state = usa_state or order.usa_state
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
+        LogActions.create_order_log(uuid, usa_state, order_number, home_office_code, order_status_id)
         db.session.commit()
         return order
 

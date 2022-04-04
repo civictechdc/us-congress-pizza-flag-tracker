@@ -1,12 +1,9 @@
 from flask import render_template, request, send_file, Response
 from src.order_log import order_log_controller
-# from src.order_log import order_log_actions
-
 from src.util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode, db
 import qrcode
 from src.auth import auth_controller, auth_privileges
-from src.order_log.order_log_actions import LogActions
 from src.user.user_controller import get_current_office
 from src.order.order_actions import OrderActions
 import io
@@ -27,8 +24,7 @@ def create_order():
     order = OrderActions.create(
         usa_state, idbased_order_number, home_office_code, order_status_id
     )
-    log_order = LogActions.create_order_log(usa_state, idbased_order_number, home_office_code, order_status_id)
-    return table_record_to_json(order) #new order log needs to be sent to the front-end (log_order)
+    return table_record_to_json(order)
 
 
 def get_orders():
@@ -102,9 +98,7 @@ def update_order(uuid):
     order = OrderActions.update_order_by_uuid(
         uuid, usa_state, order_number, home_office_code, order_status_id
     )
-    update_order_log = LogActions.create_order_log(
-        usa_state, order_number, home_office_code, order_status_id)
-    order_dict = table_record_to_json(order) #order log update needs to be sent to the front-end (update_order_log)
+    order_dict = table_record_to_json(order)
     return order_dict
 
 
@@ -112,15 +106,11 @@ def update_order_status(uuid):
     auth_controller.set_authorize_current_user()
 
     request_json = request.get_json()
-    order_status_id = get_dict_keyvalue_or_default(
+    new_order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", None
     )
-    order = OrderActions.get_order_by_uuid(uuid)
-    order.order_status_id = order_status_id or order.order_status_id
-
     auth_privileges.check_update_status_allowed(order)
 
-    OrderActions.commit_status_update()
-
+    order = OrderActions.update_order_by_uuid(uuid=uuid, order_status_id=new_order_status_id)
     order_dict = table_record_to_json(order)
     return order_dict
