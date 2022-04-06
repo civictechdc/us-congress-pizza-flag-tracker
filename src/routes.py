@@ -5,6 +5,7 @@ import src.auth.auth_controller as auth_controller
 from src.order import order_controller
 from src.office import office_controller
 from src.status import status_controller
+from src.order_log import order_log_controller
 
 # add routes below®
 
@@ -27,6 +28,8 @@ routes = [
     ["/api/users/create", user_controller.create_user, "POST"],
     ["/api/users/self/update/password",user_controller.self_update_password,"POST"],
     ["/api/users/admin/update/password",user_controller.admin_update_password,"POST"],
+    ["/api/order/log", order_log_controller.get_order_logs, "GET"],
+    ["/api/order/log/<order_number>", order_log_controller.get_all_order_logs_by_order_number, "GET"],
 ]
 
 for route in routes:
