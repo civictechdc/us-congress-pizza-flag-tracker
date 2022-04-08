@@ -7,13 +7,12 @@ from src.order.order_actions import OrderActions
 def check_is_admin():
     if not is_admin():
         raise Unauthorized("Unauthorized.  Admin privileges required.")
-
+  
 
 def check_update_order_allowed():
     if not is_update_order_allowed():
         raise Unauthorized(
             "Unauthorized.  Create/update/delete order privileges required.")
-
 
 def check_update_status_allowed(order: OrderActions):
     if not is_update_status_allowed(order):

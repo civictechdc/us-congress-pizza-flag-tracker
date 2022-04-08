@@ -6,6 +6,7 @@ class LogActions:
     @classmethod
     def create_order_log(cls, order_uuid, usa_state, order_number, home_office_code, order_status_id):
         prior_order_log_uuid = LogActions.get_order_log_uuid(order_number)
+        #order_count = LogActions.get_max_order_count(order_number)
         previous_order_log_uuid = prior_order_log_uuid
         logUuid = str(uuid.uuid4())
         new_log = OrderLogModel(logUuid = logUuid, order_number = order_number, previous_order_log_uuid = previous_order_log_uuid, order_uuid = order_uuid, usa_state = usa_state, home_office_code =home_office_code, order_status_id= order_status_id)
@@ -28,6 +29,7 @@ class LogActions:
 
     @classmethod
     def sort_order_log_by_order_number(order_logs):
+        #fix this sort function
         order_logs_len = len(order_logs)
         for order in order_logs:
             if order_logs_len == 1:
@@ -48,7 +50,7 @@ class LogActions:
     
     @classmethod
     def get_all_order_logs_by_order_number(cls, order_number):
-        order_log_obj = OrderLogModel.query.get(order_number).all()
-        return order_log_obj
+        order_logs = OrderLogModel.query.filter(OrderLogModel.order_number==order_number).all()
+        return order_logs
 
         
