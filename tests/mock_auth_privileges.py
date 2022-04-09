@@ -3,3 +3,6 @@ def check_is_admin():
 
 def check_update_order_allowed():
     pass
+
+def get_current_office():
+    return "FED-MOCK"

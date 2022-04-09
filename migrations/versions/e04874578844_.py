@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c9056fd14213
+Revision ID: e04874578844
 Revises: 
-Create Date: 2022-03-30 13:17:15.776706
+Create Date: 2022-04-08 15:31:51.122523
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c9056fd14213'
+revision = 'e04874578844'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -53,6 +53,12 @@ def upgrade():
     sa.Column('username', sa.String(length=20), nullable=False),
     sa.Column('password', sa.LargeBinary(length=2048), nullable=True),
     sa.Column('office_code', sa.String(length=10), nullable=True),
+    sa.Column('manage_all_orders', sa.String(length=1), nullable=True),
+    sa.Column('update_all_statuses', sa.String(length=1), nullable=True),
+    sa.Column('view_all_orders', sa.String(length=1), nullable=True),
+    sa.Column('manage_all_users', sa.String(length=1), nullable=True),
+    sa.Column('manage_office_users', sa.String(length=1), nullable=True),
+    sa.Column('update_own_password', sa.String(length=1), nullable=True),
     sa.Column('can_update_status_for', sa.String(length=20), nullable=True),
     sa.Column('can_update_password_for', sa.String(length=20), nullable=True),
     sa.Column('can_create_update_delete_orders', sa.String(length=1), nullable=True),

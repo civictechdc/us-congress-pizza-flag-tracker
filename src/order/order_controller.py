@@ -4,9 +4,45 @@ from src.util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode, db
 import qrcode
 from src.auth import auth_controller, auth_privileges
-from src.user.user_controller import get_current_office
 from src.order.order_actions import OrderActions
 import io
+
+constituents = [
+   ["Paul Revere", "32 Battle Road", "Lexington", "02476", "(111) 415-1775"],
+   ["Bugs Bunny", "32 Looney Tune Road", "Cwazy Rabbit", "02174", "(WHA) TSU-PDOC"],
+   ["Kamala Harris", "1 Whitehouse", "Pleasantville", "41923", "(111) 347-0000"],
+   ["Sirius Black", "12 Grimmauld Place", "Magic", "12345", "(123) 321-1234"],
+   ["Mrs Addams", "001 Cemetery Lane", "Death Hollow", "34521", "(617) 862-7731"],
+   ["Harriet Tubman", "000 Secret Street", "Hiddenville", "00000", ""]
+]
+order_mock_constituent_dict = {}
+
+# mock person data for proof of concept demo
+# in production, person data would come from external system
+def add_mock_constituents(orders_dict):
+    x = 0
+    for order_dict in orders_dict:
+        uuid = order_dict["uuid"]
+        order_mock_constituent_dict[uuid] = constituents[x]
+        add_mock_constituent(order_dict)
+
+        x = x + 1
+        if x == len(constituents):
+            x = 0
+
+# mock person data for proof of concept demo
+# in production, person data would come from external system
+def add_mock_constituent(order_dict):
+    if len(order_mock_constituent_dict) == 0:
+        get_orders() ## populates order_mock_constituent_dict
+    mock_constituent = order_mock_constituent_dict[order_dict["uuid"]]
+    mock_json = {"name": mock_constituent[0], \
+                  "address": mock_constituent[1], \
+                  "town": mock_constituent[2] + ", " + order_dict["usa_state"] + " " + mock_constituent[3], \
+                  "phone": mock_constituent[4] \
+                  }
+    order_dict["person"] = mock_json          
+
 
 
 def index():
@@ -29,15 +65,22 @@ def create_order():
 
 def get_orders():
     auth_controller.set_authorize_current_user()
-    current_office = get_current_office()
+    current_office = auth_privileges.get_current_office()
     orders = OrderActions.get(current_office)
-    return {"orders": [table_record_to_json(order) for order in orders]}
+    orders_json = [table_record_to_json(order) for order in orders]
+    add_mock_constituents(orders_json)
+
+    return {"orders": orders_json}
+    # [table_record_to_json(order) for order in orders]}
+
+
 
 
 def get_order_by_uuid(uuid):
     auth_controller.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = table_record_to_json(order_obj)
+    add_mock_constituent(order_dict)
     return order_dict
 
 
@@ -58,7 +101,9 @@ def get_order_by_order_number(order_number):
     if order_obj is None:
         return {"error": "order not found"}
     else:
-        return {"orders": [table_record_to_json(order_obj)]}
+        order_dict = table_record_to_json(order_obj)
+        add_mock_constituent(order_dict)
+        return {"orders": [order_dict]}
 
 
 # generate qr code - qr code points to Scan view on frontend

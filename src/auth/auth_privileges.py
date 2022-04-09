@@ -21,6 +21,9 @@ def check_update_status_allowed(order: OrderActions):
             "Unauthorized.  Update status privileges must be ALL or " + order.home_office_code)
 
 
+def get_current_office():
+    return get_current_user().office_code
+    
 def is_admin():
     return get_current_user().is_admin == "Y"
 
