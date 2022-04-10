@@ -20,7 +20,7 @@ routes = [
     ["/api/orders/<uuid>", order_controller.update_order, "PUT"],
     ["/api/scan/<uuid>", order_controller.update_order_status, "PUT"],
     ["/api/signin", auth_controller.login_user, "POST"],
-    ["/api/users/get", user_controller.get_all_users, "GET"],
+    ["/api/users", user_controller.get_all_users, "GET"],
     ["/api/qrcode/<uuid>", order_controller.send_file_qrcode, "GET"],
     ["/api/states", office_controller.get_all_states, "GET"],
     ["/api/state_offices/<state>", office_controller.get_offices_by_state, "GET"],
@@ -28,8 +28,8 @@ routes = [
     ["/api/users/create", user_controller.create_user, "POST"],
     ["/api/users/self/update/password",user_controller.self_update_password,"POST"],
     ["/api/users/admin/update/password",user_controller.admin_update_password,"POST"],
-    ["/api/order/log", order_log_controller.get_order_logs, "GET"],
-    ["/api/order/log/<order_number>", order_log_controller.get_all_order_logs_by_order_number, "GET"],
+    ["/api/orders/logs", order_log_controller.get_order_logs, "GET"],
+    ["/api/orders/logs/<order_number>", order_log_controller.get_all_order_logs_by_order_number, "GET"],
 ]
 
 for route in routes:
