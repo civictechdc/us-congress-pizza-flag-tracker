@@ -154,6 +154,7 @@ def update_order_status(uuid):
     new_order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", None
     )
+    order: OrderActions = OrderActions.get_order_by_uuid(uuid)
     auth_privileges.check_update_status_allowed(order)
 
     order = OrderActions.update_order_by_uuid(uuid=uuid, order_status_id=new_order_status_id)
