@@ -21,14 +21,6 @@ def get_all_users():
     all_users = UserActions.get_users()
     return table_record_to_json(all_users), 201
     
-def get_current_office():
-    current_office = auth_privileges.get_current_user().office_code
-    if "FED" == current_office[:3]:
-        return "FED"
-    else:
-        return current_office
-
-
 # function for user to update password
 # function needs to be refactored
 def self_update_password():

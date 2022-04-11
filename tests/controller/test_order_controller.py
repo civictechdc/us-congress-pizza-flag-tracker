@@ -17,6 +17,8 @@ class TestOrderController():
         # TODO refactor this to auth_controller.__name__
         mocker.patch.object(order_controller, "auth_controller",  #auth_controller.__name__,
                             tests.mock_auth_controller)
+        mocker.patch.object(order_controller, "auth_privileges",  #auth_controller.__name__,
+                            tests.mock_auth_privileges)
         unique_order_number = random.randint(1, 1000000)
         created_order = OrderActions.create("OH", unique_order_number, "OH06")
         actual_order = order_controller.get_order_by_uuid(created_order.uuid)
