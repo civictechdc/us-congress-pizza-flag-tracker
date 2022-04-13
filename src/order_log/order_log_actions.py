@@ -1,4 +1,3 @@
-from xxlimited import new
 from src.order_log import order_log_model
 from src.order_log.order_log_model import OrderLogModel
 from config import db
@@ -36,7 +35,7 @@ class LogActions:
         for order in order_logs:
             if not order_logs:
                 return new_order_log_number
-            elif order.order_log_count == 1 or order.order_log_count > 1:
+            elif order.order_log_count >= 1:
                 new_order_log_number += 1
         return new_order_log_number
 
