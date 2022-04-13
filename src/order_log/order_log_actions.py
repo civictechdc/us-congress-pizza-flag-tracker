@@ -23,35 +23,34 @@ class LogActions:
         order_logs_len = len(order_logs)
         for order in order_logs:
             if order_logs_len == 1:
-                current_order_log_uuid = order.order_uuid
-            elif order.order_status_id > max_order_count:
-                max_order_count = order.order_status_id
+                current_order_log_uuid = order.uuid
+            elif order.order_log_count > max_order_count:
+                max_order_count = order.order_log_count
                 current_order_log_uuid = order.uuid
         return current_order_log_uuid 
 
     @classmethod
-    def get_last_order_count(order_number):
+    def get_last_order_count(cls, order_number):
         order_logs = OrderLogModel.query.filter(OrderLogModel.order_number == order_number).all()
-        order_logs_len = len(order_logs)
-        new_order_log_number = None
+        new_order_log_number = 1
         for order in order_logs:
-            if order_logs_len == 1:
-                new_order_log_number = 1
+            if not order_logs:
                 return new_order_log_number
             elif order.order_log_count == 1 or order.order_log_count > 1:
                 new_order_log_number += 1
-                return new_order_log_number
+        return new_order_log_number
 
     @classmethod
-    def sort_order_log_by_order_number(order_logs):
-        #fix this sort function
+    def sort_order_log_by_order_number(order_number):
+        order_logs = OrderLogModel.query.filter(OrderLogModel.order_number == order_number).all()
         order_logs_len = len(order_logs)
-        for order in order_logs:
-            if order_logs_len == 1:
-                order_log_uuid = order.uuid
-            elif order.order_status_id > 0:
-                order #complete the sort
-        return order_log_uuid
+        for i in range(0, order_logs_len):
+            for j in range (i + 1, order_logs_len):
+                if order_logs[i] > order_logs[j]:
+                    temp = order_logs[i]
+                    order_logs[i] = order_logs[j]
+                    order_logs[j] = temp
+        return order_logs
 
     @classmethod
     def get_all_order_logs(cls):
