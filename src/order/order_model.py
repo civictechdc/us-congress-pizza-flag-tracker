@@ -27,7 +27,6 @@ class OrderModel(db.Model):
             self.order_status_id = order_status_id
         elif order_status:
             self.order_status_id = order_status.id
-        # self.updated_by = "HOSS"uus
 
     def update_order(self, usa_state=None, order_number=None, home_office_code=None, order_status_id=None, order_status=None):
         self.order_number = order_number or self.order_number

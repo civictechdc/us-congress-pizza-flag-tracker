@@ -33,7 +33,7 @@ class OrderActions:
         return new_order
 
     @classmethod
-    def get(cls, office):
+    def get_orders_by_office(cls, office):
         if office[:3] == "FED":
             orders = OrderModel.query.all()
         else:
@@ -50,12 +50,25 @@ class OrderActions:
         order = OrderModel.query.filter(OrderModel.uuid == uuid).first()
         return order
 
+    # Do we need this classmethod?
     @classmethod
     def get_by_home_office_code(cls, home_office_code):
         return OrderModel.query.filter(
             OrderActions.home_office_code == home_office_code
         )
 
+    @classmethod
+    def get_orders_by_usa_state(cls, usa_state):
+        return OrderModel.query.filter(
+            OrderActions.usa_state == usa_state
+        )
+
+    @classmethod
+    def get_orders_by_order_status_id(cls, order_status_id):
+        return OrderModel.query.filter(
+            OrderActions.order_status_id == order_status_id
+        )
+    
     @classmethod
     def update_order_by_uuid(
         cls,
