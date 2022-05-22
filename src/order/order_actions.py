@@ -89,7 +89,11 @@ class OrderActions:
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
         LogActions.create_order_log(
-            uuid, usa_state, order_number, home_office_code, order_status_id
+            uuid,
+            order.usa_state,
+            order.order_number,
+            order.home_office_code,
+            order.order_status_id,
         )
         db.session.commit()
         return order

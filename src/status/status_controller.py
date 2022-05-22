@@ -9,5 +9,5 @@ from src.auth import auth_controller
 
 def get_statuses():
     auth_controller.set_authorize_current_user()
-    statuses = StatusActions.get_statuses()
+    statuses = StatusActions.get_sorted_statuses()
     return {"statuses": [table_record_to_json(status) for status in statuses]}
