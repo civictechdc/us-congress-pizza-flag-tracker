@@ -36,12 +36,13 @@ class TestOrderActions:
         assert order1.uuid != order2.uuid
 
     def test_get_orders(self):
+        office_to_query = "MD-06"
         unique_order_number = random.randint(1, 1000000)
-        order = OrderActions.create("MD", unique_order_number, "MD-06")
+        order = OrderActions.create("MD", unique_order_number, office_to_query)
         unique_order_number2 = random.randint(1, 1000000)
         order = OrderActions.create("CA", unique_order_number2, "CA-03")
         query_params = OrderQueryParams()
-        query_params.office_code = "CA-06"
+        query_params.office_code = office_to_query
         found_orders = OrderActions.get_orders(query_params)
         assert len(found_orders) > 0
 
