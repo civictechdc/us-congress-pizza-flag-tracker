@@ -23,8 +23,9 @@ class OrderActions:
         home_office_code: str,
         order_status_id: int = None,
         order_status: OrderModel = None,
+        uuid_param: str = None,
     ):
-        theUuid = str(uuid.uuid4())
+        theUuid = uuid_param or str(uuid.uuid4())
         new_order = OrderModel(
             theUuid,
             usa_state,
