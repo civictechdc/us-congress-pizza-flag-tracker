@@ -22,14 +22,12 @@ order_mock_constituent_dict = {}
 # mock person data for proof of concept demo
 # in production, person data would come from external system
 def add_mock_constituents(orders_dict=None):
-    xorders_dict = orders_dict
-    if not xorders_dict:
+    if not orders_dict:
         orders = OrderActions.get_orders()
-        xorders_dict = [table_record_to_json(order) for order in orders]
+        orders_dict = [table_record_to_json(order) for order in orders]
 
-    print("debug", xorders_dict)
     x = 0
-    for order_dict in xorders_dict:
+    for order_dict in orders_dict:
         uuid = order_dict["uuid"]
         if not order_mock_constituent_dict.__contains__(uuid):
             order_mock_constituent_dict[uuid] = constituents[x]

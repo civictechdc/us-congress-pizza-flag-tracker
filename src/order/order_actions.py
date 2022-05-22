@@ -47,7 +47,7 @@ class OrderActions:
         else:
             query = OrderModel.home_office_code == query_params.office_code
             orders = OrderModel.query.filter(query)
-        return orders
+        return [order for order in orders]
 
     @classmethod
     def get_order_by_order_number(cls, order_number):
