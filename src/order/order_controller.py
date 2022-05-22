@@ -1,50 +1,65 @@
 from flask import render_template, request, send_file, Response
 from src.order_log import order_log_controller
-from src.util import table_record_to_json, get_dict_keyvalue_or_default
+from src.util import table_record_to_json, get_dict_keyvalue_or_default, table_to_json
 from config import flask_app, qrcode, db
 import qrcode
 from src.auth import auth_controller, auth_privileges
-from src.order.order_actions import OrderActions
+from src.order.order_actions import OrderActions, OrderQueryParams
 import io
 
+# mock person data for proof of concept demo
+# in production, person data would come from external system
 constituents = [
-   ["Paul Revere", "32 Battle Road", "Lexington", "02476", "(111) 415-1775"],
-   ["Bugs Bunny", "32 Looney Tune Road", "Cwazy Rabbit", "02174", "(WHA) TSU-PDOC"],
-   ["Kamala Harris", "1 Whitehouse", "Pleasantville", "41923", "(111) 347-0000"],
-   ["Sirius Black", "12 Grimmauld Place", "Magic", "12345", "(123) 321-1234"],
-   ["Mrs Addams", "001 Cemetery Lane", "Death Hollow", "34521", "(617) 862-7731"],
-   ["Harriet Tubman", "000 Secret Street", "Hiddenville", "00000", ""]
+    ["Paul Revere", "32 Battle Road", "Lexington", "02476", "(111) 415-1775"],
+    ["Bugs Bunny", "32 Looney Tune Road", "Cwazy Rabbit", "02174", "(WHA) TSU-PDOC"],
+    ["Kamala Harris", "1 Whitehouse", "Pleasantville", "41923", "(111) 347-0000"],
+    ["Sirius Black", "12 Grimmauld Place", "Magic", "12345", "(123) 321-1234"],
+    ["Mrs Addams", "001 Cemetery Lane", "Death Hollow", "34521", "(617) 862-7731"],
+    ["Harriet Tubman", "000 Secret Street", "Hiddenville", "00000", ""],
 ]
 order_mock_constituent_dict = {}
 
 # mock person data for proof of concept demo
 # in production, person data would come from external system
-def add_mock_constituents(orders_dict):
+def add_mock_constituents(orders_dict=None):
+    if not orders_dict:
+        orders = OrderActions.get_orders()
+        orders_dict = [table_record_to_json(order) for order in orders]
+
     x = 0
     for order_dict in orders_dict:
         uuid = order_dict["uuid"]
-        order_mock_constituent_dict[uuid] = constituents[x]
+        if not order_mock_constituent_dict.__contains__(uuid):
+            order_mock_constituent_dict[uuid] = constituents[x]
         add_mock_constituent(order_dict)
 
         x = x + 1
         if x == len(constituents):
             x = 0
 
+
 # mock person data for proof of concept demo
 # in production, person data would come from external system
 def add_mock_constituent(order_dict):
-    if len(order_mock_constituent_dict) == 0:
-        get_orders() ## populates order_mock_constituent_dict
+    if not order_mock_constituent_dict.__contains__(order_dict["uuid"]):
+        add_mock_constituents()
     mock_constituent = order_mock_constituent_dict[order_dict["uuid"]]
-    mock_json = {"name": mock_constituent[0], \
-                  "address": mock_constituent[1], \
-                  "town": mock_constituent[2] + ", " + order_dict["usa_state"] + " " + mock_constituent[3], \
-                  "phone": mock_constituent[4] \
-                  }
-    order_dict["person"] = mock_json          
+    mock_json = {
+        "name": mock_constituent[0],
+        "address": mock_constituent[1],
+        "town": mock_constituent[2]
+        + ", "
+        + order_dict["usa_state"]
+        + " "
+        + mock_constituent[3],
+        "phone": mock_constituent[4],
+    }
+    order_dict["person"] = mock_json
+
 
 def index():
     return render_template("index.html")
+
 
 def create_order():
     auth_controller.set_authorize_current_user()
@@ -59,15 +74,29 @@ def create_order():
     )
     return table_record_to_json(order)
 
+
 def get_orders():
     auth_controller.set_authorize_current_user()
-    current_office = auth_privileges.get_current_office()
-    orders = OrderActions.get_orders_by_office(current_office)
+    restrict_office = auth_privileges.get_current_office()
+    if restrict_office[:3] == "FED":
+        restrict_office = None
+    usa_state = request.args.get("usa_state")
+    status_code = request.args.get("status")
+    office_code = restrict_office or request.args.get("office_code")
+    query_params = OrderQueryParams()
+    if usa_state:
+        query_params.usa_state = usa_state
+    if status_code:
+        query_params.status_code = status_code
+    if office_code:
+        query_params.office_code = office_code
+    orders = OrderActions.get_orders(query_params)
     orders_json = [table_record_to_json(order) for order in orders]
     add_mock_constituents(orders_json)
 
     return {"orders": orders_json}
     # [table_record_to_json(order) for order in orders]}
+
 
 def get_order_by_uuid(uuid):
     auth_controller.set_authorize_current_user()
@@ -75,6 +104,7 @@ def get_order_by_uuid(uuid):
     order_dict = table_record_to_json(order_obj)
     add_mock_constituent(order_dict)
     return order_dict
+
 
 def delete_order_by_uuid(uuid):
     auth_controller.set_authorize_current_user()
@@ -84,6 +114,7 @@ def delete_order_by_uuid(uuid):
     else:
         OrderActions.delete_order_by_uuid(uuid)
         return "Deleted", 204
+
 
 def get_order_by_order_number(order_number):
     auth_controller.set_authorize_current_user()
@@ -96,6 +127,7 @@ def get_order_by_order_number(order_number):
         add_mock_constituent(order_dict)
         return {"orders": [order_dict]}
 
+
 # generate qr code - qr code points to Scan view on frontend
 def get_qrcode(uuid):
     frontend_url = flask_app.config["FRONTEND_URI"]
@@ -107,10 +139,12 @@ def get_qrcode(uuid):
     buf.seek(0)
     return buf
 
+
 # not secured as it is provided in a link where token cannot be sent
 def send_file_qrcode(uuid):
     q = get_qrcode(uuid)
     return send_file(q, mimetype="image/jpeg")
+
 
 def update_order(uuid):
     auth_controller.set_authorize_current_user()
@@ -132,6 +166,7 @@ def update_order(uuid):
     order_dict = table_record_to_json(order)
     return order_dict
 
+
 def update_order_status(uuid):
     auth_controller.set_authorize_current_user()
 
@@ -142,18 +177,22 @@ def update_order_status(uuid):
     order: OrderActions = OrderActions.get_order_by_uuid(uuid)
     auth_privileges.check_update_status_allowed(order)
 
-    order = OrderActions.update_order_by_uuid(uuid=uuid, order_status_id=new_order_status_id)
+    order = OrderActions.update_order_by_uuid(
+        uuid=uuid, order_status_id=new_order_status_id
+    )
     order_dict = table_record_to_json(order)
     return order_dict
 
-#check to see if this query is handled in get_orders
+
+# check to see if this query is handled in get_orders
 def get_orders_by_office():
     auth_controller.set_authorize_current_user()
     current_office = auth_privileges.get_current_office()
-    offices = OrderActions.get_orders_by_office(current_office)
+    offices = OrderActions.get_orders(current_office)
     office_json = [table_record_to_json(office) for office in offices]
     add_mock_constituents(office_json)
     return {"orders": office_json}
+
 
 def get_orders_by_usa_state():
     auth_controller.set_authorize_current_user()
@@ -163,11 +202,10 @@ def get_orders_by_usa_state():
     add_mock_constituents(state_json)
     return {"orders": state_json}
 
+
 def get_orders_by_order_status_id(order_status_id):
     auth_controller.set_authorize_current_user()
     statuses = OrderActions.get_orders_by_order_status_id(order_status_id)
     status_jason = [table_record_to_json(status) for status in statuses]
     add_mock_constituents(status_jason)
     return {"orders": status_jason}
-
-

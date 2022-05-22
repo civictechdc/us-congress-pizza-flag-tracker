@@ -5,8 +5,16 @@ from config import db
 import uuid
 
 
-class OrderActions:
+class OrderQueryParams:
+    status_code = ""
+    state = ""
+    office_code = ""
 
+    def isEmpty(self):
+        return not (self.status_code or self.state or self.office_code)
+
+
+class OrderActions:
     @classmethod
     def create(
         cls,
@@ -33,12 +41,12 @@ class OrderActions:
         return new_order
 
     @classmethod
-    def get_orders_by_office(cls, office):
-        if office[:3] == "FED":
-            orders = OrderModel.query.all()
-        else:
-            orders = OrderModel.query.filter(OrderModel.home_office_code == office)
-        return orders
+    def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
+        query = OrderModel.home_office_code == OrderModel.home_office_code
+        if query_params.office_code:
+            query = query & (OrderModel.home_office_code == query_params.office_code)
+        orders = OrderModel.query.filter(query)
+        return [order for order in orders]
 
     @classmethod
     def get_order_by_order_number(cls, order_number):
@@ -59,16 +67,12 @@ class OrderActions:
 
     @classmethod
     def get_orders_by_usa_state(cls, usa_state):
-        return OrderModel.query.filter(
-            OrderActions.usa_state == usa_state
-        )
+        return OrderModel.query.filter(OrderActions.usa_state == usa_state)
 
     @classmethod
     def get_orders_by_order_status_id(cls, order_status_id):
-        return OrderModel.query.filter(
-            OrderActions.order_status_id == order_status_id
-        )
-    
+        return OrderModel.query.filter(OrderActions.order_status_id == order_status_id)
+
     @classmethod
     def update_order_by_uuid(
         cls,

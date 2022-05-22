@@ -1,5 +1,8 @@
 import random
-from src.order.order_actions import OrderActions
+from numpy import size
+
+from pytz import NonExistentTimeError
+from src.order.order_actions import OrderActions, OrderQueryParams
 from src.status.status_actions import StatusActions
 from src.status.status_model import StatusModel
 from src.order.order_model import OrderModel
@@ -33,17 +36,26 @@ class TestOrderActions:
         assert order1.uuid != order2.uuid
 
     def test_get_orders(self):
+        office_to_query = "MD-06"
         unique_order_number = random.randint(1, 1000000)
-        order = OrderActions.create("MD", unique_order_number, "MD06")
-        get_orders = OrderActions.get("MD06")
-        found = False
+        order = OrderActions.create("MD", unique_order_number, office_to_query)
+        unique_order_number2 = random.randint(1, 1000000)
+        order = OrderActions.create("CA", unique_order_number2, "CA-03")
+        query_params = OrderQueryParams()
+        query_params.office_code = office_to_query
+        found_orders = OrderActions.get_orders(query_params)
+        assert len(found_orders) > 0
 
-        for order in get_orders:
-            if order.order_number == unique_order_number:
-                found = True
-        assert found
+        for order in found_orders:
+            error_msg = (
+                "Should not have found "
+                + str(order.order_number)
+                + " "
+                + order.home_office_code
+            )
+            assert order.home_office_code == query_params.office_code, error_msg
 
-    def test_get_order(self):
+    def test_get_order_by_order_number(self):
         unique_order_number = random.randint(1, 1000000)
         created_order = OrderActions.create("MD", unique_order_number, "MD06")
         actual_order = OrderActions.get_order_by_order_number(
