@@ -1,5 +1,7 @@
 import random
-from src.order.order_actions import OrderActions
+
+from pytz import NonExistentTimeError
+from src.order.order_actions import OrderActions, OrderQueryParams
 from src.status.status_actions import StatusActions
 from src.status.status_model import StatusModel
 from src.order.order_model import OrderModel
@@ -35,7 +37,9 @@ class TestOrderActions:
     def test_get_orders(self):
         unique_order_number = random.randint(1, 1000000)
         order = OrderActions.create("MD", unique_order_number, "MD06")
-        get_orders = OrderActions.get("MD06")
+        query_params = OrderQueryParams()
+        query_params.office_code = "MD06"
+        get_orders = OrderActions.get_orders(query_params)
         found = False
 
         for order in get_orders:
