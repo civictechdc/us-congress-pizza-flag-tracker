@@ -1,9 +1,12 @@
 import os
+from types import NoneType
 from flask import render_template, request, send_file, Response
 from data.scripts.add_stable_orders import add_stable_orders
 from werkzeug.exceptions import Unauthorized
 from data.scripts.data_util import get_office_codes_list
 from src.order_log import order_log_controller
+from src.status.status_actions import StatusActions
+from src.status.status_model import StatusModel
 from src.util import table_record_to_json, get_dict_keyvalue_or_default, table_to_json
 from config import flask_app, qrcode, db
 import qrcode
@@ -81,25 +84,51 @@ def create_order():
 
 def get_orders():
     auth_controller.set_authorize_current_user()
-    restrict_office = auth_privileges.get_current_office()
-    if restrict_office[:3] == "FED":
-        restrict_office = None
+    permitted_office = get_permitted_office()
+    office_code = permitted_office or request.args.get("office_code")
     usa_state = request.args.get("usa_state")
     status_code = request.args.get("status")
-    office_code = restrict_office or request.args.get("office_code")
+    active = request.args.get("active")
     query_params = OrderQueryParams()
     if usa_state:
         query_params.usa_state = usa_state
     if status_code:
         query_params.status_code = status_code
-    if office_code:
+    # when federal office code specified, it is used for max status query
+    if office_code and not office_code[:3] == "FED":
         query_params.office_code = office_code
+    if active and active.upper() == "TRUE":
+        query_params.max_status = get_max_status(office_code)
     orders = OrderActions.get_orders(query_params)
     orders_json = [table_record_to_json(order) for order in orders]
     add_mock_constituents(orders_json)
 
     return {"orders": orders_json}
-    # [table_record_to_json(order) for order in orders]}
+
+
+def get_permitted_office():
+    restrict_office = auth_privileges.get_current_office()
+    if restrict_office[:3] == "FED":
+        restrict_office = None
+    return restrict_office
+
+
+def get_max_status(office_code_param="ALL"):
+    current_office = auth_privileges.get_current_office()
+    if auth_privileges.is_admin():
+        office_code = office_code_param
+    elif current_office[:3] == "FED":
+        office_code = office_code_param
+    else:  # non-fed user
+        office_code = "ALL"
+    statuses = StatusActions.get_sorted_statuses()
+    max_status = None
+    for status in statuses:
+        if status.active_status == "CLOSED":
+            continue
+        if office_code == status.permission or office_code == "ALL":
+            max_status = status.sequence_num
+    return max_status
 
 
 def get_order_by_uuid(uuid):

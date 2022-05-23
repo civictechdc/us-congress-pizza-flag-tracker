@@ -32,7 +32,6 @@ def add_stable_orders(office_codes_list, db):
     OrderLogModel.query.delete()
     OrderModel.query.delete()
     statuses = StatusActions.get_sorted_statuses()
-    print("debug status 2", statuses)
     for x in range(10):
         order_number = x + 1
 
@@ -65,6 +64,5 @@ def add_stable_orders(office_codes_list, db):
                 OrderActions.update_order_by_uuid(
                     theUuid, order_status_id=order_status_id
                 )
-                print("debug updated to", order_status_id)
 
     db.session.commit()

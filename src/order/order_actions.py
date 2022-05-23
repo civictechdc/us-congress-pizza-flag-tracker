@@ -1,3 +1,4 @@
+from unittest.mock import NonCallableMock
 from src.status.status_model import StatusModel
 from src.order.order_model import OrderModel
 from src.order_log.order_log_actions import LogActions
@@ -9,6 +10,7 @@ class OrderQueryParams:
     status_code = ""
     state = ""
     office_code = ""
+    max_status = None
 
     def isEmpty(self):
         return not (self.status_code or self.state or self.office_code)
@@ -44,8 +46,14 @@ class OrderActions:
     @classmethod
     def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
         query = OrderModel.home_office_code == OrderModel.home_office_code
-        if query_params.office_code:
+        if query_params.office_code and not query_params.max_status:
             query = query & (OrderModel.home_office_code == query_params.office_code)
+        if query_params.max_status:
+            query = query & (
+                OrderModel.status.has(
+                    StatusModel.sequence_num <= query_params.max_status
+                )
+            )
         orders = OrderModel.query.filter(query)
         return [order for order in orders]
 
@@ -58,13 +66,6 @@ class OrderActions:
     def get_order_by_uuid(cls, uuid):
         order = OrderModel.query.filter(OrderModel.uuid == uuid).first()
         return order
-
-    # Do we need this classmethod?
-    @classmethod
-    def get_by_home_office_code(cls, home_office_code):
-        return OrderModel.query.filter(
-            OrderActions.home_office_code == home_office_code
-        )
 
     @classmethod
     def get_orders_by_usa_state(cls, usa_state):
