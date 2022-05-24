@@ -61,4 +61,7 @@ class LogActions:
         order_logs = OrderLogModel.query.filter(OrderLogModel.order_number==order_number).all()
         return order_logs
 
-        
+    @classmethod
+    def get_all_order_logs_by_order_uuid(cls, uuid):
+        order_logs = OrderLogModel.query.filter(OrderLogModel.order_uuid==uuid).all()
+        return order_logs    
