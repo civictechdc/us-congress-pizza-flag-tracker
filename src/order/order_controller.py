@@ -1,4 +1,8 @@
+import os
 from flask import render_template, request, send_file, Response
+from data.scripts.add_stable_orders import add_stable_orders
+from werkzeug.exceptions import Unauthorized
+from data.scripts.data_util import get_office_codes_list
 from src.order_log import order_log_controller
 from src.util import table_record_to_json, get_dict_keyvalue_or_default, table_to_json
 from config import flask_app, qrcode, db
@@ -209,3 +213,13 @@ def get_orders_by_order_status_id(order_status_id):
     status_jason = [table_record_to_json(status) for status in statuses]
     add_mock_constituents(status_jason)
     return {"orders": status_jason}
+
+
+def reset():
+    flask_env = os.environ["FLASK_ENV"]
+    if not (flask_env == "development" or flask_env == "test"):
+        raise Unauthorized("reset not allowed for FLASK_ENV " + flask_env)
+    office_codes_list = get_office_codes_list()
+    add_stable_orders(office_codes_list=office_codes_list, db=db)
+    print("Reset data")
+    return {"reset": "success"}
