@@ -12,6 +12,10 @@ def get_all_order_logs_by_order_number(order_number):
     order_logs = LogActions.get_all_order_logs_by_order_number(order_number)
     return {"orders": table_to_json(order_logs)}
 
+def get_all_orders_by_order_uuid(uuid):
+    order_logs = LogActions.get_all_order_logs_by_order_uuid(uuid)
+    return {"orders": table_to_json(order_logs)}
+
 def get_sorted_order_log_by_order_number(order_number):
     order_logs = LogActions.sort_order_log_by_order_number(order_number)
     return {"orders": table_to_json(order_logs)}

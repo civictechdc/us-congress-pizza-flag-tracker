@@ -39,6 +39,7 @@ routes = [
         order_log_controller.get_all_order_logs_by_order_number,
         "GET",
     ],
+    ["/api/orders/logs/<uuid>", order_log_controller.get_all_orders_by_order_uuid, "GET"],
 ]
 
 for route in routes:
