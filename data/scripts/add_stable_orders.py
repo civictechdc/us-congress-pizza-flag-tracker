@@ -1,6 +1,11 @@
 import uuid
 import random
 
+from src.order.order_actions import OrderActions
+from data.scripts.data_util import get_office_codes_list
+
+office_codes_list = get_office_codes_list()
+
 fakeUUIDs = [
     "268bf202-5da5-44be-9709-017a0833c661",
     "652f6df6-a320-4316-a758-103e10421866",
@@ -17,10 +22,13 @@ fakeUUIDs = [
 
 def add_stable_orders(office_codes_list, db):
 
-    print("Adding sample orders (stable)");
+    print("Adding sample orders (stable)")
 
     from src.order.order_model import OrderModel
+    from src.order_log.order_log_model import OrderLogModel
 
+    OrderLogModel.query.delete()
+    OrderModel.query.delete()
     for x in range(10):
         order_number = x + 1
 
@@ -41,9 +49,15 @@ def add_stable_orders(office_codes_list, db):
             order_status_id = 1
         home_office_code = usa_state_object.get("office_code")[0]
 
-        order_ = OrderModel(
-            theUuid, usa_state, order_number, home_office_code, order_status_id
+        # order_ = OrderModel(
+        #     theUuid, usa_state, order_number, home_office_code, order_status_id
+        # )
+        OrderActions.create(
+            uuid_param=theUuid,
+            usa_state=usa_state,
+            order_number=order_number,
+            home_office_code=home_office_code,
+            order_status_id=order_status_id,
         )
-        db.session.add(order_)
-    
+
     db.session.commit()

@@ -5,8 +5,16 @@ from config import db
 import uuid
 
 
-class OrderActions:
+class OrderQueryParams:
+    status_code = ""
+    state = ""
+    office_code = ""
 
+    def isEmpty(self):
+        return not (self.status_code or self.state or self.office_code)
+
+
+class OrderActions:
     @classmethod
     def create(
         cls,
@@ -15,8 +23,9 @@ class OrderActions:
         home_office_code: str,
         order_status_id: int = None,
         order_status: OrderModel = None,
+        uuid_param: str = None,
     ):
-        theUuid = str(uuid.uuid4())
+        theUuid = uuid_param or str(uuid.uuid4())
         new_order = OrderModel(
             theUuid,
             usa_state,
@@ -33,16 +42,18 @@ class OrderActions:
         return new_order
 
     @classmethod
-    def get_orders_by_office(cls, office):
-        if office[:3] == "FED":
-            orders = OrderModel.query.all()
-        else:
-            orders = OrderModel.query.filter(OrderModel.home_office_code == office)
-        return orders
+    def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
+        query = OrderModel.home_office_code == OrderModel.home_office_code
+        if query_params.office_code:
+            query = query & (OrderModel.home_office_code ==
+                             query_params.office_code)
+        orders = OrderModel.query.filter(query)
+        return [order for order in orders]
 
     @classmethod
     def get_order_by_order_number(cls, order_number):
-        order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
+        order = OrderModel.query.filter(
+            OrderModel.order_number == order_number).first()
         return order
 
     @classmethod
@@ -59,16 +70,12 @@ class OrderActions:
 
     @classmethod
     def get_orders_by_usa_state(cls, usa_state):
-        return OrderModel.query.filter(
-            OrderActions.usa_state == usa_state
-        )
+        return OrderModel.query.filter(OrderActions.usa_state == usa_state)
 
     @classmethod
     def get_orders_by_order_status_id(cls, order_status_id):
-        return OrderModel.query.filter(
-            OrderActions.order_status_id == order_status_id
-        )
-    
+        return OrderModel.query.filter(OrderActions.order_status_id == order_status_id)
+
     @classmethod
     def update_order_by_uuid(
         cls,
@@ -84,7 +91,7 @@ class OrderActions:
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
         LogActions.create_order_log(
-            uuid, usa_state, order_number, home_office_code, order_status_id
+            uuid, order.usa_state, order.order_number, order.home_office_code, order.order_status_id
         )
         db.session.commit()
         return order
