@@ -11,7 +11,7 @@ from src.order.order_model import OrderModel
 class TestOrderActions:
     def test_create(self):
         unique_order_number = random.randint(1, 1000000)
-        expected_status: StatusModel = StatusActions.get_statuses()[0]
+        expected_status: StatusModel = StatusActions.get_sorted_statuses()[0]
         status_id = expected_status.id
         OrderActions.create(
             usa_state="MD",

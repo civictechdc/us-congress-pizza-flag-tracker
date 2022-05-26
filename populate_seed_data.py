@@ -22,6 +22,7 @@ if users_exist:
     sys.exit()
 office_codes_list = get_office_codes_list()
 
+
 with open("data/fed_users_order_privs.json") as users_json:
     users_list = json.load(users_json)
 

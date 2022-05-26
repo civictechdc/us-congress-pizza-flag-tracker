@@ -45,15 +45,13 @@ class OrderActions:
     def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
         query = OrderModel.home_office_code == OrderModel.home_office_code
         if query_params.office_code:
-            query = query & (OrderModel.home_office_code ==
-                             query_params.office_code)
+            query = query & (OrderModel.home_office_code == query_params.office_code)
         orders = OrderModel.query.filter(query)
         return [order for order in orders]
 
     @classmethod
     def get_order_by_order_number(cls, order_number):
-        order = OrderModel.query.filter(
-            OrderModel.order_number == order_number).first()
+        order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
         return order
 
     @classmethod
@@ -91,7 +89,11 @@ class OrderActions:
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
         LogActions.create_order_log(
-            uuid, order.usa_state, order.order_number, order.home_office_code, order.order_status_id
+            uuid,
+            order.usa_state,
+            order.order_number,
+            order.home_office_code,
+            order.order_status_id,
         )
         db.session.commit()
         return order

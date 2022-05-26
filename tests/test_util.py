@@ -1,6 +1,7 @@
 import random
 
 import pytest
+
 # qrcode related imports
 
 # import cv2
@@ -22,21 +23,27 @@ from src.order.order_model import OrderModel
 from src.util import table_record_to_json
 
 
-class TestUtils():
+class TestUtils:
     def test_table_record_to_json(self):
         unique_number = random.randint(1, 1000000)
         order_number = unique_number
         usa_state = "MA"
-        order_statuses: [StatusModel] = StatusActions.get_statuses()
+        order_statuses: [StatusModel] = StatusActions.get_sorted_statuses()
         order_status = order_statuses[0]
         home_office_code = "FED-ADMIN"
-        order = OrderActions.create(order_number=order_number, usa_state=usa_state,
-                                    home_office_code=home_office_code, order_status=order_status)
+        order = OrderActions.create(
+            order_number=order_number,
+            usa_state=usa_state,
+            home_office_code=home_office_code,
+            order_status=order_status,
+        )
         json = table_record_to_json(order)
-        assert (json["usa_state"] == order.usa_state)
-        assert (json["status"]["description"] == order_status.description)
+        assert json["usa_state"] == order.usa_state
+        assert json["status"]["description"] == order_status.description
 
-    @pytest.mark.skip(reason="function works, but test does not.  openCV is an issue, so may delete this test.")
+    @pytest.mark.skip(
+        reason="function works, but test does not.  openCV is an issue, so may delete this test."
+    )
     def test_qrcode(self):
         qrcodeValue = "https://example.com/A43X2Q3"
         # with app.test_client() as c:

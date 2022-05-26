@@ -9,5 +9,7 @@ class StatusActions:
     # Table actions:
 
     @classmethod
-    def get_statuses(cls):
-        return StatusModel.query.all()
+    def get_sorted_statuses(cls):
+        statuses = StatusModel.query.all()
+        statuses.sort(key=lambda status: status.sequence_num)
+        return statuses
