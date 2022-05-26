@@ -34,11 +34,11 @@ class OrderActions:
             order_status_id,
             order_status,
         )
+        db.session.add(new_order)
+        db.session.commit()
         LogActions.create_order_log(
             theUuid, usa_state, order_number, home_office_code, order_status_id
         )
-        db.session.add(new_order)
-        db.session.commit()
         return new_order
 
     @classmethod
