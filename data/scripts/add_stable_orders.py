@@ -1,6 +1,13 @@
 import uuid
 import random
 
+from src.order.order_actions import OrderActions
+from data.scripts.data_util import get_office_codes_list
+from src.status.status_actions import StatusActions
+from src.status.status_model import StatusModel
+
+office_codes_list = get_office_codes_list()
+
 fakeUUIDs = [
     "268bf202-5da5-44be-9709-017a0833c661",
     "652f6df6-a320-4316-a758-103e10421866",
@@ -17,10 +24,15 @@ fakeUUIDs = [
 
 def add_stable_orders(office_codes_list, db):
 
-    print("Adding sample orders (stable)");
+    print("Adding sample orders (stable)")
 
     from src.order.order_model import OrderModel
+    from src.order_log.order_log_model import OrderLogModel
 
+    OrderLogModel.query.delete()
+    OrderModel.query.delete()
+    statuses = StatusActions.get_sorted_statuses()
+    print("debug status 2", statuses)
     for x in range(10):
         order_number = x + 1
 
@@ -35,15 +47,24 @@ def add_stable_orders(office_codes_list, db):
         usa_state_object = office_codes_list[x + x + 2]
         usa_state = usa_state_object.get("usa_state")
 
-        if x > 0 and x <= 9:
-            order_status_id = x
-        else:
-            order_status_id = 1
         home_office_code = usa_state_object.get("office_code")[0]
 
-        order_ = OrderModel(
-            theUuid, usa_state, order_number, home_office_code, order_status_id
+        # order_ = OrderModel(
+        #     theUuid, usa_state, order_number, home_office_code, order_status_id
+        # )
+        OrderActions.create(
+            uuid_param=theUuid,
+            usa_state=usa_state,
+            order_number=order_number,
+            home_office_code=home_office_code,
+            order_status_id=statuses[0].id,
         )
-        db.session.add(order_)
-    
+        if x > 0 and x < len(statuses):
+            for status_position in range(1, x + 1):
+                order_status_id = statuses[status_position].id
+                OrderActions.update_order_by_uuid(
+                    theUuid, order_status_id=order_status_id
+                )
+                print("debug updated to", order_status_id)
+
     db.session.commit()
