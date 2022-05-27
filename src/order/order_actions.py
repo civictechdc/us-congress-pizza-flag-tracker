@@ -7,11 +7,11 @@ import uuid
 
 class OrderQueryParams:
     status_code = ""
-    state = ""
+    usa_state = ""
     office_code = ""
 
     def isEmpty(self):
-        return not (self.status_code or self.state or self.office_code)
+        return not (self.status_code or self.usa_state or self.office_code)
 
 
 class OrderActions:
@@ -44,13 +44,17 @@ class OrderActions:
     def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
         query = OrderModel.home_office_code == OrderModel.home_office_code
         if query_params.office_code:
-            query = query & (OrderModel.home_office_code == query_params.office_code)
+            query = query & (OrderModel.home_office_code ==
+                             query_params.office_code)
+        if query_params.usa_state:
+            query = query & (OrderModel.usa_state == query_params.usa_state)
         orders = OrderModel.query.filter(query)
         return [order for order in orders]
 
     @classmethod
     def get_order_by_order_number(cls, order_number):
-        order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
+        order = OrderModel.query.filter(
+            OrderModel.order_number == order_number).first()
         return order
 
     @classmethod
