@@ -1,10 +1,9 @@
-from src.office import office_actions
+from src.office.office_actions import OfficeActions
 
 
 def get_all_states():
-    return {"states": office_actions.get_states()}
+    return {"states": OfficeActions.get_states()}
 
 
 def get_offices_by_state(state):
-    return {state: office_actions.get_offices_by_state(state)}
-
+    return {state: OfficeActions.get_offices_by_state(state)}
