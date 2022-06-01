@@ -28,7 +28,7 @@ class TestUtils:
         unique_number = random.randint(1, 1000000)
         order_number = unique_number
         usa_state = "MA"
-        order_statuses: [StatusModel] = StatusActions.get_sorted_statuses()
+        order_statuses = StatusActions.get_sorted_statuses()
         order_status = order_statuses[0]
         home_office_code = "FED-ADMIN"
         order = OrderActions.create(
