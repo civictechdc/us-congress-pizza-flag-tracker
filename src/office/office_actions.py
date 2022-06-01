@@ -20,7 +20,8 @@ class OfficeActions:
 
     @classmethod
     def get_states(cls):
-        query = db.session.query(OfficeModel.usa_state.distinct().label("usa_state"))
+        query = db.session.query(
+            OfficeModel.usa_state.distinct().label("usa_state"))
         return [row.usa_state for row in query.all()]
 
     @classmethod
