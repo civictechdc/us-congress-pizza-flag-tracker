@@ -24,8 +24,9 @@ class OrderActions:
         home_office_code: str,
         order_status_id: int = None,
         order_status: OrderModel = None,
+        uuid_param: str = None,
     ):
-        theUuid = str(uuid.uuid4())
+        theUuid = uuid_param or str(uuid.uuid4())
         new_order = OrderModel(
             theUuid,
             usa_state,
@@ -34,11 +35,11 @@ class OrderActions:
             order_status_id,
             order_status,
         )
+        db.session.add(new_order)
+        db.session.commit()
         LogActions.create_order_log(
             theUuid, usa_state, order_number, home_office_code, order_status_id
         )
-        db.session.add(new_order)
-        db.session.commit()
         return new_order
 
     @classmethod
@@ -100,7 +101,7 @@ class OrderActions:
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
         LogActions.create_order_log(
-            uuid, usa_state, order_number, home_office_code, order_status_id
+            uuid, order.usa_state, order.order_number, order.home_office_code, order.order_status_id
         )
         db.session.commit()
         return order
