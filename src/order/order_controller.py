@@ -1,10 +1,11 @@
+import keyword
 import os
 from flask import render_template, request, send_file, Response
 from data.scripts.add_stable_orders import add_stable_orders
 from werkzeug.exceptions import Unauthorized
 from data.scripts.data_util import get_office_codes_list
 from src.order_log import order_log_controller
-from src.util import table_record_to_json, get_dict_keyvalue_or_default, table_to_json
+from src.util import table_record_to_json, get_dict_keyvalue_or_default
 from config import flask_app, qrcode, db
 import qrcode
 from src.auth import auth_controller, auth_privileges
@@ -27,8 +28,11 @@ order_mock_constituent_dict = {}
 # in production, person data would come from external system
 def add_mock_constituents(orders_dict=None):
     if not orders_dict:
+        print("getting")
         orders = OrderActions.get_orders()
         orders_dict = [table_record_to_json(order) for order in orders]
+        print("debug 2", orders)
+        print("debug 3", orders_dict)
 
     x = 0
     for order_dict in orders_dict:
@@ -85,18 +89,22 @@ def get_orders():
     if restrict_office[:3] == "FED":
         restrict_office = None
     usa_state = request.args.get("usa_state")
-    status_code = request.args.get("status")
+    statuses = request.args.get("status")
     office_code = restrict_office or request.args.get("office_code")
+    keyword = request.args.get("keyword")
     query_params = OrderQueryParams()
     if usa_state:
         query_params.usa_state = usa_state
-    if status_code:
-        query_params.status_code = status_code
+    if statuses:
+        query_params.statuses = statuses
     if office_code:
         query_params.office_code = office_code
+    if keyword:
+        query_params.keyword = keyword
     orders = OrderActions.get_orders(query_params)
     orders_json = [table_record_to_json(order) for order in orders]
     add_mock_constituents(orders_json)
+    print("debug json", orders_json)
 
     return {"orders": orders_json}
     # [table_record_to_json(order) for order in orders]}

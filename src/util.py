@@ -66,4 +66,4 @@ def table_record_to_json(record):
 
 
 def table_to_json(table):
-    return {"data": [table_record_to_json(record) for record in table]}
+    return [table_record_to_json(record) for record in table]

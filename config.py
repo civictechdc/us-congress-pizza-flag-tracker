@@ -11,8 +11,6 @@ import os
 import qrcode
 from werkzeug.exceptions import HTTPException
 
-from src.util import table_to_json
-
 flask_app = Flask(__name__)
 qrcode = QRcode(flask_app)
 
