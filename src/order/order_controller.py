@@ -28,11 +28,8 @@ order_mock_constituent_dict = {}
 # in production, person data would come from external system
 def add_mock_constituents(orders_dict=None):
     if not orders_dict:
-        print("getting")
         orders = OrderActions.get_orders()
         orders_dict = [table_record_to_json(order) for order in orders]
-        print("debug 2", orders)
-        print("debug 3", orders_dict)
 
     x = 0
     for order_dict in orders_dict:
@@ -104,8 +101,6 @@ def get_orders():
     orders = OrderActions.get_orders(query_params)
     orders_json = [table_record_to_json(order) for order in orders]
     add_mock_constituents(orders_json)
-    print("debug json", orders_json)
-
     return {"orders": orders_json}
     # [table_record_to_json(order) for order in orders]}
 

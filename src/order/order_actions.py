@@ -62,18 +62,14 @@ class OrderActions:
         orders = OrderModel.query.filter(query)
         order_array = [order for order in orders]
         if query_params.keyword:
-            print("here")
-            order_filtered_array = filter(
+            filter_obj = filter(
                 lambda order: query_params.keyword
                 in json.dumps(table_record_to_json(order)),
                 order_array,
             )
-            print("debug", table_to_json(order_filtered_array))
-            print("debug 2", table_to_json(order_array)[0])
-
+            order_filtered_array = list(filter_obj)
         else:
             order_filtered_array = order_array
-        print("debug len", order_filtered_array.__sizeof__())
         return order_filtered_array
 
     @classmethod
