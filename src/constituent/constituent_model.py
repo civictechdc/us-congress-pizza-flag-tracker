@@ -4,15 +4,6 @@ from sqlalchemy.sql.expression import join
 
 
 class ConstituentModel(db.Model):
-
-    #     "name": mock_constituent[0],
-    # "Constituent": mock_constituent[1],
-    # "town": mock_constituent[2]
-    # + ", "
-    # + constituent_dict["name"]
-    # + " "
-    # + mock_constituent[3],
-    # "phone": mock_constituent[4],
     __tablename__ = "constituents"
     uuid = db.Column(db.String(40), primary_key=True, index=True, nullable=False)
     name = db.Column(db.String(40))

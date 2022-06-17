@@ -34,11 +34,7 @@ class OrderActions:
         constituent_id: str = None,
     ):
         if not constituent_id:
-            len_order = OrderModel.query.count()
-            constituents = ConstituentActions.get_constituents()
-            len_constituent = len(constituents)
-            constituent_index = len_order % len_constituent
-            constituent_id = constituents[constituent_index].uuid
+            constituent_id = cls.select_mock_constituent()
         theUuid = uuid_param or str(uuid.uuid4())
         new_order = OrderModel(
             theUuid,
@@ -106,6 +102,15 @@ class OrderActions:
     @classmethod
     def get_orders_by_order_status_id(cls, order_status_id):
         return OrderModel.query.filter(OrderActions.order_status_id == order_status_id)
+
+    @classmethod
+    def select_mock_constituent(cls):
+        len_order = OrderModel.query.count()
+        constituents = ConstituentActions.get_constituents()
+        len_constituent = len(constituents)
+        constituent_index = len_order % len_constituent
+        constituent_id = constituents[constituent_index].uuid
+        return constituent_id
 
     @classmethod
     def update_order_by_uuid(
