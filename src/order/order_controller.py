@@ -14,52 +14,65 @@ import io
 
 # mock person data for proof of concept demo
 # in production, person data would come from external system
-constituents = [
-    ["Paul Revere", "32 Battle Road", "Lexington", "02476", "(111) 415-1775"],
-    ["Bugs Bunny", "32 Looney Tune Road", "Cwazy Rabbit", "02174", "(WHA) TSU-PDOC"],
-    ["Kamala Harris", "1 Whitehouse", "Pleasantville", "41923", "(111) 347-0000"],
-    ["Sirius Black", "12 Grimmauld Place", "Magic", "12345", "(123) 321-1234"],
-    ["Mrs Addams", "001 Cemetery Lane", "Death Hollow", "34521", "(617) 862-7731"],
-    ["Harriet Tubman", "000 Secret Street", "Hiddenville", "00000", ""],
-]
-order_mock_constituent_dict = {}
+# constituents = [
+#     ["Paul Revere", "32 Battle Road", "Lexington", "02476", "(111) 415-1775"],
+#     ["Bugs Bunny", "32 Looney Tune Road", "Cwazy Rabbit", "02174", "(WHA) TSU-PDOC"],
+#     ["Kamala Harris", "1 Whitehouse", "Pleasantville", "41923", "(111) 347-0000"],
+#     ["Sirius Black", "12 Grimmauld Place", "Magic", "12345", "(123) 321-1234"],
+#     ["Mrs Addams", "001 Cemetery Lane", "Death Hollow", "34521", "(617) 862-7731"],
+#     ["Harriet Tubman", "000 Secret Street", "Hiddenville", "00000", ""],
+# ]
+# order_mock_constituent_dict = {}
 
 # mock person data for proof of concept demo
 # in production, person data would come from external system
-def add_mock_constituents(orders_dict=None):
-    if not orders_dict:
-        orders = OrderActions.get_orders()
-        orders_dict = [table_record_to_json(order) for order in orders]
+# def add_mock_constituents(orders_dict=None):
+#     if not orders_dict:
+#         orders = OrderActions.get_orders()
+#         orders_dict = [table_record_to_json(order) for order in orders]
 
-    x = 0
-    for order_dict in orders_dict:
-        uuid = order_dict["uuid"]
-        if not order_mock_constituent_dict.__contains__(uuid):
-            order_mock_constituent_dict[uuid] = constituents[x]
-        add_mock_constituent(order_dict)
+#     x = 0
+#     for order_dict in orders_dict:
+#         uuid = order_dict["uuid"]
+#         if not order_mock_constituent_dict.__contains__(uuid):
+#             order_mock_constituent_dict[uuid] = constituents[x]
+#         add_mock_constituent(order_dict)
 
-        x = x + 1
-        if x == len(constituents):
-            x = 0
+#         x = x + 1
+#         if x == len(constituents):
+#             x = 0
 
 
-# mock person data for proof of concept demo
-# in production, person data would come from external system
-def add_mock_constituent(order_dict):
-    if not order_mock_constituent_dict.__contains__(order_dict["uuid"]):
-        add_mock_constituents()
-    mock_constituent = order_mock_constituent_dict[order_dict["uuid"]]
-    mock_json = {
-        "name": mock_constituent[0],
-        "address": mock_constituent[1],
-        "town": mock_constituent[2]
-        + ", "
-        + order_dict["usa_state"]
-        + " "
-        + mock_constituent[3],
-        "phone": mock_constituent[4],
-    }
-    order_dict["person"] = mock_json
+# # mock person data for proof of concept demo
+# # in production, person data would come from external system
+# def add_mock_constituent(order_dict):
+#     if not order_mock_constituent_dict.__contains__(order_dict["uuid"]):
+#         add_mock_constituents()
+#     mock_constituent = order_mock_constituent_dict[order_dict["uuid"]]
+#     mock_json = {
+#         "name": mock_constituent[0],
+#         "address": mock_constituent[1],
+#         "town": mock_constituent[2]
+#         + ", "
+#         + order_dict["usa_state"]
+#         + " "
+#         + mock_constituent[3],
+#         "phone": mock_constituent[4],
+#     }
+#     order_dict["person"] = mock_json
+def replace_state_placeholders(orders_json):
+    for order in orders_json:
+        replace_state_placeholder(order)
+
+
+def replace_state_placeholder(order):
+    print("replacing", order)
+    if not (order["person"] and order["person"]["town"]):
+        return
+    person_constituent_town = order["person"]["town"]
+    usa_state = order["usa_state"]
+    new_constituent_town = person_constituent_town.replace("<state>", usa_state)
+    order["person"]["town"] = new_constituent_town
 
 
 def index():
@@ -100,7 +113,7 @@ def get_orders():
         query_params.keyword = keyword
     orders = OrderActions.get_orders(query_params)
     orders_json = [table_record_to_json(order) for order in orders]
-    add_mock_constituents(orders_json)
+    replace_state_placeholders(orders_json)
     return {"orders": orders_json}
     # [table_record_to_json(order) for order in orders]}
 
@@ -109,7 +122,8 @@ def get_order_by_uuid(uuid):
     auth_controller.set_authorize_current_user()
     order_obj = OrderActions.get_order_by_uuid(uuid)
     order_dict = table_record_to_json(order_obj)
-    add_mock_constituent(order_dict)
+    replace_state_placeholder(order_dict)
+    # add_mock_constituent(order_dict)
     return order_dict
 
 
@@ -131,7 +145,8 @@ def get_order_by_order_number(order_number):
         return {"error": "order not found"}
     else:
         order_dict = table_record_to_json(order_obj)
-        add_mock_constituent(order_dict)
+        # add_mock_constituent(order_dict)
+        replace_state_placeholder(order_dict)
         return {"orders": [order_dict]}
 
 
@@ -197,7 +212,7 @@ def get_orders_by_office():
     current_office = auth_privileges.get_current_office()
     offices = OrderActions.get_orders(current_office)
     office_json = [table_record_to_json(office) for office in offices]
-    add_mock_constituents(office_json)
+    # add_mock_constituents(office_json)
     return {"orders": office_json}
 
 
@@ -206,7 +221,7 @@ def get_orders_by_usa_state():
     current_office = auth_privileges.get_current_office()
     states = OrderActions.get_orders_by_usa_state(current_office)
     state_json = [table_record_to_json(state) for state in states]
-    add_mock_constituents(state_json)
+    # add_mock_constituents(state_json)
     return {"orders": state_json}
 
 
@@ -214,7 +229,7 @@ def get_orders_by_order_status_id(order_status_id):
     auth_controller.set_authorize_current_user()
     statuses = OrderActions.get_orders_by_order_status_id(order_status_id)
     status_jason = [table_record_to_json(status) for status in statuses]
-    add_mock_constituents(status_jason)
+    # add_mock_constituents(status_jason)
     return {"orders": status_jason}
 
 
@@ -224,5 +239,4 @@ def reset():
         raise Unauthorized("reset not allowed for FLASK_ENV " + flask_env)
     office_codes_list = get_office_codes_list()
     add_stable_orders(office_codes_list=office_codes_list, db=db)
-    print("Reset data")
     return {"reset": "success"}

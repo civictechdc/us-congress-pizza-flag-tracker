@@ -29,6 +29,7 @@ class OrderActions:
         order_status_id: int = None,
         order_status: OrderModel = None,
         uuid_param: str = None,
+        constituent_id: str = None,
     ):
         theUuid = uuid_param or str(uuid.uuid4())
         new_order = OrderModel(
@@ -38,6 +39,7 @@ class OrderActions:
             home_office_code,
             order_status_id,
             order_status,
+            constituent_id,
         )
         db.session.add(new_order)
         db.session.commit()
