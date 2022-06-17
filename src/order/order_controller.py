@@ -66,7 +66,6 @@ def replace_state_placeholders(orders_json):
 
 
 def replace_state_placeholder(order):
-    print("replacing", order)
     if not (order["person"] and order["person"]["town"]):
         return
     person_constituent_town = order["person"]["town"]

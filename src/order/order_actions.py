@@ -1,4 +1,6 @@
 import json
+from src.constituent.constituent_actions import ConstituentActions
+from src.constituent.constituent_model import ConstituentModel
 from src.status.status_model import StatusModel
 from src.status.status_actions import StatusActions
 from src.order.order_model import OrderModel
@@ -31,6 +33,12 @@ class OrderActions:
         uuid_param: str = None,
         constituent_id: str = None,
     ):
+        if not constituent_id:
+            len_order = OrderModel.query.count()
+            constituents = ConstituentActions.get_constituents()
+            len_constituent = len(constituents)
+            constituent_index = len_order % len_constituent
+            constituent_id = constituents[constituent_index].uuid
         theUuid = uuid_param or str(uuid.uuid4())
         new_order = OrderModel(
             theUuid,
