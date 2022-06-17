@@ -1,15 +1,8 @@
-import json
-from src.status.status_model import StatusModel
-from src.status.status_actions import StatusActions
 from src.constituent.constituent_model import ConstituentModel
 from config import db
 import uuid
 
 from src.util import table_record_to_json, table_to_json
-
-
-def xyz(keyword, constituent):
-    return keyword in json.dumps(table_record_to_json(constituent))
 
 
 class ConstituentQueryParams:
