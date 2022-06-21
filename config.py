@@ -11,8 +11,6 @@ import os
 import qrcode
 from werkzeug.exceptions import HTTPException
 
-from src.util import table_to_json
-
 flask_app = Flask(__name__)
 qrcode = QRcode(flask_app)
 
@@ -42,3 +40,4 @@ from src.office.office_model import OfficeModel
 from src.order.order_model import OrderModel
 from src.user.user_model import UserModel
 from src.status.status_model import StatusModel
+from src.constituent.constituent_model import ConstituentModel
