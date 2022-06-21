@@ -52,10 +52,22 @@ class OrderActions:
             query = query & (OrderModel.usa_state == query_params.usa_state)
         if query_params.statuses:
             statuses = StatusActions.get_sorted_statuses()
+            status_query = None
             for status in statuses:
-                if status.status_code == query_params.statuses:
-                    query = query & (OrderModel.order_status_id ==
-                                     status.id)
+                # if status.status_code == query_params.statuses:
+                # status.status_code: HHOS_verified, query_params.statuses(HHOS_verified, AOC_recieved)
+                print("status: ", status.status_code, query_params.statuses)
+                if status.status_code in query_params.statuses:
+                    print("Adding Query")
+                    if status_query:
+                        status_query or (OrderModel.order_status_id ==
+                                         status.id)
+                    else:
+                        status_query = (OrderModel.order_status_id ==
+                                        status.id)
+                    print(status_query)
+            query = query and (status_query)
+            print(query)
 
         orders = OrderModel.query.filter(query)
         return [order for order in orders]

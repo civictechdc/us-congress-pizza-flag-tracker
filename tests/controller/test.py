@@ -26,8 +26,8 @@ def test_get_orders_by_multiple_status_code(self):
     assert len(found_orders) > 0
     count_status1 = 0
     count_status2 = 0
-
     count_wrong_status = 0
+
     for order in found_orders:
         if statuses[1].id == order.order_status_id:
             count_status1 += 1
