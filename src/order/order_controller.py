@@ -32,13 +32,14 @@ def create_order():
 
 
 def get_orders():
+
     auth_controller.set_authorize_current_user()
     restrict_office = auth_privileges.get_current_office()
     if restrict_office[:3] == "FED":
         restrict_office = None
-    usa_state = request.args.get("usa_state")
+    usa_state = request.args.get("state")
     statuses = request.args.get("status")
-    office_code = restrict_office or request.args.get("office_code")
+    office_code = restrict_office or request.args.get("office")
     keyword = request.args.get("keyword")
     query_params = OrderQueryParams()
     if usa_state:
@@ -49,6 +50,7 @@ def get_orders():
         query_params.office_code = office_code
     if keyword:
         query_params.keyword = keyword
+
     orders = OrderActions.get_orders(query_params)
     orders_json = [table_record_to_json(order) for order in orders]
     replace_mock_state_placeholders(orders_json)

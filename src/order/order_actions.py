@@ -55,6 +55,7 @@ class OrderActions:
     @classmethod
     def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
         query = OrderModel.home_office_code == OrderModel.home_office_code
+
         if query_params.office_code:
             query = query & (OrderModel.home_office_code == query_params.office_code)
         if query_params.usa_state:
