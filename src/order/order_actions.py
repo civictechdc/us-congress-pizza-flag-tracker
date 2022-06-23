@@ -70,8 +70,8 @@ class OrderActions:
         order_array = [order for order in orders]
         if query_params.keyword:
             filter_obj = filter(
-                lambda order: query_params.keyword
-                in json.dumps(table_record_to_json(order)),
+                lambda order: query_params.keyword.upper()
+                in json.dumps(table_record_to_json(order)).upper(),
                 order_array,
             )
             order_filtered_array = list(filter_obj)
