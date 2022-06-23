@@ -12,7 +12,7 @@ class OrderModel(db.Model):
     usa_state = db.Column(db.String(10))
     # sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'mapped class OfficeModel->offices'. Original exception was: Could not determine join condition between parent/child tables on relationship OfficeModel.orders - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
     order_status_id = db.Column(db.Integer, db.ForeignKey("status.id"))
-    constituent_id = db.Column(db.Integer, db.ForeignKey("constituents.uuid"))
+    constituent_id = db.Column(db.String(40), db.ForeignKey("constituents.uuid"))
     home_office_code = db.Column(db.String(10), db.ForeignKey(OfficeModel.office_code))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
