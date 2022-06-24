@@ -57,13 +57,14 @@ class OrderActions:
         query = OrderModel.home_office_code == OrderModel.home_office_code
 
         if query_params.office_code:
-            query = query & (OrderModel.home_office_code == query_params.office_code)
+            query = query & (OrderModel.home_office_code ==
+                             query_params.office_code)
         if query_params.usa_state:
             query = query & (OrderModel.usa_state == query_params.usa_state)
         if query_params.statuses:
             statuses = StatusActions.get_sorted_statuses()
             for status in statuses:
-                if status.status_code == query_params.statuses:
+                if status.id == int(query_params.statuses):
                     query = query & (OrderModel.order_status_id == status.id)
 
         orders = OrderModel.query.filter(query)
@@ -81,7 +82,8 @@ class OrderActions:
 
     @classmethod
     def get_order_by_order_number(cls, order_number):
-        order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
+        order = OrderModel.query.filter(
+            OrderModel.order_number == order_number).first()
         return order
 
     @classmethod
