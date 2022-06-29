@@ -64,7 +64,7 @@ class OrderActions:
         if query_params.statuses:
             # create an array of the statis query
             status_query = query_params.statuses.split(',')
-            print(status_query)
+            # print(status_query)
             statuses = StatusActions.get_sorted_statuses()
             for status in statuses:
                 # if status.status_code == status_query:
