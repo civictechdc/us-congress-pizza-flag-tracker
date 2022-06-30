@@ -57,21 +57,27 @@ class OrderActions:
         query = OrderModel.home_office_code == OrderModel.home_office_code
 
         if query_params.office_code:
-            query = query & (OrderModel.home_office_code == query_params.office_code)
+            query = query & (OrderModel.home_office_code ==
+                             query_params.office_code)
         if query_params.usa_state:
             query = query & (OrderModel.usa_state == query_params.usa_state)
         if query_params.statuses:
+            status_query = query_params.statuses.split(',')
             statuses = StatusActions.get_sorted_statuses()
+            sub_query = OrderModel.home_office_code != OrderModel.home_office_code
             for status in statuses:
-                if status.status_code == query_params.statuses:
-                    query = query & (OrderModel.order_status_id == status.id)
+                if status.status_code in status_query:
+                    sub_query = sub_query | (
+                        OrderModel.order_status_id == status.id)
+
+            query = query & sub_query
 
         orders = OrderModel.query.filter(query)
         order_array = [order for order in orders]
         if query_params.keyword:
             filter_obj = filter(
-                lambda order: query_params.keyword
-                in json.dumps(table_record_to_json(order)),
+                lambda order: query_params.keyword.upper()
+                in json.dumps(table_record_to_json(order)).upper(),
                 order_array,
             )
             order_filtered_array = list(filter_obj)
@@ -81,7 +87,8 @@ class OrderActions:
 
     @classmethod
     def get_order_by_order_number(cls, order_number):
-        order = OrderModel.query.filter(OrderModel.order_number == order_number).first()
+        order = OrderModel.query.filter(
+            OrderModel.order_number == order_number).first()
         return order
 
     @classmethod
