@@ -62,14 +62,15 @@ class OrderActions:
         if query_params.usa_state:
             query = query & (OrderModel.usa_state == query_params.usa_state)
         if query_params.statuses:
-            # create an array of the statis query
             status_query = query_params.statuses.split(',')
-            # print(status_query)
             statuses = StatusActions.get_sorted_statuses()
+            sub_query = OrderModel.home_office_code != OrderModel.home_office_code
             for status in statuses:
-                # if status.status_code == status_query:
-                if status.status_code == query_params.statuses:
-                    query = query & (OrderModel.order_status_id == status.id)
+                if status.status_code in status_query:
+                    sub_query = sub_query | (
+                        OrderModel.order_status_id == status.id)
+
+            query = query & sub_query
 
         orders = OrderModel.query.filter(query)
         order_array = [order for order in orders]
