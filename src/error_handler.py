@@ -39,7 +39,7 @@ def handle_exceptions_for_app(e: HTTPException):
     else:
         response_var = {"error_msg": str(e)}
     print("Code:", code)
-    print("Response Var: ", response_var)  
+    print("Response: ", response_var)  
     print(traceback.print_exc())
     now = datetime.now()
     text_msg = json.dumps(response_var)
