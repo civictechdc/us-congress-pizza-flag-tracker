@@ -42,14 +42,10 @@ def handle_exceptions_for_app(e: HTTPException):
     print("Response", response_var)
     print("Code:", code)
     print(traceback.print_exc())
-    print("Message (stored in http_response.response.body.error_msg):", str(e))
     now = datetime.now()
     text_msg = json.dumps(response_var)
-    print('msg', text_msg);
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)
     print()
     return text_msg, code
-    # return flask_app.response_class(
-    #     response=text_msg, status=code, mimetype="application/json"
-    # )
+
