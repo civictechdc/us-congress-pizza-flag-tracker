@@ -1,5 +1,6 @@
 import json
 import traceback
+import numbers
 from datetime import datetime
 
 from flask import jsonify
@@ -31,23 +32,17 @@ e.toString() (the string value of e).  See best practices for how to specify str
 @flask_app.errorhandler(Exception)
 def handle_exceptions_for_app(e: HTTPException):
     code = 500
-    response_var = None
-    if isinstance(e, HTTPException):
-        code = e.code
-        response_var = e.response
-        if response_var:
-            response_var["error_msg"] = str(e)
-        else:
-            response_var = {"error_msg": str(e)}
-        print("Response", response_var)
+    if type(e.code) in (int, float):
+      code = e.code
+    response_var = {"error_msg": str(e)}
+    print("Error", e.__dict__)
+    print("Response", response_var)
     print("Code:", code)
     print(traceback.print_exc())
-    print("Message (stored in http_response.response.body.error_msg):", str(e))
     now = datetime.now()
     text_msg = json.dumps(response_var)
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)
     print()
-    return flask_app.response_class(
-        response=text_msg, status=code, mimetype="application/json"
-    )
+    return text_msg, code
+
