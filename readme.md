@@ -12,3 +12,6 @@ To run:
 TODO: https://dev.to/mburszley/an-introduction-to-poetry-2b6n ?
 
 There is a meeting via Code for DC every Wednesday 7pm ET. Development details are available here: https://github.com/codefordc/us-congress-pizza-flag-tracker/wiki.
+
+development details:
+https://github.com/codefordc/us-congress-pizza-flag-tracker/wiki/Development-Guide
