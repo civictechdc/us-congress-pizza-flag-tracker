@@ -16,6 +16,7 @@ class OrderQueryParams:
     usa_state = ""
     office_code = ""
     keyword = ""
+    order_number = ""
 
     def isEmpty(self):
         return not (self.status_code or self.usa_state or self.office_code)
@@ -56,6 +57,9 @@ class OrderActions:
     def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
         query = OrderModel.home_office_code == OrderModel.home_office_code
 
+        if query_params.order_number:
+            query = query & (OrderModel.order_number ==
+                             query_params.order_number)
         if query_params.office_code:
             query = query & (OrderModel.home_office_code ==
                              query_params.office_code)

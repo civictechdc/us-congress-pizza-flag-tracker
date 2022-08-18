@@ -41,6 +41,7 @@ def get_orders():
     statuses = request.args.get("status")
     office_code = restrict_office or request.args.get("office")
     keyword = request.args.get("keyword")
+    order_number = request.args.get("order_number")
     query_params = OrderQueryParams()
     if usa_state:
         query_params.usa_state = usa_state
@@ -50,6 +51,8 @@ def get_orders():
         query_params.office_code = office_code
     if keyword:
         query_params.keyword = keyword
+    if order_number:
+        query_params.order_number = order_number
 
     orders = OrderActions.get_orders(query_params)
     orders_json = [table_record_to_json(order) for order in orders]
