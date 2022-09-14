@@ -56,7 +56,10 @@ class OrderActions:
     @classmethod
     def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
         query = OrderModel.home_office_code == OrderModel.home_office_code
+        keyword = query_params.keyword
 
+        if keyword and keyword.isnumeric():
+            query = query & (OrderModel.order_number == keyword)
         if query_params.order_number:
             query = query & (OrderModel.order_number ==
                              query_params.order_number)
@@ -78,9 +81,9 @@ class OrderActions:
 
         orders = OrderModel.query.filter(query)
         order_array = [order for order in orders]
-        if query_params.keyword:
+        if keyword and not keyword.isnumeric():
             filter_obj = filter(
-                lambda order: query_params.keyword.upper()
+                lambda order: keyword.upper()
                 in json.dumps(table_record_to_json(order)).upper(),
                 order_array,
             )
