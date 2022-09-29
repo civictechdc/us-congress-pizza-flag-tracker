@@ -6,12 +6,12 @@ import uuid
 
 class LogActions:
     @classmethod
-    def create_order_log(cls, order_uuid, usa_state, order_number, home_office_code, order_status_id):
+    def create_order_log(cls, order_uuid, usa_state, order_number, home_office_code, order_status_id, order_archived=None):
         previous_order_log_uuid = LogActions.get_order_log_uuid(order_number)
         order_log_count = LogActions.get_last_order_count(order_number)
         logUuid = str(uuid.uuid4())
         new_log = OrderLogModel(logUuid=logUuid, order_number=order_number, order_log_count=order_log_count, previous_order_log_uuid=previous_order_log_uuid,
-                                order_uuid=order_uuid, usa_state=usa_state, home_office_code=home_office_code, order_status_id=order_status_id)
+                                order_uuid=order_uuid, usa_state=usa_state, home_office_code=home_office_code, order_status_id=order_status_id, order_archived=order_archived)
         db.session.add(new_log)
         db.session.commit()
         return new_log

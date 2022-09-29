@@ -55,7 +55,7 @@ class OrderActions:
 
     @classmethod
     def get_orders(cls, query_params: OrderQueryParams = OrderQueryParams()):
-        query = OrderModel.home_office_code == OrderModel.home_office_code
+        query = (OrderModel.home_office_code == OrderModel.home_office_code) & (OrderModel.archived == 0)
 
         if query_params.order_number:
             query = query & (OrderModel.order_number ==
@@ -151,7 +151,15 @@ class OrderActions:
     @classmethod
     def delete_order_by_uuid(cls, uuid):
         order = cls.get_order_by_uuid(uuid)
-        db.session.delete(order)
+        order.archived = 1
+        LogActions.create_order_log(
+            order_uuid = uuid,
+            usa_state = order.usa_state,
+            order_number = order.order_number,
+            home_office_code = order.home_office_code,
+            order_status_id = order.order_status_id,
+            order_archived = 1,
+        )
         db.session.commit()
 
     @classmethod

@@ -8,6 +8,7 @@ from sqlalchemy.sql.expression import join
 class OrderModel(db.Model):
     __tablename__ = "orders"
     order_number = db.Column(db.Integer, primary_key=True, nullable=False)
+    archived = db.Column(db.Integer, nullable=False)
     uuid = db.Column(db.String(40), unique=True, index=True, nullable=False)
     usa_state = db.Column(db.String(10))
     # sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'mapped class OfficeModel->offices'. Original exception was: Could not determine join condition between parent/child tables on relationship OfficeModel.orders - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
@@ -28,6 +29,7 @@ class OrderModel(db.Model):
         order_status_id,
         order_status=None,
         constituent_id=None,
+        archived=0,
     ):
         self.uuid = theUuid
         self.usa_state = usa_state
@@ -38,6 +40,7 @@ class OrderModel(db.Model):
             self.order_status_id = order_status_id
         elif order_status:
             self.order_status_id = order_status.id
+        self.archived = archived
 
     def update_order(
         self,
