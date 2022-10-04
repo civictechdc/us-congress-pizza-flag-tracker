@@ -132,18 +132,21 @@ class OrderActions:
         order_number=None,
         home_office_code=None,
         order_status_id=None,
+        archived=0,
     ):
         order = cls.get_order_by_uuid(uuid)
         order.order_number = order_number or order.order_number
         order.usa_state = usa_state or order.usa_state
         order.home_office_code = home_office_code or order.home_office_code
         order.order_status_id = order_status_id or order.order_status_id
+        order.archived = archived
         LogActions.create_order_log(
-            uuid,
-            order.usa_state,
-            order.order_number,
-            order.home_office_code,
-            order.order_status_id,
+            order_uuid = uuid,
+            usa_state = order.usa_state,
+            order_number = order.order_number,
+            home_office_code = order.home_office_code,
+            order_status_id = order.order_status_id,
+            order_archived = 0,
         )
         db.session.commit()
         return order
