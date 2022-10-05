@@ -123,8 +123,9 @@ def update_order(uuid):
     order_status_id = get_dict_keyvalue_or_default(
         request_json, "order_status_id", None
     )
+    archived = get_dict_keyvalue_or_default(request_json, "archived", None)
     order = OrderActions.update_order_by_uuid(
-        uuid, usa_state, order_number, home_office_code, order_status_id
+        uuid, usa_state, order_number, home_office_code, order_status_id, archived
     )
     order_dict = table_record_to_json(order)
     return order_dict
