@@ -54,11 +54,4 @@
     "permission": "STATE",
     "active_status": "CLOSED",
     "status_code": "CONST_NOTIFIED"
-  }, {
-    "id": 9,
-    "sequence_num": 9,
-    "description": "Order canceled",    
-    "permission": "ALL",
-    "active_status": "CANCELED",
-    "status_code": "CANCELED"
-    }]
+  }]
